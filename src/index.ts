@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 import axios from "axios";
 import base64 from "base-64";
 
-import { AuthStrategy } from './types/AuthStrategy';
-import { PassageConfig } from './types/PassageConfig';
+import { AuthStrategy } from "./types/AuthStrategy";
+import { PassageConfig } from "./types/PassageConfig";
 
 declare global{
     namespace Express {
@@ -17,48 +17,55 @@ declare global{
 
 
 export default function initialize(config: PassageConfig) {
-    
     if (!config.appID) throw new Error("Passage requires an App ID");
     
-    let passage = new Passage(config.appID);
-    switch (passage.authStrategy) {
-        case "COOKIE":
-            return (req: Request, res: Response, next: NextFunction) => {
-                passage.authenticateRequestWithCookie(req, res, next);
-            }
-        case "HEADER":
-            return (req: Request, res: Response, next: NextFunction) => {
-                passage.authenticateRequestWithHeader(req, res, next);
-            }
-        default:
-            return (req: Request, res: Response, next: NextFunction) => {
-                passage.authenticateRequest(req, res, next);
-            }
+    let passage = new Passage(config);
+    return (req: Request, res: Response, next: NextFunction) => {
+        passage.authenticateRequest(req, res, next);
     }
 }
 
 export class Passage {
     appID: string;
     #publicKey: string;
+    #apiKey: string;
     authStrategy: AuthStrategy;
+    authorizationHeader: object | undefined;
 
-    constructor(appID: string, config?: any) {
-        this.appID = appID;
+    constructor(config?: any) {
+        console.log(config);
+        this.appID = config.appID;
+        this.#apiKey = config.apiKey ? config.apiKey : '';
+
+        if (this.#apiKey) {
+            this.authorizationHeader = { headers: {
+                'Authorization': `Bearer ${this.#apiKey}` 
+            }}
+        } else {
+            this.authorizationHeader = undefined;
+        }
+
         this.#publicKey = '';
         this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";
     }
 
     async authenticateRequest(req: Request, res: Response, next: NextFunction) {
-        try {
-            return await this.authenticateRequestWithCookie(req, res, next);
-        } catch(e) {
-            try {
+        switch (this.authStrategy) {
+            case "COOKIE":
+                return this.authenticateRequestWithCookie(req, res, next);
+            case "HEADER":
                 return this.authenticateRequestWithHeader(req, res, next);
-            } catch(e) {
-                console.warn(`Failed to authenticate request: ${e}`);
-                return res.send("Failed to authenticate request.");
-            }
+            default:
+                return this.authenticateRequestWithCookie(req, res, next);
         }
+    }
+
+    set apiKey(_apiKey) {
+        this.#apiKey = _apiKey;
+    }
+
+    get apiKey(): string {
+        return this.#apiKey;
     }
 
     set publicKey(_publicKey) {
@@ -141,39 +148,80 @@ export class Passage {
 
     async getUser(userID: string): Promise<object> {
         // add api key to axios request
-        let userData: object = await axios.get(`https://api.passage.id/v1/apps/${this.appID}/users/${userID}`)
-        .catch(err => {
-            throw new Error(`Could not fetch user. HTTP status: ${err.response.status}`);
-        })
-        .then(res => {
-            return res.data.app;
-        });
+        if (!this.#apiKey) throw new Error("A Passage API key is needed to make a getUser request");
+
+        let userData: object = await axios.get(
+            `https://api.passage.id/v1/apps/${this.appID}/users/${userID}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${this.#apiKey}`,
+                }
+            }
+        )
+            .catch(err => {
+                throw new Error(`Could not fetch user. HTTP status: ${err.response.status}`);
+            })
+            .then(res => {
+                return res.data.user;
+            });
 
         return userData;
     }
 
     async activateUser(userID: string): Promise<object> {
-        let userData: object = await axios.get(`https://api.passage.id/v1/apps/${this.appID}/users/${userID}/activate`)
-            .catch(err => {
-                throw new Error(`Could not activate user. HTTP status: ${err.response.status}`);
-            })
-            .then(res => {
-                return res.data.app;
-            });
+        try {
+            if (!this.#apiKey) throw new Error("A Passage API key is needed to make an activateUser request");
 
-        return userData;
+            let userData: object = await axios.patch(
+                `https://api.passage.id/v1/apps/${this.appID}/users/${userID}/activate`,
+                null, // note that this null is required as axios.post has different param order than axios.get
+                {
+                    headers: {
+                        'Authorization': `Bearer ${this.#apiKey}`,
+                    }
+                }
+            )
+                .catch(err => {
+                    throw new Error(`Could not activate user. HTTP status: ${err.response.status}`);
+                })
+                .then(res => {
+                    return res.data.user;
+                });
+    
+            return userData;
+        } catch(e) {
+            console.warn(e);
+            return {};
+        }
+        
     }
 
     async deactivateUser(userID: string): Promise<object> {
-        let userData: object = await axios.get(`https://api.passage.id/v1/apps/${this.appID}/users/${userID}/deactivate`)
-            .catch(err => {
-                throw new Error(`Could not deactivate user. HTTP status: ${err.response.status}`);
-            })
-            .then(res => {
-                return res.data.app;
-            });
+        try {
+            if (!this.#apiKey) throw new Error("A Passage API key is needed to make a deactivateUser request");
 
-        return userData;
+            let userData: object = await axios.patch(
+                `https://api.passage.id/v1/apps/${this.appID}/users/${userID}/deactivate`,
+                null, // note that this null is required as axios.post has different param order than axios.get
+                {
+                    headers: {
+                        'Authorization': `Bearer ${this.#apiKey}`,
+                    }
+                }
+            )
+                .catch(err => {
+                    throw new Error(`Could not deactivate user. HTTP status: ${err.response.status}`);
+                })
+                .then(res => {
+                    return res.data.user;
+                });
+    
+            return userData;
+        } catch(e) {
+            console.warn(e);
+            return {};
+        }
+        
     }
 
     validAuthToken(token: string, publicKey: string): boolean {
