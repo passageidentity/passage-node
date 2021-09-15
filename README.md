@@ -8,44 +8,71 @@ Install this package using npm.
 npm i --save passage-node
 ```
 
-## Authenticating a Request
+## Authenticating a Request With Express & Passage
 
 To authenticate an HTTP request in an Express application, you can use the Passage as a middleware in your Express server.
 You need to provide Passage with your app ID in order to verify the JWTs.
 
 ```javascript
 import passage from "Passage";
-
 import express from "express";
+
 const app = express();
 const port = 3000;
 
-app.use("/authenticated_route", {
+let passageConfig = {
   appID: "YOUR_APP_ID",
-  /** optional
+  /** Optional Config Options:
     apiKey: "YOUR_API_KEY",
-    authStrategy: "YOUR_AUTH_STRATEGY,
-    failureRedirect: "YOUR_FAILURE_REDIRECT",
+    authStrategy: "YOUR_AUTH_STRATEGY",
     **/
-});
+};
 
-app.get("/authenticated_route", (req, res) => {
-  res.send("Successful authentication via Passage.");
-});
+app.get(
+  "/authenticatedRoute",
+  passage(passageConfig),
+  async (req, res, next) => {
+    // Here you can access your Passage instance
+    let apiKey = res.passage.apiKey;
+    let publicKey = res.passage.publicKey;
+    let validAuthToken = res.passage.validAuthToken("TOKEN", "PUBLIC_KEY");
 
-app.list(port, () => {
+    // To use the Passage API for users, use passage.user
+    let userObject = await res.passage.user.get("USER_ID");
+    let activateUserResponseObject = await res.passage.user.activate("USER_ID");
+    let deactivateUserResponseObject = await res.passage.user.deactivate(
+      "USER_ID"
+    );
+
+    res.send("This is an authenticated route!");
+  }
+);
+
+app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 ```
 
-Passage Class
--authenticateRequest
--fetchPublicKey
--AuthenticateRequestWithHeader
--AuthenticateRequestWithCookie
--validAuthToken
+## Using The Passage API Without Express
 
--User Class
--get
--deactivate
--activate
+Use the Passage API by initializing a Passage class.
+You will need to provide Passage with your app ID, and your Passage API Key.
+
+```javascript
+import { Passage } from "Passage";
+
+let passageConfig = {
+  appID: "YOUR_APP_ID",
+  apiKey: "YOUR_API_KEY",
+};
+
+let passage = new Passage(passageConfig);
+
+async function main() {
+  let publicKey = await passage.fetchPublicKey();
+  let userObject = await passage.user.get("USER_ID");
+  let activateUserResponseObject = await passage.user.activate("USER_ID");
+  let deactivateUserResponseObject = await passage.user.deactivate("USER_ID");
+  let validAuthToken = passage.validAuthToken("TOKEN", "PUBLIC_KEY");
+}
+```
