@@ -16,8 +16,9 @@ export default class Passage {
     user: User;
 
     /**
+     * Initialize a new Passage instance.
      * 
-     * @param config
+     * @param {PassageConfig} config The default config for Passage initialization 
      */
     constructor(config?: PassageConfig) {
         if (!config?.appID) {
@@ -39,6 +40,16 @@ export default class Passage {
         this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";
     }
 
+    /**
+     * Authenticate request with a cookie, or header. If no authentication
+     * strategy is given, authenticate the request via cookie (default
+     * authentication strategy).
+     * 
+     * @param `req` Express request
+     * @param res Express response
+     * @param next Express next
+     * @returns Middleware function for use in authentication
+     */
     async authenticateRequest(req: Request, res: Response, next: NextFunction) {
         switch (this.authStrategy) {
             case "COOKIE":
@@ -66,6 +77,11 @@ export default class Passage {
         return this.#publicKey;
     }
 
+    /**
+     * Fetch the corresponding public key for this Passage instance.
+     * 
+     * @returns {Promise<string>} publicKey
+     */
     async fetchPublicKey(): Promise<string> {
         // use cached value if found
         if (this.#publicKey) return this.#publicKey;
@@ -86,6 +102,14 @@ export default class Passage {
         return publicKey;
     }
 
+    /**
+     * Authenticate a request via the http header.
+     * 
+     * @param req Express request
+     * @param res Express response
+     * @param next Express next
+     * @returns Middleware function for use in header authentication
+     */
     async authenticateRequestWithHeader(req: any, res: Response, next: NextFunction) {
         try {
             let publicKey = await this.fetchPublicKey();
@@ -107,6 +131,14 @@ export default class Passage {
         }
     }
     
+    /**
+     * Authenticate request via cookie.
+     * 
+     * @param req Express request
+     * @param res Express response
+     * @param next Express next
+     * @returns Middleware function for use in cookie authentication
+     */
     async authenticateRequestWithCookie(req: Request, res: Response, next: NextFunction) {
         try {
             if (!req.headers.cookie) throw new Error("Could not fetch cookies");
@@ -136,6 +168,14 @@ export default class Passage {
         }
     }
 
+    /**
+     * Determine if the provided token is valid when compared with its
+     * respective public key.
+     * 
+     * @param token Authentication token
+     * @param publicKey The public key corresponding to the Passage application
+     * @returns {boolean} True if the jwt can be verified, false jwt cannot be verified
+     */
     validAuthToken(token: string, publicKey: string): boolean {
         try {
             let validAuthToken = jwt.verify(token, publicKey);

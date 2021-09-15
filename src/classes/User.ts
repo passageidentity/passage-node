@@ -6,6 +6,11 @@ export default class User {
     #apiKey: string;
     #authorizationHeader: object | undefined;
      
+    /**
+     * Initialize a new Passage User instance.
+     * 
+     * @param {PassageConfig} config The default config for Passage and User initialization
+     */
     constructor(config: PassageConfig) {
         this.#appID = config.appID ? config.appID : '';
         this.#apiKey = config.apiKey ? config.apiKey : '';
@@ -20,6 +25,12 @@ export default class User {
 
     }
 
+    /**
+     * Get a user's object using their user ID.
+     * 
+     * @param userID The Passage user ID
+     * @returns User object
+     */
     async get(userID: string): Promise<object> {
         if (!this.#apiKey) throw new Error("A Passage API key is needed to make a getUser request");
 
@@ -41,6 +52,12 @@ export default class User {
         return userData;
     }
 
+    /**
+     * Deactivate a user using their user ID.
+     * 
+     * @param userID The Passage user ID
+     * @returns User object
+     */
     async deactivate(userID: string): Promise<object> {
         try {
             if (!this.#apiKey) throw new Error("A Passage API key is needed to make a deactivateUser request");
@@ -69,6 +86,12 @@ export default class User {
         
     }
     
+    /**
+     * Activate a user using their user ID.
+     * 
+     * @param userID The passage user ID
+     * @returns User object
+     */
     async activate(userID: string): Promise<object> {
         try {
             if (!this.#apiKey) throw new Error("A Passage API key is needed to make an activateUser request");

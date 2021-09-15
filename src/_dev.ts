@@ -1,4 +1,4 @@
-import passage, { Passage } from '.'
+import passage, { Passage } from "./index";
 
 import express from 'express';
 import { PassageConfig } from "./types/PassageConfig";

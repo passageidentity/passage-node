@@ -2,6 +2,7 @@ import { Request, NextFunction, Response } from "express-serve-static-core";
 import { PassageConfig } from "./types/PassageConfig";
 import Passage from "./classes/Passage";
 
+
 declare global{
     namespace Express {
         export interface Response {
@@ -10,6 +11,12 @@ declare global{
     }
 }
 
+/**
+ * Initialize a new instance of the Passage middleware.
+ * 
+ * @param config The default config for Passage initialization
+ * @returns 
+ */
 export default function initialize(config: PassageConfig) {
     if (!config.appID) throw new Error("Passage requires an App ID");
     
