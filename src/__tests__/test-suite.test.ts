@@ -36,16 +36,16 @@ describe('Passage API Requests', () => {
     });
 
     test('getUser', async () => { 
-        let user = await passage.getUser(userID);
+        let user = await passage.user.get(userID);
         expect(user).toHaveProperty("id", userID);
     });
     test('activateUser', async () => {
-        let activatedUser = await passage.activateUser(userID);
+        let activatedUser = await passage.user.activate(userID);
         expect(activatedUser).toHaveProperty("active", true);
         expect(activatedUser).toHaveProperty("id", userID);
     });
     test('deactivateUser', async () => {
-        let deactivatedUser = await passage.deactivateUser(userID);
+        let deactivatedUser = await passage.user.deactivate(userID);
         expect(deactivatedUser).toHaveProperty("active", false);
         expect(deactivatedUser).toHaveProperty("id", userID);
     });
