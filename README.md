@@ -76,3 +76,7 @@ async function main() {
   let validAuthToken = passage.validAuthToken("TOKEN", "PUBLIC_KEY");
 }
 ```
+
+## Class Methods
+
+[Click here](https://github.com/passageidentity/passage-node/blob/main/src/classes/readme.MD) to view all available class methods.
