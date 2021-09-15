@@ -36,11 +36,7 @@ export default class User {
 
         let userData: object = await axios.get(
             `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
-            {
-                headers: {
-                    'Authorization': `Bearer ${this.#apiKey}`,
-                }
-            }
+            this.#authorizationHeader,
         )
             .catch(err => {
                 throw new Error(`Could not fetch user. HTTP status: ${err.response.status}`);
@@ -65,11 +61,7 @@ export default class User {
             let userData: object = await axios.patch(
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/deactivate`,
                 null, // note that this null is required as axios.patch has different param order than axios.get
-                {
-                    headers: {
-                        'Authorization': `Bearer ${this.#apiKey}`,
-                    }
-                }
+                this.#authorizationHeader,
             )
                 .catch(err => {
                     throw new Error(`Could not deactivate user. HTTP status: ${err.response.status}`);
@@ -99,11 +91,7 @@ export default class User {
             let userData: object = await axios.patch(
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/activate`,
                 null, // note that this null is required as axios.patch has different param order than axios.get
-                {
-                    headers: {
-                        'Authorization': `Bearer ${this.#apiKey}`,
-                    }
-                }
+                this.#authorizationHeader,
             )
                 .catch(err => {
                     throw new Error(`Could not activate user. HTTP status: ${err.response.status}`);

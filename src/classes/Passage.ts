@@ -12,7 +12,6 @@ export default class Passage {
     #publicKey: string;
     #apiKey: string | undefined;
     authStrategy: AuthStrategy;
-    authorizationHeader: object | undefined;
     user: User;
 
     /**
@@ -27,14 +26,6 @@ export default class Passage {
         this.appID = config.appID;
         this.#apiKey = config?.apiKey;
         this.user = new User(config);
-
-        if (this.#apiKey) {
-            this.authorizationHeader = { headers: {
-                'Authorization': `Bearer ${this.#apiKey}` 
-            }}
-        } else {
-            this.authorizationHeader = undefined;
-        }
 
         this.#publicKey = '';
         this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";

@@ -14,7 +14,7 @@ To authenticate an HTTP request in an Express application, you can use the Passa
 You need to provide Passage with your app ID in order to verify the JWTs.
 
 ```javascript
-import passage from "Passage";
+import passage from "passage-node";
 import express from "express";
 
 const app = express();
@@ -59,7 +59,7 @@ Use the Passage API by initializing a Passage class.
 You will need to provide Passage with your app ID, and your Passage API Key.
 
 ```javascript
-import { Passage } from "Passage";
+import { Passage } from "passage-node";
 
 let passageConfig = {
   appID: "YOUR_APP_ID",
