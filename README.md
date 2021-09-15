@@ -37,3 +37,15 @@ app.list(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 ```
+
+Passage Class
+-authenticateRequest
+-fetchPublicKey
+-AuthenticateRequestWithHeader
+-AuthenticateRequestWithCookie
+-validAuthToken
+
+-User Class
+-get
+-deactivate
+-activate

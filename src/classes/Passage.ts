@@ -45,12 +45,12 @@ export default class Passage {
      * strategy is given, authenticate the request via cookie (default
      * authentication strategy).
      * 
-     * @param `req` Express request
+     * @param req Express request
      * @param res Express response
      * @param next Express next
      * @returns Middleware function for use in authentication
      */
-    async authenticateRequest(req: Request, res: Response, next: NextFunction) {
+    async authenticateRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
         switch (this.authStrategy) {
             case "COOKIE":
                 return this.authenticateRequestWithCookie(req, res, next);
@@ -110,7 +110,7 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in header authentication
      */
-    async authenticateRequestWithHeader(req: any, res: Response, next: NextFunction) {
+    async authenticateRequestWithHeader(req: any, res: Response, next: NextFunction): Promise<void> {
         try {
             let publicKey = await this.fetchPublicKey();
             let { authorization } = req.headers;
@@ -139,7 +139,7 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in cookie authentication
      */
-    async authenticateRequestWithCookie(req: Request, res: Response, next: NextFunction) {
+    async authenticateRequestWithCookie(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             if (!req.headers.cookie) throw new Error("Could not fetch cookies");
             let cookies: any = {};

@@ -15,7 +15,7 @@ declare global{
  * Initialize a new instance of the Passage middleware.
  * 
  * @param config The default config for Passage initialization
- * @returns 
+ * @returns Callback function
  */
 export default function initialize(config: PassageConfig) {
     if (!config.appID) throw new Error("Passage requires an App ID");

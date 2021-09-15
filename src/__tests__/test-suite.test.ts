@@ -1,4 +1,4 @@
-import { Passage } from "..";
+import { Passage } from "../index";
 
 require('dotenv').config();
 let userID = process.env.EXAMPLE_USER_ID ? process.env.EXAMPLE_USER_ID : '';
