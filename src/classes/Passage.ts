@@ -4,19 +4,27 @@ import jwt from "jsonwebtoken";
 import { Request, NextFunction, Response } from "express-serve-static-core";
 import base64 from "base-64";
 import axios from "axios";
+import { PassageConfig } from "../types/PassageConfig";
 
 
 export default class Passage {
     appID: string;
     #publicKey: string;
-    #apiKey: string;
+    #apiKey: string | undefined;
     authStrategy: AuthStrategy;
     authorizationHeader: object | undefined;
     user: User;
 
-    constructor(config?: any) {
+    /**
+     * 
+     * @param config
+     */
+    constructor(config?: PassageConfig) {
+        if (!config?.appID) {
+            throw new Error("A Passage appID is required. Please include {appID: YOUR_APP_ID}.");
+        }
         this.appID = config.appID;
-        this.#apiKey = config.apiKey ? config.apiKey : '';
+        this.#apiKey = config?.apiKey;
         this.user = new User(config);
 
         if (this.#apiKey) {
@@ -46,7 +54,7 @@ export default class Passage {
         this.#apiKey = _apiKey;
     }
 
-    get apiKey(): string {
+    get apiKey(): string | undefined {
         return this.#apiKey;
     }
 

@@ -5,7 +5,10 @@ let userID = process.env.EXAMPLE_USER_ID ? process.env.EXAMPLE_USER_ID : '';
 let appToken = process.env.APP_TOKEN ? process.env.APP_TOKEN : '';
 
 describe('Passage Initialization', () => {
-    let passage = new Passage({appID: process.env.APP_ID});
+    let config = {
+        appID: process.env.APP_ID ? process.env.APP_ID : ''
+    }
+    let passage = new Passage(config);
 
     test('fetchPublicKey', async () => {
         let publicKey = await passage.fetchPublicKey();
@@ -31,7 +34,7 @@ describe('Passage Initialization', () => {
 
 describe('Passage API Requests', () => {
     let passage = new Passage({
-        appID: process.env.APP_ID,
+        appID: process.env.APP_ID ? process.env.APP_ID : '',
         apiKey: process.env.API_KEY,
     });
 

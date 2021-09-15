@@ -18,6 +18,7 @@ app.get('/authentication', passage(passageConfig), async (req, res) => {
     // let result_1 = await res.passage.user.get("USER_ID_HERE");
     // console.log(result_1);
 
+
     res.send("This is an authenticated route!");
 });
 
