@@ -147,6 +147,8 @@ export default class Passage {
             if (psg_auth_token) {
                 let publicKey = await this.fetchPublicKey();
                 if(this.validAuthToken(psg_auth_token, publicKey)) {
+                    let userID = psg_auth_token.split('.')[1];
+                    this.user.ID = userID;
                     res.passage = this;
                     next();
                 }
