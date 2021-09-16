@@ -26,6 +26,8 @@ export default function initialize(config: PassageConfig) {
     }
 }
 
+module.exports = initialize;
+
 export {
     Passage as Passage
 }
