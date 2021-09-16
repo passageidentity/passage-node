@@ -173,7 +173,7 @@ export default class Passage {
 
             if (validAuthToken) {
                 let userID = validAuthToken.sub;
-                this.user.ID = userID;
+                this.user.id = userID;
                 return true;
             } else return false;
         } catch(e) {
