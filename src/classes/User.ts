@@ -1,11 +1,12 @@
 import { PassageConfig } from "../types/PassageConfig";
 import axios from "axios";
+import { JwtPayload } from "jsonwebtoken";
 
 export default class User {
     #appID: string;
     #apiKey: string;
     #authorizationHeader: object | undefined;
-    ID: string;
+    ID: any;
      
     /**
      * Initialize a new Passage User instance.

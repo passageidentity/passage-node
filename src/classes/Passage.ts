@@ -147,8 +147,6 @@ export default class Passage {
             if (psg_auth_token) {
                 let publicKey = await this.fetchPublicKey();
                 if(this.validAuthToken(psg_auth_token, publicKey)) {
-                    let userID = psg_auth_token.split('.')[1];
-                    this.user.ID = userID;
                     res.passage = this;
                     next();
                 }
@@ -172,8 +170,12 @@ export default class Passage {
     validAuthToken(token: string, publicKey: string): boolean {
         try {
             let validAuthToken = jwt.verify(token, publicKey);
-            if (validAuthToken) return true;
-            else return false;
+
+            if (validAuthToken) {
+                let userID = validAuthToken.sub;
+                this.user.ID = userID;
+                return true;
+            } else return false;
         } catch(e) {
             return false
         }

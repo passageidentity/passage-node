@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/base-64": "^1.0.0",
@@ -24,7 +24,7 @@
     "lib/"
   ],
   "scripts": {
-    "dev": "ts-node-dev --respawn src/_dev.ts",
+    "dev": "ts-node-dev --respawn _dev.ts",
     "test": "jest",
     "prepublishOnly": "npm run tsc",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json"
