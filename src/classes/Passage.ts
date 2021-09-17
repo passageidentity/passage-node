@@ -151,13 +151,13 @@ export default class Passage {
         let psg_auth_token = cookies.psg_auth_token;
         if (psg_auth_token) {
             let publicKey = await this.fetchPublicKey();
-            if (await this.validAuthToken(psg_auth_token, publicKey)) {
+            if (this.validAuthToken(psg_auth_token, publicKey)) {
                 res.passage = this;
                 if (next) next();
                 else return this.user;
             } else {
                 if (next) res.status(401).send('unauthorized');
-                else throw new Error("Could not validate cookie auth token. Your must catch this error.");
+                else throw new Error("Could not validate cookie auth token. You must catch this error.");
             }
         } else {
             if (next) res.status(401).send('unauthorized'); 
@@ -173,17 +173,16 @@ export default class Passage {
      * @param publicKey The public key corresponding to the Passage application
      * @returns {boolean} True if the jwt can be verified, false jwt cannot be verified
      */
-     async validAuthToken(token: string, publicKey: string): Promise<boolean> {
+     validAuthToken(token: string, publicKey: string): boolean {
         try {
             let validAuthToken = jwt.verify(token, publicKey);
-
             if (validAuthToken) {
                 let userID: any = validAuthToken.sub;
-                this.user.data = await this.user.get(userID);
                 this.user.id = userID;
                 return true;
             } else return false;
         } catch(e) {
+            console.log(e);
             return false
         }
     }
