@@ -114,7 +114,6 @@ export default class Passage {
      * @returns Middleware function for use in header authentication
      */
     async authenticateRequestWithHeader(req: any, res: Response, next?: NextFunction): Promise<void|boolean|User> {
-        try {
             let publicKey = await this.fetchPublicKey();
             let { authorization } = req.headers;
 
@@ -127,14 +126,13 @@ export default class Passage {
                     if (next) next();
                     else return this.user;
                 } else {
-                    if (next) res.status(401).send('');
-                    else throw new Error("Could not validate auth token.");
+                    if (next) res.status(401).send('unauthorized');
+                    else throw new Error("Could not validate header auth token. You must catch this error.");
                 }
-            } else throw new Error("Header authorization not found.");
-        } catch (e) {
-            console.warn(e);
-            throw new Error("User could not be authenticated.");
-        }
+            } else {
+                if (next) res.status(401).send('unauthorized');
+                else throw new Error("Header authorization not found. You must catch this error.");
+            }
     }
     
     /**
@@ -146,34 +144,31 @@ export default class Passage {
      * @returns Middleware function for use in cookie authentication
      */
     async authenticateRequestWithCookie(req: Request, res: Response, next?: NextFunction): Promise<boolean|void|User> {
-        try {
-            if (!req.headers.cookie) throw new Error("Could not fetch cookies. You must catch this error.");
-            let cookies: any = {};
-            req.headers && req.headers.cookie.split(';').forEach((cookie: any) => {
-                let parts = cookie.match(/(.*?)=(.*)$/);
-                if (parts) {
-                    let key = parts[1].trim();
-                    let value = parts[2].trim() || '';
-                    cookies[key] = value;
-                }
-            });
-            
-            let psg_auth_token = cookies.psg_auth_token;
-            if (psg_auth_token) {
-                let publicKey = await this.fetchPublicKey();
-                if (await this.validAuthToken(psg_auth_token, publicKey)) {
-                    res.passage = this;
-                    if (next) next();
-                    else return this.user;
-                } else {
-                    if (next) res.status(401).send('');
-                    else throw new Error("Could not validate auth token.");
-                }
+        if (!req.headers.cookie) throw new Error("Could not fetch cookies. You must catch this error.");
+        let cookies: any = {};
+        req.headers && req.headers.cookie.split(';').forEach((cookie: any) => {
+            let parts = cookie.match(/(.*?)=(.*)$/);
+            if (parts) {
+                let key = parts[1].trim();
+                let value = parts[2].trim() || '';
+                cookies[key] = value;
             }
-            else throw new Error("Could not find authentication cookie 'psg_auth_token' token");
-        } catch(e) {
-            console.warn(e);
-            return false;
+        });
+        
+        let psg_auth_token = cookies.psg_auth_token;
+        if (psg_auth_token) {
+            let publicKey = await this.fetchPublicKey();
+            if (await this.validAuthToken(psg_auth_token, publicKey)) {
+                res.passage = this;
+                if (next) next();
+                else return this.user;
+            } else {
+                if (next) res.status(401).send('unauthorized');
+                else throw new Error("Could not validate cookie auth token. Your must catch this error.");
+            }
+        } else {
+            if (next) res.status(401).send('unauthorized'); 
+            else throw new Error("Could not find authentication cookie 'psg_auth_token' token. You must catch this error.");
         }
     }
 
