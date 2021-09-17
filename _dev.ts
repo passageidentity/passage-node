@@ -19,11 +19,19 @@ let passageConfig: PassageConfig = {
 //     }
 // }
 
-let passage = new psg(passageConfig).express;
+let passage = new psg(passageConfig);
 
-app.get('/', passage, async (req, res) => {
-    console.log(res.passage);
-    res.send("This is an authenticated route!");
+
+app.get('/', async (req, res) => {
+    // res.send("authenticated!");
+    try {
+        let user = await passage.authenticateRequest(req, res);
+        if (user) res.send(user);
+        else res.send("Failed to authenticate user.");
+    } catch(e) {
+        console.log("ASLJHDGASLJASHDGLASJDHG");
+    }
+
 });
 
 app.listen(port, () => {

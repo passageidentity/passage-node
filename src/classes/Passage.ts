@@ -13,7 +13,6 @@ export default class Passage {
     #apiKey: string | undefined;
     authStrategy: AuthStrategy;
     user: User;
-    #failureRedirect: string;
     #config: PassageConfig;
 
     /**
@@ -28,7 +27,6 @@ export default class Passage {
         this.appID = config.appID;
         this.#apiKey = config?.apiKey;
         this.user = new User(config);
-        this.#failureRedirect = config.failureRedirect ? config.failureRedirect : '/';
 
         this.#publicKey = '';
         this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";
@@ -45,14 +43,17 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in authentication
      */
-    async authenticateRequest(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async authenticateRequest(req: Request, res: Response, next?: NextFunction): Promise<void|boolean|User> {
         switch (this.authStrategy) {
             case "COOKIE":
-                return this.authenticateRequestWithCookie(req, res, next);
+                if (next) return this.authenticateRequestWithCookie(req, res, next);
+                else return this.authenticateRequestWithCookie(req, res);
             case "HEADER":
-                return this.authenticateRequestWithHeader(req, res, next);
+                if (next) return this.authenticateRequestWithHeader(req, res, next);
+                else return this.authenticateRequestWithHeader(req, res);
             default:
-                return this.authenticateRequestWithCookie(req, res, next);
+                if (next) return this.authenticateRequestWithCookie(req, res, next);
+                else return this.authenticateRequestWithCookie(req, res);
         }
     }
 
@@ -112,7 +113,7 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in header authentication
      */
-    async authenticateRequestWithHeader(req: any, res: Response, next: NextFunction): Promise<void> {
+    async authenticateRequestWithHeader(req: any, res: Response, next?: NextFunction): Promise<void|boolean|User> {
         try {
             let publicKey = await this.fetchPublicKey();
             let { authorization } = req.headers;
@@ -123,13 +124,16 @@ export default class Passage {
                 
                 if (await validRequest) {
                     res.passage = this;
-                    next();
+                    if (next) next();
+                    else return this.user;
+                } else {
+                    if (next) res.status(401).send('');
+                    else throw new Error("Could not validate auth token.");
                 }
-                else throw new Error("Request could not be authenticated");
-            } else throw new Error("Header authorization not found");
+            } else throw new Error("Header authorization not found.");
         } catch (e) {
             console.warn(e);
-            res.redirect(this.#failureRedirect);
+            throw new Error("User could not be authenticated.");
         }
     }
     
@@ -141,9 +145,9 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in cookie authentication
      */
-    async authenticateRequestWithCookie(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async authenticateRequestWithCookie(req: Request, res: Response, next?: NextFunction): Promise<boolean|void|User> {
         try {
-            if (!req.headers.cookie) throw new Error("Could not fetch cookies");
+            if (!req.headers.cookie) throw new Error("Could not fetch cookies. You must catch this error.");
             let cookies: any = {};
             req.headers && req.headers.cookie.split(';').forEach((cookie: any) => {
                 let parts = cookie.match(/(.*?)=(.*)$/);
@@ -157,16 +161,19 @@ export default class Passage {
             let psg_auth_token = cookies.psg_auth_token;
             if (psg_auth_token) {
                 let publicKey = await this.fetchPublicKey();
-                if(await this.validAuthToken(psg_auth_token, publicKey)) {
+                if (await this.validAuthToken(psg_auth_token, publicKey)) {
                     res.passage = this;
-                    next();
+                    if (next) next();
+                    else return this.user;
+                } else {
+                    if (next) res.status(401).send('');
+                    else throw new Error("Could not validate auth token.");
                 }
-                else throw new Error("Could not validate auth token.");
             }
             else throw new Error("Could not find authentication cookie 'psg_auth_token' token");
         } catch(e) {
             console.warn(e);
-            res.redirect(this.#failureRedirect);
+            return false;
         }
     }
 
