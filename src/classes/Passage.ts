@@ -71,10 +71,7 @@ export default class Passage {
     async fetchPublicKey(): Promise<string> {
         // use cached value if found
         let cachedPublicKey = passagePublicKeyCache[this.appID];
-        if (cachedPublicKey) {
-            console.log(`using cached public key: ${cachedPublicKey}`);
-            return cachedPublicKey;
-        }
+        if (cachedPublicKey) return cachedPublicKey;
     
         let publicKey: string = await axios.get(`https://api.passage.id/v1/apps/${this.appID}`)
             .catch(err => {
@@ -117,7 +114,7 @@ export default class Passage {
                 if (await validRequest) {
                     res.passage = this;
                     if (next) next();
-                    else return this.user;
+                    else return this.user.id;
                 } else {
                     if (next) res.status(401).send('unauthorized');
                     else throw new Error("Could not validate header auth token. You must catch this error.");
@@ -154,7 +151,7 @@ export default class Passage {
             if (this.validAuthToken(psg_auth_token, publicKey)) {
                 res.passage = this;
                 if (next) next();
-                else return this.user;
+                else return this.user.id;
             } else {
                 if (next) res.status(401).send('unauthorized');
                 else throw new Error("Could not validate cookie auth token. You must catch this error.");

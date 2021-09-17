@@ -6,7 +6,6 @@ export default class User {
     #apiKey: string;
     #authorizationHeader: object | undefined;
     id: any;
-    data: any;
      
     /**
      * Initialize a new Passage User instance.
@@ -17,7 +16,6 @@ export default class User {
         this.#appID = config.appID ? config.appID : '';
         this.#apiKey = config.apiKey ? config.apiKey : '';
         this.id = '';
-        this.data = {};
 
         if (this.#apiKey) {
             this.#authorizationHeader = { headers: {
