@@ -3,6 +3,8 @@ import { PassageConfig } from "./types/PassageConfig";
 import Passage from "./classes/Passage";
 
 
+export var passagePublicKeyCache: any = {}
+
 declare global{
     namespace Express {
         export interface Response {

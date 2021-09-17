@@ -5,11 +5,10 @@ import { Request, NextFunction, Response } from "express-serve-static-core";
 import base64 from "base-64";
 import axios from "axios";
 import { PassageConfig } from "../types/PassageConfig";
-
+import { passagePublicKeyCache } from "..";
 
 export default class Passage {
     appID: string;
-    #publicKey: string;
     #apiKey: string | undefined;
     authStrategy: AuthStrategy;
     user: User;
@@ -28,7 +27,6 @@ export default class Passage {
         this.#apiKey = config?.apiKey;
         this.user = new User(config);
 
-        this.#publicKey = '';
         this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";
         this.#config = config;
     }
@@ -65,14 +63,6 @@ export default class Passage {
         return this.#apiKey;
     }
 
-    set publicKey(_publicKey) {
-        this.#publicKey = _publicKey;
-    }
-    
-    get publicKey(): string {
-        return this.#publicKey;
-    }
-
     /**
      * Fetch the corresponding public key for this Passage instance.
      * 
@@ -80,7 +70,11 @@ export default class Passage {
      */
     async fetchPublicKey(): Promise<string> {
         // use cached value if found
-        if (this.#publicKey) return this.#publicKey;
+        let cachedPublicKey = passagePublicKeyCache[this.appID];
+        if (cachedPublicKey) {
+            console.log(`using cached public key: ${cachedPublicKey}`);
+            return cachedPublicKey;
+        }
     
         let publicKey: string = await axios.get(`https://api.passage.id/v1/apps/${this.appID}`)
             .catch(err => {
@@ -89,9 +83,8 @@ export default class Passage {
             .then(res => {
                 let rsaPublicKey = res.data.app.rsa_public_key;
                 let finalPublicKey = base64.decode(rsaPublicKey);
+                passagePublicKeyCache[this.appID] = finalPublicKey;
 
-                this.publicKey = finalPublicKey;
-    
                 return finalPublicKey;
             });
     
