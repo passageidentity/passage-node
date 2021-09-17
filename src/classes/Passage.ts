@@ -103,7 +103,7 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in header authentication
      */
-    async authenticateRequestWithHeader(req: any, res: Response, next?: NextFunction): Promise<void|boolean|User> {
+    async authenticateRequestWithHeader(req: any, res: Response, next?: NextFunction): Promise<any> {
             let publicKey = await this.fetchPublicKey();
             let { authorization } = req.headers;
 
@@ -117,11 +117,11 @@ export default class Passage {
                         next();
                     } else return userID;
                 } else {
-                    if (next) res.status(401).send('unauthorized');
+                    if (next) return res.status(401).send('unauthorized');
                     else throw new Error("Could not validate header auth token. You must catch this error.");
                 }
             } else {
-                if (next) res.status(401).send('unauthorized');
+                if (next) return res.status(401).send('unauthorized');
                 else throw new Error("Header authorization not found. You must catch this error.");
             }
     }
@@ -134,9 +134,9 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in cookie authentication
      */
-    async authenticateRequestWithCookie(req: Request, res: Response, next?: NextFunction): Promise<boolean|void|User> {
+    async authenticateRequestWithCookie(req: Request, res: Response, next?: NextFunction): Promise<any> {
         if (!req.headers.cookie) {
-            if (next) res.status(401).send('unauthorized'); 
+            if (next) return res.status(401).send('unauthorized'); 
             else throw new Error("Could not fetch cookies. You must catch this error.");
         }
         let cookies: any = {};
@@ -159,11 +159,11 @@ export default class Passage {
                     next();
                 } else return userID;
             } else {
-                if (next) res.status(401).send('unauthorized');
+                if (next) return res.status(401).send('unauthorized');
                 else throw new Error("Could not validate cookie auth token. You must catch this error.");
             }
         } else {
-            if (next) res.status(401).send('unauthorized'); 
+            if (next) return res.status(401).send('unauthorized'); 
             else throw new Error("Could not find authentication cookie 'psg_auth_token' token. You must catch this error.");
         }
     }
