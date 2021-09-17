@@ -10,7 +10,7 @@ require('dotenv').config();
 let passageConfig: PassageConfig = {
     appID: process.env.APP_ID ? process.env.APP_ID : '',
     apiKey: process.env.API_KEY ? process.env.API_KEY : '',
-    authStrategy: "HEADER",
+    authStrategy: "COOKIE",
 }
 
 // let passage = (passageConfig: any) => {
@@ -26,6 +26,7 @@ app.get('/', async (req, res) => {
     // res.send("authenticated!");
 
         let user = await passage.authenticateRequest(req, res);
+        console.log(user);
         if (user) res.send(user);
         else res.send("Failed to authenticate user.");
 

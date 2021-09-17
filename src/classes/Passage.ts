@@ -109,12 +109,11 @@ export default class Passage {
 
             if (authorization) {
                 req.token = authorization.split(" ")[1];
-                let validRequest = this.validAuthToken(req.token, publicKey);
+                let userID = this.validAuthToken(req.token, publicKey, next);
                 
-                if (await validRequest) {
-                    res.passage = this;
+                if (userID) {
                     if (next) next();
-                    else return this.user.id;
+                    else return userID;
                 } else {
                     if (next) res.status(401).send('unauthorized');
                     else throw new Error("Could not validate header auth token. You must catch this error.");
@@ -148,10 +147,10 @@ export default class Passage {
         let psg_auth_token = cookies.psg_auth_token;
         if (psg_auth_token) {
             let publicKey = await this.fetchPublicKey();
-            if (this.validAuthToken(psg_auth_token, publicKey)) {
-                res.passage = this;
+            let userID = this.validAuthToken(psg_auth_token, publicKey, next);
+            if (userID) {
                 if (next) next();
-                else return this.user.id;
+                else return userID;
             } else {
                 if (next) res.status(401).send('unauthorized');
                 else throw new Error("Could not validate cookie auth token. You must catch this error.");
@@ -170,13 +169,13 @@ export default class Passage {
      * @param publicKey The public key corresponding to the Passage application
      * @returns {boolean} True if the jwt can be verified, false jwt cannot be verified
      */
-     validAuthToken(token: string, publicKey: string): boolean {
+     validAuthToken(token: string, publicKey: string, next?: NextFunction): boolean {
         try {
             let validAuthToken = jwt.verify(token, publicKey);
             if (validAuthToken) {
                 let userID: any = validAuthToken.sub;
-                this.user.id = userID;
-                return true;
+                if (next) this.user.id = userID;
+                return userID;
             } else return false;
         } catch(e) {
             console.log(e);
