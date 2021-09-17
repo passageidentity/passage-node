@@ -110,7 +110,7 @@ export default class Passage {
                 req.token = authorization.split(" ")[1];
                 let validRequest = this.validAuthToken(req.token, publicKey);
                 
-                if (validRequest) {
+                if (await validRequest) {
                     res.passage = this;
                     next();
                 }
@@ -146,7 +146,7 @@ export default class Passage {
             let psg_auth_token = cookies.psg_auth_token;
             if (psg_auth_token) {
                 let publicKey = await this.fetchPublicKey();
-                if(this.validAuthToken(psg_auth_token, publicKey)) {
+                if(await this.validAuthToken(psg_auth_token, publicKey)) {
                     res.passage = this;
                     next();
                 }
@@ -167,12 +167,13 @@ export default class Passage {
      * @param publicKey The public key corresponding to the Passage application
      * @returns {boolean} True if the jwt can be verified, false jwt cannot be verified
      */
-    validAuthToken(token: string, publicKey: string): boolean {
+     async validAuthToken(token: string, publicKey: string): Promise<boolean> {
         try {
             let validAuthToken = jwt.verify(token, publicKey);
 
             if (validAuthToken) {
-                let userID = validAuthToken.sub;
+                let userID: any = validAuthToken.sub;
+                this.user.data = await this.user.get(userID);
                 this.user.id = userID;
                 return true;
             } else return false;
