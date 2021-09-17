@@ -112,8 +112,10 @@ export default class Passage {
                 let userID = this.validAuthToken(req.token, publicKey, next);
                 
                 if (userID) {
-                    if (next) next();
-                    else return userID;
+                    if (next) {
+                        res.passage = this;
+                        next();
+                    } else return userID;
                 } else {
                     if (next) res.status(401).send('unauthorized');
                     else throw new Error("Could not validate header auth token. You must catch this error.");
@@ -149,8 +151,10 @@ export default class Passage {
             let publicKey = await this.fetchPublicKey();
             let userID = this.validAuthToken(psg_auth_token, publicKey, next);
             if (userID) {
-                if (next) next();
-                else return userID;
+                if (next) {
+                    res.passage = this;
+                    next();
+                } else return userID;
             } else {
                 if (next) res.status(401).send('unauthorized');
                 else throw new Error("Could not validate cookie auth token. You must catch this error.");
