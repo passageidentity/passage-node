@@ -13,6 +13,7 @@ export default class Passage {
     #apiKey: string | undefined;
     authStrategy: AuthStrategy;
     user: User;
+    #failureRedirect: string;
 
     /**
      * Initialize a new Passage instance.
@@ -26,6 +27,7 @@ export default class Passage {
         this.appID = config.appID;
         this.#apiKey = config?.apiKey;
         this.user = new User(config);
+        this.#failureRedirect = config.failureRedirect ? config.failureRedirect : '/';
 
         this.#publicKey = '';
         this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";
@@ -118,7 +120,7 @@ export default class Passage {
             } else throw new Error("Header authorization not found");
         } catch (e) {
             console.warn(e);
-            res.send("Could not authenticate request with header.");
+            res.redirect(this.#failureRedirect);
         }
     }
     
@@ -155,7 +157,7 @@ export default class Passage {
             else throw new Error("Could not find authentication cookie 'psg_auth_token' token");
         } catch(e) {
             console.warn(e);
-            res.send("Could not authenticate user with cookie.");
+            res.redirect(this.#failureRedirect);
         }
     }
 

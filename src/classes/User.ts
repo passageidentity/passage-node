@@ -1,6 +1,5 @@
 import { PassageConfig } from "../types/PassageConfig";
 import axios from "axios";
-import { JwtPayload } from "jsonwebtoken";
 
 export default class User {
     #appID: string;
