@@ -135,9 +135,12 @@ export default class Passage {
      * @returns Middleware function for use in cookie authentication
      */
     async authenticateRequestWithCookie(req: Request, res: Response, next?: NextFunction): Promise<boolean|void|User> {
-        if (!req.headers.cookie) throw new Error("Could not fetch cookies. You must catch this error.");
+        if (!req.headers.cookie) {
+            if (next) res.status(401).send('unauthorized'); 
+            else throw new Error("Could not fetch cookies. You must catch this error.");
+        }
         let cookies: any = {};
-        req.headers && req.headers.cookie.split(';').forEach((cookie: any) => {
+        req.headers && req.headers.cookie?.split(';').forEach((cookie: any) => {
             let parts = cookie.match(/(.*?)=(.*)$/);
             if (parts) {
                 let key = parts[1].trim();
