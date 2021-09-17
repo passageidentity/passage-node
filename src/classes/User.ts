@@ -6,7 +6,7 @@ export default class User {
     #apiKey: string;
     #authorizationHeader: object | undefined;
     id: any;
-    data: object;
+    data: any;
      
     /**
      * Initialize a new Passage User instance.
