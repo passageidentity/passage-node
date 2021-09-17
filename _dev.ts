@@ -1,4 +1,4 @@
-import passage from "./src/index";
+import psg from "./src/index";
 
 import express from 'express';
 import { PassageConfig } from "./src/types/PassageConfig";
@@ -13,10 +13,15 @@ let passageConfig: PassageConfig = {
     authStrategy: "COOKIE",
 }
 
-app.get('/', passage(passageConfig), async (req, res) => {
+// let passage = (passageConfig: any) => {
+//     return (req: any, res: any, next: any) => {
+//         new psg(passageConfig).authenticateRequest(req, res, next);
+//     }
+// }
 
-    // let result_1 = await res.passage.user.get("USER_ID_HERE");
-    // console.log(result_1);
+let passage = new psg(passageConfig).express;
+
+app.get('/', passage, async (req, res) => {
     console.log(res.passage);
     res.send("This is an authenticated route!");
 });

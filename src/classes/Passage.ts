@@ -14,11 +14,12 @@ export default class Passage {
     authStrategy: AuthStrategy;
     user: User;
     #failureRedirect: string;
+    #config: PassageConfig;
 
     /**
      * Initialize a new Passage instance.
      * 
-     * @param {PassageConfig} config The default config for Passage initialization 
+     * @param {PassageConfig} config The default config for Passage initialization
      */
     constructor(config?: PassageConfig) {
         if (!config?.appID) {
@@ -31,6 +32,7 @@ export default class Passage {
 
         this.#publicKey = '';
         this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";
+        this.#config = config;
     }
 
     /**
@@ -93,6 +95,13 @@ export default class Passage {
             });
     
         return publicKey;
+    }
+
+    get express() {
+        let passage = new Passage(this.#config);
+        return (req: Request, res: Response, next: NextFunction) => {
+            passage.authenticateRequest(req, res, next);
+        }
     }
 
     /**

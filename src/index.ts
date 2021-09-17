@@ -17,7 +17,7 @@ declare global{
  * @param config The default config for Passage initialization
  * @returns Callback function
  */
-export default function initialize(config: PassageConfig) {
+export function middleware(config: PassageConfig) {
     if (!config.appID) throw new Error("Passage requires an App ID");
     
     let passage = new Passage(config);
@@ -26,8 +26,6 @@ export default function initialize(config: PassageConfig) {
     }
 }
 
-module.exports = initialize;
+module.exports = Passage;
 
-export {
-    Passage as Passage
-}
+export default Passage
