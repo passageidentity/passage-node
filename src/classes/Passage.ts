@@ -41,7 +41,7 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in authentication
      */
-    async authenticateRequest(req: Request, res: Response, next?: NextFunction): Promise<void|boolean|User> {
+    async authenticateRequest(req: Request, res?: Response, next?: NextFunction): Promise<void|boolean|User> {
         switch (this.authStrategy) {
             case "COOKIE":
                 if (next) return this.authenticateRequestWithCookie(req, res, next);
@@ -89,6 +89,8 @@ export default class Passage {
     }
 
     get express() {
+        if (!this.#config.appID) throw new Error("Passage requires an App ID");
+        
         let passage = new Passage(this.#config);
         return (req: Request, res: Response, next: NextFunction) => {
             passage.authenticateRequest(req, res, next);
@@ -103,7 +105,7 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in header authentication
      */
-    async authenticateRequestWithHeader(req: any, res: Response, next?: NextFunction): Promise<any> {
+    async authenticateRequestWithHeader(req: any, res?: Response, next?: NextFunction): Promise<any> {
             let publicKey = await this.fetchPublicKey();
             let { authorization } = req.headers;
 
@@ -112,21 +114,21 @@ export default class Passage {
                 let userID = this.validAuthToken(req.token, publicKey, next);
                 
                 if (userID) {
-                    if (next) {
+                    if (next && res) {
                         res.passage = this;
                         next();
                     } else return userID;
                 } else {
-                    if (next) {
+                    if (next && res) {
                         res.passage = false;
-                        return;
+                        next();
                     }
                     else throw new Error("Could not validate header auth token. You must catch this error.");
                 }
             } else {
-                if (next) {
+                if (next && res) {
                     res.passage = false;
-                    return;
+                    next();
                 }
                 else throw new Error("Header authorization not found. You must catch this error.");
             }
@@ -140,9 +142,12 @@ export default class Passage {
      * @param next Express next
      * @returns Middleware function for use in cookie authentication
      */
-    async authenticateRequestWithCookie(req: Request, res: Response, next?: NextFunction): Promise<any> {
+    async authenticateRequestWithCookie(req: Request, res?: Response, next?: NextFunction): Promise<any> {
         if (!req.headers.cookie) {
-            if (next) return; 
+            if (next && res) {
+                res.passage = false;
+                next();
+            }
             else throw new Error("Could not fetch cookies. You must catch this error.");
         }
         let cookies: any = {};
@@ -160,21 +165,21 @@ export default class Passage {
             let publicKey = await this.fetchPublicKey();
             let userID = this.validAuthToken(psg_auth_token, publicKey, next);
             if (userID) {
-                if (next) {
+                if (next && res) {
                     res.passage = this;
                     next();
                 } else return userID;
             } else {
-                if (next) {
+                if (next && res) {
                     res.passage = false;
-                    return;
+                    next();
                 }
                 else throw new Error("Could not validate cookie auth token. You must catch this error.");
             }
         } else {
-            if (next) {
+            if (next && res) {
                 res.passage = false;
-                return;
+                next();
             }
             else throw new Error("Could not find authentication cookie 'psg_auth_token' token. You must catch this error.");
         }

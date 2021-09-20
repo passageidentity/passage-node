@@ -20,16 +20,18 @@ let passageConfig: PassageConfig = {
 // }
 
 let passage = new psg(passageConfig);
-
-
 app.get('/', async (req, res) => {
-    // res.send("authenticated!");
-
-        let user = await passage.authenticateRequest(req, res);
-        console.log(user);
-        if (user) res.send(user);
-        else res.send("Failed to authenticate user.");
-
+    try {
+        let userID = await passage.authenticateRequest(req);
+        console.log(userID)
+        if (userID) {
+            res.send("authenticated!");
+        } else {
+            res.send("You are not authenticated");
+        }
+    } catch(e) {
+        res.send("Error authenticating user");
+    }
 });
 
 app.listen(port, () => {
