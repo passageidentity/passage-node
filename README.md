@@ -8,50 +8,6 @@ Install this package using npm.
 npm i --save passage-node
 ```
 
-## Authenticating a Request With Express & Passage
-
-To authenticate an HTTP request in an Express application, you can use the Passage as a middleware in your Express server.
-You need to provide Passage with your app ID in order to verify the JWTs.
-
-```javascript
-import Passage from "@passageidentity/passage-node";
-import express from "express";
-
-const app = express();
-const port = 3000;
-
-let passageConfig = {
-  appID: "YOUR_APP_ID",
-};
-
-// Authentication using the built-in Passage middleware for Express
-let passage = new Passage(passageConfig);
-app.get("/authenticatedRoute", passage.express, async (req, res) => {
-  try {
-    if (res.passage) {
-      /** The user has been authenticated!
-    Note: you can access passage methods and
-    attributes with res.passage, or access
-    user information using res.passage.user
-
-    For example, if I want a user ID: res.passage.user.id
-    To retrieve that user: await res.passage.user.get(USER_ID_HERE)
-    **/
-      res.render("You've been authenticated with Passage!");
-    } else {
-      res.status(401).send("");
-    }
-  } catch (e) {
-    console.log(e);
-    res.status(401).send("");
-  }
-});
-
-app.listen(5000, () => {
-  console.log(`Example app listening on port 5000`);
-});
-```
-
 ## HTTP authentication using the Passage class
 
 Use the Passage API by initializing a Passage class.
@@ -82,6 +38,53 @@ app.get("/authenticatedRoute", async (req, res) => {
     console.log(e);
     res.send("Authentication failed!");
   }
+});
+```
+
+## Authenticating a Request With Middleware
+
+To authenticate an HTTP request in an Express application, you can use the Passage as a middleware in your Express server.
+You need to provide Passage with your app ID in order to verify the JWTs.
+
+```javascript
+import Passage from "@passageidentity/passage-node";
+import express from "express";
+
+const app = express();
+const port = 3000;
+
+let passageConfig = {
+  appID: "YOUR_APP_ID",
+};
+
+// example of custom middleware
+let passage = new psg(passageConfig);
+let customMiddleware = (() => {
+  return async (req: any, res: any, next: NextFunction) => {
+    try {
+      let userID = await passage.authenticateRequest(req);
+      if (userID) res.userID = userID;
+      else res.userID = false;
+      next();
+    } catch (e) {
+      console.log(e);
+      res.status(401).send("Could not authenticate user!");
+    }
+  };
+})();
+
+// example implementation of custom middleware
+app.get("/", customMiddleware, async (req: Request, res: any) => {
+  let userID = res.userID;
+  if (userID) {
+    res.send(userID);
+  } else {
+    res.send("Failed to get user");
+  }
+});
+
+app.listen(5000, () => {
+  console.log(`Example app listening on port 5000`);
 });
 ```
 

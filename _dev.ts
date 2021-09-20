@@ -1,6 +1,6 @@
 import psg from "./src/index";
 
-import express from 'express';
+import express, { NextFunction } from 'express';
 import { PassageConfig } from "./src/types/PassageConfig";
 const app = express();
 const port = 3000;
@@ -13,26 +13,51 @@ let passageConfig: PassageConfig = {
     authStrategy: "COOKIE",
 }
 
-// let passage = (passageConfig: any) => {
-//     return (req: any, res: any, next: any) => {
-//         new psg(passageConfig).authenticateRequest(req, res, next);
-//     }
-// }
-
+// example of custom middleware
 let passage = new psg(passageConfig);
-app.get('/', async (req, res) => {
-    try {
-        let userID = await passage.authenticateRequest(req);
-        console.log(userID)
-        if (userID) {
-            res.send("authenticated!");
-        } else {
-            res.send("You are not authenticated");
+let customMiddleware = (() => {
+    return async (req: any, res: any, next: NextFunction) => {
+        try {
+            let userID = await passage.authenticateRequest(req);
+            if (userID) res.userID = userID;
+            else res.userID = false;
+            next();
+        } catch(e) {
+            console.log(e);
+            res.status(401).send('Could not authenticate user!');
         }
-    } catch(e) {
-        res.send("Error authenticating user");
+    }
+})();
+
+// example implementation of custom middleware
+app.get('/', customMiddleware, async(req: Request, res: any) => {
+    let userID = res.userID;
+    if (userID) {
+        console.log(userID);
+        let { email }: any = await passage.user.get(userID);
+        res.send(email);
+    } else {
+        console.log(res.userID);
+        res.send("Failed to get user");
     }
 });
+
+
+// let passage = new psg(passageConfig);
+// app.get('/', async (req, res) => {
+//     try {
+//         let userID = await passage.authenticateRequest(req);
+//         console.log(userID)
+//         if (userID) {
+//             res.send("authenticated!");
+//         } else {
+//             res.send("You are not authenticated");
+//         }
+//     } catch(e) {
+//         console.log(e);
+//         res.send("Error authenticating user");
+//     }
+// });
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
