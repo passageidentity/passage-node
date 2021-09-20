@@ -117,11 +117,17 @@ export default class Passage {
                         next();
                     } else return userID;
                 } else {
-                    if (next) return res.status(401).send('unauthorized');
+                    if (next) {
+                        res.passage = false;
+                        return;
+                    }
                     else throw new Error("Could not validate header auth token. You must catch this error.");
                 }
             } else {
-                if (next) return res.status(401).send('unauthorized');
+                if (next) {
+                    res.passage = false;
+                    return;
+                }
                 else throw new Error("Header authorization not found. You must catch this error.");
             }
     }
@@ -136,7 +142,7 @@ export default class Passage {
      */
     async authenticateRequestWithCookie(req: Request, res: Response, next?: NextFunction): Promise<any> {
         if (!req.headers.cookie) {
-            if (next) return res.status(401).send('unauthorized'); 
+            if (next) return; 
             else throw new Error("Could not fetch cookies. You must catch this error.");
         }
         let cookies: any = {};
@@ -159,11 +165,17 @@ export default class Passage {
                     next();
                 } else return userID;
             } else {
-                if (next) return res.status(401).send('unauthorized');
+                if (next) {
+                    res.passage = false;
+                    return;
+                }
                 else throw new Error("Could not validate cookie auth token. You must catch this error.");
             }
         } else {
-            if (next) return res.status(401).send('unauthorized'); 
+            if (next) {
+                res.passage = false;
+                return;
+            }
             else throw new Error("Could not find authentication cookie 'psg_auth_token' token. You must catch this error.");
         }
     }

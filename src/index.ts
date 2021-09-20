@@ -8,7 +8,7 @@ export var passagePublicKeyCache: any = {}
 declare global{
     namespace Express {
         export interface Response {
-            passage: Passage
+            passage: Passage | boolean
         }
     }
 }
@@ -19,7 +19,7 @@ declare global{
  * @param config The default config for Passage initialization
  * @returns Callback function
  */
-export function middleware(config: PassageConfig) {
+export async function middleware(config: PassageConfig) {
     if (!config.appID) throw new Error("Passage requires an App ID");
     
     let passage = new Passage(config);
