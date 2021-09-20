@@ -27,15 +27,24 @@ let passageConfig = {
 // Authentication using the built-in Passage middleware for Express
 let passage = new Passage(passageConfig);
 app.get("/authenticatedRoute", passage.express, async (req, res) => {
-  /** The user has been authenticated!
+  try {
+    if (res.passage) {
+      /** The user has been authenticated!
     Note: you can access passage methods and
     attributes with res.passage, or access
     user information using res.passage.user
 
     For example, if I want a user ID: res.passage.user.id
     To retrieve that user: await res.passage.user.get(USER_ID_HERE)
-  **/
-  res.render("You've been authenticated with Passage!");
+    **/
+      res.render("You've been authenticated with Passage!");
+    } else {
+      res.status(401).send("");
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(401).send("");
+  }
 });
 
 app.listen(5000, () => {
