@@ -1,7 +1,6 @@
 enum AuthStrategyEnum {
     "COOKIE",
-    "HEADER",
-    "DEFAULT"
+    "HEADER"
 }
 
 export type AuthStrategy = keyof typeof AuthStrategyEnum;
