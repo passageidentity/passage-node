@@ -150,7 +150,6 @@ export default class Passage {
                 } else return false;
             } else return false;
         } catch(e) {
-            console.log(e);
             return false;
         }
     }
