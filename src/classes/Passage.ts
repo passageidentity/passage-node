@@ -26,7 +26,7 @@ export default class Passage {
         this.#apiKey = config?.apiKey;
         this.user = new User(config);
 
-        this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";
+        this.authStrategy = config?.authStrategy ? config.authStrategy : "COOKIE";
     }
 
     /**
@@ -35,18 +35,14 @@ export default class Passage {
      * authentication strategy).
      * 
      * @param req Express request
-     * @param res Express response
-     * @param next Express next
-     * @returns Middleware function for use in authentication
+     * @returns User ID of Passage user
      */
     async authenticateRequest(req: Request): Promise<void|boolean|User> {
-        switch (this.authStrategy) {
-            case "COOKIE":
-                return this.authenticateRequestWithCookie(req);
-            case "HEADER":
-                return this.authenticateRequestWithHeader(req);
-            default:
-                return this.authenticateRequestWithCookie(req);
+        if (this.authStrategy == "HEADER") {
+            return this.authenticateRequestWithHeader(req);
+        } else {
+            // defaults to cookie
+            return this.authenticateRequestWithCookie(req);
         }
     }
 
@@ -87,9 +83,7 @@ export default class Passage {
      * Authenticate a request via the http header.
      * 
      * @param req Express request
-     * @param res Express response
-     * @param next Express next
-     * @returns Middleware function for use in header authentication
+     * @returns User ID for Passage User
      */
     async authenticateRequestWithHeader(req: any): Promise<any> {
             let publicKey = await this.fetchPublicKey();
@@ -109,9 +103,7 @@ export default class Passage {
      * Authenticate request via cookie.
      * 
      * @param req Express request
-     * @param res Express response
-     * @param next Express next
-     * @returns Middleware function for use in cookie authentication
+     * @returns User ID for Passage User
      */
     async authenticateRequestWithCookie(req: Request): Promise<any> {
         if (!req.headers.cookie) {
