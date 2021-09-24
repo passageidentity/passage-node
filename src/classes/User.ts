@@ -92,6 +92,13 @@ export default class User {
     }
   }
 
+  /**
+   * Update a user's email.
+   *
+   * @param userID The passage user ID
+   * @param email The user's new email
+   * @returns User object
+   */
   async updateEmail(userID: string, email: string): Promise<object> {
     try {
       if (!this.#apiKey)
