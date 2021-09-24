@@ -103,7 +103,7 @@ export default class User {
     try {
       if (!this.#apiKey)
         throw new Error(
-          "A Passage API key is needed to make an activateUser request"
+          "A Passage API key is needed to make an updateEmail request"
         );
 
       let userData: object = await axios
@@ -116,7 +116,7 @@ export default class User {
         )
         .catch((err) => {
           throw new Error(
-            `Could not activate user. HTTP status: ${err.response.status}`
+            `Could not update user's email. HTTP status: ${err.response.status}`
           );
         })
         .then((res) => {
