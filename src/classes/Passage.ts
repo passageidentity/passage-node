@@ -12,7 +12,6 @@ export default class Passage {
     #apiKey: string | undefined;
     authStrategy: AuthStrategy;
     user: User;
-    #config: PassageConfig;
 
     /**
      * Initialize a new Passage instance.
@@ -27,8 +26,7 @@ export default class Passage {
         this.#apiKey = config?.apiKey;
         this.user = new User(config);
 
-        this.authStrategy = config?.authStrategy ? config.authStrategy : "DEFAULT";
-        this.#config = config;
+        this.authStrategy = config?.authStrategy ? config.authStrategy : "COOKIE";
     }
 
     /**
@@ -37,21 +35,14 @@ export default class Passage {
      * authentication strategy).
      * 
      * @param req Express request
-     * @param res Express response
-     * @param next Express next
-     * @returns Middleware function for use in authentication
+     * @returns User ID of Passage user
      */
-    async authenticateRequest(req: Request, res?: Response, next?: NextFunction): Promise<void|boolean|User> {
-        switch (this.authStrategy) {
-            case "COOKIE":
-                if (next) return this.authenticateRequestWithCookie(req, res, next);
-                else return this.authenticateRequestWithCookie(req, res);
-            case "HEADER":
-                if (next) return this.authenticateRequestWithHeader(req, res, next);
-                else return this.authenticateRequestWithHeader(req, res);
-            default:
-                if (next) return this.authenticateRequestWithCookie(req, res, next);
-                else return this.authenticateRequestWithCookie(req, res);
+    async authenticateRequest(req: Request): Promise<void|boolean|User> {
+        if (this.authStrategy == "HEADER") {
+            return this.authenticateRequestWithHeader(req);
+        } else {
+            // defaults to cookie
+            return this.authenticateRequestWithCookie(req);
         }
     }
 
@@ -88,68 +79,37 @@ export default class Passage {
         return publicKey;
     }
 
-    get express() {
-        if (!this.#config.appID) throw new Error("Passage requires an App ID");
-        
-        let passage = new Passage(this.#config);
-        return (req: Request, res: Response, next: NextFunction) => {
-            passage.authenticateRequest(req, res, next);
-        }
-    }
-
     /**
      * Authenticate a request via the http header.
      * 
      * @param req Express request
-     * @param res Express response
-     * @param next Express next
-     * @returns Middleware function for use in header authentication
+     * @returns User ID for Passage User
      */
-    async authenticateRequestWithHeader(req: any, res?: Response, next?: NextFunction): Promise<any> {
+    async authenticateRequestWithHeader(req: any): Promise<any> {
             let publicKey = await this.fetchPublicKey();
             let { authorization } = req.headers;
 
             if (authorization) {
                 req.token = authorization.split(" ")[1];
-                let userID = this.validAuthToken(req.token, publicKey, next);
+                let userID = this.validAuthToken(req.token, publicKey);
                 
-                if (userID) {
-                    if (next && res) {
-                        res.passage = this;
-                        next();
-                    } else return userID;
-                } else {
-                    if (next && res) {
-                        res.passage = false;
-                        next();
-                    }
-                    else throw new Error("Could not validate header auth token. You must catch this error.");
-                }
-            } else {
-                if (next && res) {
-                    res.passage = false;
-                    next();
-                }
-                else throw new Error("Header authorization not found. You must catch this error.");
-            }
+                if (userID) return userID;
+                else throw new Error("Could not validate header auth token. You must catch this error.");
+
+            } else throw new Error("Header authorization not found. You must catch this error.");
     }
     
     /**
      * Authenticate request via cookie.
      * 
      * @param req Express request
-     * @param res Express response
-     * @param next Express next
-     * @returns Middleware function for use in cookie authentication
+     * @returns User ID for Passage User
      */
-    async authenticateRequestWithCookie(req: Request, res?: Response, next?: NextFunction): Promise<any> {
+    async authenticateRequestWithCookie(req: Request): Promise<any> {
         if (!req.headers.cookie) {
-            if (next && res) {
-                res.passage = false;
-                next();
-            }
-            else throw new Error("Could not fetch cookies. You must catch this error.");
+            throw new Error("Could not find valid cookie for authentication. You must catch this error.");
         }
+
         let cookies: any = {};
         req.headers && req.headers.cookie?.split(';').forEach((cookie: any) => {
             let parts = cookie.match(/(.*?)=(.*)$/);
@@ -163,25 +123,12 @@ export default class Passage {
         let psg_auth_token = cookies.psg_auth_token;
         if (psg_auth_token) {
             let publicKey = await this.fetchPublicKey();
-            let userID = this.validAuthToken(psg_auth_token, publicKey, next);
-            if (userID) {
-                if (next && res) {
-                    res.passage = this;
-                    next();
-                } else return userID;
-            } else {
-                if (next && res) {
-                    res.passage = false;
-                    next();
-                }
-                else throw new Error("Could not validate cookie auth token. You must catch this error.");
-            }
+            let userID = this.validAuthToken(psg_auth_token, publicKey);
+            if (userID) return userID;
+            else throw new Error("Could not validate auth token. You must catch this error.");
+
         } else {
-            if (next && res) {
-                res.passage = false;
-                next();
-            }
-            else throw new Error("Could not find authentication cookie 'psg_auth_token' token. You must catch this error.");
+            throw new Error("Could not find authentication cookie 'psg_auth_token' token. You must catch this error.");
         }
     }
 
@@ -193,17 +140,17 @@ export default class Passage {
      * @param publicKey The public key corresponding to the Passage application
      * @returns {boolean} True if the jwt can be verified, false jwt cannot be verified
      */
-     validAuthToken(token: string, publicKey: string, next?: NextFunction): boolean {
+     validAuthToken(token: string, publicKey: string): boolean | (string | (() => string)) {
         try {
             let validAuthToken = jwt.verify(token, publicKey);
             if (validAuthToken) {
-                let userID: any = validAuthToken.sub;
-                if (next) this.user.id = userID;
-                return userID;
+                let userID = validAuthToken.sub ? validAuthToken.sub : false;
+                if (userID) {
+                    return userID;
+                } else return false;
             } else return false;
         } catch(e) {
-            console.log(e);
-            return false
+            return false;
         }
     }
  }
