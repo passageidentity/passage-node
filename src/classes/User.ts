@@ -86,9 +86,8 @@ export default class User {
         });
 
       return userData;
-    } catch (e) {
-      console.warn(e);
-      return {};
+    } catch (e: any) {
+      throw new Error(e);
     }
   }
 
@@ -124,9 +123,8 @@ export default class User {
         });
 
       return userData;
-    } catch (e) {
-      console.warn(e);
-      return {};
+    } catch (e: any) {
+      throw new Error(e);
     }
   }
 
@@ -161,9 +159,8 @@ export default class User {
         });
 
       return userData;
-    } catch (e) {
-      console.warn(e);
-      return {};
+    } catch (e: any) {
+      throw new Error(e);
     }
   }
 }
