@@ -23,7 +23,6 @@ let customMiddleware = (() => {
       else res.userID = false;
       next();
     } catch (e) {
-      console.log(e);
       res.status(401).send("Could not authenticate user!");
     }
   };
@@ -33,10 +32,8 @@ let customMiddleware = (() => {
 app.get("/", customMiddleware, async (req: Request, res: any) => {
   let userID = res.userID;
   if (userID) {
-    console.log(userID);
-    passage.user.updateEmail(userID, "abc@123.com");
     let { email }: any = await passage.user.get(userID);
-    res.send(email);
+    res.json({ email });
   } else {
     console.log(res.userID);
     res.send("Failed to get user");
@@ -59,6 +56,4 @@ app.get("/", customMiddleware, async (req: Request, res: any) => {
 //     }
 // });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+export default app;
