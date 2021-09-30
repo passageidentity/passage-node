@@ -56,12 +56,13 @@ describe("Passage API Requests", () => {
     expect(deactivatedUser).toHaveProperty("id", userID);
   });
   test("changeUserEmail", async () => {
-    let user = await passage.user.updateEmail(
-      userID,
-      "changeEmailTest@passage.id"
-    );
-    expect(user).toHaveProperty("email", "changeEmailTest@passage.id");
+    let updatedUser: any = await passage.user.update(userID, {
+      email: "changeEmailTest@passage.id",
+    });
+    expect(updatedUser).toHaveProperty("email", "changeEmailTest@passage.id");
 
-    await passage.user.updateEmail(userID, "defaultTestEmail@passage.id");
+    await passage.user.update(updatedUser.id, {
+      email: "defaultTestEmail@passage.id",
+    });
   });
 });

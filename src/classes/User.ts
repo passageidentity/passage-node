@@ -95,22 +95,20 @@ export default class User {
    * Update a user's email.
    *
    * @param userID The passage user ID
-   * @param email The user's new email
+   * @param attributes The user attributes to be updated
    * @returns User object
    */
-  async updateEmail(userID: string, email: string): Promise<object> {
+  async update(userID: string, attributes: object): Promise<object> {
     try {
       if (!this.#apiKey)
         throw new Error(
-          "A Passage API key is needed to make an updateEmail request"
+          "A Passage API key is needed to make a user update request"
         );
 
       let userData: object = await axios
         .patch(
           `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
-          {
-            email,
-          },
+          attributes,
           this.#authorizationHeader
         )
         .catch((err) => {
