@@ -1,5 +1,4 @@
 import Passage from "../src/index";
-import express from "express";
 import request from "supertest";
 import app from "../testServer";
 
@@ -11,6 +10,7 @@ let appToken = process.env.APP_TOKEN ? process.env.APP_TOKEN : "";
 describe("Passage Initialization", () => {
   let config = {
     appID: process.env.APP_ID ? process.env.APP_ID : "",
+    apiKey: process.env.API_KEY,
   };
   let passage = new Passage(config);
 
@@ -19,15 +19,13 @@ describe("Passage Initialization", () => {
     expect(publicKey).toContain(process.env.PUBLIC_KEY);
   });
 
-  // note that the current token is only valid until Nov. 8 2022
+  //   note that the current token is only valid until Nov. 8 2022
   test("authenticateRequestWithCookie", async () => {
     await request(app).get("/").expect(401);
     await request(app)
       .get("/")
       .set("Cookie", [`psg_auth_token=${appToken}`])
-      .expect(200, {
-        email: "anna@passage.id",
-      });
+      .expect(200);
   });
 
   test("validAuthToken", async () => {
@@ -58,6 +56,12 @@ describe("Passage API Requests", () => {
     expect(deactivatedUser).toHaveProperty("id", userID);
   });
   test("changeUserEmail", async () => {
-    // add test here when endpoint is added
+    let user = await passage.user.updateEmail(
+      userID,
+      "changeEmailTest@passage.id"
+    );
+    expect(user).toHaveProperty("email", "changeEmailTest@passage.id");
+
+    await passage.user.updateEmail(userID, "defaultTestEmail@passage.id");
   });
 });
