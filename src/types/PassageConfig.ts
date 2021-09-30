@@ -1,8 +1,8 @@
-import { AuthStrategy } from "./AuthStrategy"
+import { AuthStrategy } from "./AuthStrategy";
 
 export type PassageConfig = {
-    appID: string,
-    apiKey?: string,
-    authStrategy?: AuthStrategy,
-    failureRedirect?: string,
-}
+  appID: string;
+  apiKey?: string;
+  authStrategy?: AuthStrategy;
+  failureRedirect?: string;
+};
