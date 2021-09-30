@@ -1,5 +1,5 @@
 {
-  "version": "1.0.24",
+  "version": "1.0.25",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/base-64": "^1.0.0",
@@ -8,6 +8,7 @@
     "@types/jsonwebtoken": "^8.5.5",
     "@types/node": "^16.9.0",
     "@types/pem": "^1.9.6",
+    "@types/supertest": "^2.0.11",
     "babel-jest": "^27.2.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -24,7 +25,7 @@
     "lib/"
   ],
   "scripts": {
-    "dev": "ts-node-dev --respawn _dev.ts",
+    "dev": "ts-node-dev --respawn testServer.ts",
     "test": "jest",
     "prepublishOnly": "npm run tsc",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json"
