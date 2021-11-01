@@ -1,6 +1,11 @@
 import { PassageConfig } from "../types/PassageConfig";
 import axios from "axios";
 
+type UserAttributes = {
+  email?: string;
+  phone?: string;
+};
+
 export default class User {
   #appID: string;
   #apiKey: string;
@@ -98,7 +103,10 @@ export default class User {
    * @param attributes The user attributes to be updated
    * @returns User object
    */
-  async update(userID: string, attributes: object): Promise<object> {
+  async update(
+    userID: string,
+    userAttributes: UserAttributes
+  ): Promise<object> {
     try {
       if (!this.#apiKey)
         throw new Error(
@@ -108,12 +116,14 @@ export default class User {
       let userData: object = await axios
         .patch(
           `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
-          attributes,
+          userAttributes,
           this.#authorizationHeader
         )
         .catch((err) => {
           throw new Error(
-            `Could not update user's email. HTTP status: ${err.response.status}`
+            `Could not update user attributes (${Object.keys(
+              userAttributes
+            ).join(", ")}). HTTP status: ${err.response.status}`
           );
         })
         .then((res) => {

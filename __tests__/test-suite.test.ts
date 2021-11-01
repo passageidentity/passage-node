@@ -40,6 +40,7 @@ describe("Passage API Requests", () => {
     appID: process.env.APP_ID ? process.env.APP_ID : "",
     apiKey: process.env.API_KEY,
   });
+  console.log(process.env.API_KEY);
 
   test("getUser", async () => {
     let user = await passage.user.get(userID);
@@ -55,7 +56,7 @@ describe("Passage API Requests", () => {
     expect(deactivatedUser).toHaveProperty("active", false);
     expect(deactivatedUser).toHaveProperty("id", userID);
   });
-  test("changeUserEmail", async () => {
+  test("update User Email", async () => {
     let updatedUser: any = await passage.user.update(userID, {
       email: "changeEmailTest@passage.id",
     });
@@ -63,6 +64,16 @@ describe("Passage API Requests", () => {
 
     await passage.user.update(updatedUser.id, {
       email: "defaultTestEmail@passage.id",
+    });
+  });
+  test("update User Phone", async () => {
+    let updatedUser: any = await passage.user.update(userID, {
+      phone: "+15005550006",
+    });
+    expect(updatedUser).toHaveProperty("phone", "+15005550006");
+
+    await passage.user.update(updatedUser.id, {
+      phone: "+17372021928",
     });
   });
 });
