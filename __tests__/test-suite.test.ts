@@ -67,9 +67,9 @@ describe("Passage API Requests", () => {
   });
   test("update User Phone", async () => {
     let updatedUser: any = await passage.user.update(userID, {
-      phone: "+15005550006",
+      phone: "+15005550001",
     });
-    expect(updatedUser).toHaveProperty("phone", "+15005550006");
+    expect(updatedUser).toHaveProperty("phone", "+15005550001");
 
     await passage.user.update(updatedUser.id, {
       phone: "+17372021928",
