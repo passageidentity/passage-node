@@ -1,10 +1,14 @@
 import { PassageConfig } from "../types/PassageConfig";
 import axios from "axios";
 
-type UserAttributes = {
-  email?: string;
-  phone?: string;
+type PossibleUserUpdateAttributes = {
+  email: string;
+  phone: string;
 };
+
+type UserAttributes =
+  | Pick<PossibleUserUpdateAttributes, "email">
+  | Pick<PossibleUserUpdateAttributes, "phone">;
 
 export default class User {
   #appID: string;
