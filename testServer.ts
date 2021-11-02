@@ -40,20 +40,4 @@ app.get("/", customMiddleware, async (req: Request, res: any) => {
   }
 });
 
-// let passage = new psg(passageConfig);
-// app.get('/', async (req, res) => {
-//     try {
-//         let userID = await passage.authenticateRequest(req);
-//         console.log(userID)
-//         if (userID) {
-//             res.send("authenticated!");
-//         } else {
-//             res.send("You are not authenticated");
-//         }
-//     } catch(e) {
-//         console.log(e);
-//         res.send("Error authenticating user");
-//     }
-// });
-
 export default app;

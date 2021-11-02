@@ -44,10 +44,14 @@ let passageAuthMiddleware = (() => {
 })();
 
 // example implementation of custom middleware
-app.get("/authenticatedRoute", passageAuthMiddleware, async (req: Request, res: any) => {
-  let userID = res.userID;
-  // do authenticated things...
-});
+app.get(
+  "/authenticatedRoute",
+  passageAuthMiddleware,
+  async (req: Request, res: any) => {
+    let userID = res.userID;
+    // do authenticated things...
+  }
+);
 
 app.listen(port, () => {
   console.log(`Example app running`);
@@ -55,6 +59,7 @@ app.listen(port, () => {
 ```
 
 ## Retrieve User Info
+
 To retrieve information about a user, you should use the `passage.user.get()` function. You will need to use a Passage API key, which can be created in the Passage Console under your Application Settings. This API key grants your web server access to the Passage management APIs to get and update information about users. This API key must be protected and stored in an appropriate secure storage location. It should never be hard-coded in the repository.
 
 ```javascript
@@ -66,25 +71,28 @@ const port = 3000;
 
 let passageConfig = {
   appID: "YOUR_APP_ID",
-  apiKey: "YOUR_API_KEY"
+  apiKey: "YOUR_API_KEY",
 };
-let passage = new Passage(passageConfig)
+let passage = new Passage(passageConfig);
 
 // example authenticated route
-app.get("/authenticatedRoute", passageAuthMiddleware, async (req: Request, res: any) => {
-  // get passage user ID from middleware
-  let userID = res.userID;
-  
-  // get user info
-  let passageUser = passage.user.get(userID);
-  console.log(passageUser.email)
-});
+app.get(
+  "/authenticatedRoute",
+  passageAuthMiddleware,
+  async (req: Request, res: any) => {
+    // get passage user ID from middleware
+    let userID = res.userID;
+
+    // get user info
+    let passageUser = await passage.user.get(userID);
+    console.log(passageUser.email);
+  }
+);
 ```
 
-
 ## Activate/Deactivate User
-You can also activate or deactivate a user using the Passage SDK. These actions require an API Key and deactivating a user will prevent them from logging into your application with Passage.
 
+You can also activate or deactivate a user using the Passage SDK. These actions require an API Key and deactivating a user will prevent them from logging into your application with Passage.
 
 ```javascript
 import Passage from "@passageidentity/passage-node";
@@ -95,22 +103,57 @@ const port = 3000;
 
 let passageConfig = {
   appID: "YOUR_APP_ID",
-  apiKey: "YOUR_API_KEY"
+  apiKey: "YOUR_API_KEY",
 };
-let passage = new Passage(passageConfig)
+let passage = new Passage(passageConfig);
 
 // example authenticated route
-app.get("/authenticatedRoute", passageAuthMiddleware, async (req: Request, res: any) => {
-  // get passage user ID from middleware
-  let userID = res.userID;
-  
-  // deactivate user
-  let passageUser = passage.user.deactivate(userID);
-  console.log(passageUser.activate)
-});
+app.get(
+  "/authenticatedRoute",
+  passageAuthMiddleware,
+  async (req: Request, res: any) => {
+    // get passage user ID from middleware
+    let userID = res.userID;
+
+    // deactivate user
+    let passageUser = await passage.user.deactivate(userID);
+    console.log(passageUser.activate);
+  }
+);
 ```
 
+## Update User Attributes
 
-## Class Methods
+With the Passage SDK, you can update a User's attributes. These actions require an API Key and deactivating a user will prevent them from logging into your application with Passage.
 
-[Click here](https://github.com/passageidentity/passage-node/blob/main/src/classes/readme.MD) to view all available class methods.
+```javascript
+import Passage from "@passageidentity/passage-node";
+import express from "express";
+
+const app = express();
+const port = 3000;
+
+let passageConfig = {
+  appID: "YOUR_APP_ID",
+  apiKey: "YOUR_API_KEY",
+};
+let passage = new Passage(passageConfig);
+
+// example authenticated route
+app.get(
+  "/authenticatedRoute",
+  passageAuthMiddleware,
+  async (req: Request, res: any) => {
+    // get passage user ID from middleware
+    let userID = res.userID;
+    let newAttributes = {
+      email: "newEmail@domain.com",
+      phone: "+15005550006",
+    };
+
+    // update user attributes
+    let passageUser = await passage.user.update(userID, newAttributes);
+    console.log(passageUser);
+  }
+);
+```
