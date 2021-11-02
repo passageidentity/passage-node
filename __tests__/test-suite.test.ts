@@ -40,7 +40,6 @@ describe("Passage API Requests", () => {
     appID: process.env.APP_ID ? process.env.APP_ID : "",
     apiKey: process.env.API_KEY,
   });
-  console.log(process.env.API_KEY);
 
   test("getUser", async () => {
     let user = await passage.user.get(userID);
