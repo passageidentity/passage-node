@@ -19,7 +19,7 @@ describe("Passage Initialization", () => {
     expect(publicKey).toContain(process.env.PUBLIC_KEY);
   });
 
-  //   note that the current token is only valid until Nov. 8 2022
+  // note that the current token is only valid until Nov.8 2022
   test("authenticateRequestWithCookie", async () => {
     await request(app).get("/").expect(401);
     await request(app)
@@ -72,7 +72,23 @@ describe("Passage API Requests", () => {
     expect(updatedUser).toHaveProperty("phone", "+15005550001");
 
     await passage.user.update(updatedUser.id, {
-      phone: "+17372021928",
+      phone: "+15005550002",
     });
+  });
+
+  test("Create and Delete User", async () => {
+    // Create and delete user via email for now.
+    // Split into two after soft delete strategy implementation
+    let randomEmail = `${Math.random().toString(36).substr(2, 20)}@gmail.com`;
+
+    let createdUserWithEmail = await passage.user.create({
+      email: randomEmail,
+    });
+    expect(createdUserWithEmail).toHaveProperty("email", randomEmail);
+
+    let deletedUserWithEmail = await passage.user.delete(
+      createdUserWithEmail.id
+    );
+    expect(deletedUserWithEmail).toBe(true);
   });
 });
