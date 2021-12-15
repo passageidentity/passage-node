@@ -2,6 +2,6 @@
   "type": "minor",
   "comment": "Added User methods: delete, create",
   "packageName": "@passageidentity/passage-node",
-  "email": "dylanbrookes10@gmail.com",
+  "email": "dylan.brookes@passage.id",
   "dependentChangeType": "patch"
 }
