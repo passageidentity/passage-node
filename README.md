@@ -5,7 +5,7 @@ This Node.js SDK allows for verification of server-side authentication for appli
 Install this package using npm.
 
 ```
-npm i --save passage-node
+npm i @passageidentity/passage-node
 ```
 
 ## Authenticating a Request
@@ -156,4 +156,60 @@ app.get(
     console.log(passageUser);
   }
 );
+```
+
+## Delete A User
+
+To delete a Passage user, you will need to provide the `userID`, and corresponding app credentials.
+
+```javascript
+import Passage from "@passageidentity/passage-node";
+import express from "express";
+
+const app = express();
+const port = 3000;
+
+let passageConfig = {
+  appID: "YOUR_APP_ID",
+  apiKey: "YOUR_API_KEY",
+};
+let passage = new Passage(passageConfig);
+
+// example authenticated route
+app.get(
+  "/authenticatedRoute",
+  passageAuthMiddleware,
+  async (req: Request, res: any) => {
+    // get passage user ID from middleware
+    let userID = res.userID;
+
+    // deactivate user
+    let deletedPassageUser = await passage.user.delete(userID);
+    console.log(deletedPassageUser); // true
+  }
+);
+```
+
+## Create A User
+
+You can also create a Passage user by providing an `email` or `phone` (phone number must be a valid E164 phone number).
+
+```javascript
+import Passage from "@passageidentity/passage-node";
+
+let passageConfig = {
+  appID: "YOUR_APP_ID",
+  apiKey: "YOUR_API_KEY",
+};
+let passage = new Passage(passageConfig);
+
+let newPassageUser1 = passage.user.create({
+  email: "newEmail@domain.com",
+});
+console.log(newPassageUser1); // [userObject]
+
+let newPassageUser2 = passage.user.create({
+  phone: "+15005550006",
+});
+console.log(newPassageUser2); // [userObject]
 ```

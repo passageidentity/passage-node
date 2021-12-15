@@ -1,0 +1,34 @@
+name: Deploy to NPM
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+env:
+  NPM_AUTHTOKEN: ${{ secrets.NPM_AUTHTOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  API_KEY: ${{ secrets.API_KEY }}
+  APP_ID: ${{ secrets.APP_ID }}
+  APP_TOKEN: ${{ secrets.APP_TOKEN }}
+  EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
+  PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+
+jobs:
+  publish:
+    name: Test and Publish to NPM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Unit Test
+        run: npm i && npm run test
+
+      - name: Deploy to NPM
+        run: |
+          git config user.email "dylan.brookes@passage.id"
+          git config user.name "Dylan Brookes"
+          git remote set-url origin https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
+          npm run publish ${{ env.NPM_AUTHTOKEN }}
