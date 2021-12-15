@@ -1,0 +1,20 @@
+{
+  "name": "@passageidentity/passage-node",
+  "entries": [
+    {
+      "date": "Wed, 15 Dec 2021 21:15:19 GMT",
+      "tag": "@passageidentity/passage-node_v1.1.0",
+      "version": "1.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "dylan.brookes@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "117d8e7bc21d19f786b26a14bd53402ef35b67af",
+            "comment": "Added User methods: delete, create"
+          }
+        ]
+      }
+    }
+  ]
+}
