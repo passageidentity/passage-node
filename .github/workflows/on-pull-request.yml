@@ -1,9 +1,9 @@
-name: Deploy to NPM
+name: Run Tests on PR
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [users/db/create-delete-users]
 
 env:
   NPM_AUTHTOKEN: ${{ secrets.NPM_AUTHTOKEN }}
@@ -17,19 +17,12 @@ env:
 
 jobs:
   publish:
-    name: Test and Publish to NPM
+    name: Run Tests on PR
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - name: Unit Test
-      #   run: npm i && npm run test
-
-      - name: Deploy to NPM
-        run: |
-          git config user.email "dylan.brookes@passage.id"
-          git config user.name "Dylan Brookes"
-          git remote set-url origin https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
-          npm run publish ${{ env.NPM_AUTHTOKEN }}
+      - name: Unit Test
+        run: npm i && npm run test
