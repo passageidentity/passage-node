@@ -12,7 +12,6 @@ env:
   APP_ID: ${{ secrets.APP_ID }}
   APP_TOKEN: ${{ secrets.APP_TOKEN }}
   EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
-  NPM_AUTHTOKEN: ${{ secrets.NPM_AUTHTOKEN }}
   PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
 
 jobs:
