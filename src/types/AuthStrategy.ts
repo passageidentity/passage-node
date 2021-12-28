@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
+
 enum AuthStrategyEnum {
-  "COOKIE",
-  "HEADER",
+  COOKIE = "COOKIE",
+  HEADER = "HEADER",
 }
 
 export type AuthStrategy = keyof typeof AuthStrategyEnum;
