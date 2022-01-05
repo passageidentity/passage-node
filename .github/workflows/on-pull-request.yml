@@ -20,5 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install Dependencies
+        run: npm i
+
+      - name: ESLint Check
+        run: npm run lint
+
       - name: Unit Test
-        run: npm i && npm run test
+        run: npm run test

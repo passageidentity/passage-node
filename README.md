@@ -27,31 +27,23 @@ let passageConfig = {
 // example of custom middleware
 let passage = new Passage(passageConfig);
 let passageAuthMiddleware = (() => {
-  return async (req: any, res: any, next: NextFunction) => {
-    try {
-      let userID = await passage.authenticateRequest(req);
-      if (userID) {
-        // successfully authenticated. save user ID and continue
-        res.userID = userID;
-        next();
-      }
-    } catch (e) {
-      // failed authentication
-      console.log(e);
-      res.status(401).send("Could not authenticate user!");
+    return async (req, res, next) => {
+      await passage.authenticateRequest(req)
+        .then((userID) => {
+            if (userID) {
+                res.userID = userID;
+                return next();
+            } else return res.status(401).send("unauthorized");
+        })
+        .catch(() => {return res.status(401).send("Could not authenticate user!")});
     }
-  };
 })();
 
 // example implementation of custom middleware
-app.get(
-  "/authenticatedRoute",
-  passageAuthMiddleware,
-  async (req: Request, res: any) => {
-    let userID = res.userID;
-    // do authenticated things...
-  }
-);
+app.get("/authenticatedRoute", passageAuthMiddleware, async (req, res) => {
+  // authenticated user
+  let userID = res.userID;
+});
 
 app.listen(port, () => {
   console.log(`Example app running`);
@@ -76,18 +68,14 @@ let passageConfig = {
 let passage = new Passage(passageConfig);
 
 // example authenticated route
-app.get(
-  "/authenticatedRoute",
-  passageAuthMiddleware,
-  async (req: Request, res: any) => {
-    // get passage user ID from middleware
-    let userID = res.userID;
+app.get("/authenticatedRoute", passageAuthMiddleware, async (req, res) => {
+  // get passage user ID from middleware
+  let userID = res.userID;
 
-    // get user info
-    let passageUser = await passage.user.get(userID);
-    console.log(passageUser.email);
-  }
-);
+  // get user info
+  let passageUser = await passage.user.get(userID);
+  console.log(passageUser.email);
+});
 ```
 
 ## Activate/Deactivate User
@@ -108,18 +96,14 @@ let passageConfig = {
 let passage = new Passage(passageConfig);
 
 // example authenticated route
-app.get(
-  "/authenticatedRoute",
-  passageAuthMiddleware,
-  async (req: Request, res: any) => {
-    // get passage user ID from middleware
-    let userID = res.userID;
+app.get("/authenticatedRoute", passageAuthMiddleware, async (req, res) => {
+  // get passage user ID from middleware
+  let userID = res.userID;
 
-    // deactivate user
-    let passageUser = await passage.user.deactivate(userID);
-    console.log(passageUser.activate);
-  }
-);
+  // deactivate user
+  let passageUser = await passage.user.deactivate(userID);
+  console.log(passageUser.activate);
+});
 ```
 
 ## Update User Attributes
@@ -140,22 +124,18 @@ let passageConfig = {
 let passage = new Passage(passageConfig);
 
 // example authenticated route
-app.get(
-  "/authenticatedRoute",
-  passageAuthMiddleware,
-  async (req: Request, res: any) => {
-    // get passage user ID from middleware
-    let userID = res.userID;
-    let newAttributes = {
-      email: "newEmail@domain.com",
-      phone: "+15005550006",
-    };
+app.get("/authenticatedRoute", passageAuthMiddleware, async (req, res) => {
+  // get passage user ID from middleware
+  let userID = res.userID;
+  let newAttributes = {
+    email: "newEmail@domain.com",
+    phone: "+15005550006",
+  };
 
-    // update user attributes
-    let passageUser = await passage.user.update(userID, newAttributes);
-    console.log(passageUser);
-  }
-);
+  // update user attributes
+  let passageUser = await passage.user.update(userID, newAttributes);
+  console.log(passageUser);
+});
 ```
 
 ## Delete A User
@@ -176,18 +156,14 @@ let passageConfig = {
 let passage = new Passage(passageConfig);
 
 // example authenticated route
-app.get(
-  "/authenticatedRoute",
-  passageAuthMiddleware,
-  async (req: Request, res: any) => {
-    // get passage user ID from middleware
-    let userID = res.userID;
+app.get("/authenticatedRoute", passageAuthMiddleware, async (req, res) => {
+  // get passage user ID from middleware
+  let userID = res.userID;
 
-    // deactivate user
-    let deletedPassageUser = await passage.user.delete(userID);
-    console.log(deletedPassageUser); // true
-  }
-);
+  // deactivate user
+  let deletedPassageUser = await passage.user.delete(userID);
+  console.log(deletedPassageUser); // true
+});
 ```
 
 ## Create A User

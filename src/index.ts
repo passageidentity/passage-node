@@ -1,6 +1,9 @@
 import Passage from "./classes/Passage";
-
 module.exports = Passage;
 
-export var passagePublicKeyCache: any = {};
+interface PassagePublicKeyCache {
+  [appID: string]: string;
+}
+
+export const passagePublicKeyCache: PassagePublicKeyCache = {};
 export default Passage;
