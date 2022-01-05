@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/base-64": "^1.0.0",

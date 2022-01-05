@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Wed, 05 Jan 2022 17:04:51 GMT",
+      "tag": "@passageidentity/passage-node_v1.2.0",
+      "version": "1.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "dylan.brookes@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "938c729a43edc03b54e9032363a6fbb847b51491",
+            "comment": "Type safety refinement"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 15 Dec 2021 21:15:19 GMT",
       "tag": "@passageidentity/passage-node_v1.1.0",
       "version": "1.1.0",
