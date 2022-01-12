@@ -26,5 +26,9 @@ jobs:
       - name: ESLint Check
         run: npm run lint
 
+      - name: Beachball Check
+        run: |
+          npm run beachball-check
+
       - name: Unit Test
         run: npm run test

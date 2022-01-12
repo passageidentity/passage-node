@@ -26,6 +26,10 @@ jobs:
       - name: Unit Test
         run: npm i && npm run test
 
+      - name: Beachball Check
+        run: |
+          npm run beachball-check
+
       - name: Deploy to NPM
         run: |
           git config user.email "dylan.brookes@passage.id"

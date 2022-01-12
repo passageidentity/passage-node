@@ -43,7 +43,8 @@
     "prepublishOnly": "npm run tsc",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "change": "beachball change",
-    "publish": "beachball publish -y -n"
+    "publish": "beachball publish -y -n",
+    "beachball-check": "beachball check"
   },
   "keywords": [
     "passage",
