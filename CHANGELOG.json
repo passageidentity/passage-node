@@ -2,6 +2,24 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Wed, 12 Jan 2022 22:13:17 GMT",
+      "tag": "@passageidentity/passage-node_v1.2.0",
+      "version": "1.2.0",
+      "comments": {
+        "none": [
+          {
+            "author": "dylan.brookes@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "2e82dd0af98add59379672d68cc94470120bd94d",
+            "comment": {
+              "title": "",
+              "value": ""
+            }
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Jan 2022 17:04:51 GMT",
       "tag": "@passageidentity/passage-node_v1.2.0",
       "version": "1.2.0",
