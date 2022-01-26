@@ -1,3 +1,7 @@
+<img src="https://assets.website-files.com/611bef56e0906b4f195e5adc/6143c10e1d92181a95f86048_PassageLogo.svg" alt="Passage logo" style="width:250px;"/>
+
+[![npm version](https://badge.fury.io/js/@passageidentity%2Fpassage-node.svg)](https://badge.fury.io/js/@passageidentity%2Fpassage-node)
+
 # passage-node
 
 This Node.js SDK allows for verification of server-side authentication for applications using [Passage](https://passage.id)
@@ -10,7 +14,7 @@ npm i @passageidentity/passage-node
 
 ## Authenticating a Request
 
-To authenticate an HTTP request in an Express application, you can use the Passage SDK to check a request for a valid authentication tokekn.
+To authenticate an HTTP request in an Express application, you can use the Passage SDK to check a request for a valid authentication token.
 You need to provide Passage with your App ID in order to verify the JWTs.
 
 ```javascript
@@ -27,16 +31,19 @@ let passageConfig = {
 // example of custom middleware
 let passage = new Passage(passageConfig);
 let passageAuthMiddleware = (() => {
-    return async (req, res, next) => {
-      await passage.authenticateRequest(req)
-        .then((userID) => {
-            if (userID) {
-                res.userID = userID;
-                return next();
-            } else return res.status(401).send("unauthorized");
-        })
-        .catch(() => {return res.status(401).send("Could not authenticate user!")});
-    }
+  return async (req, res, next) => {
+    await passage
+      .authenticateRequest(req)
+      .then((userID) => {
+        if (userID) {
+          res.userID = userID;
+          return next();
+        } else return res.status(401).send("unauthorized");
+      })
+      .catch(() => {
+        return res.status(401).send("Could not authenticate user!");
+      });
+  };
 })();
 
 // example implementation of custom middleware
