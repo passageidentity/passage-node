@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "User status updated",
+  "packageName": "@passageidentity/passage-node",
+  "email": "dylanbrookes10@gmail.com",
+  "dependentChangeType": "patch"
+}
