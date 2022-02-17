@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { PassageConfig } from "../types/PassageConfig";
 import axios from "axios";
 
@@ -21,10 +22,17 @@ interface WebAuthnDevices {
   last_used: string;
 }
 
+enum UserStatus {
+    ACTIVE = "active",
+    INACTIVE = "inactive",
+    PENDING = "pending",
+}
+type UserStatusEnum = keyof typeof UserStatus;
+
 interface UserObject {
   created_at: string;
   updated_at: string;
-  active: boolean;
+  status: UserStatusEnum;
   email_verified: boolean;
   email: string;
   phone: string;
