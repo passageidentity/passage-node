@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 05 Jan 2022 17:04:51 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Feb 2022 16:32:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.0
+
+Fri, 18 Feb 2022 16:32:45 GMT
+
+### Minor changes
+
+- User status now an enum (no longer active boolean) (dylan.brookes@passage.id)
 
 ## 1.2.0
 
