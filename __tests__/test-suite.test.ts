@@ -1,8 +1,15 @@
+/* eslint-disable no-unused-vars */
 import Passage from "../src/index";
 import request from "supertest";
 import app from "../testServer";
 
 require("dotenv").config();
+
+enum Status {
+    ACTIVE = "active",
+    INACTIVE = "inactive",
+    PENDING = "pending",
+}
 
 const userID = process.env.EXAMPLE_USER_ID ? process.env.EXAMPLE_USER_ID : "";
 const appToken = process.env.APP_TOKEN ? process.env.APP_TOKEN : "";
@@ -47,12 +54,12 @@ describe("Passage API Requests", () => {
     });
     test("activateUser", async () => {
         const activatedUser = await passage.user.activate(userID);
-        expect(activatedUser).toHaveProperty("active", true);
+        expect(activatedUser).toHaveProperty("status", Status.ACTIVE);
         expect(activatedUser).toHaveProperty("id", userID);
     });
     test("deactivateUser", async () => {
         const deactivatedUser = await passage.user.deactivate(userID);
-        expect(deactivatedUser).toHaveProperty("active", false);
+        expect(deactivatedUser).toHaveProperty("status", Status.INACTIVE);
         expect(deactivatedUser).toHaveProperty("id", userID);
     });
     test("update User Email", async () => {
