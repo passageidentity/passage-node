@@ -199,7 +199,7 @@ export default class Passage {
   ): Promise<MagicLinkObject> {
     const magicLinkData: MagicLinkObject = await axios
       .post(
-        `https://api.passage.id/v1/apps/${this.appID}/magic-link/`,
+        `https://api.passage.id/v1/apps/${this.appID}/magic-links/`,
         magicLinkReq,
         {
           headers: {
