@@ -153,7 +153,6 @@ export default class Passage {
 
         // @ts-ignore
         const passageAuthToken = cookies.psg_auth_token;
-        // eslint-disable-next-line camelcase
         if (passageAuthToken) {
             const publicKey = await this.fetchPublicKey();
             const userID = this.validAuthToken(passageAuthToken, publicKey);
