@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add create magic link",
+  "packageName": "@passageidentity/passage-node",
+  "email": "chrisloper@utexas.edu",
+  "dependentChangeType": "patch"
+}
