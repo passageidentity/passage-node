@@ -196,3 +196,22 @@ let newPassageUser2 = passage.user.create({
 });
 console.log(newPassageUser2); // [userObject]
 ```
+
+## Create A Magic Link
+
+You can also create a Passage magic link by providing a MagicLinkRequest type
+
+```javascript
+import Passage from "@passageidentity/passage-node";
+
+let passageConfig = {
+  appID: "YOUR_APP_ID",
+  apiKey: "YOUR_API_KEY",
+};
+let passage = new Passage(passageConfig);
+
+let magicLink = passage.createMagicLink({
+  email: "newEmail@domain.com",
+  channel: "email",
+});
+```

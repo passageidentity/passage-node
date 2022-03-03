@@ -1,4 +1,5 @@
 import { AuthStrategy } from "../types/AuthStrategy";
+import { MagicLinkObject, MagicLinkRequest } from "../types/MagicLink";
 import User from "./User";
 import jwt from "jsonwebtoken";
 import { Request } from "express-serve-static-core";
@@ -72,8 +73,8 @@ export default class Passage {
    * @return {Promise<string>} publicKey
    */
     async fetchPublicKey(): Promise<string> {
-        // use cached value if found
-        // @ts-ignore
+    // use cached value if found
+    // @ts-ignore
         const cachedPublicKey = passagePublicKeyCache[this.appID];
         if (cachedPublicKey) return cachedPublicKey;
 
@@ -185,5 +186,35 @@ export default class Passage {
         } catch (e) {
             return false;
         }
+    }
+
+    /**
+   * Create a Magic Link for your app.
+   *
+   * @param {MagicLinkRequest} magicLinkReq options for creating a MagicLink.
+   * @return {Promise<MagicLinkObject>} Passage MagicLink object
+   */
+    async createMagicLink(
+        magicLinkReq: MagicLinkRequest
+    ): Promise<MagicLinkObject> {
+        const magicLinkData: MagicLinkObject = await axios
+            .post(
+                `https://api.passage.id/v1/apps/${this.appID}/magic-links/`,
+                magicLinkReq,
+                {
+                    headers: {
+                        Authorization: `Bearer ${this.#apiKey}`,
+                    },
+                }
+            )
+            .catch((err) => {
+                throw new Error(
+                    `Could not create a magic link for this app. HTTP Status: ${err.response.status}.`
+                );
+            })
+            .then((res) => {
+                return res.data.magic_link;
+            });
+        return magicLinkData;
     }
 }
