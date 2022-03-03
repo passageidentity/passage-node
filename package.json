@@ -35,7 +35,7 @@
     "lib/"
   ],
   "scripts": {
-    "lint": "eslint 'src/**/*.ts?(x)'",
+    "lint": "eslint 'src/**/*.ts?(x)' --fix",
     "format": "pretty-quick --staged",
     "prepare": "husky install",
     "dev": "ts-node-dev --respawn testServer.ts",
