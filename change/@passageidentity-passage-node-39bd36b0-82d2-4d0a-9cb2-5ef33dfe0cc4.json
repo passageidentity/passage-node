@@ -1,6 +1,7 @@
 {
   "type": "minor",
+  "comment": "add ttl to createMagicLink",
   "packageName": "@passageidentity/passage-node",
-  "email": "chrisloper@utexas.edu",
+  "email": "chris.loper@passage.id",
   "dependentChangeType": "patch"
 }
