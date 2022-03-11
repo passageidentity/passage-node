@@ -9,6 +9,7 @@ export type MagicLinkObject = {
   type: string;
   redirect_url: string;
   url: string;
+  ttl: number;
 };
 
 enum ChannelEnum {
@@ -25,4 +26,5 @@ export type MagicLinkRequest = {
   send: boolean;
   magic_link_path: string;
   redirect_url: string;
+  ttl: number;
 };
