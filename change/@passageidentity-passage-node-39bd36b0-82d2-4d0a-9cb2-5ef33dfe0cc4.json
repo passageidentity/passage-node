@@ -1,0 +1,6 @@
+{
+  "type": "minor",
+  "packageName": "@passageidentity/passage-node",
+  "email": "chrisloper@utexas.edu",
+  "dependentChangeType": "patch"
+}
