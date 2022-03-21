@@ -2,6 +2,6 @@
   "type": "minor",
   "comment": "user: list devices and revoke device",
   "packageName": "@passageidentity/passage-node",
-  "email": "chrisloper@utexas.edu",
+  "email": "chris.loper@passage.id",
   "dependentChangeType": "patch"
 }
