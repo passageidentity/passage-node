@@ -1,8 +1,21 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 18 Feb 2022 16:32:45 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Mar 2022 19:06:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.0
+
+Tue, 22 Mar 2022 19:06:51 GMT
+
+### Minor changes
+
+- add ttl to createMagicLink (chris.loper@passage.id)
+- user: list devices and revoke device (chris.loper@passage.id)
+
+### Patches
+
+- add create magic link (chris.loper@passage.id)
 
 ## 1.3.0
 
