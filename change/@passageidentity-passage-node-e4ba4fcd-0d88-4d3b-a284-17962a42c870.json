@@ -1,7 +1,7 @@
 {
   "type": "minor",
-  "comment": "add ttl to createMagicLink",
+  "comment": "list and revoke devices for user",
   "packageName": "@passageidentity/passage-node",
-  "email": "chris.loper@passage.id",
+  "email": "anna.pobletts@gmail.com",
   "dependentChangeType": "patch"
 }
