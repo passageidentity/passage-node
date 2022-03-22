@@ -8,6 +8,11 @@ on:
 env:
   NPM_AUTHTOKEN: ${{ secrets.NPM_AUTHTOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  API_KEY: ${{ secrets.API_KEY }}
+  APP_ID: ${{ secrets.APP_ID }}
+  APP_TOKEN: ${{ secrets.APP_TOKEN }}
+  EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
+  PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
   PAT: ${{ secrets.BEACHBALL_PAT }}
 
 jobs:
