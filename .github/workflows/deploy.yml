@@ -8,7 +8,11 @@ on:
 env:
   NPM_AUTHTOKEN: ${{ secrets.NPM_AUTHTOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  PAT: ${{ secrets.BEACHBALL_PAT }}
+  API_KEY: ${{ secrets.API_KEY }}
+  APP_ID: ${{ secrets.APP_ID }}
+  APP_TOKEN: ${{ secrets.APP_TOKEN }}
+  EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
+  PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
 
 jobs:
   publish:
@@ -28,7 +32,7 @@ jobs:
 
       - name: Deploy to NPM
         run: |
-          git config user.email "beachball_bot@passage.id"
-          git config user.name "Beachball Machine Account"
-          git remote set-url origin https://$GITHUB_ACTOR:$PAT@github.com/$GITHUB_REPOSITORY.git
+          git config user.email "dylan.brookes@passage.id"
+          git config user.name "Dylan Brookes"
+          git remote set-url origin https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
           npm run publish ${{ env.NPM_AUTHTOKEN }}
