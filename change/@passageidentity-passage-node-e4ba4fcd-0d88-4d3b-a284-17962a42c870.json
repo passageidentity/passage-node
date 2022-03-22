@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "list and revoke devices for user",
-  "packageName": "@passageidentity/passage-node",
-  "email": "anna.pobletts@gmail.com",
-  "dependentChangeType": "patch"
-}

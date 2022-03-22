@@ -1,8 +1,17 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 18 Feb 2022 16:32:45 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Mar 2022 19:47:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.0
+
+Tue, 22 Mar 2022 19:47:06 GMT
+
+### Minor changes
+
+- user: list devices and revoke device (chris.loper@passage.id)
+- list and revoke devices for user (anna.pobletts@gmail.com)
 
 ## 1.3.0
 
