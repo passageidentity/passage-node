@@ -17,16 +17,15 @@ interface UserEventInfo {
 
 interface WebAuthnDevices {
   id: string;
-  cred_id: string;
   friendly_name: string;
   usage_count: string;
   last_used: string;
 }
 
 enum UserStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  PENDING = "pending",
+    ACTIVE = "active",
+    INACTIVE = "inactive",
+    PENDING = "pending",
 }
 type UserStatusEnum = keyof typeof UserStatus;
 
@@ -267,64 +266,5 @@ export default class User {
             });
 
         return response === 200;
-    }
-
-    /**
-   * Get a user's devices using their user ID.
-   *
-   * @param {string} userID The Passage user ID
-   * @return {Promise<Array<WebAuthnDevices>>} List of devices
-   */
-    async listDevices(userID: string): Promise<Array<WebAuthnDevices>> {
-        if (!this.#apiKey) {
-            throw new Error("A Passage API key is needed to make a getUser request");
-        }
-
-        const devices: Array<WebAuthnDevices> = await axios
-            .get(
-                `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices`,
-                this.#authorizationHeader
-            )
-            .catch((err) => {
-                throw new Error(
-                    `Could not fetch user's devices. HTTP status: ${err.response.status}`
-                );
-            })
-            .then((res) => {
-                return res.data.devices;
-            });
-
-        return devices;
-    }
-
-    /**
-   * Revoke a user's device using their user ID and the device ID.
-   *
-   * @param {string} userID The Passage user ID
-   * @param {string} deviceID The Passage user's device ID
-   * @return {Promise<boolean>}
-   */
-    async revokeDevice(userID: string, deviceID: string): Promise<boolean> {
-        if (!this.#apiKey) {
-            throw new Error("A Passage API key is needed to make a getUser request");
-        }
-
-        const success: boolean = await axios
-            .delete(
-                `https://api.passage.id/v1/apps/${
-                    this.#appID
-                }/users/${userID}/devices/${deviceID}`,
-                this.#authorizationHeader
-            )
-            .catch((err) => {
-                throw new Error(
-                    `Could not delete user device. HTTP status: ${err.response.status}`
-                );
-            })
-            .then(() => {
-                return true;
-            });
-
-        return success;
     }
 }
