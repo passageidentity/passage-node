@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update devices interface",
-  "packageName": "@passageidentity/passage-node",
-  "email": "chris.loper@passage.id",
-  "dependentChangeType": "patch"
-}

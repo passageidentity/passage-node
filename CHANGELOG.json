@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Thu, 24 Mar 2022 19:59:59 GMT",
+      "tag": "@passageidentity/passage-node_v1.7.1",
+      "version": "1.7.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "chris.loper@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "5faa620ee5acb8bb29b931b3d70f4a4034e3d194",
+            "comment": "update devices interface"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Mar 2022 19:47:06 GMT",
       "tag": "@passageidentity/passage-node_v1.7.0",
       "version": "1.7.0",
