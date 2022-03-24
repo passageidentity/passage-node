@@ -20,7 +20,8 @@ interface WebAuthnDevices {
   cred_id: string;
   friendly_name: string;
   usage_count: string;
-  last_used: string;
+  updated_at: string;
+  created_at: string;
 }
 
 enum UserStatus {
