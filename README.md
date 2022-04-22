@@ -1,4 +1,4 @@
-<img src="https://assets.website-files.com/611bef56e0906b4f195e5adc/6143c10e1d92181a95f86048_PassageLogo.svg" alt="Passage logo" style="width:250px;"/>
+<img src="https://storage.googleapis.com/passage-docs/passage-logo-gradient.svg" alt="Passage logo" style="width:250px;"/>
 
 [![npm version](https://badge.fury.io/js/@passageidentity%2Fpassage-node.svg)](https://badge.fury.io/js/@passageidentity%2Fpassage-node)
 
