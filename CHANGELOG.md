@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Thu, 24 Mar 2022 19:59:59 GMT and should not be manually modified.
+This log was last generated on Fri, 22 Apr 2022 19:49:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.7.2
+
+Fri, 22 Apr 2022 19:49:46 GMT
+
+### Patches
+
+- update readme logo (kevin.flanagan@passage.id)
 
 ## 1.7.1
 

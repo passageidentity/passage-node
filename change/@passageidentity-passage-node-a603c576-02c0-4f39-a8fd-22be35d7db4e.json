@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update readme logo",
-  "packageName": "@passageidentity/passage-node",
-  "email": "kevin.flanagan@passage.id",
-  "dependentChangeType": "patch"
-}

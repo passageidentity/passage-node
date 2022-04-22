@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Fri, 22 Apr 2022 19:49:46 GMT",
+      "tag": "@passageidentity/passage-node_v1.7.2",
+      "version": "1.7.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "kevin.flanagan@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "5d923c0470268d1762348e4a7c1e0ae377dc450f",
+            "comment": "update readme logo"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 24 Mar 2022 19:59:59 GMT",
       "tag": "@passageidentity/passage-node_v1.7.1",
       "version": "1.7.1",
