@@ -3,7 +3,6 @@ import Passage from "../src/index";
 import request from "supertest";
 import app from "../testServer";
 import { MagicLinkRequest } from "../src/types/MagicLink";
-import axios from "axios";
 
 require("dotenv").config();
 
