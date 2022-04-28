@@ -3,6 +3,7 @@ import Passage from "../src/index";
 import request from "supertest";
 import app from "../testServer";
 import { MagicLinkRequest } from "../src/types/MagicLink";
+import axios from "axios";
 
 require("dotenv").config();
 
@@ -106,5 +107,38 @@ describe("Passage API Requests", () => {
       createdUserWithEmail.id
     );
     expect(deletedUserWithEmail).toBe(true);
+  });
+
+  test("Create and Update User", async () => {
+    const randomEmail = `${Math.random().toString(36).substr(2, 20)}@gmail.com`;
+
+    const createdUserWithEmail = await passage.user.create({
+      email: randomEmail,
+    });
+    expect(createdUserWithEmail).toHaveProperty("email", randomEmail);
+
+    const updatedUserWithEmail = await passage.user.update(
+      createdUserWithEmail.id,
+      {
+        user_metadata: {
+          example1: "abc",
+        },
+      }
+    );
+    expect(updatedUserWithEmail.user_metadata).toMatchObject({
+      example1: "abc",
+    });
+
+    const updatedUserWithEmail2 = await passage.user.update(
+      createdUserWithEmail.id,
+      {
+        user_metadata: {
+          example1: "xyz",
+        },
+      }
+    );
+    expect(updatedUserWithEmail2.user_metadata).toMatchObject({
+      example1: "xyz",
+    });
   });
 });
