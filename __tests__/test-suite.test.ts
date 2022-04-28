@@ -109,7 +109,7 @@ describe("Passage API Requests", () => {
     expect(deletedUserWithEmail).toBe(true);
   });
 
-  test("Create and Update User", async () => {
+  test("Create and Update User With Metadata", async () => {
     const randomEmail = `${Math.random().toString(36).substr(2, 20)}@gmail.com`;
 
     const createdUserWithEmail = await passage.user.create({

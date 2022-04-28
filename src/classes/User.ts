@@ -17,6 +17,8 @@ interface WebAuthnDevices {
   last_used: string;
 }
 
+interface Test {}
+
 enum UserStatus {
   ACTIVE = "active",
   INACTIVE = "inactive",
@@ -59,9 +61,13 @@ interface UpdateUserPayload {
   user_metadata?: Metadata;
 }
 
-/**
- * Passage User Class
- */
+interface CreateUserPayload {
+  email?: string;
+  phone?: string;
+  user_metadata?: Metadata;
+}
+
+/***/
 export default class User {
   #appID: string;
   #apiKey: string;
@@ -220,11 +226,10 @@ export default class User {
   /**
    * Create a user using their user ID.
    *
-   * @param {UserAttributes} identifier The identifier for the new user.
-   * Either an E164 phone number or email address.
+   * @param {CreateUserPayload} payload To create the user.
    * @return {Promise<UserObject>} Passage User object
    */
-  async create(identifier: UserAttributes): Promise<UserObject> {
+  async create(payload: CreateUserPayload): Promise<UserObject> {
     if (!this.#apiKey) {
       throw new Error(
         "A Passage API key is needed to make an createUser request"
@@ -233,14 +238,12 @@ export default class User {
     const userData: UserObject = await axios
       .post(
         `https://api.passage.id/v1/apps/${this.#appID}/users/`,
-        identifier,
+        payload,
         this.#authorizationHeader
       )
       .catch((err) => {
         throw new Error(
-          `Could not create user with the identifier: ${JSON.stringify(
-            identifier
-          )}. HTTP Status: ${err.response.status}.`
+          `Could not create user. HTTP Status: ${err.response.status}.`
         );
       })
       .then((res) => {
