@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Fri, 29 Apr 2022 17:34:59 GMT",
+      "tag": "@passageidentity/passage-node_v1.8.1",
+      "version": "1.8.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "dylan.brookes@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "315f0c3ff1fad3f7cbf92f17b03a609b39c0aef4",
+            "comment": "User metadata and devices now supported"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 29 Apr 2022 16:05:31 GMT",
       "tag": "@passageidentity/passage-node_v1.8.0",
       "version": "1.8.0",

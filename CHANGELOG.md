@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 29 Apr 2022 16:05:31 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Apr 2022 17:34:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.1
+
+Fri, 29 Apr 2022 17:34:59 GMT
+
+### Patches
+
+- User metadata and devices now supported (dylan.brookes@passage.id)
 
 ## 1.8.0
 
