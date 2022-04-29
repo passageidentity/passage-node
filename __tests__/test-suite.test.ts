@@ -140,4 +140,11 @@ describe("Passage API Requests", () => {
             example1: "xyz",
         });
     });
+
+    test("List Devices", async () => {
+        const devices = await passage.user.listDevices(userID);
+        expect(devices).toHaveLength(0);
+    });
+
+    // NOTE revokeDevice is not tested because it is impossible to spoof webauthn to create a device to then revoke
 });
