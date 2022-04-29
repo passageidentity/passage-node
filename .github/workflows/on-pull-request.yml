@@ -3,8 +3,6 @@ name: Run Tests on PR
 on: [pull_request]
 
 env:
-  NPM_AUTHTOKEN: ${{ secrets.NPM_AUTHTOKEN }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   API_KEY: ${{ secrets.API_KEY }}
   APP_ID: ${{ secrets.APP_ID }}
   APP_TOKEN: ${{ secrets.APP_TOKEN }}
