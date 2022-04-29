@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "User metadata now supported when creating or updating users",
+  "packageName": "@passageidentity/passage-node",
+  "email": "dylan.brookes@passage.id",
+  "dependentChangeType": "patch"
+}

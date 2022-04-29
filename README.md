@@ -1,4 +1,4 @@
-<img src="https://assets.website-files.com/611bef56e0906b4f195e5adc/6143c10e1d92181a95f86048_PassageLogo.svg" alt="Passage logo" style="width:250px;"/>
+<img src="https://storage.googleapis.com/passage-docs/passage-logo-gradient.svg" alt="Passage logo" style="width:250px;"/>
 
 [![npm version](https://badge.fury.io/js/@passageidentity%2Fpassage-node.svg)](https://badge.fury.io/js/@passageidentity%2Fpassage-node)
 
@@ -137,6 +137,10 @@ app.get("/authenticatedRoute", passageAuthMiddleware, async (req, res) => {
   let newAttributes = {
     email: "newEmail@domain.com",
     phone: "+15005550006",
+    // note that user_metadata is an optional field and is defined in your Passage App settings.
+    user_metadata: {
+      "examplefield": 123,
+    }
   };
 
   // update user attributes
@@ -186,8 +190,12 @@ let passageConfig = {
 };
 let passage = new Passage(passageConfig);
 
+// note that user_metadata is an optional field and is defined in your Passage App settings.
 let newPassageUser1 = passage.user.create({
   email: "newEmail@domain.com",
+  user_metadata: {
+    "examplefield": 123,
+  }
 });
 console.log(newPassageUser1); // [userObject]
 

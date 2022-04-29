@@ -2,11 +2,6 @@
 import { PassageConfig } from "../types/PassageConfig";
 import axios from "axios";
 
-interface PossibleUserUpdateAttributes {
-  email: string;
-  phone: string;
-}
-
 interface UserEventInfo {
   type: string;
   timestamp: string;
@@ -23,11 +18,24 @@ interface WebAuthnDevices {
 }
 
 enum UserStatus {
-    ACTIVE = "active",
-    INACTIVE = "inactive",
-    PENDING = "pending",
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+  PENDING = "pending",
 }
 type UserStatusEnum = keyof typeof UserStatus;
+
+interface PossibleUserUpdateAttributes {
+  email: string;
+  phone: string;
+}
+
+type UserAttributes =
+  | Pick<PossibleUserUpdateAttributes, "email">
+  | Pick<PossibleUserUpdateAttributes, "phone">;
+
+export interface Metadata {
+  [key: string]: boolean | string | number;
+}
 
 interface UserObject {
   created_at: string;
@@ -42,15 +50,22 @@ interface UserObject {
   recent_events: Array<UserEventInfo>;
   webauthn: boolean;
   webauthn_devices: Array<WebAuthnDevices>;
+  user_metadata?: Metadata;
 }
 
-type UserAttributes =
-  | Pick<PossibleUserUpdateAttributes, "email">
-  | Pick<PossibleUserUpdateAttributes, "phone">;
+interface UpdateUserPayload {
+  email?: string;
+  phone?: string;
+  user_metadata?: Metadata;
+}
 
-/**
- * Passage User Class
- */
+interface CreateUserPayload {
+  email?: string;
+  phone?: string;
+  user_metadata?: Metadata;
+}
+
+/***/
 export default class User {
     #appID: string;
     #apiKey: string;
@@ -139,15 +154,15 @@ export default class User {
     }
 
     /**
-   * Update a user's email.
+   * Update a user.
    *
    * @param {string} userID The passage user ID
-   * @param {UserAttributes} userAttributes The user attributes to be updated
+   * @param {UpdateUserPayload} payload The user attributes to be updated
    * @return {Promise<UserObject>} Pasasge User Object
    */
     async update(
         userID: string,
-        userAttributes: UserAttributes
+        payload: UpdateUserPayload
     ): Promise<UserObject> {
         if (!this.#apiKey) {
             throw new Error(
@@ -157,12 +172,12 @@ export default class User {
         const userData: UserObject = await axios
             .patch(
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
-                userAttributes,
+                payload,
                 this.#authorizationHeader
             )
             .catch((err) => {
                 throw new Error(
-                    `Could not update user attributes (${Object.keys(userAttributes).join(
+                    `Could not update user attributes (${Object.keys(payload).join(
                         ", "
                     )}). HTTP status: ${err.response.status}`
                 );
@@ -207,13 +222,12 @@ export default class User {
     }
 
     /**
-   * Create a user using their user ID.
+   * Create a user.
    *
-   * @param {UserAttributes} identifier The identifier for the new user.
-   * Either an E164 phone number or email address.
+   * @param {CreateUserPayload} payload To create the user.
    * @return {Promise<UserObject>} Passage User object
    */
-    async create(identifier: UserAttributes): Promise<UserObject> {
+    async create(payload: CreateUserPayload): Promise<UserObject> {
         if (!this.#apiKey) {
             throw new Error(
                 "A Passage API key is needed to make an createUser request"
@@ -222,14 +236,12 @@ export default class User {
         const userData: UserObject = await axios
             .post(
                 `https://api.passage.id/v1/apps/${this.#appID}/users/`,
-                identifier,
+                payload,
                 this.#authorizationHeader
             )
             .catch((err) => {
                 throw new Error(
-                    `Could not create user with the identifier: ${JSON.stringify(
-                        identifier
-                    )}. HTTP Status: ${err.response.status}.`
+                    `Could not create user. HTTP Status: ${err.response.status}.`
                 );
             })
             .then((res) => {
