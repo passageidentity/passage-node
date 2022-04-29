@@ -16,7 +16,7 @@ env:
 
 jobs:
   publish:
-    name: Test and Publish to NPM
+    name: Deploy To NPM
     runs-on: ubuntu-latest
 
     steps:
