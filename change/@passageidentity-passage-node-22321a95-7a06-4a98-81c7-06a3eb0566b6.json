@@ -1,6 +1,6 @@
 {
-  "type": "minor",
-  "comment": "Added user metadata and list devices",
+  "type": "patch",
+  "comment": "User metadata and devices now supproted",
   "packageName": "@passageidentity/passage-node",
   "email": "dylan.brookes@passage.id",
   "dependentChangeType": "patch"
