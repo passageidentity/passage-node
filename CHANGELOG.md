@@ -1,8 +1,20 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 18 Feb 2022 16:32:45 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Apr 2022 16:05:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.8.0
+
+Fri, 29 Apr 2022 16:05:31 GMT
+
+### Minor changes
+
+- User metadata now supported when creating or updating users (dylan.brookes@passage.id)
+
+### Patches
+
+- API enhancements (dylan.brookes@passage.id)
 
 ## 1.3.0
 

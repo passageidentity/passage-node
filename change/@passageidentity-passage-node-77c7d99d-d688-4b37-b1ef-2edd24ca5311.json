@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "API enhancements",
-  "packageName": "@passageidentity/passage-node",
-  "email": "dylan.brookes@passage.id",
-  "dependentChangeType": "patch"
-}
