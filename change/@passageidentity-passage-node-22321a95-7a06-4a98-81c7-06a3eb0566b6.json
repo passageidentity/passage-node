@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "User metadata and devices now supproted",
+  "comment": "User metadata and devices now supported",
   "packageName": "@passageidentity/passage-node",
   "email": "dylan.brookes@passage.id",
   "dependentChangeType": "patch"
