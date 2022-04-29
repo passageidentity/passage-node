@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Publishing updates",
+  "packageName": "@passageidentity/passage-node",
+  "email": "dylan.brookes@passage.id",
+  "dependentChangeType": "none"
+}

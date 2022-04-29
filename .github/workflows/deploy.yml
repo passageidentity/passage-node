@@ -1,28 +1,32 @@
-name: Publish to NPM Registry
+name: Deploy To NPM
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 
 env:
+  API_KEY: ${{ secrets.API_KEY }}
+  APP_ID: ${{ secrets.APP_ID }}
+  APP_TOKEN: ${{ secrets.APP_TOKEN }}
+  EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
+  PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
   NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
   PAT: ${{ secrets.BEACHBALL_PAT }}
 
 jobs:
   publish:
-    name: Publish to NPM Registry
+    name: Test and Publish to NPM
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           token: ${{ env.PAT }}
 
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build:prod
+      - name: Unit Test
+        run: npm i && npm run test
 
       - name: Beachball Check
         run: |
