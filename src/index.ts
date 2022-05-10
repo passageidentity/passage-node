@@ -1,9 +1,6 @@
 import Passage from "./classes/Passage";
+import { JWK } from "./types/JWK";
 module.exports = Passage;
 
-interface PassagePublicKeyCache {
-  [appID: string]: string;
-}
-
-export const passagePublicKeyCache: PassagePublicKeyCache = {};
+export const jwkCache: JWK[] = [];
 export default Passage;
