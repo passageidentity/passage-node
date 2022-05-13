@@ -3,22 +3,21 @@ import psg from "./src/index";
 import express, { NextFunction } from "express";
 import { PassageConfig } from "./src/types/PassageConfig";
 const app = express();
-const port = 3000;
 
 require("dotenv").config();
 
-let passageConfig: PassageConfig = {
+const passageConfig: PassageConfig = {
   appID: process.env.APP_ID ? process.env.APP_ID : "",
   apiKey: process.env.API_KEY ? process.env.API_KEY : "",
   authStrategy: "COOKIE",
 };
 
 // example of custom middleware
-let passage = new psg(passageConfig);
-let customMiddleware = (() => {
+const passage = new psg(passageConfig);
+const customMiddleware = (() => {
   return async (req: any, res: any, next: NextFunction) => {
     try {
-      let userID = await passage.authenticateRequest(req);
+      const userID = await passage.authenticateRequest(req);
       if (userID) res.userID = userID;
       else res.userID = false;
       next();
@@ -30,12 +29,11 @@ let customMiddleware = (() => {
 
 // example implementation of custom middleware
 app.get("/", customMiddleware, async (req: Request, res: any) => {
-  let userID = res.userID;
+  const userID = res.userID;
   if (userID) {
-    let { email }: any = await passage.user.get(userID);
+    const { email }: any = await passage.user.get(userID);
     res.json({ email });
   } else {
-    console.log(res.userID);
     res.send("Failed to get user");
   }
 });

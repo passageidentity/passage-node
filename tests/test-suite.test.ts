@@ -24,12 +24,12 @@ describe("Passage Initialization", () => {
   };
   const passage = new Passage(config);
 
-  test("fetchPublicKey", async () => {
+  test("fetchJWKS", async () => {
     const jwks = await passage.fetchJWKs();
     const { kid } = jwt.decode(appToken, { complete: true })!.header;
-    const jwk = jwks.find((jwk) => jwk.kid === kid) as RSA;
+    const jwk = jwks[kid];
 
-    const pem = jwkToPem(jwk);
+    const pem = jwkToPem(jwk as RSA);
 
     expect(pem).toContain(process.env.PUBLIC_KEY);
   });
@@ -46,7 +46,7 @@ describe("Passage Initialization", () => {
   test("validAuthToken", async () => {
     const jwks = await passage.fetchJWKs();
     const { kid } = jwt.decode(appToken, { complete: true })!.header;
-    const jwk = jwks.find((jwk) => jwk.kid === kid);
+    const jwk = jwks[kid];
 
     const userID = passage.validAuthToken(appToken, jwk);
     expect(userID).toBe("bEXIZKYyApgz5oWYc5WM9vfF");
