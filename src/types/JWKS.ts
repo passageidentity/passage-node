@@ -1,9 +1,11 @@
 export interface AUTHCACHE {
   [appID: string]: {
-    jwks: {
-      [kid: string]: JWK;
-    };
+    jwks: JWKS;
   };
+}
+
+export interface JWKS {
+  [kid: string]: JWK;
 }
 
 export interface JWK {
