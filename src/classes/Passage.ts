@@ -3,10 +3,12 @@ import { MagicLinkObject, MagicLinkRequest } from "../types/MagicLink";
 import User from "./User";
 import jwt from "jsonwebtoken";
 import { Request } from "express-serve-static-core";
-import base64 from "base-64";
+import jwkToPem, { RSA } from "jwk-to-pem";
 import axios from "axios";
 import { PassageConfig } from "../types/PassageConfig";
-import { passagePublicKeyCache } from "..";
+import { AUTHCACHE, JWK, JWKS } from "../types/JWKS";
+
+const AUTH_CACHE: AUTHCACHE = {};
 
 /**
  * Passage Class
@@ -68,33 +70,46 @@ export default class Passage {
     }
 
     /**
-   * Fetch the corresponding public key for this Passage instance.
+   * Fetch the corresponding JWKS for this app.
    *
-   * @return {Promise<string>} publicKey
+   * @param {boolean} resetCache Optional value to specify whether or not the cache should be reset
+   * @return {JWKS} JWKS for this app.
    */
-    async fetchPublicKey(): Promise<string> {
+    async fetchJWKS(resetCache?: boolean): Promise<JWKS> {
     // use cached value if found
-    // @ts-ignore
-        const cachedPublicKey = passagePublicKeyCache[this.appID];
-        if (cachedPublicKey) return cachedPublicKey;
+        if (
+            AUTH_CACHE[this.appID] !== undefined &&
+      Object.keys(AUTH_CACHE).length > 0 &&
+      !resetCache
+        ) {
+            return AUTH_CACHE[this.appID]["jwks"];
+        }
 
-        const publicKey: string = await axios
-            .get(`https://api.passage.id/v1/apps/${this.appID}`)
+        const jwks: { [kid: string]: JWK } = await axios
+            .get(
+                `https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`
+            )
             .catch((err) => {
                 throw new Error(
-                    `Could not fetch appID\'s respective public key. HTTP status: ${err.response.status}`
+                    `Could not fetch appID\'s JWKs. HTTP status: ${err.response.status}`
                 );
             })
             .then((res) => {
-                const rsaPublicKey = res.data.app.rsa_public_key;
-                const finalPublicKey = base64.decode(rsaPublicKey);
-                // @ts-ignore
-                passagePublicKeyCache[this.appID] = finalPublicKey;
+                const jwks = res.data.keys;
+                const formattedJWKS: JWKS = {};
 
-                return finalPublicKey;
+                // format jwks for cache
+                for (const jwk of jwks) {
+                    formattedJWKS[jwk.kid] = jwk;
+                }
+
+                Object.assign(AUTH_CACHE, {
+                    [this.appID]: { jwks: { ...formattedJWKS } },
+                });
+                return formattedJWKS;
             });
 
-        return publicKey;
+        return jwks;
     }
 
     /**
@@ -104,17 +119,24 @@ export default class Passage {
    * @return {string} User ID for Passage User
    */
     async authenticateRequestWithHeader(req: Request): Promise<string | false> {
-        const publicKey = await this.fetchPublicKey();
         const { authorization } = req.headers;
 
         if (authorization) {
-            // @ts-ignore
-            req.token = authorization.split(" ")[1];
-            // @ts-ignore
-            const userID = this.validAuthToken(req.token, publicKey);
+            const authToken = authorization.split(" ")[1];
+            const { kid } = jwt.decode(authToken, { complete: true })!.header;
+            if (!kid) {
+                throw new Error("No KID found in JWT. You must catch this error.");
+            }
 
-            if (userID) return userID;
-            else {
+            const jwk = await this._findJWK(kid);
+            if (!jwk) {
+                throw new Error("No JWKs found for app. You must catch this error.");
+            }
+
+            const userID = this.validAuthToken(authToken, jwk);
+            if (userID) {
+                return userID;
+            } else {
                 throw new Error(
                     "Could not validate header auth token. You must catch this error."
                 );
@@ -139,7 +161,7 @@ export default class Passage {
             );
         }
 
-        const cookies = {};
+        const cookies = {} as { psg_auth_token: string };
 
         req.headers.cookie?.split(";").forEach((cookie) => {
             const parts = cookie.match(/(.*?)=(.*)$/);
@@ -151,11 +173,19 @@ export default class Passage {
             }
         });
 
-        // @ts-ignore
         const passageAuthToken = cookies.psg_auth_token;
         if (passageAuthToken) {
-            const publicKey = await this.fetchPublicKey();
-            const userID = this.validAuthToken(passageAuthToken, publicKey);
+            const { kid } = jwt.decode(passageAuthToken, { complete: true })!.header;
+            if (!kid) {
+                throw new Error("No KID found in JWT. You must catch this error.");
+            }
+
+            const jwk = await this._findJWK(kid);
+            if (!jwk) {
+                throw new Error("No JWKs found for app. You must catch this error.");
+            }
+
+            const userID = this.validAuthToken(passageAuthToken, jwk);
             if (userID) return userID;
             else {
                 throw new Error(
@@ -170,16 +200,42 @@ export default class Passage {
     }
 
     /**
+   *
+   * @param {string} kid the KID from the authToken to determine which JWK to use.
+   * @return {Promise<JWK | undefined>} the JWK to be used for decoding an authToken with the associated KID.
+   */
+    private async _findJWK(kid: string): Promise<JWK | undefined> {
+        if (!AUTH_CACHE) return undefined;
+        const jwk = AUTH_CACHE[this.appID]["jwks"][kid];
+
+        // if there is no JWK, cache might need to be updated; update cache and try again
+        if (!jwk) {
+            await this.fetchJWKS(true);
+            const jwk = AUTH_CACHE[this.appID]["jwks"][kid];
+            if (jwk) {
+                return jwk;
+            }
+            return undefined;
+        }
+        return jwk;
+    }
+
+    /**
    * Determine if the provided token is valid when compared with its
    * respective public key.
    *
    * @param {string} token Authentication token
-   * @param {string} publicKey The public key corresponding to the Passage application
+   * @param {jwkToPem.JWK} jwk The jwk that matches the kid in the authToken
    * @return {boolean} True if the jwt can be verified, false jwt cannot be verified
    */
-    validAuthToken(token: string, publicKey: string): string | false {
+    validAuthToken(token: string, jwk: JWK): string | false {
         try {
-            const validAuthToken = jwt.verify(token, publicKey).sub;
+            const pem = jwkToPem(jwk as RSA);
+
+            const validAuthToken = jwt.verify(token, pem, {
+                // @ts-ignore
+                algorithms: jwk.alg,
+            }).sub;
             if (validAuthToken) return validAuthToken.toString();
             else return false;
         } catch (e) {

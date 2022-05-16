@@ -3,6 +3,8 @@ import Passage from "../src/index";
 import request from "supertest";
 import app from "../testServer";
 import { MagicLinkRequest } from "../src/types/MagicLink";
+import jwt from "jsonwebtoken";
+import jwkToPem, { RSA } from "jwk-to-pem";
 
 require("dotenv").config();
 
@@ -22,9 +24,14 @@ describe("Passage Initialization", () => {
     };
     const passage = new Passage(config);
 
-    test("fetchPublicKey", async () => {
-        const publicKey = await passage.fetchPublicKey();
-        expect(publicKey).toContain(process.env.PUBLIC_KEY);
+    test("fetchJWKS", async () => {
+        const jwks = await passage.fetchJWKS();
+        const { kid } = jwt.decode(appToken, { complete: true })!.header;
+        const jwk = jwks[kid];
+
+        const pem = jwkToPem(jwk as RSA);
+
+        expect(pem).toContain(process.env.PUBLIC_KEY);
     });
 
     // note that the current token is only valid until Nov.8 2022
@@ -37,9 +44,12 @@ describe("Passage Initialization", () => {
     });
 
     test("validAuthToken", async () => {
-        const publicKey = await passage.fetchPublicKey();
-        const userID = passage.validAuthToken(appToken, publicKey);
-        expect(userID).toBe("FXmduAG55lEsueAiKqZ4Kjfy");
+        const jwks = await passage.fetchJWKS();
+        const { kid } = jwt.decode(appToken, { complete: true })!.header;
+        const jwk = jwks[kid];
+
+        const userID = passage.validAuthToken(appToken, jwk);
+        expect(userID).toBe("bEXIZKYyApgz5oWYc5WM9vfF");
     });
 });
 

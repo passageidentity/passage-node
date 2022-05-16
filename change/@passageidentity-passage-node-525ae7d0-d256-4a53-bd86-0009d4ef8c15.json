@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "JWK support; fetchPublicKey -> fetchJWKs",
+  "packageName": "@passageidentity/passage-node",
+  "email": "dylan.brookes@passage.id",
+  "dependentChangeType": "patch"
+}
