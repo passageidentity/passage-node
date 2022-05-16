@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Mon, 16 May 2022 18:56:55 GMT",
+      "tag": "@passageidentity/passage-node_v1.9.0",
+      "version": "1.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "dylan.brookes@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "430c279659ab1ed9704e9961c03b33a05a16c11c",
+            "comment": "JWK support; fetchPublicKey -> fetchJWKs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 29 Apr 2022 17:34:59 GMT",
       "tag": "@passageidentity/passage-node_v1.8.1",
       "version": "1.8.1",

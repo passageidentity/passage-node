@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 29 Apr 2022 17:34:59 GMT and should not be manually modified.
+This log was last generated on Mon, 16 May 2022 18:56:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.9.0
+
+Mon, 16 May 2022 18:56:55 GMT
+
+### Minor changes
+
+- JWK support; fetchPublicKey -> fetchJWKs (dylan.brookes@passage.id)
 
 ## 1.8.1
 
