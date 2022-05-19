@@ -43,56 +43,56 @@ interface AppObject {
 
 /***/
 export default class App {
-  #appID: string;
-  #apiKey: string;
-  #authorizationHeader: object | undefined;
-  id: string;
+    #appID: string;
+    #apiKey: string;
+    #authorizationHeader: object | undefined;
+    id: string;
 
-  /**
+    /**
    * Initialize a new Passage App instance.
    *
    * @param {PassageConfig} config The default config for Passage and App initialization
    */
-  constructor(config: PassageConfig) {
-    this.#appID = config.appID ? config.appID : "";
-    this.#apiKey = config.apiKey ? config.apiKey : "";
-    this.id = "";
+    constructor(config: PassageConfig) {
+        this.#appID = config.appID ? config.appID : "";
+        this.#apiKey = config.apiKey ? config.apiKey : "";
+        this.id = "";
 
-    if (this.#apiKey) {
-      this.#authorizationHeader = {
-        headers: {
-          Authorization: `Bearer ${this.#apiKey}`,
-        },
-      };
-    } else {
-      this.#authorizationHeader = undefined;
+        if (this.#apiKey) {
+            this.#authorizationHeader = {
+                headers: {
+                    Authorization: `Bearer ${this.#apiKey}`,
+                },
+            };
+        } else {
+            this.#authorizationHeader = undefined;
+        }
     }
-  }
 
-  /**
+    /**
    * Get App Info about an app
    *
    * @return {Promise<AppObject>} Passage App object
    */
-  async get(): Promise<AppObject> {
-    if (!this.#apiKey) {
-      throw new Error("A Passage API key is needed to make a getUser request");
+    async get(): Promise<AppObject> {
+        if (!this.#apiKey) {
+            throw new Error("A Passage API key is needed to make a getUser request");
+        }
+
+        const appData: AppObject = await axios
+            .get(
+                `https://api.passage.id/v1/apps/${this.#appID}`,
+                this.#authorizationHeader
+            )
+            .catch((err) => {
+                throw new Error(
+                    `Could not fetch user. HTTP status: ${err.response.status}`
+                );
+            })
+            .then((res) => {
+                return res.data.app;
+            });
+
+        return appData;
     }
-
-    const appData: AppObject = await axios
-      .get(
-        `https://api.passage.id/v1/apps/${this.#appID}`,
-        this.#authorizationHeader
-      )
-      .catch((err) => {
-        throw new Error(
-          `Could not fetch user. HTTP status: ${err.response.status}`
-        );
-      })
-      .then((res) => {
-        return res.data.app;
-      });
-
-    return appData;
-  }
 }
