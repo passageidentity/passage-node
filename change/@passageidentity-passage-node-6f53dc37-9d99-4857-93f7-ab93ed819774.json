@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add getApp Details to Passage class",
+  "packageName": "@passageidentity/passage-node",
+  "email": "1934806+himichaelroberts@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
