@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Mon, 16 May 2022 18:56:55 GMT and should not be manually modified.
+This log was last generated on Mon, 23 May 2022 16:42:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.10.0
+
+Mon, 23 May 2022 16:42:44 GMT
+
+### Minor changes
+
+- add getApp Details to Passage class (1934806+himichaelroberts@users.noreply.github.com)
 
 ## 1.9.0
 

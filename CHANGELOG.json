@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Mon, 23 May 2022 16:42:44 GMT",
+      "tag": "@passageidentity/passage-node_v1.10.0",
+      "version": "1.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "1934806+himichaelroberts@users.noreply.github.com",
+            "package": "@passageidentity/passage-node",
+            "commit": "39dc0290a58bd60fd2cad9681b3e70d2421bedd8",
+            "comment": "add getApp Details to Passage class"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 16 May 2022 18:56:55 GMT",
       "tag": "@passageidentity/passage-node_v1.9.0",
       "version": "1.9.0",
