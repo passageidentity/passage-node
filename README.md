@@ -66,8 +66,8 @@ import Passage from "@passageidentity/passage-node";
 
 let passageConfig = {
   appID: "YOUR_APP_ID",
-  apiKey: "YOUR_API_KEY",
 };
+
 let passage = new Passage(passageConfig);
 
 let passageApp = await passage.getApp();
