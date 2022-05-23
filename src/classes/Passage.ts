@@ -1,5 +1,6 @@
 import { AuthStrategy } from "../types/AuthStrategy";
 import { MagicLinkObject, MagicLinkRequest } from "../types/MagicLink";
+import { AppObject } from "../types/App";
 import User from "./User";
 import jwt from "jsonwebtoken";
 import { Request } from "express-serve-static-core";
@@ -271,5 +272,25 @@ export default class Passage {
                 return res.data.magic_link;
             });
         return magicLinkData;
+    }
+
+    /**
+   * Get App Info about an app
+   *
+   * @return {Promise<AppObject>} Passage App object
+   */
+    async getApp(): Promise<AppObject> {
+        const appData: AppObject = await axios
+            .get(`https://api.passage.id/v1/apps/${this.appID}`)
+            .catch((err) => {
+                throw new Error(
+                    `Could not fetch user. HTTP status: ${err.response.status}`
+                );
+            })
+            .then((res) => {
+                return res.data.app;
+            });
+
+        return appData;
     }
 }

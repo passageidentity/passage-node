@@ -57,6 +57,22 @@ app.listen(port, () => {
 });
 ```
 
+## Retrieve App Info
+
+To retrieve information about an app, you should use the `passage.getApp()` function.
+
+```javascript
+import Passage from "@passageidentity/passage-node";
+
+let passageConfig = {
+  appID: "YOUR_APP_ID",
+};
+
+let passage = new Passage(passageConfig);
+
+let passageApp = await passage.getApp();
+```
+
 ## Retrieve User Info
 
 To retrieve information about a user, you should use the `passage.user.get()` function. You will need to use a Passage API key, which can be created in the Passage Console under your Application Settings. This API key grants your web server access to the Passage management APIs to get and update information about users. This API key must be protected and stored in an appropriate secure storage location. It should never be hard-coded in the repository.
