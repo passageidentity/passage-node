@@ -280,16 +280,8 @@ export default class Passage {
    * @return {Promise<AppObject>} Passage App object
    */
     async getApp(): Promise<AppObject> {
-        if (!this.#apiKey) {
-            throw new Error("A Passage API key is needed to make a getUser request");
-        }
-
         const appData: AppObject = await axios
-            .get(`https://api.passage.id/v1/apps/${this.appID}`, {
-                headers: {
-                    Authorization: `Bearer ${this.#apiKey}`,
-                },
-            })
+            .get(`https://api.passage.id/v1/apps/${this.appID}`)
             .catch((err) => {
                 throw new Error(
                     `Could not fetch user. HTTP status: ${err.response.status}`
