@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "no longer require jwk to validAuthToken",
+  "packageName": "@passageidentity/passage-node",
+  "email": "chrisloper@utexas.edu",
+  "dependentChangeType": "patch"
+}
