@@ -124,17 +124,8 @@ export default class Passage {
 
         if (authorization) {
             const authToken = authorization.split(" ")[1];
-            const { kid } = jwt.decode(authToken, { complete: true })!.header;
-            if (!kid) {
-                throw new Error("No KID found in JWT. You must catch this error.");
-            }
 
-            const jwk = await this._findJWK(kid);
-            if (!jwk) {
-                throw new Error("No JWKs found for app. You must catch this error.");
-            }
-
-            const userID = this.validAuthToken(authToken, jwk);
+            const userID = await this.validAuthToken(authToken);
             if (userID) {
                 return userID;
             } else {
@@ -176,17 +167,7 @@ export default class Passage {
 
         const passageAuthToken = cookies.psg_auth_token;
         if (passageAuthToken) {
-            const { kid } = jwt.decode(passageAuthToken, { complete: true })!.header;
-            if (!kid) {
-                throw new Error("No KID found in JWT. You must catch this error.");
-            }
-
-            const jwk = await this._findJWK(kid);
-            if (!jwk) {
-                throw new Error("No JWKs found for app. You must catch this error.");
-            }
-
-            const userID = this.validAuthToken(passageAuthToken, jwk);
+            const userID = await this.validAuthToken(passageAuthToken);
             if (userID) return userID;
             else {
                 throw new Error(
@@ -226,11 +207,19 @@ export default class Passage {
    * respective public key.
    *
    * @param {string} token Authentication token
-   * @param {jwkToPem.JWK} jwk The jwk that matches the kid in the authToken
    * @return {boolean} True if the jwt can be verified, false jwt cannot be verified
    */
-    validAuthToken(token: string, jwk: JWK): string | false {
+    async validAuthToken(token: string): Promise<string | false> {
         try {
+            const { kid } = jwt.decode(token, { complete: true })!.header;
+            if (!kid) {
+                return false;
+            }
+            const jwk = await this._findJWK(kid);
+            if (!jwk) {
+                return false;
+            }
+
             const pem = jwkToPem(jwk as RSA);
 
             const validAuthToken = jwt.verify(token, pem, {

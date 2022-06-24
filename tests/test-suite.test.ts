@@ -44,11 +44,7 @@ describe("Passage Initialization", () => {
   });
 
   test("validAuthToken", async () => {
-    const jwks = await passage.fetchJWKS();
-    const { kid } = jwt.decode(appToken, { complete: true })!.header;
-    const jwk = jwks[kid];
-
-    const userID = passage.validAuthToken(appToken, jwk);
+    const userID = await passage.validAuthToken(appToken);
     expect(userID).toBe("bEXIZKYyApgz5oWYc5WM9vfF");
   });
 });
