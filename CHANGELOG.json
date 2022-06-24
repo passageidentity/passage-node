@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Fri, 24 Jun 2022 14:41:19 GMT",
+      "tag": "@passageidentity/passage-node_v1.10.1",
+      "version": "1.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "chris.loper@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "667d6aefeb0b0c0b35fe5e5fed0fca6486296fb1",
+            "comment": "no longer require jwk to validAuthToken"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 23 May 2022 16:42:44 GMT",
       "tag": "@passageidentity/passage-node_v1.10.0",
       "version": "1.10.0",

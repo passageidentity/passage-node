@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Mon, 23 May 2022 16:42:44 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Jun 2022 14:41:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.10.1
+
+Fri, 24 Jun 2022 14:41:19 GMT
+
+### Patches
+
+- no longer require jwk to validAuthToken (chris.loper@passage.id)
 
 ## 1.10.0
 
