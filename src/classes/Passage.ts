@@ -188,10 +188,13 @@ export default class Passage {
    */
     private async _findJWK(kid: string): Promise<JWK | undefined> {
         if (!AUTH_CACHE) return undefined;
-        const jwk = AUTH_CACHE[this.appID]["jwks"][kid];
-
-        // if there is no JWK, cache might need to be updated; update cache and try again
-        if (!jwk) {
+        try {
+            const jwk = AUTH_CACHE[this.appID]["jwks"][kid];
+            if (jwk) {
+                return jwk;
+            }
+        } catch (e) {
+            // if there is no JWK, cache might need to be updated; update cache and try again
             await this.fetchJWKS(true);
             const jwk = AUTH_CACHE[this.appID]["jwks"][kid];
             if (jwk) {
@@ -199,7 +202,6 @@ export default class Passage {
             }
             return undefined;
         }
-        return jwk;
     }
 
     /**
@@ -207,29 +209,29 @@ export default class Passage {
    * respective public key.
    *
    * @param {string} token Authentication token
-   * @return {boolean} True if the jwt can be verified, false jwt cannot be verified
+   * @return {string} sub claim if the jwt can be verified, or undefined
    */
-    async validAuthToken(token: string): Promise<string | false> {
+    async validAuthToken(token: string): Promise<string | undefined> {
         try {
             const { kid } = jwt.decode(token, { complete: true })!.header;
             if (!kid) {
-                return false;
+                return undefined;
             }
             const jwk = await this._findJWK(kid);
             if (!jwk) {
-                return false;
+                return undefined;
             }
 
             const pem = jwkToPem(jwk as RSA);
 
-            const validAuthToken = jwt.verify(token, pem, {
+            const userID = jwt.verify(token, pem, {
                 // @ts-ignore
                 algorithms: jwk.alg,
             }).sub;
-            if (validAuthToken) return validAuthToken.toString();
-            else return false;
+            if (userID) return userID.toString();
+            else return undefined;
         } catch (e) {
-            return false;
+            return undefined;
         }
     }
 
