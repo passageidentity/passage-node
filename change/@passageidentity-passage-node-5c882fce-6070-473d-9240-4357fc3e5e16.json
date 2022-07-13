@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "improvement in jwks caching",
-  "packageName": "@passageidentity/passage-node",
-  "email": "anna.pobletts@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Wed, 13 Jul 2022 21:01:30 GMT",
+      "tag": "@passageidentity/passage-node_v1.11.0",
+      "version": "1.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "anna.pobletts@gmail.com",
+            "package": "@passageidentity/passage-node",
+            "commit": "7aae1fd283ba9ba27880061177e4fb96fa2e7ce3",
+            "comment": "improvement in jwks caching"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Jun 2022 14:41:19 GMT",
       "tag": "@passageidentity/passage-node_v1.10.1",
       "version": "1.10.1",
