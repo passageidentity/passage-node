@@ -30,8 +30,7 @@ export interface AppObject {
   login_url: string;
   rsa_public_key: string;
   allowed_identifier: string;
-  required_identifier: string;
-  require_email_verification: boolean;
+  require_identifier_verification: boolean;
   session_timeout_length: number;
   user_metadata_schema: Array<UserMetadataField>;
   layouts: Array<Layouts>;
