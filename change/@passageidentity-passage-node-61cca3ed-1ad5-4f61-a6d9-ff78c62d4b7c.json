@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add fields to device type",
-  "packageName": "@passageidentity/passage-node",
-  "email": "luis.ramirez@passage.id",
-  "dependentChangeType": "patch"
-}

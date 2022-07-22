@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Fri, 22 Jul 2022 17:40:00 GMT",
+      "tag": "@passageidentity/passage-node_v1.11.1",
+      "version": "1.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "luis.ramirez@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "eaa1276268f404fa01d4b983ed9fb2ed235bba03",
+            "comment": "add fields to device type"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 13 Jul 2022 21:01:30 GMT",
       "tag": "@passageidentity/passage-node_v1.11.0",
       "version": "1.11.0",

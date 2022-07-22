@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 13 Jul 2022 21:01:30 GMT and should not be manually modified.
+This log was last generated on Fri, 22 Jul 2022 17:40:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.11.1
+
+Fri, 22 Jul 2022 17:40:00 GMT
+
+### Patches
+
+- add fields to device type (luis.ramirez@passage.id)
 
 ## 1.11.0
 
