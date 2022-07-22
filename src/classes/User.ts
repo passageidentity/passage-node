@@ -45,6 +45,7 @@ interface UserObject {
   updated_at: string;
   status: UserStatusEnum;
   email_verified: boolean;
+  phone_verified: boolean;
   email: string;
   phone: string;
   id: string;
