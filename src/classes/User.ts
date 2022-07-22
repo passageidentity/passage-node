@@ -12,9 +12,12 @@ interface UserEventInfo {
 
 interface WebAuthnDevices {
   id: string;
+  cred_id: string;
   friendly_name: string;
-  usage_count: string;
-  last_used: string;
+  usage_count: number;
+  updated_at: string;
+  created_at: string;
+  last_login_at: string;
 }
 
 enum UserStatus {
