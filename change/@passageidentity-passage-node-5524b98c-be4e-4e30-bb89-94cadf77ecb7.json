@@ -1,0 +1,7 @@
+{
+    "type": "major",
+    "comment": "update App and User fields",
+    "packageName": "@passageidentity/passage-node",
+    "email": "luis.ramirez@passage.id",
+    "dependentChangeType": "patch"
+}
