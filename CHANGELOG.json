@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Tue, 26 Jul 2022 19:59:20 GMT",
+      "tag": "@passageidentity/passage-node_v2.0.0",
+      "version": "2.0.0",
+      "comments": {
+        "major": [
+          {
+            "author": "luis.ramirez@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "7a3d56eba067e863acd567ec1f115bc90b59b8a7",
+            "comment": "update App and User fields"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 22 Jul 2022 17:40:00 GMT",
       "tag": "@passageidentity/passage-node_v1.11.1",
       "version": "1.11.1",

@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 22 Jul 2022 17:40:00 GMT and should not be manually modified.
+This log was last generated on Tue, 26 Jul 2022 19:59:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.0.0
+
+Tue, 26 Jul 2022 19:59:20 GMT
+
+### Major changes
+
+- update App and User fields (luis.ramirez@passage.id)
 
 ## 1.11.1
 
