@@ -91,11 +91,11 @@ describe("Passage API Requests", () => {
       });
       expect(updatedUser).toHaveProperty(
         "email",
-        "changeEmailTest+nodeSDK@passage.id"
+        "changeemailtest+nodesdk@passage.id"
       );
 
       await passage.user.update(updatedUser.id, {
-        email: "defaultTestEmail+nodeSDK@passage.id",
+        email: "defaulttestemail+nodesdk@passage.id",
       });
     });
     test("update User Phone", async () => {
