@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Update tests to expect lowercase emails",
-  "packageName": "@passageidentity/passage-node",
-  "email": "mac.evans@passage.id",
-  "dependentChangeType": "none"
-}

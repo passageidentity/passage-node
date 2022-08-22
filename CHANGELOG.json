@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Mon, 22 Aug 2022 13:37:35 GMT",
+      "tag": "@passageidentity/passage-node_v2.0.0",
+      "version": "2.0.0",
+      "comments": {
+        "none": [
+          {
+            "author": "mac.evans@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "944ed7d36b85d9dc19567f0ceb6389999a6feb4d",
+            "comment": "Update tests to expect lowercase emails"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Jul 2022 19:59:20 GMT",
       "tag": "@passageidentity/passage-node_v2.0.0",
       "version": "2.0.0",
