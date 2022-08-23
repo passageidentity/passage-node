@@ -342,4 +342,32 @@ export default class User {
 
         return success;
     }
+
+    /**
+   * Revokes all of a user's Refresh Tokens using their User ID.
+   *
+   * @param {string} userID The Passage user ID
+   * @return {Promise<boolean>}
+   */
+    async signOut(userID: string): Promise<boolean> {
+        if (!this.#apiKey) {
+            throw new Error("A Passage API key is needed to make a getUser request");
+        }
+
+        const success: boolean = await axios
+            .delete(
+                `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
+                this.#authorizationHeader
+            )
+            .catch((err) => {
+                throw new Error(
+                    `Could not revoke user's refresh tokens. HTTP status: ${err.response.status}`
+                );
+            })
+            .then(() => {
+                return true;
+            });
+
+        return success;
+    }
 }
