@@ -354,7 +354,7 @@ export default class User {
             throw new Error("A Passage API key is needed to make a getUser request");
         }
 
-        const success: boolean = await axios
+       return axios
             .delete(
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/tokens/`,
                 this.#authorizationHeader
