@@ -367,7 +367,5 @@ export default class User {
             .then(() => {
                 return true;
             });
-
-        return success;
     }
 }
