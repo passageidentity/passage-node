@@ -31,7 +31,10 @@ export interface AppObject {
   rsa_public_key: string;
   allowed_identifier: string;
   require_identifier_verification: boolean;
+  refresh_enabled: boolean;
   session_timeout_length: number;
+  refresh_absolute_lifetime: number;
+  refresh_inactivity_lifetime: number;
   user_metadata_schema: Array<UserMetadataField>;
   layouts: Array<Layouts>;
 }
