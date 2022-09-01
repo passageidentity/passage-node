@@ -2,6 +2,6 @@
   "type": "patch",
   "comment": "add refresh token sighOut",
   "packageName": "@passageidentity/passage-node",
-  "email": "chrisloper@utexas.edu",
+  "email": "chris.loper@passage.id",
   "dependentChangeType": "patch"
 }
