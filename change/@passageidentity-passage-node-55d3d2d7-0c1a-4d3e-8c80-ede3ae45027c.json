@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add refresh token sighOut",
+  "packageName": "@passageidentity/passage-node",
+  "email": "chris.loper@passage.id",
+  "dependentChangeType": "patch"
+}

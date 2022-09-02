@@ -168,5 +168,10 @@ describe("Passage API Requests", () => {
     });
 
     // NOTE revokeDevice is not tested because it is impossible to spoof webauthn to create a device to then revoke
+
+    test("SignOut", async () => {
+      const success = await passage.user.signOut(userID);
+      expect(success).toBeTruthy;
+    });
   });
 });
