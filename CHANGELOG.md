@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Tue, 26 Jul 2022 19:59:20 GMT and should not be manually modified.
+This log was last generated on Fri, 02 Sep 2022 14:07:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.0.1
+
+Fri, 02 Sep 2022 14:07:34 GMT
+
+### Patches
+
+- add refresh token sighOut (chris.loper@passage.id)
 
 ## 2.0.0
 

@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Fri, 02 Sep 2022 14:07:34 GMT",
+      "tag": "@passageidentity/passage-node_v2.0.1",
+      "version": "2.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "chris.loper@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "1039728932c1dfb7f3a0a2063740d56de5c107a6",
+            "comment": "add refresh token sighOut"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 22 Aug 2022 13:37:35 GMT",
       "tag": "@passageidentity/passage-node_v2.0.0",
       "version": "2.0.0",
