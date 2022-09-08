@@ -45,11 +45,10 @@ export default class Passage {
    * @param {Request} req Express request
    * @return {string} UserID of the Passage user
    */
-    async authenticateRequest(req: Request): Promise<string | false> {
+    async authenticateRequest(req: Request): Promise<string> {
         if (this.authStrategy == "HEADER") {
             return this.authenticateRequestWithHeader(req);
         } else {
-            // defaults to cookie
             return this.authenticateRequestWithCookie(req);
         }
     }
@@ -119,24 +118,21 @@ export default class Passage {
    * @param {Request} req Express request
    * @return {string} User ID for Passage User
    */
-    async authenticateRequestWithHeader(req: Request): Promise<string | false> {
+    async authenticateRequestWithHeader(req: Request): Promise<string> {
         const { authorization } = req.headers;
 
-        if (authorization) {
+        if (!authorization) {
+            throw new Error(
+                "Header authorization not found. You must catch this error."
+            );
+        } else {
             const authToken = authorization.split(" ")[1];
-
             const userID = await this.validAuthToken(authToken);
             if (userID) {
                 return userID;
             } else {
-                throw new Error(
-                    "Could not validate header auth token. You must catch this error."
-                );
+                throw new Error("Auth token is invalid");
             }
-        } else {
-            throw new Error(
-                "Header authorization not found. You must catch this error."
-            );
         }
     }
 
@@ -146,8 +142,8 @@ export default class Passage {
    * @param {Request} req Express request
    * @return {string} UserID for Passage User
    */
-    async authenticateRequestWithCookie(req: Request): Promise<string | false> {
-        if (!req.headers.cookie) {
+    async authenticateRequestWithCookie(req: Request): Promise<string> {
+        if (!req.headers?.cookie) {
             throw new Error(
                 "Could not find valid cookie for authentication. You must catch this error."
             );
