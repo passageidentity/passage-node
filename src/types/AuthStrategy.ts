@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-export enum AuthStrategyEnum {
+enum AuthStrategyEnum {
   COOKIE = "COOKIE",
   HEADER = "HEADER",
 }
