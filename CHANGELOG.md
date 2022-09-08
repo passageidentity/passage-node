@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 02 Sep 2022 14:07:34 GMT and should not be manually modified.
+This log was last generated on Thu, 08 Sep 2022 18:56:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.0.2
+
+Thu, 08 Sep 2022 18:56:38 GMT
+
+### Patches
+
+- Remove boolean value from promise return type value on authenticateRequest (mac.evans@passage.id)
 
 ## 2.0.1
 

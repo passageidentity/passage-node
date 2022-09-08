@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove boolean value from promise return type  value on authenticateRequest",
-  "packageName": "@passageidentity/passage-node",
-  "email": "mac.evans@passage.id",
-  "dependentChangeType": "patch"
-}

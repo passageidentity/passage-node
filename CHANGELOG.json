@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Thu, 08 Sep 2022 18:56:38 GMT",
+      "tag": "@passageidentity/passage-node_v2.0.2",
+      "version": "2.0.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "mac.evans@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "9bd92390573c0a5c0730d698298db6f76f7f30b6",
+            "comment": "Remove boolean value from promise return type  value on authenticateRequest"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 02 Sep 2022 14:07:34 GMT",
       "tag": "@passageidentity/passage-node_v2.0.1",
       "version": "2.0.1",
