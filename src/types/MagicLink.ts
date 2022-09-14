@@ -25,4 +25,5 @@ export type MagicLinkRequest = {
   send: boolean;
   magic_link_path: string;
   redirect_url: string;
+  language: string;
 };
