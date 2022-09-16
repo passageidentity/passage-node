@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "packageName": "@passageidentity/passage-node",
-  "email": "chris.loper@passage.id",
-  "dependentChangeType": "patch",
-  "comment": "add locale support to passage-node"
-}

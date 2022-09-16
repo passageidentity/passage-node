@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Fri, 16 Sep 2022 14:08:34 GMT",
+      "tag": "@passageidentity/passage-node_v2.0.3",
+      "version": "2.0.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "chris.loper@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "bc7c97fe6b5a62effe259ac4346d81a4ec5cc235",
+            "comment": "add locale support to passage-node"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 08 Sep 2022 18:56:38 GMT",
       "tag": "@passageidentity/passage-node_v2.0.2",
       "version": "2.0.2",

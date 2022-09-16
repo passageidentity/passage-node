@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Thu, 08 Sep 2022 18:56:38 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 14:08:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.0.3
+
+Fri, 16 Sep 2022 14:08:34 GMT
+
+### Patches
+
+- add locale support to passage-node (chris.loper@passage.id)
 
 ## 2.0.2
 
