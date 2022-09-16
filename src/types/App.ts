@@ -37,4 +37,5 @@ export interface AppObject {
   refresh_inactivity_lifetime: number;
   user_metadata_schema: Array<UserMetadataField>;
   layouts: Array<Layouts>;
+  default_language: string;
 }
