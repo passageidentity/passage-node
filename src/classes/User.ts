@@ -200,7 +200,7 @@ export default class User {
                 null, // note that this null is required as axios.patch has different param order than axios.get
                 this.#authorizationHeader
             )
-            .catch((err) => {
+            .catch((err: AxiosError) => {
                 throw new PassageError("Could not activate user", err);
             })
             .then((res) => {

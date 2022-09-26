@@ -91,7 +91,6 @@ export default class Passage {
                 `https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`
             )
             .catch((err: AxiosError) => {
-                console.log("error", err);
                 throw new PassageError("Could not fetch appID's JWKs", err);
             })
             .then((res) => {
