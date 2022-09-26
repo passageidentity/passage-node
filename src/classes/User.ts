@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { PassageConfig } from "../types/PassageConfig";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosError } from "axios";
 import { PassageError } from "./PassageError";
 
 interface UserEventInfo {
