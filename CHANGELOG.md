@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 16 Sep 2022 14:08:34 GMT and should not be manually modified.
+This log was last generated on Wed, 28 Sep 2022 14:49:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.0.4
+
+Wed, 28 Sep 2022 14:49:14 GMT
+
+### Patches
+
+- PSG-1017: parse cookies without regex (luis.ramirez@passage.id)
 
 ## 2.0.3
 
