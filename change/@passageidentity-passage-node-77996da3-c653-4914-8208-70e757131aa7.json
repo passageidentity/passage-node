@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add new PassageError class for handling errors",
-  "packageName": "@passageidentity/passage-node",
-  "email": "chris.loper@passage.id",
-  "dependentChangeType": "patch"
-}

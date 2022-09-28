@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 28 Sep 2022 14:49:14 GMT and should not be manually modified.
+This log was last generated on Wed, 28 Sep 2022 15:34:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.1.0
+
+Wed, 28 Sep 2022 15:34:12 GMT
+
+### Minor changes
+
+- add new PassageError class for handling errors (chris.loper@passage.id)
 
 ## 2.0.4
 
