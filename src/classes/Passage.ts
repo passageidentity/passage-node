@@ -180,7 +180,6 @@ export default class Passage {
         }
     }
 
-
     /**
    *
    * @param {string} kid the KID from the authToken to determine which JWK to use.
