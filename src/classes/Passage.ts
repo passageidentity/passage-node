@@ -150,18 +150,21 @@ export default class Passage {
             );
         }
 
-        const cookies: Record<string, string> = {};
-
-        cookiesStr.split(";").forEach((cookie) => {
+        const cookies = cookiesStr.split(";");
+        let passageAuthToken;
+        for (const cookie of cookies) {
             const sepIdx = cookie.indexOf("=");
-            if (sepIdx !== -1) {
-                const key = cookie.slice(0, sepIdx).trim();
-                const value = cookie.slice(sepIdx + 1).trim();
-                cookies[key] = value;
+            if (sepIdx === -1) {
+                continue;
             }
-        });
+            const key = cookie.slice(0, sepIdx).trim();
+            if (key !== "psg_auth_token") {
+                continue;
+            }
+            passageAuthToken = cookie.slice(sepIdx + 1).trim();
+            break;
+        }
 
-        const passageAuthToken = cookies.psg_auth_token;
         if (passageAuthToken) {
             const userID = await this.validAuthToken(passageAuthToken);
             if (userID) return userID;
@@ -176,6 +179,7 @@ export default class Passage {
             );
         }
     }
+
 
     /**
    *
