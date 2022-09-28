@@ -5,9 +5,10 @@ import User from "./User";
 import jwt from "jsonwebtoken";
 import { Request } from "express-serve-static-core";
 import jwkToPem, { RSA } from "jwk-to-pem";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { PassageConfig } from "../types/PassageConfig";
 import { AUTHCACHE, JWK, JWKS } from "../types/JWKS";
+import { PassageError } from "./PassageError";
 
 const AUTH_CACHE: AUTHCACHE = {};
 
@@ -26,7 +27,7 @@ export default class Passage {
    */
     constructor(config?: PassageConfig) {
         if (!config?.appID) {
-            throw new Error(
+            throw new PassageError(
                 "A Passage appID is required. Please include {appID: YOUR_APP_ID}."
             );
         }
@@ -89,10 +90,8 @@ export default class Passage {
             .get(
                 `https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not fetch appID\'s JWKs. HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not fetch appID's JWKs", err);
             })
             .then((res) => {
                 const jwks = res.data.keys;
@@ -122,7 +121,7 @@ export default class Passage {
         const { authorization } = req.headers;
 
         if (!authorization) {
-            throw new Error(
+            throw new PassageError(
                 "Header authorization not found. You must catch this error."
             );
         } else {
@@ -145,7 +144,7 @@ export default class Passage {
     async authenticateRequestWithCookie(req: Request): Promise<string> {
         const cookiesStr = req.headers?.cookie;
         if (!cookiesStr) {
-            throw new Error(
+            throw new PassageError(
                 "Could not find valid cookie for authentication. You must catch this error."
             );
         }
@@ -169,12 +168,12 @@ export default class Passage {
             const userID = await this.validAuthToken(passageAuthToken);
             if (userID) return userID;
             else {
-                throw new Error(
+                throw new PassageError(
                     "Could not validate auth token. You must catch this error."
                 );
             }
         } else {
-            throw new Error(
+            throw new PassageError(
                 "Could not find authentication cookie 'psg_auth_token' token. You must catch this error."
             );
         }
@@ -253,9 +252,10 @@ export default class Passage {
                     },
                 }
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not create a magic link for this app. HTTP Status: ${err.response.status}.`
+            .catch((err: AxiosError) => {
+                throw new PassageError(
+                    "Could not create a magic link for this app.",
+                    err
                 );
             })
             .then((res) => {
@@ -272,10 +272,8 @@ export default class Passage {
     async getApp(): Promise<AppObject> {
         const appData: AppObject = await axios
             .get(`https://api.passage.id/v1/apps/${this.appID}`)
-            .catch((err) => {
-                throw new Error(
-                    `Could not fetch user. HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not fetch app.", err);
             })
             .then((res) => {
                 return res.data.app;

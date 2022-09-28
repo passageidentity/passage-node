@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { PassageConfig } from "../types/PassageConfig";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { PassageError } from "./PassageError";
 
 interface UserEventInfo {
   type: string;
@@ -105,7 +106,7 @@ export default class User {
    */
     async get(userID: string): Promise<UserObject> {
         if (!this.#apiKey) {
-            throw new Error("A Passage API key is needed to make a getUser request");
+            throw new PassageError("A Passage API key is needed.");
         }
 
         const userData: UserObject = await axios
@@ -113,10 +114,8 @@ export default class User {
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not fetch user. HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not fetch user.", err);
             })
             .then((res) => {
                 return res.data.user;
@@ -133,9 +132,7 @@ export default class User {
    */
     async deactivate(userID: string): Promise<UserObject> {
         if (!this.#apiKey) {
-            throw new Error(
-                "A Passage API key is needed to make a deactivateUser request"
-            );
+            throw new PassageError("A Passage API key is needed.");
         }
         const userData: UserObject = await axios
             .patch(
@@ -145,10 +142,8 @@ export default class User {
                 null, // note that this null is required as axios.patch has different param order than axios.get
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not deactivate user. HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not deactivate user.", err);
             })
             .then((res) => {
                 return res.data.user;
@@ -169,9 +164,7 @@ export default class User {
         payload: UpdateUserPayload
     ): Promise<UserObject> {
         if (!this.#apiKey) {
-            throw new Error(
-                "A Passage API key is needed to make a user update request"
-            );
+            throw new PassageError("A Passage API key is needed.");
         }
         const userData: UserObject = await axios
             .patch(
@@ -179,12 +172,8 @@ export default class User {
                 payload,
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not update user attributes (${Object.keys(payload).join(
-                        ", "
-                    )}). HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not update user.", err);
             })
             .then((res) => {
                 return res.data.user;
@@ -201,9 +190,7 @@ export default class User {
    */
     async activate(userID: string): Promise<UserObject> {
         if (!this.#apiKey) {
-            throw new Error(
-                "A Passage API key is needed to make an activateUser request"
-            );
+            throw new PassageError("A Passage API key is needed");
         }
         const userData: UserObject = await axios
             .patch(
@@ -213,10 +200,8 @@ export default class User {
                 null, // note that this null is required as axios.patch has different param order than axios.get
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not activate user. HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not activate user", err);
             })
             .then((res) => {
                 return res.data.user;
@@ -233,9 +218,7 @@ export default class User {
    */
     async create(payload: CreateUserPayload): Promise<UserObject> {
         if (!this.#apiKey) {
-            throw new Error(
-                "A Passage API key is needed to make an createUser request"
-            );
+            throw new PassageError("A Passage API key is needed");
         }
         const userData: UserObject = await axios
             .post(
@@ -243,10 +226,8 @@ export default class User {
                 payload,
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not create user. HTTP Status: ${err.response.status}.`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not create user", err);
             })
             .then((res) => {
                 return res.data.user;
@@ -263,19 +244,15 @@ export default class User {
    */
     async delete(userID: string): Promise<boolean> {
         if (!this.#apiKey) {
-            throw new Error(
-                "A Passage API key is needed to make an activateUser request"
-            );
+            throw new PassageError("A Passage API key is needed");
         }
         const response: number = await axios
             .delete(
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not delete user with the userID: ${userID}. HTTP Status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not delete user.", err);
             })
             .then((res) => {
                 return res.status.valueOf();
@@ -292,7 +269,7 @@ export default class User {
    */
     async listDevices(userID: string): Promise<Array<WebAuthnDevices>> {
         if (!this.#apiKey) {
-            throw new Error("A Passage API key is needed to make a getUser request");
+            throw new PassageError("A Passage API key is needed");
         }
 
         const devices: Array<WebAuthnDevices> = await axios
@@ -300,10 +277,8 @@ export default class User {
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices`,
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not fetch user's devices. HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not fetch user's devices.", err);
             })
             .then((res) => {
                 return res.data.devices;
@@ -321,7 +296,7 @@ export default class User {
    */
     async revokeDevice(userID: string, deviceID: string): Promise<boolean> {
         if (!this.#apiKey) {
-            throw new Error("A Passage API key is needed to make a getUser request");
+            throw new PassageError("A Passage API key is needed");
         }
 
         const success: boolean = await axios
@@ -331,10 +306,8 @@ export default class User {
                 }/users/${userID}/devices/${deviceID}`,
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not delete user device. HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not delete user's device", err);
             })
             .then(() => {
                 return true;
@@ -351,7 +324,7 @@ export default class User {
    */
     async signOut(userID: string): Promise<boolean> {
         if (!this.#apiKey) {
-            throw new Error("A Passage API key is needed to make a getUser request");
+            throw new PassageError("A Passage API key is needed");
         }
 
         return axios
@@ -359,10 +332,8 @@ export default class User {
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/tokens/`,
                 this.#authorizationHeader
             )
-            .catch((err) => {
-                throw new Error(
-                    `Could not revoke user's refresh tokens. HTTP status: ${err.response.status}`
-                );
+            .catch((err: AxiosError) => {
+                throw new PassageError("Could not revoke user's refresh tokens.", err);
             })
             .then(() => {
                 return true;
