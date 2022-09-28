@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "PSG-1017: parse cookies without regex",
+  "packageName": "@passageidentity/passage-node",
+  "email": "luis.ramirez@passage.id",
+  "dependentChangeType": "patch"
+}
