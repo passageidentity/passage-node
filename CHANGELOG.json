@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Wed, 28 Sep 2022 14:49:14 GMT",
+      "tag": "@passageidentity/passage-node_v2.0.4",
+      "version": "2.0.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "luis.ramirez@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "20dec51a3b3dd22425e286e45bc9d6fa6eb1d739",
+            "comment": "PSG-1017: parse cookies without regex"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 14:08:34 GMT",
       "tag": "@passageidentity/passage-node_v2.0.3",
       "version": "2.0.3",

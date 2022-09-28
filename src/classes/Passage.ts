@@ -142,25 +142,28 @@ export default class Passage {
    * @return {string} UserID for Passage User
    */
     async authenticateRequestWithCookie(req: Request): Promise<string> {
-        if (!req.headers?.cookie) {
+        const cookiesStr = req.headers?.cookie;
+        if (!cookiesStr) {
             throw new PassageError(
                 "Could not find valid cookie for authentication. You must catch this error."
             );
         }
 
-        const cookies = {} as { psg_auth_token: string };
-
-        req.headers.cookie?.split(";").forEach((cookie) => {
-            const parts = cookie.match(/(.*?)=(.*)$/);
-            if (parts) {
-                const key = parts[1].trim();
-                const value = parts[2].trim() || "";
-                // @ts-ignore
-                cookies[key] = value;
+        const cookies = cookiesStr.split(";");
+        let passageAuthToken;
+        for (const cookie of cookies) {
+            const sepIdx = cookie.indexOf("=");
+            if (sepIdx === -1) {
+                continue;
             }
-        });
+            const key = cookie.slice(0, sepIdx).trim();
+            if (key !== "psg_auth_token") {
+                continue;
+            }
+            passageAuthToken = cookie.slice(sepIdx + 1).trim();
+            break;
+        }
 
-        const passageAuthToken = cookies.psg_auth_token;
         if (passageAuthToken) {
             const userID = await this.validAuthToken(passageAuthToken);
             if (userID) return userID;
