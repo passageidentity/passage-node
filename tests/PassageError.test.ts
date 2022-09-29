@@ -26,6 +26,7 @@ describe("PassageError", () => {
       config: {},
       request: {},
       response: response,
+      isAxiosError: true,
     } as AxiosError<any>;
 
     const msg =
