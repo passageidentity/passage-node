@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { PassageConfig } from "../types/PassageConfig";
-import axios, { AxiosError } from "axios";
+import axios from "../utils/axios";
 import { PassageError } from "./PassageError";
 
 interface UserEventInfo {
@@ -114,7 +114,7 @@ export default class User {
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not fetch user.", err);
             })
             .then((res) => {
@@ -142,7 +142,7 @@ export default class User {
                 null, // note that this null is required as axios.patch has different param order than axios.get
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not deactivate user.", err);
             })
             .then((res) => {
@@ -172,7 +172,7 @@ export default class User {
                 payload,
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not update user.", err);
             })
             .then((res) => {
@@ -200,7 +200,7 @@ export default class User {
                 null, // note that this null is required as axios.patch has different param order than axios.get
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not activate user", err);
             })
             .then((res) => {
@@ -226,7 +226,7 @@ export default class User {
                 payload,
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not create user", err);
             })
             .then((res) => {
@@ -251,7 +251,7 @@ export default class User {
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not delete user.", err);
             })
             .then((res) => {
@@ -277,7 +277,7 @@ export default class User {
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices`,
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not fetch user's devices.", err);
             })
             .then((res) => {
@@ -306,7 +306,7 @@ export default class User {
                 }/users/${userID}/devices/${deviceID}`,
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not delete user's device", err);
             })
             .then(() => {
@@ -332,8 +332,11 @@ export default class User {
                 `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/tokens/`,
                 this.#authorizationHeader
             )
-            .catch((err: AxiosError) => {
-                throw new PassageError("Could not revoke user's refresh tokens.", err);
+            .catch((err) => {
+                throw new PassageError(
+                    "Could not revoke user's refresh tokens.",
+                    err
+                );
             })
             .then(() => {
                 return true;
