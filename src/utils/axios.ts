@@ -1,7 +1,8 @@
 import axios from "axios";
+import config from "./config.json";
 
 const instance = axios.create({
-    headers: { "X-Custom-Header": "foobar" },
+    headers: { "Passage-Version": config.version },
 });
 
 export default instance;
