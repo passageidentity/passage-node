@@ -36,9 +36,12 @@ jobs:
         run: |
           npm run beachball-bump
 
-      - name: Set Version
+      - name: Build
+        run: npm run set-version && npm run tsc
+
+      - name: Clear Beachball Changes
         run: |
-          npm run set-version
+          git reset --hard
 
       - name: Deploy to NPM
         run: |

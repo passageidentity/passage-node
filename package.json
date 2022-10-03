@@ -43,7 +43,6 @@
     "dev": "ts-node-dev --respawn testServer.ts",
     "test": "jest",
     "test:watch": "jest --watch",
-    "prepublishOnly": "npm run tsc",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "change": "beachball change",
     "publish": "beachball publish -y -n",
