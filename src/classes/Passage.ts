@@ -5,7 +5,7 @@ import User from "./User";
 import jwt from "jsonwebtoken";
 import { Request } from "express-serve-static-core";
 import jwkToPem, { RSA } from "jwk-to-pem";
-import axios, { AxiosError } from "axios";
+import axios from "../utils/axios";
 import { PassageConfig } from "../types/PassageConfig";
 import { AUTHCACHE, JWK, JWKS } from "../types/JWKS";
 import { PassageError } from "./PassageError";
@@ -35,7 +35,9 @@ export default class Passage {
         this.#apiKey = config?.apiKey;
         this.user = new User(config);
 
-        this.authStrategy = config?.authStrategy ? config.authStrategy : "COOKIE";
+        this.authStrategy = config?.authStrategy
+            ? config.authStrategy
+            : "COOKIE";
     }
 
     /**
@@ -77,11 +79,11 @@ export default class Passage {
    * @return {JWKS} JWKS for this app.
    */
     async fetchJWKS(resetCache?: boolean): Promise<JWKS> {
-    // use cached value if found
+        // use cached value if found
         if (
             AUTH_CACHE[this.appID] !== undefined &&
-      Object.keys(AUTH_CACHE).length > 0 &&
-      !resetCache
+            Object.keys(AUTH_CACHE).length > 0 &&
+            !resetCache
         ) {
             return AUTH_CACHE[this.appID]["jwks"];
         }
@@ -90,7 +92,7 @@ export default class Passage {
             .get(
                 `https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not fetch appID's JWKs", err);
             })
             .then((res) => {
@@ -252,7 +254,7 @@ export default class Passage {
                     },
                 }
             )
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError(
                     "Could not create a magic link for this app.",
                     err
@@ -272,7 +274,7 @@ export default class Passage {
     async getApp(): Promise<AppObject> {
         const appData: AppObject = await axios
             .get(`https://api.passage.id/v1/apps/${this.appID}`)
-            .catch((err: AxiosError) => {
+            .catch((err) => {
                 throw new PassageError("Could not fetch app.", err);
             })
             .then((res) => {

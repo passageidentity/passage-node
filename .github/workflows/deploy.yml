@@ -32,6 +32,17 @@ jobs:
         run: |
           npm run beachball-check
 
+      - name: Beachball Bump
+        run: |
+          npm run beachball-bump
+
+      - name: Build
+        run: npm run set-version && npm run tsc
+
+      - name: Clear Beachball Changes
+        run: |
+          git reset --hard
+
       - name: Deploy to NPM
         run: |
           git config user.email "beachball_bot@passage.id"
