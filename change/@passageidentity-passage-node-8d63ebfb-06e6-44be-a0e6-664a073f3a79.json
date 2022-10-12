@@ -1,7 +1,0 @@
-{
-    "type": "patch",
-    "comment": "add sdk version header",
-    "packageName": "@passageidentity/passage-node",
-    "email": "luis.ramirez@passage.id",
-    "dependentChangeType": "patch"
-}

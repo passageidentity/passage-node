@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 28 Sep 2022 15:34:12 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 17:08:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.1.1
+
+Wed, 12 Oct 2022 17:08:12 GMT
+
+### Patches
+
+- add sdk version header (luis.ramirez@passage.id)
 
 ## 2.1.0
 

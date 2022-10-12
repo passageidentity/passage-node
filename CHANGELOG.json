@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Wed, 12 Oct 2022 17:08:12 GMT",
+      "tag": "@passageidentity/passage-node_v2.1.1",
+      "version": "2.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "luis.ramirez@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "4a2321f13309f2977d1dd237bf819941b683b432",
+            "comment": "add sdk version header"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 28 Sep 2022 15:34:12 GMT",
       "tag": "@passageidentity/passage-node_v2.1.0",
       "version": "2.1.0",
