@@ -63,7 +63,7 @@
   "dependencies": {
     "axios": "^0.21.4",
     "base-64": "^1.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "jwk-to-pem": "^2.0.5"
   },
   "publishConfig": {
