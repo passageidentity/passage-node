@@ -60,8 +60,10 @@ describe("Passage API Requests", () => {
       const magicLink = await passage.createMagicLink({
         email: "chris@passage.id",
         channel: "email",
-      } as MagicLinkRequest);
+        ttl: 12,
+      });
       expect(magicLink).toHaveProperty("identifier", "chris@passage.id");
+      expect(magicLink).toHaveProperty("ttl", 12);
     });
 
     test("Get App", async () => {
