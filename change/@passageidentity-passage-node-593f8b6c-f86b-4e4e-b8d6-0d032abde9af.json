@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Improve typing for MagicLinkRequest",
-  "packageName": "@passageidentity/passage-node",
-  "email": "kevin.flanagan@passage.id",
-  "dependentChangeType": "patch"
-}

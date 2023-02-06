@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Mon, 06 Feb 2023 16:20:13 GMT",
+      "tag": "@passageidentity/passage-node_v2.1.2",
+      "version": "2.1.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "kevin.flanagan@passage.id",
+            "package": "@passageidentity/passage-node",
+            "commit": "aa83aa00630da0357ef2670614d72774e3f3bd4f",
+            "comment": "Improve typing for MagicLinkRequest"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 17:08:12 GMT",
       "tag": "@passageidentity/passage-node_v2.1.1",
       "version": "2.1.1",

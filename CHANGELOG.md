@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 12 Oct 2022 17:08:12 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Feb 2023 16:20:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.1.2
+
+Mon, 06 Feb 2023 16:20:13 GMT
+
+### Patches
+
+- Improve typing for MagicLinkRequest (kevin.flanagan@passage.id)
 
 ## 2.1.1
 
