@@ -2,6 +2,21 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Thu, 06 Apr 2023 15:55:49 GMT",
+      "tag": "@passageidentity/passage-node_v2.2.0",
+      "version": "2.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "1934806+himichaelroberts@users.noreply.github.com",
+            "package": "@passageidentity/passage-node",
+            "commit": "833a3f63e26bad3cc52bb0f0378bbdfe2d55ae9d",
+            "comment": "Add Auth Fallback Method Properties"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Feb 2023 16:20:13 GMT",
       "tag": "@passageidentity/passage-node_v2.1.2",
       "version": "2.1.2",
