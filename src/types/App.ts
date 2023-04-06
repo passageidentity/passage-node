@@ -38,4 +38,6 @@ export interface AppObject {
   user_metadata_schema: Array<UserMetadataField>;
   layouts: Array<Layouts>;
   default_language: string;
+  auth_fallback_method: string;
+  auth_fallback_method_ttl: number;
 }
