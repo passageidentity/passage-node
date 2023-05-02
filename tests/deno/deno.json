@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@passageidentity/passage-node": "file:///Users/michaelroberts/Projects/passage-node/tests/deno/index.js"
+  }
+}
