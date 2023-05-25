@@ -225,7 +225,6 @@ export default class Passage {
       } = await jwtVerify(token, key, {
         algorithms: [jwk.alg as string],
       });
-
       if (userID) return userID.toString();
       else return undefined;
     } catch (e) {
