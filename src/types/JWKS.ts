@@ -8,12 +8,3 @@ export interface AUTHCACHE {
 export interface JWKS {
   [kid: string]: JWK;
 }
-
-// export interface JWK {
-//   alg: string;
-//   kty: string;
-//   use: string;
-//   n: string;
-//   e: string;
-//   kid: string;
-// }
