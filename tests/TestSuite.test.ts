@@ -2,9 +2,7 @@
 import Passage from "../src/index";
 import request from "supertest";
 import app from "../testServer";
-import { MagicLinkRequest } from "../src/types/MagicLink";
-import jwt from "jsonwebtoken";
-import jwkToPem, { RSA } from "jwk-to-pem";
+import { decodeProtectedHeader, importJWK, exportSPKI, KeyLike } from "jose";
 
 require("dotenv").config();
 
@@ -26,12 +24,12 @@ describe("Passage Initialization", () => {
 
   test("fetchJWKS", async () => {
     const jwks = await passage.fetchJWKS();
-    const { kid } = jwt.decode(appToken, { complete: true })!.header;
-    const jwk = jwks[kid];
+    const { kid } = decodeProtectedHeader(appToken);
+    const jwk = jwks[kid as string];
+    const key = await importJWK(jwk);
+    const spkiPem = await exportSPKI(key as KeyLike);
 
-    const pem = jwkToPem(jwk as RSA);
-
-    expect(pem).toContain(process.env.PUBLIC_KEY);
+    expect(spkiPem).toContain(process.env.PUBLIC_KEY);
   });
 
   // note that the current token is only valid until Nov.8 2022

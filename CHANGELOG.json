@@ -2,6 +2,51 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Fri, 26 May 2023 16:21:14 GMT",
+      "tag": "@passageidentity/passage-node_v2.2.1",
+      "version": "2.2.1",
+      "comments": {
+        "none": [
+          {
+            "author": "bester.duane@gmail.com",
+            "package": "@passageidentity/passage-node",
+            "commit": "277ebf142c32c68ff6ffae787b7dc6b806f33fc6",
+            "comment": "Revert axios version bump"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 26 May 2023 14:11:46 GMT",
+      "tag": "@passageidentity/passage-node_v2.2.1",
+      "version": "2.2.1",
+      "comments": {
+        "none": [
+          {
+            "author": "bester.duane@gmail.com",
+            "package": "@passageidentity/passage-node",
+            "commit": "bfd1ebfa70e830a1c8feb2b7aab17785510fafd8",
+            "comment": "Change files"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 25 May 2023 17:58:29 GMT",
+      "tag": "@passageidentity/passage-node_v2.2.1",
+      "version": "2.2.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "bester.duane@gmail.com",
+            "package": "@passageidentity/passage-node",
+            "commit": "76c52892be8e7d7b427ab97b5b699343439b1835",
+            "comment": "removing jsonwebtoken and jwt-to-pem and using jose instead"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Apr 2023 15:55:49 GMT",
       "tag": "@passageidentity/passage-node_v2.2.0",
       "version": "2.2.0",

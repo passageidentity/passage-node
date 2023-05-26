@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Thu, 06 Apr 2023 15:55:49 GMT and should not be manually modified.
+This log was last generated on Thu, 25 May 2023 17:58:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.2.1
+
+Thu, 25 May 2023 17:58:29 GMT
+
+### Patches
+
+- removing jsonwebtoken and jwt-to-pem and using jose instead (bester.duane@gmail.com)
 
 ## 2.2.0
 
