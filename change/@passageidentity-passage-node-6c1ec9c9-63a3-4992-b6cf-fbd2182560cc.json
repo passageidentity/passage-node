@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Revert axios version bump",
+  "packageName": "@passageidentity/passage-node",
+  "email": "bester.duane@gmail.com",
+  "dependentChangeType": "none"
+}
