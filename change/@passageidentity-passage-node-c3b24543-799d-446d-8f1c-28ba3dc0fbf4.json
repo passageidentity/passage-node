@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "removing jsonwebtoken and jwt-to-pem and using jose instead",
-  "packageName": "@passageidentity/passage-node",
-  "email": "bester.duane@gmail.com",
-  "dependentChangeType": "patch"
-}
