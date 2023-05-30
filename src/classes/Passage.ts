@@ -2,12 +2,11 @@ import { AuthStrategy } from "../types/AuthStrategy";
 import { MagicLinkObject, MagicLinkRequest } from "../types/MagicLink";
 import { AppObject } from "../types/App";
 import User from "./User";
-import jwt from "jsonwebtoken";
+import { decodeProtectedHeader, importJWK, jwtVerify, JWK } from "jose";
 import { Request } from "express-serve-static-core";
-import jwkToPem, { RSA } from "jwk-to-pem";
 import axios from "../utils/axios";
 import { PassageConfig } from "../types/PassageConfig";
-import { AUTHCACHE, JWK, JWKS } from "../types/JWKS";
+import { AUTHCACHE, JWKS } from "../types/JWKS";
 import { PassageError } from "./PassageError";
 
 const AUTH_CACHE: AUTHCACHE = {};
@@ -35,9 +34,7 @@ export default class Passage {
         this.#apiKey = config?.apiKey;
         this.user = new User(config);
 
-        this.authStrategy = config?.authStrategy
-            ? config.authStrategy
-            : "COOKIE";
+        this.authStrategy = config?.authStrategy ? config.authStrategy : "COOKIE";
     }
 
     /**
@@ -79,11 +76,11 @@ export default class Passage {
    * @return {JWKS} JWKS for this app.
    */
     async fetchJWKS(resetCache?: boolean): Promise<JWKS> {
-        // use cached value if found
+    // use cached value if found
         if (
             AUTH_CACHE[this.appID] !== undefined &&
-            Object.keys(AUTH_CACHE).length > 0 &&
-            !resetCache
+      Object.keys(AUTH_CACHE).length > 0 &&
+      !resetCache
         ) {
             return AUTH_CACHE[this.appID]["jwks"];
         }
@@ -213,7 +210,7 @@ export default class Passage {
    */
     async validAuthToken(token: string): Promise<string | undefined> {
         try {
-            const { kid } = jwt.decode(token, { complete: true })!.header;
+            const { kid } = decodeProtectedHeader(token);
             if (!kid) {
                 return undefined;
             }
@@ -222,12 +219,12 @@ export default class Passage {
                 return undefined;
             }
 
-            const pem = jwkToPem(jwk as RSA);
-
-            const userID = jwt.verify(token, pem, {
-                // @ts-ignore
-                algorithms: jwk.alg,
-            }).sub;
+            const key = await importJWK(jwk);
+            const {
+                payload: { sub: userID },
+            } = await jwtVerify(token, key, {
+                algorithms: [jwk.alg as string],
+            });
             if (userID) return userID.toString();
             else return undefined;
         } catch (e) {
