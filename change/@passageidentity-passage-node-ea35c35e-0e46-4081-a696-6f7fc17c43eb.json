@@ -1,6 +1,6 @@
 {
   "type": "none",
-  "comment": "Change files",
+  "comment": "Removing jsonwebtoken and jwt-to-pem and using jose instead",
   "packageName": "@passageidentity/passage-node",
   "email": "bester.duane@gmail.com",
   "dependentChangeType": "none"
