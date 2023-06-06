@@ -2,6 +2,27 @@
   "name": "@passageidentity/passage-node",
   "entries": [
     {
+      "date": "Tue, 06 Jun 2023 21:10:47 GMT",
+      "tag": "@passageidentity/passage-node_v2.2.2",
+      "version": "2.2.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "bester.duane@gmail.com",
+            "package": "@passageidentity/passage-node",
+            "commit": "be41dfeb558dfc8c100a40f3dd648378bb819bff",
+            "comment": "PSG-2003: Replace jsonwebtoken and jwk-to-pem with jose"
+          },
+          {
+            "author": "bester.duane@gmail.com",
+            "package": "@passageidentity/passage-node",
+            "commit": "be41dfeb558dfc8c100a40f3dd648378bb819bff",
+            "comment": "PSG-2055: fix type errors for when apps default our lib to CJS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Apr 2023 15:55:49 GMT",
       "tag": "@passageidentity/passage-node_v2.2.0",
       "version": "2.2.0",

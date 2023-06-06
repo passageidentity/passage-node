@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "PSG-2003: Replace jsonwebtoken and jwk-to-pem with jose",
-  "packageName": "@passageidentity/passage-node",
-  "email": "bester.duane@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,17 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Thu, 06 Apr 2023 15:55:49 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Jun 2023 21:10:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.2.2
+
+Tue, 06 Jun 2023 21:10:47 GMT
+
+### Patches
+
+- PSG-2003: Replace jsonwebtoken and jwk-to-pem with jose (bester.duane@gmail.com)
+- PSG-2055: fix type errors for when apps default our lib to CJS (bester.duane@gmail.com)
 
 ## 2.2.0
 
