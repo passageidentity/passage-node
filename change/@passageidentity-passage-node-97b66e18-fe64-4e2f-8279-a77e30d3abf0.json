@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Security patches for vulnerable packages",
+  "packageName": "@passageidentity/passage-node",
+  "email": "mac.evans@passage.id",
+  "dependentChangeType": "none"
+}
