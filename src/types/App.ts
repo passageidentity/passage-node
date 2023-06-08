@@ -1,6 +1,6 @@
-type UserMetadataFieldType = string;
+export type UserMetadataFieldType = string;
 
-type UserMetadataField = {
+export type UserMetadataField = {
     handle: string;
     field_name: string;
     field_type: UserMetadataFieldType;
@@ -9,7 +9,7 @@ type UserMetadataField = {
     profile: boolean;
 };
 
-type LayoutConfig = {
+export type LayoutConfig = {
     id: string;
     x: number;
     y: number;
@@ -17,7 +17,7 @@ type LayoutConfig = {
     h: number;
 };
 
-type Layouts = {
+export type Layouts = {
     registration: Array<LayoutConfig>;
     profile: Array<LayoutConfig>;
 };

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-interface UserEventInfo {
+export interface UserEventInfo {
     type: string;
     timestamp: string;
     id: string;
@@ -22,14 +22,14 @@ enum UserStatus {
     INACTIVE = 'inactive',
     PENDING = 'pending',
 }
-type UserStatusEnum = keyof typeof UserStatus;
+export type UserStatusEnum = keyof typeof UserStatus;
 
-interface PossibleUserUpdateAttributes {
+export interface PossibleUserUpdateAttributes {
     email: string;
     phone: string;
 }
 
-type UserAttributes = Pick<PossibleUserUpdateAttributes, 'email'> | Pick<PossibleUserUpdateAttributes, 'phone'>;
+export type UserAttributes = Pick<PossibleUserUpdateAttributes, 'email'> | Pick<PossibleUserUpdateAttributes, 'phone'>;
 
 export interface Metadata {
     [key: string]: boolean | string | number;
