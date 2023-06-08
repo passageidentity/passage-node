@@ -1,4 +1,4 @@
-import { JWK } from "jose";
+import { JWK } from 'jose';
 export interface AUTHCACHE {
   [appID: string]: {
     jwks: JWKS;

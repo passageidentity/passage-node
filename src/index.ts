@@ -1,4 +1,4 @@
-import Passage from "./classes/Passage";
+import Passage from './classes/Passage';
 
 module.exports = Passage;
 
