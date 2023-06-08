@@ -1,366 +1,366 @@
 {
-  "name": "@passageidentity/passage-node",
-  "entries": [
-    {
-      "date": "Tue, 06 Jun 2023 21:10:47 GMT",
-      "tag": "@passageidentity/passage-node_v2.2.2",
-      "version": "2.2.2",
-      "comments": {
-        "patch": [
-          {
-            "author": "bester.duane@gmail.com",
-            "package": "@passageidentity/passage-node",
-            "commit": "be41dfeb558dfc8c100a40f3dd648378bb819bff",
-            "comment": "PSG-2003: Replace jsonwebtoken and jwk-to-pem with jose"
-          },
-          {
-            "author": "bester.duane@gmail.com",
-            "package": "@passageidentity/passage-node",
-            "commit": "be41dfeb558dfc8c100a40f3dd648378bb819bff",
-            "comment": "PSG-2055: fix type errors for when apps default our lib to CJS"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Thu, 06 Apr 2023 15:55:49 GMT",
-      "tag": "@passageidentity/passage-node_v2.2.0",
-      "version": "2.2.0",
-      "comments": {
-        "minor": [
-          {
-            "author": "1934806+himichaelroberts@users.noreply.github.com",
-            "package": "@passageidentity/passage-node",
-            "commit": "833a3f63e26bad3cc52bb0f0378bbdfe2d55ae9d",
-            "comment": "Add Auth Fallback Method Properties"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Mon, 06 Feb 2023 16:20:13 GMT",
-      "tag": "@passageidentity/passage-node_v2.1.2",
-      "version": "2.1.2",
-      "comments": {
-        "patch": [
-          {
-            "author": "kevin.flanagan@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "aa83aa00630da0357ef2670614d72774e3f3bd4f",
-            "comment": "Improve typing for MagicLinkRequest"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 12 Oct 2022 17:08:12 GMT",
-      "tag": "@passageidentity/passage-node_v2.1.1",
-      "version": "2.1.1",
-      "comments": {
-        "patch": [
-          {
-            "author": "luis.ramirez@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "4a2321f13309f2977d1dd237bf819941b683b432",
-            "comment": "add sdk version header"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 28 Sep 2022 15:34:12 GMT",
-      "tag": "@passageidentity/passage-node_v2.1.0",
-      "version": "2.1.0",
-      "comments": {
-        "minor": [
-          {
-            "author": "chris.loper@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "bdf2e518fc4bb61d6055a40187a127cd0989d7e0",
-            "comment": "add new PassageError class for handling errors"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 28 Sep 2022 14:49:14 GMT",
-      "tag": "@passageidentity/passage-node_v2.0.4",
-      "version": "2.0.4",
-      "comments": {
-        "patch": [
-          {
-            "author": "luis.ramirez@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "20dec51a3b3dd22425e286e45bc9d6fa6eb1d739",
-            "comment": "PSG-1017: parse cookies without regex"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Fri, 16 Sep 2022 14:08:34 GMT",
-      "tag": "@passageidentity/passage-node_v2.0.3",
-      "version": "2.0.3",
-      "comments": {
-        "patch": [
-          {
-            "author": "chris.loper@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "bc7c97fe6b5a62effe259ac4346d81a4ec5cc235",
-            "comment": "add locale support to passage-node"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Thu, 08 Sep 2022 18:56:38 GMT",
-      "tag": "@passageidentity/passage-node_v2.0.2",
-      "version": "2.0.2",
-      "comments": {
-        "patch": [
-          {
-            "author": "mac.evans@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "9bd92390573c0a5c0730d698298db6f76f7f30b6",
-            "comment": "Remove boolean value from promise return type  value on authenticateRequest"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Fri, 02 Sep 2022 14:07:34 GMT",
-      "tag": "@passageidentity/passage-node_v2.0.1",
-      "version": "2.0.1",
-      "comments": {
-        "patch": [
-          {
-            "author": "chris.loper@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "1039728932c1dfb7f3a0a2063740d56de5c107a6",
-            "comment": "add refresh token sighOut"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Mon, 22 Aug 2022 13:37:35 GMT",
-      "tag": "@passageidentity/passage-node_v2.0.0",
-      "version": "2.0.0",
-      "comments": {
-        "none": [
-          {
-            "author": "mac.evans@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "944ed7d36b85d9dc19567f0ceb6389999a6feb4d",
-            "comment": "Update tests to expect lowercase emails"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Tue, 26 Jul 2022 19:59:20 GMT",
-      "tag": "@passageidentity/passage-node_v2.0.0",
-      "version": "2.0.0",
-      "comments": {
-        "major": [
-          {
-            "author": "luis.ramirez@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "7a3d56eba067e863acd567ec1f115bc90b59b8a7",
-            "comment": "update App and User fields"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Fri, 22 Jul 2022 17:40:00 GMT",
-      "tag": "@passageidentity/passage-node_v1.11.1",
-      "version": "1.11.1",
-      "comments": {
-        "patch": [
-          {
-            "author": "luis.ramirez@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "eaa1276268f404fa01d4b983ed9fb2ed235bba03",
-            "comment": "add fields to device type"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 13 Jul 2022 21:01:30 GMT",
-      "tag": "@passageidentity/passage-node_v1.11.0",
-      "version": "1.11.0",
-      "comments": {
-        "minor": [
-          {
-            "author": "anna.pobletts@gmail.com",
-            "package": "@passageidentity/passage-node",
-            "commit": "7aae1fd283ba9ba27880061177e4fb96fa2e7ce3",
-            "comment": "improvement in jwks caching"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Fri, 24 Jun 2022 14:41:19 GMT",
-      "tag": "@passageidentity/passage-node_v1.10.1",
-      "version": "1.10.1",
-      "comments": {
-        "patch": [
-          {
-            "author": "chris.loper@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "667d6aefeb0b0c0b35fe5e5fed0fca6486296fb1",
-            "comment": "no longer require jwk to validAuthToken"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Mon, 23 May 2022 16:42:44 GMT",
-      "tag": "@passageidentity/passage-node_v1.10.0",
-      "version": "1.10.0",
-      "comments": {
-        "minor": [
-          {
-            "author": "1934806+himichaelroberts@users.noreply.github.com",
-            "package": "@passageidentity/passage-node",
-            "commit": "39dc0290a58bd60fd2cad9681b3e70d2421bedd8",
-            "comment": "add getApp Details to Passage class"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Mon, 16 May 2022 18:56:55 GMT",
-      "tag": "@passageidentity/passage-node_v1.9.0",
-      "version": "1.9.0",
-      "comments": {
-        "minor": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "430c279659ab1ed9704e9961c03b33a05a16c11c",
-            "comment": "JWK support; fetchPublicKey -> fetchJWKs"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Fri, 29 Apr 2022 17:34:59 GMT",
-      "tag": "@passageidentity/passage-node_v1.8.1",
-      "version": "1.8.1",
-      "comments": {
-        "patch": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "315f0c3ff1fad3f7cbf92f17b03a609b39c0aef4",
-            "comment": "User metadata and devices now supported"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Fri, 29 Apr 2022 16:05:31 GMT",
-      "tag": "@passageidentity/passage-node_v1.8.0",
-      "version": "1.8.0",
-      "comments": {
-        "none": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "5629d2e3cd0f52482b844219d6adeec1b816c999",
-            "comment": "Publishing updates"
-          },
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "5629d2e3cd0f52482b844219d6adeec1b816c999",
-            "comment": "Publishing adjustments"
-          }
-        ],
-        "minor": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "5629d2e3cd0f52482b844219d6adeec1b816c999",
-            "comment": "User metadata now supported when creating or updating users"
-          }
-        ],
-        "patch": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "5629d2e3cd0f52482b844219d6adeec1b816c999",
-            "comment": "API enhancements"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Fri, 18 Feb 2022 16:32:45 GMT",
-      "tag": "@passageidentity/passage-node_v1.3.0",
-      "version": "1.3.0",
-      "comments": {
-        "minor": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "7ca6237da46baf926ae0d1b6fe29a4c468faa207",
-            "comment": "User status now an enum (no longer active boolean)"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 12 Jan 2022 22:13:17 GMT",
-      "tag": "@passageidentity/passage-node_v1.2.0",
-      "version": "1.2.0",
-      "comments": {
-        "none": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "2e82dd0af98add59379672d68cc94470120bd94d",
-            "comment": {
-              "title": "",
-              "value": ""
+    "name": "@passageidentity/passage-node",
+    "entries": [
+        {
+            "date": "Tue, 06 Jun 2023 21:10:47 GMT",
+            "tag": "@passageidentity/passage-node_v2.2.2",
+            "version": "2.2.2",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "bester.duane@gmail.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "be41dfeb558dfc8c100a40f3dd648378bb819bff",
+                        "comment": "PSG-2003: Replace jsonwebtoken and jwk-to-pem with jose"
+                    },
+                    {
+                        "author": "bester.duane@gmail.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "be41dfeb558dfc8c100a40f3dd648378bb819bff",
+                        "comment": "PSG-2055: fix type errors for when apps default our lib to CJS"
+                    }
+                ]
             }
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 05 Jan 2022 17:04:51 GMT",
-      "tag": "@passageidentity/passage-node_v1.2.0",
-      "version": "1.2.0",
-      "comments": {
-        "minor": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "938c729a43edc03b54e9032363a6fbb847b51491",
-            "comment": "Type safety refinement"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 15 Dec 2021 21:15:19 GMT",
-      "tag": "@passageidentity/passage-node_v1.1.0",
-      "version": "1.1.0",
-      "comments": {
-        "minor": [
-          {
-            "author": "dylan.brookes@passage.id",
-            "package": "@passageidentity/passage-node",
-            "commit": "117d8e7bc21d19f786b26a14bd53402ef35b67af",
-            "comment": "Added User methods: delete, create"
-          }
-        ]
-      }
-    }
-  ]
+        },
+        {
+            "date": "Thu, 06 Apr 2023 15:55:49 GMT",
+            "tag": "@passageidentity/passage-node_v2.2.0",
+            "version": "2.2.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "1934806+himichaelroberts@users.noreply.github.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "833a3f63e26bad3cc52bb0f0378bbdfe2d55ae9d",
+                        "comment": "Add Auth Fallback Method Properties"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Mon, 06 Feb 2023 16:20:13 GMT",
+            "tag": "@passageidentity/passage-node_v2.1.2",
+            "version": "2.1.2",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "kevin.flanagan@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "aa83aa00630da0357ef2670614d72774e3f3bd4f",
+                        "comment": "Improve typing for MagicLinkRequest"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Wed, 12 Oct 2022 17:08:12 GMT",
+            "tag": "@passageidentity/passage-node_v2.1.1",
+            "version": "2.1.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "luis.ramirez@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "4a2321f13309f2977d1dd237bf819941b683b432",
+                        "comment": "add sdk version header"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Wed, 28 Sep 2022 15:34:12 GMT",
+            "tag": "@passageidentity/passage-node_v2.1.0",
+            "version": "2.1.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "chris.loper@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "bdf2e518fc4bb61d6055a40187a127cd0989d7e0",
+                        "comment": "add new PassageError class for handling errors"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Wed, 28 Sep 2022 14:49:14 GMT",
+            "tag": "@passageidentity/passage-node_v2.0.4",
+            "version": "2.0.4",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "luis.ramirez@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "20dec51a3b3dd22425e286e45bc9d6fa6eb1d739",
+                        "comment": "PSG-1017: parse cookies without regex"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Fri, 16 Sep 2022 14:08:34 GMT",
+            "tag": "@passageidentity/passage-node_v2.0.3",
+            "version": "2.0.3",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "chris.loper@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "bc7c97fe6b5a62effe259ac4346d81a4ec5cc235",
+                        "comment": "add locale support to passage-node"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Thu, 08 Sep 2022 18:56:38 GMT",
+            "tag": "@passageidentity/passage-node_v2.0.2",
+            "version": "2.0.2",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "mac.evans@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "9bd92390573c0a5c0730d698298db6f76f7f30b6",
+                        "comment": "Remove boolean value from promise return type  value on authenticateRequest"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Fri, 02 Sep 2022 14:07:34 GMT",
+            "tag": "@passageidentity/passage-node_v2.0.1",
+            "version": "2.0.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "chris.loper@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "1039728932c1dfb7f3a0a2063740d56de5c107a6",
+                        "comment": "add refresh token sighOut"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Mon, 22 Aug 2022 13:37:35 GMT",
+            "tag": "@passageidentity/passage-node_v2.0.0",
+            "version": "2.0.0",
+            "comments": {
+                "none": [
+                    {
+                        "author": "mac.evans@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "944ed7d36b85d9dc19567f0ceb6389999a6feb4d",
+                        "comment": "Update tests to expect lowercase emails"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Tue, 26 Jul 2022 19:59:20 GMT",
+            "tag": "@passageidentity/passage-node_v2.0.0",
+            "version": "2.0.0",
+            "comments": {
+                "major": [
+                    {
+                        "author": "luis.ramirez@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "7a3d56eba067e863acd567ec1f115bc90b59b8a7",
+                        "comment": "update App and User fields"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Fri, 22 Jul 2022 17:40:00 GMT",
+            "tag": "@passageidentity/passage-node_v1.11.1",
+            "version": "1.11.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "luis.ramirez@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "eaa1276268f404fa01d4b983ed9fb2ed235bba03",
+                        "comment": "add fields to device type"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Wed, 13 Jul 2022 21:01:30 GMT",
+            "tag": "@passageidentity/passage-node_v1.11.0",
+            "version": "1.11.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "anna.pobletts@gmail.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "7aae1fd283ba9ba27880061177e4fb96fa2e7ce3",
+                        "comment": "improvement in jwks caching"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Fri, 24 Jun 2022 14:41:19 GMT",
+            "tag": "@passageidentity/passage-node_v1.10.1",
+            "version": "1.10.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "chris.loper@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "667d6aefeb0b0c0b35fe5e5fed0fca6486296fb1",
+                        "comment": "no longer require jwk to validAuthToken"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Mon, 23 May 2022 16:42:44 GMT",
+            "tag": "@passageidentity/passage-node_v1.10.0",
+            "version": "1.10.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "1934806+himichaelroberts@users.noreply.github.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "39dc0290a58bd60fd2cad9681b3e70d2421bedd8",
+                        "comment": "add getApp Details to Passage class"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Mon, 16 May 2022 18:56:55 GMT",
+            "tag": "@passageidentity/passage-node_v1.9.0",
+            "version": "1.9.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "430c279659ab1ed9704e9961c03b33a05a16c11c",
+                        "comment": "JWK support; fetchPublicKey -> fetchJWKs"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Fri, 29 Apr 2022 17:34:59 GMT",
+            "tag": "@passageidentity/passage-node_v1.8.1",
+            "version": "1.8.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "315f0c3ff1fad3f7cbf92f17b03a609b39c0aef4",
+                        "comment": "User metadata and devices now supported"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Fri, 29 Apr 2022 16:05:31 GMT",
+            "tag": "@passageidentity/passage-node_v1.8.0",
+            "version": "1.8.0",
+            "comments": {
+                "none": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5629d2e3cd0f52482b844219d6adeec1b816c999",
+                        "comment": "Publishing updates"
+                    },
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5629d2e3cd0f52482b844219d6adeec1b816c999",
+                        "comment": "Publishing adjustments"
+                    }
+                ],
+                "minor": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5629d2e3cd0f52482b844219d6adeec1b816c999",
+                        "comment": "User metadata now supported when creating or updating users"
+                    }
+                ],
+                "patch": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5629d2e3cd0f52482b844219d6adeec1b816c999",
+                        "comment": "API enhancements"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Fri, 18 Feb 2022 16:32:45 GMT",
+            "tag": "@passageidentity/passage-node_v1.3.0",
+            "version": "1.3.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "7ca6237da46baf926ae0d1b6fe29a4c468faa207",
+                        "comment": "User status now an enum (no longer active boolean)"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Wed, 12 Jan 2022 22:13:17 GMT",
+            "tag": "@passageidentity/passage-node_v1.2.0",
+            "version": "1.2.0",
+            "comments": {
+                "none": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "2e82dd0af98add59379672d68cc94470120bd94d",
+                        "comment": {
+                            "title": "",
+                            "value": ""
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Wed, 05 Jan 2022 17:04:51 GMT",
+            "tag": "@passageidentity/passage-node_v1.2.0",
+            "version": "1.2.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "938c729a43edc03b54e9032363a6fbb847b51491",
+                        "comment": "Type safety refinement"
+                    }
+                ]
+            }
+        },
+        {
+            "date": "Wed, 15 Dec 2021 21:15:19 GMT",
+            "tag": "@passageidentity/passage-node_v1.1.0",
+            "version": "1.1.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "dylan.brookes@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "117d8e7bc21d19f786b26a14bd53402ef35b67af",
+                        "comment": "Added User methods: delete, create"
+                    }
+                ]
+            }
+        }
+    ]
 }

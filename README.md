@@ -25,35 +25,35 @@ const app = express();
 const port = 3000;
 
 let passageConfig = {
-  appID: 'YOUR_APP_ID',
+    appID: 'YOUR_APP_ID',
 };
 
 // example of custom middleware
 let passage = new Passage(passageConfig);
 let passageAuthMiddleware = (() => {
-  return async (req, res, next) => {
-    await passage
-      .authenticateRequest(req)
-      .then((userID) => {
-        if (userID) {
-          res.userID = userID;
-          return next();
-        } else return res.status(401).send('unauthorized');
-      })
-      .catch(() => {
-        return res.status(401).send('Could not authenticate user!');
-      });
-  };
+    return async (req, res, next) => {
+        await passage
+            .authenticateRequest(req)
+            .then((userID) => {
+                if (userID) {
+                    res.userID = userID;
+                    return next();
+                } else return res.status(401).send('unauthorized');
+            })
+            .catch(() => {
+                return res.status(401).send('Could not authenticate user!');
+            });
+    };
 })();
 
 // example implementation of custom middleware
 app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-  // authenticated user
-  let userID = res.userID;
+    // authenticated user
+    let userID = res.userID;
 });
 
 app.listen(port, () => {
-  console.log(`Example app running`);
+    console.log(`Example app running`);
 });
 ```
 
@@ -65,7 +65,7 @@ To retrieve information about an app, you should use the `passage.getApp()` func
 import Passage from '@passageidentity/passage-node';
 
 let passageConfig = {
-  appID: 'YOUR_APP_ID',
+    appID: 'YOUR_APP_ID',
 };
 
 let passage = new Passage(passageConfig);
@@ -85,19 +85,19 @@ const app = express();
 const port = 3000;
 
 let passageConfig = {
-  appID: 'YOUR_APP_ID',
-  apiKey: 'YOUR_API_KEY',
+    appID: 'YOUR_APP_ID',
+    apiKey: 'YOUR_API_KEY',
 };
 let passage = new Passage(passageConfig);
 
 // example authenticated route
 app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-  // get passage user ID from middleware
-  let userID = res.userID;
+    // get passage user ID from middleware
+    let userID = res.userID;
 
-  // get user info
-  let passageUser = await passage.user.get(userID);
-  console.log(passageUser.email);
+    // get user info
+    let passageUser = await passage.user.get(userID);
+    console.log(passageUser.email);
 });
 ```
 
@@ -113,19 +113,19 @@ const app = express();
 const port = 3000;
 
 let passageConfig = {
-  appID: 'YOUR_APP_ID',
-  apiKey: 'YOUR_API_KEY',
+    appID: 'YOUR_APP_ID',
+    apiKey: 'YOUR_API_KEY',
 };
 let passage = new Passage(passageConfig);
 
 // example authenticated route
 app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-  // get passage user ID from middleware
-  let userID = res.userID;
+    // get passage user ID from middleware
+    let userID = res.userID;
 
-  // deactivate user
-  let passageUser = await passage.user.deactivate(userID);
-  console.log(passageUser.activate);
+    // deactivate user
+    let passageUser = await passage.user.deactivate(userID);
+    console.log(passageUser.activate);
 });
 ```
 
@@ -141,27 +141,27 @@ const app = express();
 const port = 3000;
 
 let passageConfig = {
-  appID: 'YOUR_APP_ID',
-  apiKey: 'YOUR_API_KEY',
+    appID: 'YOUR_APP_ID',
+    apiKey: 'YOUR_API_KEY',
 };
 let passage = new Passage(passageConfig);
 
 // example authenticated route
 app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-  // get passage user ID from middleware
-  let userID = res.userID;
-  let newAttributes = {
-    email: 'newEmail@domain.com',
-    phone: '+15005550006',
-    // note that user_metadata is an optional field and is defined in your Passage App settings.
-    user_metadata: {
-      examplefield: 123,
-    },
-  };
+    // get passage user ID from middleware
+    let userID = res.userID;
+    let newAttributes = {
+        email: 'newEmail@domain.com',
+        phone: '+15005550006',
+        // note that user_metadata is an optional field and is defined in your Passage App settings.
+        user_metadata: {
+            examplefield: 123,
+        },
+    };
 
-  // update user attributes
-  let passageUser = await passage.user.update(userID, newAttributes);
-  console.log(passageUser);
+    // update user attributes
+    let passageUser = await passage.user.update(userID, newAttributes);
+    console.log(passageUser);
 });
 ```
 
@@ -177,19 +177,19 @@ const app = express();
 const port = 3000;
 
 let passageConfig = {
-  appID: 'YOUR_APP_ID',
-  apiKey: 'YOUR_API_KEY',
+    appID: 'YOUR_APP_ID',
+    apiKey: 'YOUR_API_KEY',
 };
 let passage = new Passage(passageConfig);
 
 // example authenticated route
 app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-  // get passage user ID from middleware
-  let userID = res.userID;
+    // get passage user ID from middleware
+    let userID = res.userID;
 
-  // deactivate user
-  let deletedPassageUser = await passage.user.delete(userID);
-  console.log(deletedPassageUser); // true
+    // deactivate user
+    let deletedPassageUser = await passage.user.delete(userID);
+    console.log(deletedPassageUser); // true
 });
 ```
 
@@ -201,22 +201,22 @@ You can also create a Passage user by providing an `email` or `phone` (phone num
 import Passage from '@passageidentity/passage-node';
 
 let passageConfig = {
-  appID: 'YOUR_APP_ID',
-  apiKey: 'YOUR_API_KEY',
+    appID: 'YOUR_APP_ID',
+    apiKey: 'YOUR_API_KEY',
 };
 let passage = new Passage(passageConfig);
 
 // note that user_metadata is an optional field and is defined in your Passage App settings.
 let newPassageUser1 = passage.user.create({
-  email: 'newEmail@domain.com',
-  user_metadata: {
-    examplefield: 123,
-  },
+    email: 'newEmail@domain.com',
+    user_metadata: {
+        examplefield: 123,
+    },
 });
 console.log(newPassageUser1); // [userObject]
 
 let newPassageUser2 = passage.user.create({
-  phone: '+15005550006',
+    phone: '+15005550006',
 });
 console.log(newPassageUser2); // [userObject]
 ```
@@ -229,13 +229,13 @@ You can also create a Passage magic link by providing a MagicLinkRequest type
 import Passage from '@passageidentity/passage-node';
 
 let passageConfig = {
-  appID: 'YOUR_APP_ID',
-  apiKey: 'YOUR_API_KEY',
+    appID: 'YOUR_APP_ID',
+    apiKey: 'YOUR_API_KEY',
 };
 let passage = new Passage(passageConfig);
 
 let magicLink = passage.createMagicLink({
-  email: 'newEmail@domain.com',
-  channel: 'email',
+    email: 'newEmail@domain.com',
+    channel: 'email',
 });
 ```
