@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Fri, 09 Jun 2023 15:32:31 GMT",
+            "tag": "@passageidentity/passage-node_v2.3.0",
+            "version": "2.3.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "jennifer.macfarlane@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "24833df8fcac8bc931880c39a7bb25dbd801d319",
+                        "comment": "Export all types from indexfile, clean up eslintconfig and prettierconfigs"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Tue, 06 Jun 2023 21:10:47 GMT",
             "tag": "@passageidentity/passage-node_v2.2.2",
             "version": "2.2.2",

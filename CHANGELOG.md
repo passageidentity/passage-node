@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Tue, 06 Jun 2023 21:10:47 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Jun 2023 15:32:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.3.0
+
+Fri, 09 Jun 2023 15:32:31 GMT
+
+### Minor changes
+
+-   Export all types from indexfile, clean up eslintconfig and prettierconfigs (jennifer.macfarlane@agilebits.com)
 
 ## 2.2.2
 

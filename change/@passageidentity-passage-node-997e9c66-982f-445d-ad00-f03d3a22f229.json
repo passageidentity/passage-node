@@ -1,7 +1,0 @@
-{
-    "type": "minor",
-    "comment": "Export all types from indexfile, clean up eslintconfig and prettierconfigs",
-    "packageName": "@passageidentity/passage-node",
-    "email": "jennifer.macfarlane@agilebits.com",
-    "dependentChangeType": "patch"
-}
