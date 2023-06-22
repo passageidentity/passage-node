@@ -2,7 +2,6 @@
 import Passage from '../src/index';
 import request from 'supertest';
 import app from '../testServer';
-import { decodeProtectedHeader, importJWK, exportSPKI, KeyLike } from 'jose';
 
 require('dotenv').config();
 
@@ -21,16 +20,6 @@ describe('Passage Initialization', () => {
         apiKey: process.env.API_KEY,
     };
     const passage = new Passage(config);
-
-    test('fetchJWKS', async () => {
-        const jwks = await passage.fetchJWKS();
-        const { kid } = decodeProtectedHeader(appToken);
-        const jwk = jwks[kid as string];
-        const key = await importJWK(jwk);
-        const spkiPem = await exportSPKI(key as KeyLike);
-
-        expect(spkiPem).toContain(process.env.PUBLIC_KEY);
-    });
 
     // note that the current token is only valid until Nov.8 2022
     test('authenticateRequestWithCookie', async () => {

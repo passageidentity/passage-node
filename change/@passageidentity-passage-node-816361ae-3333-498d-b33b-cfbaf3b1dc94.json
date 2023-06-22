@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "Replace JWKS Lookup with Jose createRemoteJWKSet",
+    "packageName": "@passageidentity/passage-node",
+    "email": "1934806+himichaelroberts@users.noreply.github.com",
+    "dependentChangeType": "patch"
+}
