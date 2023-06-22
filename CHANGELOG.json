@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Thu, 22 Jun 2023 01:27:40 GMT",
+            "tag": "@passageidentity/passage-node_v2.3.1",
+            "version": "2.3.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "mac.evans@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "a4c0424c2aa830ddbfe2996170f36ca0af025624",
+                        "comment": "Update security vulnerabilities in npm packages"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Fri, 09 Jun 2023 15:32:31 GMT",
             "tag": "@passageidentity/passage-node_v2.3.0",
             "version": "2.3.0",

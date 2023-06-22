@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 09 Jun 2023 15:32:31 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Jun 2023 01:27:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.3.1
+
+Thu, 22 Jun 2023 01:27:40 GMT
+
+### Patches
+
+-   Update security vulnerabilities in npm packages (mac.evans@passage.id)
 
 ## 2.3.0
 
