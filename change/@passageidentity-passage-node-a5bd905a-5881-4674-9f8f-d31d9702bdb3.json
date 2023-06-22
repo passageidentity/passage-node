@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "Update security vulnerabilities in npm packages",
+    "packageName": "@passageidentity/passage-node",
+    "email": "mac.evans@passage.id",
+    "dependentChangeType": "patch"
+}
