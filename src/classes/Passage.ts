@@ -16,6 +16,7 @@ export default class Passage {
     #apiKey: string | undefined;
     authStrategy: AuthStrategy;
     user: User;
+    jwks: ReturnType<typeof createRemoteJWKSet>;
 
     /**
      * Initialize a new Passage instance.
@@ -30,6 +31,10 @@ export default class Passage {
         this.user = new User(config);
 
         this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
+
+        this.jwks = createRemoteJWKSet(new URL(`https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`), {
+            cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
+        });
     }
 
     /**
@@ -140,16 +145,9 @@ export default class Passage {
                 return undefined;
             }
 
-            const JWKS = createRemoteJWKSet(
-                new URL(`https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`),
-                {
-                    cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
-                },
-            );
-
             const {
                 payload: { sub: userID },
-            } = await jwtVerify(token, JWKS);
+            } = await jwtVerify(token, this.jwks);
             if (userID) return userID.toString();
             else return undefined;
         } catch (e) {
