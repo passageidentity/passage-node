@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Fri, 23 Jun 2023 00:50:10 GMT",
+            "tag": "@passageidentity/passage-node_v2.3.2",
+            "version": "2.3.2",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "1934806+himichaelroberts@users.noreply.github.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "aeefbe7cec3f96150979ee7ac17175baf776b1d9",
+                        "comment": "Replace JWKS Lookup with Jose createRemoteJWKSet"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Thu, 22 Jun 2023 01:27:40 GMT",
             "tag": "@passageidentity/passage-node_v2.3.1",
             "version": "2.3.1",

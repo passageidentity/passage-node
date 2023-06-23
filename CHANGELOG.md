@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Thu, 22 Jun 2023 01:27:40 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Jun 2023 00:50:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.3.2
+
+Fri, 23 Jun 2023 00:50:10 GMT
+
+### Patches
+
+-   Replace JWKS Lookup with Jose createRemoteJWKSet (1934806+himichaelroberts@users.noreply.github.com)
 
 ## 2.3.1
 
