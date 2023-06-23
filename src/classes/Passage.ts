@@ -2,14 +2,11 @@ import { AuthStrategy } from '../types/AuthStrategy';
 import { MagicLinkObject, MagicLinkRequest } from '../types/MagicLink';
 import { AppObject } from '../types/App';
 import User from './User';
-import { decodeProtectedHeader, importJWK, jwtVerify, JWK } from 'jose';
+import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
 import { Request } from 'express-serve-static-core';
 import axios from '../utils/axios';
 import { PassageConfig } from '../types/PassageConfig';
-import { AUTHCACHE, JWKS } from '../types/JWKS';
 import { PassageError } from './PassageError';
-
-const AUTH_CACHE: AUTHCACHE = {};
 
 /**
  * Passage Class
@@ -19,6 +16,7 @@ export default class Passage {
     #apiKey: string | undefined;
     authStrategy: AuthStrategy;
     user: User;
+    jwks: ReturnType<typeof createRemoteJWKSet>;
 
     /**
      * Initialize a new Passage instance.
@@ -33,6 +31,10 @@ export default class Passage {
         this.user = new User(config);
 
         this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
+
+        this.jwks = createRemoteJWKSet(new URL(`https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`), {
+            cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
+        });
     }
 
     /**
@@ -65,41 +67,6 @@ export default class Passage {
      */
     get apiKey(): string | undefined {
         return this.#apiKey;
-    }
-
-    /**
-     * Fetch the corresponding JWKS for this app.
-     *
-     * @param {boolean} resetCache Optional value to specify whether or not the cache should be reset
-     * @return {JWKS} JWKS for this app.
-     */
-    async fetchJWKS(resetCache?: boolean): Promise<JWKS> {
-        // use cached value if found
-        if (AUTH_CACHE[this.appID] !== undefined && Object.keys(AUTH_CACHE).length > 0 && !resetCache) {
-            return AUTH_CACHE[this.appID]['jwks'];
-        }
-
-        const jwks: { [kid: string]: JWK } = await axios
-            .get(`https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`)
-            .catch((err) => {
-                throw new PassageError("Could not fetch appID's JWKs", err);
-            })
-            .then((res) => {
-                const jwks = res.data.keys;
-                const formattedJWKS: JWKS = {};
-
-                // format jwks for cache
-                for (const jwk of jwks) {
-                    formattedJWKS[jwk.kid] = jwk;
-                }
-
-                Object.assign(AUTH_CACHE, {
-                    [this.appID]: { jwks: { ...formattedJWKS } },
-                });
-                return formattedJWKS;
-            });
-
-        return jwks;
     }
 
     /**
@@ -165,29 +132,6 @@ export default class Passage {
     }
 
     /**
-     *
-     * @param {string} kid the KID from the authToken to determine which JWK to use.
-     * @return {Promise<JWK | undefined>} the JWK to be used for decoding an authToken with the associated KID.
-     */
-    private async _findJWK(kid: string): Promise<JWK | undefined> {
-        if (!AUTH_CACHE) return undefined;
-        try {
-            const jwk = AUTH_CACHE[this.appID]['jwks'][kid];
-            if (jwk) {
-                return jwk;
-            }
-        } catch (e) {
-            // if there is no JWK, cache might need to be updated; update cache and try again
-            await this.fetchJWKS(true);
-            const jwk = AUTH_CACHE[this.appID]['jwks'][kid];
-            if (jwk) {
-                return jwk;
-            }
-            return undefined;
-        }
-    }
-
-    /**
      * Determine if the provided token is valid when compared with its
      * respective public key.
      *
@@ -200,17 +144,10 @@ export default class Passage {
             if (!kid) {
                 return undefined;
             }
-            const jwk = await this._findJWK(kid);
-            if (!jwk) {
-                return undefined;
-            }
 
-            const key = await importJWK(jwk);
             const {
                 payload: { sub: userID },
-            } = await jwtVerify(token, key, {
-                algorithms: [jwk.alg as string],
-            });
+            } = await jwtVerify(token, this.jwks);
             if (userID) return userID.toString();
             else return undefined;
         } catch (e) {
