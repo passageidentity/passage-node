@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Thu, 06 Jul 2023 20:49:59 GMT",
+            "tag": "@passageidentity/passage-node_v2.3.2",
+            "version": "2.3.2",
+            "comments": {
+                "none": [
+                    {
+                        "author": "1934806+himichaelroberts@users.noreply.github.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "ee441e3d04207adb8b5c1f3f5eda998fc516a802",
+                        "comment": "Removed Hardcoded Test Variable"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Fri, 23 Jun 2023 00:50:10 GMT",
             "tag": "@passageidentity/passage-node_v2.3.2",
             "version": "2.3.2",
