@@ -41,8 +41,8 @@ describe('Passage Initialization', () => {
     });
 
     test('validAuthToken', async () => {
-        const userID = await passage.validAuthToken(appToken);
-        expect(userID).toBe('bEXIZKYyApgz5oWYc5WM9vfF');
+        const userIdFromToken = await passage.validAuthToken(appToken);
+        expect(userIdFromToken).toBe(userID);
     });
 
     test('invalidAuthToken', async () => {
