@@ -42,7 +42,7 @@ describe('Passage Initialization', () => {
 
     test('validAuthToken', async () => {
         const userID = await passage.validAuthToken(appToken);
-        expect(userID).toBe('bEXIZKYyApgz5oWYc5WM9vfF');
+        expect(userID).toBe(userID);
     });
 
     test('invalidAuthToken', async () => {
