@@ -27,6 +27,7 @@ interface MagicLinkRequestProps {
     redirect_url: string;
     language: string;
     ttl: number;
+    type: string;
 }
 
 /** MagicLinkRequest must contain at least one of an email, phone, or user_id property. Note, if you set a value for the send property you must also set a value for the channel.*/

@@ -162,12 +162,14 @@ export default class Passage {
      * @return {Promise<MagicLinkObject>} Passage MagicLink object
      */
     async createMagicLink(magicLinkReq: MagicLinkRequest): Promise<MagicLinkObject> {
-        const magicLinkData: MagicLinkObject = await axios
-            .post(`https://api.passage.id/v1/apps/${this.appID}/magic-links/`, magicLinkReq, {
-                headers: {
-                    Authorization: `Bearer ${this.#apiKey}`,
-                },
-            })
+        const magicLinkData: MagicLinkObject = await 
+        fetch(`https://api.passage.id/v1/apps/${this.appID}/magic-links/`, {
+            method: 'POST',
+            body: JSON.stringify(magicLinkReq),
+            headers: {
+                Authorization: `Bearer ${this.#apiKey}`,
+            },
+        })
             .catch((err) => {
                 throw new PassageError('Could not create a magic link for this app.', err);
             })
