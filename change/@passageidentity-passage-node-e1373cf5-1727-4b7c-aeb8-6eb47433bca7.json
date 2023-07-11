@@ -1,7 +1,0 @@
-{
-    "type": "minor",
-    "comment": "create magic link with specific type",
-    "packageName": "@passageidentity/passage-node",
-    "email": "anna.pobletts@agilebits.com",
-    "dependentChangeType": "patch"
-}

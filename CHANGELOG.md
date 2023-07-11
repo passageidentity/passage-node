@@ -1,8 +1,20 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 23 Jun 2023 00:50:10 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Jul 2023 18:48:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.4.0
+
+Tue, 11 Jul 2023 18:48:21 GMT
+
+### Minor changes
+
+-   create magic link with specific type (anna.pobletts@agilebits.com)
+
+### Patches
+
+-   Fixing the MagicLink Enumeration (bester.duane@gmail.com)
 
 ## 2.3.2
 

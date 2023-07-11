@@ -2,6 +2,29 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Tue, 11 Jul 2023 18:48:21 GMT",
+            "tag": "@passageidentity/passage-node_v2.4.0",
+            "version": "2.4.0",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "bester.duane@gmail.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "66890dac8e57a4d0048ede6ade6db3d3ea224a54",
+                        "comment": "Fixing the MagicLink Enumeration"
+                    }
+                ],
+                "minor": [
+                    {
+                        "author": "anna.pobletts@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "66890dac8e57a4d0048ede6ade6db3d3ea224a54",
+                        "comment": "create magic link with specific type"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Thu, 06 Jul 2023 20:49:59 GMT",
             "tag": "@passageidentity/passage-node_v2.3.2",
             "version": "2.3.2",
