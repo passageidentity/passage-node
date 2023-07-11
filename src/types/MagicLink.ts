@@ -17,6 +17,12 @@ export enum ChannelEnum {
 }
 export type ChannelType = keyof typeof ChannelEnum;
 
+export enum MagicLinkType {
+    login = 'login',
+    verify_identifier = 'verify_identifier',
+}
+export type MagicLinkType = keyof typeof MagicLinkType;
+
 interface MagicLinkRequestProps {
     user_id: string;
     email: string;
@@ -27,7 +33,7 @@ interface MagicLinkRequestProps {
     redirect_url: string;
     language: string;
     ttl: number;
-    type: string;
+    type?: MagicLinkType;
 }
 
 /** MagicLinkRequest must contain at least one of an email, phone, or user_id property. Note, if you set a value for the send property you must also set a value for the channel.*/
