@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "Fixing the MagicLink Enumeration",
+    "packageName": "@passageidentity/passage-node",
+    "email": "bester.duane@gmail.com",
+    "dependentChangeType": "patch"
+}
