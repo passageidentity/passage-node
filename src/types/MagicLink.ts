@@ -17,11 +17,11 @@ export enum ChannelEnum {
 }
 export type ChannelType = keyof typeof ChannelEnum;
 
-export enum MagicLinkType {
+export enum MagicLinkEnum {
     login = 'login',
     verify_identifier = 'verify_identifier',
 }
-export type MagicLinkType = keyof typeof MagicLinkType;
+export type MagicLinkType = keyof typeof MagicLinkEnum;
 
 interface MagicLinkRequestProps {
     user_id: string;
