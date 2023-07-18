@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
+import { FetchError } from 'node-fetch';
+import fetch from '../utils/fetch';
 import { PassageConfig } from '../types/PassageConfig';
-import axios from '../utils/axios';
-import { PassageError } from './PassageError';
 import { WebAuthnDevices, UserObject, UpdateUserPayload, CreateUserPayload } from '../types/User';
+import { PassageError } from './PassageError';
 
 /***/
 export default class User {
@@ -43,16 +44,17 @@ export default class User {
             throw new PassageError('A Passage API key is needed.');
         }
 
-        const userData: UserObject = await axios
-            .get(`https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`, this.#authorizationHeader)
-            .catch((err) => {
-                throw new PassageError('Could not fetch user.', err);
-            })
-            .then((res) => {
-                return res.data.user;
+        try {
+            const response = await fetch({
+                ...this.#authorizationHeader,
+                method: 'GET',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
             });
 
-        return userData;
+            return response.user;
+        } catch (err) {
+            throw new PassageError('Could not fetch user.', err as FetchError);
+        }
     }
 
     /**
@@ -65,20 +67,18 @@ export default class User {
         if (!this.#apiKey) {
             throw new PassageError('A Passage API key is needed.');
         }
-        const userData: UserObject = await axios
-            .patch(
-                `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/deactivate`,
-                null, // note that this null is required as axios.patch has different param order than axios.get
-                this.#authorizationHeader,
-            )
-            .catch((err) => {
-                throw new PassageError('Could not deactivate user.', err);
-            })
-            .then((res) => {
-                return res.data.user;
+
+        try {
+            const response = await fetch({
+                ...this.#authorizationHeader,
+                method: 'PATCH',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/deactivate`,
             });
 
-        return userData;
+            return response.user;
+        } catch (err) {
+            throw new PassageError('Could not deactivate user.', err as FetchError);
+        }
     }
 
     /**
@@ -92,16 +92,19 @@ export default class User {
         if (!this.#apiKey) {
             throw new PassageError('A Passage API key is needed.');
         }
-        const userData: UserObject = await axios
-            .patch(`https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`, payload, this.#authorizationHeader)
-            .catch((err) => {
-                throw new PassageError('Could not update user.', err);
-            })
-            .then((res) => {
-                return res.data.user;
+
+        try {
+            const response = await fetch({
+                ...this.#authorizationHeader,
+                body: payload,
+                method: 'PATCH',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
             });
 
-        return userData;
+            return response.user;
+        } catch (err) {
+            throw new PassageError('Could not update user.', err as FetchError);
+        }
     }
 
     /**
@@ -114,20 +117,18 @@ export default class User {
         if (!this.#apiKey) {
             throw new PassageError('A Passage API key is needed');
         }
-        const userData: UserObject = await axios
-            .patch(
-                `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/activate`,
-                null, // note that this null is required as axios.patch has different param order than axios.get
-                this.#authorizationHeader,
-            )
-            .catch((err) => {
-                throw new PassageError('Could not activate user', err);
-            })
-            .then((res) => {
-                return res.data.user;
+
+        try {
+            const response = await fetch({
+                ...this.#authorizationHeader,
+                method: 'PATCH',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/activate`,
             });
 
-        return userData;
+            return response.user;
+        } catch (err) {
+            throw new PassageError('Could not activate user', err as FetchError);
+        }
     }
 
     /**
@@ -140,15 +141,19 @@ export default class User {
         if (!this.#apiKey) {
             throw new PassageError('A Passage API key is needed');
         }
-        const userData: UserObject = await axios
-            .post(`https://api.passage.id/v1/apps/${this.#appID}/users/`, payload, this.#authorizationHeader)
-            .catch((err) => {
-                throw new PassageError('Could not create user', err);
-            })
-            .then((res) => {
-                return res.data.user;
+
+        try {
+            const response = await fetch({
+                ...this.#authorizationHeader,
+                body: payload,
+                method: 'POST',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/`,
             });
-        return userData;
+
+            return response.user;
+        } catch (err) {
+            throw new PassageError('Could not create user', err as FetchError);
+        }
     }
 
     /**
@@ -162,16 +167,18 @@ export default class User {
         if (!this.#apiKey) {
             throw new PassageError('A Passage API key is needed');
         }
-        const response: number = await axios
-            .delete(`https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`, this.#authorizationHeader)
-            .catch((err) => {
-                throw new PassageError('Could not delete user.', err);
-            })
-            .then((res) => {
-                return res.status.valueOf();
+
+        try {
+            await fetch({
+                ...this.#authorizationHeader,
+                method: 'DELETE',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
             });
 
-        return response === 200;
+            return true;
+        } catch (err) {
+            throw new PassageError('Could not delete user.', err as FetchError);
+        }
     }
 
     /**
@@ -185,16 +192,17 @@ export default class User {
             throw new PassageError('A Passage API key is needed');
         }
 
-        const devices: Array<WebAuthnDevices> = await axios
-            .get(`https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices`, this.#authorizationHeader)
-            .catch((err) => {
-                throw new PassageError("Could not fetch user's devices.", err);
-            })
-            .then((res) => {
-                return res.data.devices;
+        try {
+            const response = await fetch({
+                ...this.#authorizationHeader,
+                method: 'GET',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices`,
             });
 
-        return devices;
+            return response.devices;
+        } catch (err) {
+            throw new PassageError("Could not fetch user's devices.", err as FetchError);
+        }
     }
 
     /**
@@ -209,19 +217,17 @@ export default class User {
             throw new PassageError('A Passage API key is needed');
         }
 
-        const success: boolean = await axios
-            .delete(
-                `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices/${deviceID}`,
-                this.#authorizationHeader,
-            )
-            .catch((err) => {
-                throw new PassageError("Could not delete user's device", err);
-            })
-            .then(() => {
-                return true;
+        try {
+            await fetch({
+                ...this.#authorizationHeader,
+                method: 'DELETE',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices/${deviceID}`,
             });
 
-        return success;
+            return true;
+        } catch (err) {
+            throw new PassageError("Could not delete user's device", err as FetchError);
+        }
     }
 
     /**
@@ -235,13 +241,16 @@ export default class User {
             throw new PassageError('A Passage API key is needed');
         }
 
-        return axios
-            .delete(`https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/tokens/`, this.#authorizationHeader)
-            .catch((err) => {
-                throw new PassageError("Could not revoke user's refresh tokens.", err);
-            })
-            .then(() => {
-                return true;
+        try {
+            await fetch({
+                ...this.#authorizationHeader,
+                method: 'DELETE',
+                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/tokens/`,
             });
+
+            return true;
+        } catch (err) {
+            throw new PassageError("Could not revoke user's refresh tokens.", err as FetchError);
+        }
     }
 }
