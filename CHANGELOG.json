@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Wed, 19 Jul 2023 15:02:00 GMT",
+            "tag": "@passageidentity/passage-node_v2.4.1",
+            "version": "2.4.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "email not defined",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "a7c24c6e018ed232ee58e14fa3488b2d37d0fbce",
+                        "comment": "Replace axios for node-fetch"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Tue, 11 Jul 2023 18:48:21 GMT",
             "tag": "@passageidentity/passage-node_v2.4.0",
             "version": "2.4.0",

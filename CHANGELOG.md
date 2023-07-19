@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Tue, 11 Jul 2023 18:48:21 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Jul 2023 15:02:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.4.1
+
+Wed, 19 Jul 2023 15:02:00 GMT
+
+### Patches
+
+-   Replace axios for node-fetch (email not defined)
 
 ## 2.4.0
 
