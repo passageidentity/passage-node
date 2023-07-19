@@ -1,12 +1,12 @@
-import { AxiosError } from 'axios';
+import { FetchError } from 'node-fetch';
 
 /**
- * Check if Error looks like AxiosError.
+ * Check if Error looks like FetchError.
  * @param {Error} e the error
- * @return {boolean} whether it looks like an AxiosError
+ * @return {boolean} whether it looks like an FetchError
  */
-function isAxiosError(e: Error): e is AxiosError {
-    return (e as AxiosError).isAxiosError === true;
+function isFetchError(e: Error): boolean {
+    return (e as FetchError)?.name === 'FetchError';
 }
 
 /**
@@ -21,16 +21,17 @@ export class PassageError extends Error {
     /**
      * Initialize a new PassageError instance.
      * @param {string} message friendly message,
-     * @param {Error} err error from axios request
+     * @param {Error} err error from node-fetch request
      */
-    constructor(message: string, err?: Error) {
+    constructor(message: string, err?: FetchError) {
         super();
 
         this.message = message;
-        if (err && isAxiosError(err)) {
-            this.statusCode = err.response?.status;
-            this.statusText = err.response?.statusText;
-            this.error = err.response?.data.error;
+
+        if (err && isFetchError(err)) {
+            this.statusCode = err?.code ? parseInt(err?.code) : 500;
+            this.statusText = err.name;
+            this.error = err.message;
         } else {
             this.error = err?.message;
         }

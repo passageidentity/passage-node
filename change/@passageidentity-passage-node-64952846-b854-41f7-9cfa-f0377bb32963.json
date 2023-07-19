@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "Replace axios for node-fetch",
+    "packageName": "@passageidentity/passage-node",
+    "email": "email not defined",
+    "dependentChangeType": "patch"
+}

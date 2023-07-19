@@ -1,12 +1,13 @@
+import { Request } from 'express-serve-static-core';
+import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
+import { FetchError } from 'node-fetch';
+import fetch from '../utils/fetch';
+import { AppObject } from '../types/App';
 import { AuthStrategy } from '../types/AuthStrategy';
 import { MagicLinkObject, MagicLinkRequest } from '../types/MagicLink';
-import { AppObject } from '../types/App';
-import User from './User';
-import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
-import { Request } from 'express-serve-static-core';
-import axios from '../utils/axios';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
+import User from './User';
 
 /**
  * Passage Class
@@ -162,19 +163,20 @@ export default class Passage {
      * @return {Promise<MagicLinkObject>} Passage MagicLink object
      */
     async createMagicLink(magicLinkReq: MagicLinkRequest): Promise<MagicLinkObject> {
-        const magicLinkData: MagicLinkObject = await axios
-            .post(`https://api.passage.id/v1/apps/${this.appID}/magic-links/`, magicLinkReq, {
+        try {
+            const response = await fetch({
+                body: magicLinkReq,
                 headers: {
                     Authorization: `Bearer ${this.#apiKey}`,
                 },
-            })
-            .catch((err) => {
-                throw new PassageError('Could not create a magic link for this app.', err);
-            })
-            .then((res) => {
-                return res.data.magic_link;
+                method: 'POST',
+                url: `https://api.passage.id/v1/apps/${this.appID}/magic-links/`,
             });
-        return magicLinkData;
+
+            return response.magic_link;
+        } catch (err) {
+            throw new PassageError('Could not create a magic link for this app.', err as FetchError);
+        }
     }
 
     /**
@@ -183,15 +185,15 @@ export default class Passage {
      * @return {Promise<AppObject>} Passage App object
      */
     async getApp(): Promise<AppObject> {
-        const appData: AppObject = await axios
-            .get(`https://api.passage.id/v1/apps/${this.appID}`)
-            .catch((err) => {
-                throw new PassageError('Could not fetch app.', err);
-            })
-            .then((res) => {
-                return res.data.app;
+        try {
+            const response = await fetch({
+                method: 'GET',
+                url: `https://api.passage.id/v1/apps/${this.appID}`,
             });
 
-        return appData;
+            return response.app;
+        } catch (err) {
+            throw new PassageError('Could not fetch app.', err as FetchError);
+        }
     }
 }
