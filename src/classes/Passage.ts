@@ -137,22 +137,24 @@ export default class Passage {
      * respective public key.
      *
      * @param {string} token Authentication token
-     * @return {string} sub claim if the jwt can be verified, or undefined
+     * @return {string} sub claim if the jwt can be verified, or Error
      */
     async validAuthToken(token: string): Promise<string | undefined> {
         try {
             const { kid } = decodeProtectedHeader(token);
             if (!kid) {
-                return undefined;
+                throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
             }
 
             const {
                 payload: { sub: userID },
             } = await jwtVerify(token, this.jwks);
             if (userID) return userID.toString();
-            else return undefined;
+            
+            
+            throw new PassageError('Could not verify token identity. You must catch this error.');
         } catch (e) {
-            return undefined;
+            throw new PassageError('Could not verify token. You must catch this error.');
         }
     }
 

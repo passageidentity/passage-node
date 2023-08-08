@@ -1,0 +1,9 @@
+{
+    "type": "patch",
+    "comment": {
+        "title": ""
+    },
+    "packageName": "@passageidentity/passage-node",
+    "email": "vanessa.burroughs@passage.id",
+    "dependentChangeType": "patch"
+}

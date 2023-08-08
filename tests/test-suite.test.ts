@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import Passage from '../src/index';
+import { PassageError } from '../src/classes/PassageError';
 import request from 'supertest';
 import app from '../testServer';
 
@@ -45,9 +46,8 @@ describe('Passage Initialization', () => {
         expect(userIdFromToken).toBe(userID);
     });
 
-    test('invalidAuthToken', async () => {
-        const userID = await passage.validAuthToken('invalid_token');
-        expect(userID).toBe(undefined);
+    test('invalidAuthToken', () => {
+        expect(async () => await passage.validAuthToken('invalid_token')).rejects.toThrow(PassageError);
     });
 });
 
