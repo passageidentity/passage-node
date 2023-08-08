@@ -1,7 +1,7 @@
 {
     "type": "patch",
     "comment": {
-        "title": ""
+        "title": "Improve token errors"
     },
     "packageName": "@passageidentity/passage-node",
     "email": "vanessa.burroughs@passage.id",
