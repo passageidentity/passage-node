@@ -150,11 +150,13 @@ export default class Passage {
                 payload: { sub: userID },
             } = await jwtVerify(token, this.jwks);
             if (userID) return userID.toString();
-            
-            
+
             throw new PassageError('Could not verify token identity. You must catch this error.');
         } catch (e) {
-            throw new PassageError('Could not verify token. You must catch this error.');
+            if (e instanceof Error)
+                throw new PassageError(`Could not verify token: ${e.toString()}. You must catch this error.`);
+
+            throw new PassageError(`Could not verify token. You must catch this error.`);
         }
     }
 
