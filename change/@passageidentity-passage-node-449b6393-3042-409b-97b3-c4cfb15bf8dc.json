@@ -1,0 +1,9 @@
+{
+    "type": "patch",
+    "comment": {
+        "title": "Improve token errors"
+    },
+    "packageName": "@passageidentity/passage-node",
+    "email": "vanessa.burroughs@passage.id",
+    "dependentChangeType": "patch"
+}
