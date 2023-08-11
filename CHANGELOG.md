@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 19 Jul 2023 15:02:00 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Aug 2023 15:16:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.4.2
+
+Fri, 11 Aug 2023 15:16:54 GMT
+
+### Patches
+
+-   [object Object] (vanessa.burroughs@passage.id)
 
 ## 2.4.1
 
