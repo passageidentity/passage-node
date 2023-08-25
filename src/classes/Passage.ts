@@ -1,10 +1,6 @@
 import { Request } from 'express-serve-static-core';
 import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
-import { FetchError } from 'node-fetch';
-import fetch from '../utils/fetch';
-import { AppObject } from '../types/App';
 import { AuthStrategy } from '../types/AuthStrategy';
-import { MagicLinkObject, MagicLinkRequest } from '../types/MagicLink';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
 import User from './User';
@@ -157,47 +153,6 @@ export default class Passage {
                 throw new PassageError(`Could not verify token: ${e.toString()}. You must catch this error.`);
 
             throw new PassageError(`Could not verify token. You must catch this error.`);
-        }
-    }
-
-    /**
-     * Create a Magic Link for your app.
-     *
-     * @param {MagicLinkRequest} magicLinkReq options for creating a MagicLink.
-     * @return {Promise<MagicLinkObject>} Passage MagicLink object
-     */
-    async createMagicLink(magicLinkReq: MagicLinkRequest): Promise<MagicLinkObject> {
-        try {
-            const response = await fetch({
-                body: magicLinkReq,
-                headers: {
-                    Authorization: `Bearer ${this.#apiKey}`,
-                },
-                method: 'POST',
-                url: `https://api.passage.id/v1/apps/${this.appID}/magic-links/`,
-            });
-
-            return response.magic_link;
-        } catch (err) {
-            throw new PassageError('Could not create a magic link for this app.', err as FetchError);
-        }
-    }
-
-    /**
-     * Get App Info about an app
-     *
-     * @return {Promise<AppObject>} Passage App object
-     */
-    async getApp(): Promise<AppObject> {
-        try {
-            const response = await fetch({
-                method: 'GET',
-                url: `https://api.passage.id/v1/apps/${this.appID}`,
-            });
-
-            return response.app;
-        } catch (err) {
-            throw new PassageError('Could not fetch app.', err as FetchError);
         }
     }
 }

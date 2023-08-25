@@ -3,3 +3,5 @@ node_modules/
 coverage/
 .DS_STORE
 lib/
+wwwroot/*.js
+typings

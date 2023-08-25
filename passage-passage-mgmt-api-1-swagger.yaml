@@ -1,0 +1,3415 @@
+---
+openapi: "3.0.3"
+info:
+  title: "Passage Management API"
+  description: "Passage's management API to manage your Passage apps and users."
+  version: '1'
+  contact:
+    name: "API Support"
+    url: "https://passage.id/support"
+    email: "support@passage.id"
+servers:
+- url: "https://api.passage.id/v1"
+tags:
+- name: "ApiKeys"
+- name: "AppMetadataSchema"
+- name: "Apps"
+- name: "Events"
+- name: "Functions"
+- name: "MagicLink"
+- name: "Tokens"
+- name: "UserDevices"
+- name: "Users"
+  description: "Manage billing settings."
+  externalDocs:
+    description: "Find out more"
+    url: "https://docs.passage.id"
+- name: "Function Versions"
+  description: "Manage a version of a Function."
+  externalDocs:
+    description: "Find out more"
+    url: "https://docs.passage.id"
+- name: "Function Secrets"
+  description: "Manage Secret key-value pairs available to a Function."
+  externalDocs:
+    description: "Find out more"
+    url: "https://docs.passage.id"
+- name: "Function Events"
+  description: "View Events produced by executions of a Function."
+  externalDocs:
+    description: "Find out more"
+    url: "https://docs.passage.id"
+- name: "EmailProviders"
+  description: "Manage email communication channel provider settings."
+  externalDocs:
+    description: "Find out more"
+    url: "https://docs.passage.id"
+- name: "EmailTest"
+  description: "Test email communication channel provider settings."
+  externalDocs:
+    description: "Find out more"
+    url: "https://docs.passage.id"
+paths:
+  /apps:
+    post:
+      tags:
+      - "Apps"
+      summary: "Create App"
+      description: "Create a new application. If not authenticated, the app is created\
+        \ in test mode and not assigned to a specific user."
+      operationId: "create-app"
+      requestBody:
+        description: "app settings"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAppRequest"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    get:
+      tags:
+      - "Apps"
+      summary: "Get App"
+      description: "Get app information."
+      operationId: "get-app"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - {}
+      - bearerAuth: []
+    delete:
+      tags:
+      - "Apps"
+      summary: "Delete App"
+      description: "Delete an application."
+      operationId: "delete-app"
+      responses:
+        "200":
+          description: "OK"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    patch:
+      tags:
+      - "Apps"
+      summary: "Update App"
+      description: "Update the settings or authentication configuration for an application."
+      operationId: "update-app"
+      requestBody:
+        description: "app settings"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAppRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/api-keys:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    get:
+      tags:
+      - "ApiKeys"
+      summary: "List API Keys"
+      description: "List API keys for an application."
+      operationId: "list-apikeys"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListApiKeysResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - "ApiKeys"
+      summary: "Create API Key"
+      description: "Create a new API key."
+      operationId: "create-apikey"
+      requestBody:
+        description: "name"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateApiKeyRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateApiKeyResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/api-keys/{api_key_id}:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    - $ref: "#/components/parameters/api_key_id"
+    delete:
+      tags:
+      - "ApiKeys"
+      summary: "Delete API Key"
+      description: "Delete an API key."
+      operationId: "delete-apikey"
+      responses:
+        "200":
+          description: "OK"
+          content: {}
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    get:
+      tags:
+      - "ApiKeys"
+      summary: "Get API Key"
+      description: "Get information about an API key."
+      operationId: "get-apikey"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKeyResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    patch:
+      tags:
+      - "ApiKeys"
+      summary: "Update API Key"
+      description: "Update an API key."
+      operationId: "update-apikey"
+      requestBody:
+        description: "name"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateApiKeyRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKeyResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/claim:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    post:
+      tags:
+      - "Apps"
+      summary: "Claim Test App"
+      description: "Assign an app that is currently in test mode to the current authorized\
+        \ user. Test mode apps are created when an App ID is not specified in the\
+        \ Passage custom element."
+      operationId: "claim-app"
+      requestBody:
+        description: "name"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClaimAppRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "409":
+          description: "Conflict"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/409Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/events:
+    get:
+      tags:
+      - "Events"
+      summary: "List Paginated Events"
+      description: "List paginated events for an app."
+      operationId: "list-paginated-events"
+      parameters:
+      - $ref: "#/components/parameters/app_id"
+      - name: "page"
+        in: "query"
+        description: "page to fetch (min=1)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "number of events to fetch per page (max=500)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "integer"
+      - name: "created_before"
+        in: "query"
+        description: "Unix timestamp to anchor pagination results (fetches events\
+          \ that were created before the timestamp)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "integer"
+      - name: "order_by"
+        in: "query"
+        description: "Comma separated list of <field>:<ASC/DESC> (example: order_by=id:DESC,created_at:ASC)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "query"
+        description: "search event id (pagination prepended operators id=<val>, id=<ne:val>,\
+          \ id=<gt:val>, id=<lt:val>, id=<like:>, id=<not_like:>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "identifier"
+        in: "query"
+        description: "search event identifier (pagination prepended operators identifier=<val>,\
+          \ identifier=<ne:val>, identifier=<gt:val>, identifier=<lt:val>, identifier=<like:>,\
+          \ identifier=<not_like:>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "user_id"
+        in: "query"
+        description: "search event user_id (pagination prepended operators user_id=<val>,\
+          \ user_id=<ne:val>, user_id=<gt:val>, user_id=<lt:val>, user_id=<like:>,\
+          \ user_id=<not_like:>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "type"
+        in: "query"
+        description: "search event type (pagination prepended operators type=<val>,\
+          \ type=<ne:val>, type=<gt:val>, type=<lt:val>, type=<like:>, type=<not_like:>)\
+          \ -- valid values: (webauthn.register.initiated, webauthn.register.completed,\
+          \ webauthn.login.initiated, webauthn.login.completed, magic_link.register.initiated,\
+          \ magic_link.login.initiated, magic_link.completed)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "ip_addr"
+        in: "query"
+        description: "search event ip_addr (pagination prepended operators ip_addr=<val>,\
+          \ ip_addr=<ne:val>, ip_addr=<gt:val>, ip_addr=<lt:val>, ip_addr=<like:>,\
+          \ ip_addr=<not_like:>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "user_agent"
+        in: "query"
+        description: "search event user_agent (pagination prepended operators user_agent=<val>,\
+          \ user_agent=<ne:val>, user_agent=<gt:val>, user_agent=<lt:val>, user_agent=<like:>,\
+          \ user_agent=<not_like:>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "created_at"
+        in: "query"
+        description: "search event created_at (pagination prepended operators created_at=<val>,\
+          \ created_at=<ne:val>, created_at=<gt:val>, created_at=<lt:val> -- valid\
+          \ timestamp in the format: 2006-01-02T15:04:05.000000Z required"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPaginatedEventsResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/events/{event_id}:
+    get:
+      tags:
+      - "Events"
+      summary: "Get Event"
+      description: "Get information about an event."
+      operationId: "get-event"
+      parameters:
+      - $ref: "#/components/parameters/app_id"
+      - $ref: "#/components/parameters/event_id"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/import/users:
+    post:
+      tags:
+      - "Users"
+      summary: "Import Users"
+      description: "Bulk upload users for an application. Files must be in valid CSV\
+        \ format and no more than 30k users."
+      operationId: "import-users"
+      parameters:
+      - $ref: "#/components/parameters/app_id"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ImportUsersRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCSVImportResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/layouts:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    patch:
+      tags:
+      - "AppMetadataSchema"
+      summary: "Update app layouts"
+      description: "Update layouts for an app's registration and profile form"
+      operationId: "update-app-layouts"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Layouts"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoutsResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/magic-links:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    post:
+      tags:
+      - "MagicLink"
+      summary: "Create Embeddable Magic Link"
+      description: "Create magic link for a user."
+      operationId: "create-magic-link"
+      requestBody:
+        description: "magic link request"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMagicLinkRequest"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MagicLinkResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/stats:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    get:
+      tags:
+      - "Apps"
+      summary: "Get App Stats"
+      description: "Get some basic stats about an app, including the total user count\
+        \ and the percentages of users that are using WebAuthn to login."
+      operationId: "get-app-stats"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppStatsResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/user-metadata:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    get:
+      tags:
+      - "AppMetadataSchema"
+      summary: "Get user metadata schema for an App"
+      description: "For an authorized user get user metadata schema for an app"
+      operationId: "get-app-metadata-schema"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserMetadataSchemaResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - "AppMetadataSchema"
+      summary: "Add user metadata schema for an App"
+      description: "For an authorized user add user metadata schema for an app"
+      operationId: "add-app-metadata-schema"
+      requestBody:
+        description: "metadata field settings"
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/CreateUserMetadataField"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserMetadataSchemaResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/user-metadata/{metadata_field_id}:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    - name: "metadata_field_id"
+      in: "path"
+      description: "metadata Field ID"
+      required: true
+      schema:
+        type: "string"
+    get:
+      tags:
+      - "AppMetadataSchema"
+      summary: "Get a particular metadata field from the user metadata schema"
+      description: "For an authorized user get a particular metadata field from the\
+        \ user metadata schema"
+      operationId: "get-metadata-field"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserMetadataFieldResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - "AppMetadataSchema"
+      summary: "Delete a particular metadata field from the user metadata schema"
+      description: "For an authorized user delete a particular metadata field from\
+        \ the user metadata schema"
+      operationId: "delete-metadata-field"
+      responses:
+        "200":
+          description: "OK"
+          content: {}
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    patch:
+      tags:
+      - "AppMetadataSchema"
+      summary: "Update a particular metadata field from the user metadata schema"
+      description: "For an authorized user update a particular metadata field from\
+        \ the user metadata schema"
+      operationId: "update-metadata-field"
+      requestBody:
+        description: "metadata field settings"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserMetadataField"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserMetadataFieldResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/users:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    get:
+      tags:
+      - "Users"
+      summary: "List Users"
+      description: "List users for an app."
+      operationId: "list-paginated-users"
+      parameters:
+      - name: "page"
+        in: "query"
+        description: "page to fetch (min=1)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "number of users to fetch per page (max=500)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "integer"
+      - name: "created_before"
+        in: "query"
+        description: "Unix timestamp to anchor pagination results (fetches events\
+          \ that were created before the timestamp)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "integer"
+      - name: "order_by"
+        in: "query"
+        description: "Comma separated list of <field>:<ASC/DESC> (example: order_by=id:DESC,created_at:ASC)\
+          \ **cannot order_by `identifier`"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "identifier"
+        in: "query"
+        description: "search users email OR phone (pagination prepended operators\
+          \ identifier=<val>, identifier=<ne:val>, identifier=<gt:val>, identifier=<lt:val>,\
+          \ identifier=<like:val>, identifier=<not_like:val>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "query"
+        description: "search users id (pagination prepended operators id=<val>, id=<ne:val>,\
+          \ id=<gt:val>, id=<lt:val>, id=<like:val>, id=<not_like:val>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "login_count"
+        in: "query"
+        description: "search users login_count (pagination prepended operators login_count=<val>,\
+          \ login_count=<ne:val>, login_count=<gt:val>, login_count=<lt:val>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "integer"
+      - name: "status"
+        in: "query"
+        description: "search users by status (pagination prepended operators status=<val>,\
+          \ status=<ne:val>, status=<gt:val>, status=<lt:val>, status=<like:val>,\
+          \ status=<not_like:val>) -- valid values: (active, inactive, pending)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "email_verified"
+        in: "query"
+        description: "search users email_verified (pagination prepended operators\
+          \ email_verified=<val>, email_verified=<ne:val>, email_verified=<gt:val>,\
+          \ email_verified=<lt:val>)"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "boolean"
+      - name: "created_at"
+        in: "query"
+        description: "search users created_at (pagination prepended operators created_at=<val>,\
+          \ created_at=<ne:val>, created_at=<gt:val>, created_at=<lt:val> -- valid\
+          \ timestamp in the format: 2006-01-02T15:04:05.000000Z required"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "updated_at"
+        in: "query"
+        description: "search users updated_at (pagination prepended operators updated_at=<val>,\
+          \ updated_at=<ne:val>, updated_at=<gt:val>, updated_at=<lt:val> -- valid\
+          \ timestamp in the format: 2006-01-02T15:04:05.000000Z required"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      - name: "last_login_at"
+        in: "query"
+        description: "search users last_login_at (pagination prepended operators last_login_at=<val>,\
+          \ lat_login_at=<ne:val>, last_login_at=<gt:val>, last_login_at=<lt:val>\
+          \ -- valid timestamp in the format: 2006-01-02T15:04:05.000000Z required"
+        required: false
+        style: "form"
+        explode: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPaginatedUsersResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - "Users"
+      summary: "Create User"
+      description: "Create user for an application. Must provide an email of phone\
+        \ number identifier."
+      operationId: "create-user"
+      requestBody:
+        description: "email, phone, user_metadata"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserRequest"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/users/{user_id}:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    - name: "user_id"
+      in: "path"
+      description: "user ID"
+      required: true
+      schema:
+        type: "string"
+    get:
+      tags:
+      - "Users"
+      summary: "Get User"
+      description: "Get information about a user."
+      operationId: "get-user"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - "Users"
+      summary: "Delete User"
+      description: "Delete a user."
+      operationId: "delete-user"
+      responses:
+        "200":
+          description: "OK"
+          content: {}
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    patch:
+      tags:
+      - "Users"
+      summary: "Update User"
+      description: "Update a user's information."
+      operationId: "update-user"
+      requestBody:
+        description: "user settings"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/users/{user_id}/activate:
+    patch:
+      tags:
+      - "Users"
+      summary: "Activate User"
+      description: "Activate a user. They will now be able to login."
+      operationId: "activate-user"
+      parameters:
+      - $ref: "#/components/parameters/app_id"
+      - $ref: "#/components/parameters/user_id"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/users/{user_id}/deactivate:
+    patch:
+      tags:
+      - "Users"
+      summary: "Deactivate User"
+      description: "Deactivate a user. Their account will still exist, but they will\
+        \ not be able to login."
+      operationId: "deactivate-user"
+      parameters:
+      - $ref: "#/components/parameters/app_id"
+      - $ref: "#/components/parameters/user_id"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/users/{user_id}/devices:
+    get:
+      tags:
+      - "UserDevices"
+      summary: "List User Devices"
+      description: "List user devices."
+      operationId: "list-user-devices"
+      parameters:
+      - $ref: "#/components/parameters/app_id"
+      - $ref: "#/components/parameters/user_id"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDevicesResponse"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/users/{user_id}/devices/{device_id}:
+    delete:
+      tags:
+      - "UserDevices"
+      summary: "Delete a device for a user"
+      description: "Delete a device for a user."
+      operationId: "delete-user-devices"
+      parameters:
+      - $ref: "#/components/parameters/app_id"
+      - $ref: "#/components/parameters/user_id"
+      - name: "device_id"
+        in: "path"
+        description: "Device ID"
+        required: true
+        style: "simple"
+        explode: false
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content: {}
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/users/{user_id}/tokens:
+    parameters:
+    - $ref: "#/components/parameters/app_id"
+    - $ref: "#/components/parameters/user_id"
+    delete:
+      tags:
+      - "Tokens"
+      summary: "Revokes refresh tokens"
+      description: "Revokes all refresh tokens for a user"
+      operationId: "revoke-user-refresh-tokens"
+      responses:
+        "200":
+          description: "OK"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/email-provider:
+    parameters:
+    - $ref: "#/components/parameters/app_id3"
+    get:
+      tags:
+      - "EmailProviders"
+      summary: "Get Email Provider"
+      description: "Retrieve your Email Provider"
+      operationId: "getEmailProviderHandler"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailProviderResponse"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - "EmailProviders"
+      summary: "Configure Email Provider"
+      description: "Configure your Email Provider"
+      operationId: "createEmailProviderHandler"
+      requestBody:
+        description: "email-provider configuration"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmailProvider"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailProviderResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+    patch:
+      tags:
+      - "EmailProviders"
+      summary: "Update Email Provider"
+      description: "Update your Email Provider"
+      operationId: "updateEmailProviderHandler"
+      requestBody:
+        description: "email-provider configuration"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmailProvider"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailProviderResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/email-test:
+    parameters:
+    - $ref: "#/components/parameters/app_id3"
+    post:
+      tags:
+      - "EmailTest"
+      summary: "Send a test email"
+      description: "Send a test email"
+      operationId: "sendTestEmailHandler"
+      requestBody:
+        description: "email send settings"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendEmailRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content: {}
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "500":
+          description: "Internal Server Error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/email-templates:
+    get:
+      tags:
+      - "Email Template"
+      summary: "List Email Templates"
+      description: "List of Passage App's Email Templates"
+      operationId: "listEmailTemplatesHandler"
+      parameters:
+      - $ref: "#/components/parameters/app_id3"
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                required:
+                - "templates"
+                properties:
+                  templates:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/EmailTemplate"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - "Email Template"
+      summary: "Create Email Template"
+      description: "Initializes a Passage App's Email Templates"
+      operationId: "createEmailTemplateHandler"
+      parameters:
+      - $ref: "#/components/parameters/app_id3"
+      requestBody:
+        description: "New Email Template"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEmailTemplateRequest"
+            examples:
+              newEmailTemplate:
+                $ref: "#/components/examples/newEmailTemplate"
+        required: true
+      responses:
+        "201":
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                required:
+                - "template"
+                properties:
+                  template:
+                    $ref: "#/components/schemas/EmailTemplate"
+              examples:
+                validEmailTemplateResponse:
+                  $ref: "#/components/examples/validEmailTemplateResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+      security:
+      - bearerAuth: []
+  /apps/{app_id}/email-templates/{template_id}:
+    get:
+      tags:
+      - "Email Template"
+      summary: "Get Email Template"
+      description: "Returns a Passage App's Email Template"
+      operationId: "getEmailTemplateHandler"
+      parameters:
+      - $ref: "#/components/parameters/app_id3"
+      - $ref: "#/components/parameters/template_id"
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                properties:
+                  template:
+                    $ref: "#/components/schemas/EmailTemplate"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+      security:
+      - bearerAuth: []
+    patch:
+      tags:
+      - "Email Template"
+      summary: "Update Email Template"
+      description: "Updates a Passage App's Email Template"
+      operationId: "updateEmailTemplateHandler"
+      parameters:
+      - $ref: "#/components/parameters/app_id3"
+      - $ref: "#/components/parameters/template_id"
+      requestBody:
+        description: "Updated Email Template"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateEmailTemplateRequest"
+            examples:
+              enabledEmailTemplate:
+                $ref: "#/components/examples/enabledEmailTemplate"
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                required:
+                - "template"
+                properties:
+                  template:
+                    $ref: "#/components/schemas/EmailTemplate"
+              examples:
+                validEmailTemplateResponse:
+                  $ref: "#/components/examples/validEmailTemplateResponse"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400Error"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - "Email Template"
+      summary: "Delete Email Template"
+      description: "Deletes a Passage App's Email Template"
+      operationId: "deleteEmailTemplateHandler"
+      parameters:
+      - $ref: "#/components/parameters/app_id3"
+      - $ref: "#/components/parameters/template_id"
+      responses:
+        "204":
+          description: "successful operation"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404Error"
+      security:
+      - bearerAuth: []
+components:
+  schemas:
+    ApiKey:
+      type: "object"
+      required:
+      - "created_at"
+      - "id"
+      - "key_prefix"
+      - "name"
+      - "role"
+      properties:
+        created_at:
+          type: "string"
+        id:
+          type: "string"
+        key_prefix:
+          type: "string"
+        name:
+          type: "string"
+        role:
+          type: "string"
+    ApiKeyResponse:
+      type: "object"
+      required:
+      - "api_key"
+      properties:
+        api_key:
+          $ref: "#/components/schemas/ApiKey"
+    CreateApiKeyRequest:
+      type: "object"
+      required:
+      - "name"
+      properties:
+        name:
+          type: "string"
+    CreatedApiKey:
+      allOf:
+      - $ref: "#/components/schemas/ApiKey"
+      - type: "object"
+        required:
+        - "plaintext_key"
+        properties:
+          plaintext_key:
+            type: "string"
+    CreateApiKeyResponse:
+      type: "object"
+      required:
+      - "api_key"
+      properties:
+        api_key:
+          $ref: "#/components/schemas/CreatedApiKey"
+    ListApiKeysResponse:
+      type: "object"
+      required:
+      - "api_keys"
+      properties:
+        api_keys:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ApiKey"
+    UpdateApiKeyRequest:
+      type: "object"
+      required:
+      - "name"
+      properties:
+        name:
+          type: "string"
+    EventInfo:
+      type: "object"
+      required:
+      - "created_at"
+      - "data"
+      - "id"
+      - "identifier"
+      - "ip_addr"
+      - "type"
+      - "user_agent"
+      - "user_id"
+      properties:
+        created_at:
+          type: "string"
+        data:
+          type: "object"
+        id:
+          type: "string"
+        identifier:
+          type: "string"
+        ip_addr:
+          type: "string"
+        type:
+          type: "string"
+        user_agent:
+          type: "string"
+        user_id:
+          type: "string"
+    EventResponse:
+      type: "object"
+      required:
+      - "event"
+      properties:
+        event:
+          $ref: "#/components/schemas/EventInfo"
+    ListPaginatedEventsResponse:
+      type: "object"
+      required:
+      - "_links"
+      - "created_before"
+      - "events"
+      - "limit"
+      - "page"
+      - "total_events"
+      properties:
+        _links:
+          $ref: "#/components/schemas/PaginatedLinks"
+        created_before:
+          type: "integer"
+          format: "int64"
+          description: "time anchor (Unix timestamp) --> all events returned were\
+            \ created before this timestamp"
+        events:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/EventInfo"
+        limit:
+          type: "integer"
+        page:
+          type: "integer"
+        total_events:
+          type: "integer"
+          format: "int64"
+          description: "total number of event for a particular query"
+    Link:
+      type: "object"
+      required:
+      - "href"
+      properties:
+        href:
+          type: "string"
+    PaginatedLinks:
+      type: "object"
+      required:
+      - "first"
+      - "last"
+      - "next"
+      - "previous"
+      - "self"
+      properties:
+        first:
+          $ref: "#/components/schemas/Link"
+        last:
+          $ref: "#/components/schemas/Link"
+        next:
+          $ref: "#/components/schemas/Link"
+        previous:
+          $ref: "#/components/schemas/Link"
+        self:
+          $ref: "#/components/schemas/Link"
+    AuthorizerHeaders:
+      type: "object"
+      required:
+      - "authorization"
+      properties:
+        authorization:
+          type: "string"
+        ip:
+          type: "string"
+        user_agent:
+          type: "string"
+    AuthorizerResult:
+      type: "object"
+      required:
+      - "deny_access"
+      properties:
+        deny_access:
+          type: "boolean"
+        reason:
+          type: "string"
+        user_id:
+          type: "string"
+    AuthorizerTestResponse:
+      type: "object"
+      required:
+      - "result"
+      properties:
+        error:
+          $ref: "#/components/schemas/TestError"
+        logs:
+          type: "array"
+          items:
+            type: "string"
+        result:
+          $ref: "#/components/schemas/AuthorizerResult"
+    TestError:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+        stack:
+          type: "string"
+    AuthorizerTestRequest:
+      type: "object"
+      required:
+      - "headers"
+      properties:
+        headers:
+          $ref: "#/components/schemas/AuthorizerHeaders"
+    ImportUsersRequest:
+      type: "object"
+      required:
+      - "csv_user_import"
+      properties:
+        csv_user_import:
+          type: "string"
+          description: "file type: text/csv"
+          format: "binary"
+    UserCSVImportError:
+      type: "object"
+      required:
+      - "errors"
+      - "identifier"
+      properties:
+        errors:
+          type: "array"
+          items:
+            type: "string"
+        identifier:
+          type: "string"
+    UserCSVImportResponse:
+      type: "object"
+      required:
+      - "errors"
+      - "existing"
+      - "imported"
+      - "num_users_errored"
+      - "num_users_existing"
+      - "num_users_imported"
+      - "num_users_received"
+      properties:
+        errors:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/UserCSVImportError"
+        existing:
+          type: "array"
+          items:
+            type: "object"
+            additionalProperties:
+              type: "string"
+        imported:
+          type: "array"
+          items:
+            type: "object"
+            additionalProperties:
+              type: "string"
+        num_users_errored:
+          type: "integer"
+        num_users_existing:
+          type: "integer"
+        num_users_imported:
+          type: "integer"
+        num_users_received:
+          type: "integer"
+    ListPaginatedUsersResponse:
+      type: "object"
+      required:
+      - "_links"
+      - "created_before"
+      - "limit"
+      - "page"
+      - "total_users"
+      - "users"
+      properties:
+        _links:
+          $ref: "#/components/schemas/PaginatedLinks"
+        created_before:
+          type: "integer"
+          format: "int64"
+          description: "time anchor (Unix timestamp) --> all users returned created\
+            \ before this timestamp"
+        limit:
+          type: "integer"
+        page:
+          type: "integer"
+        total_users:
+          type: "integer"
+          format: "int64"
+          description: "total number of users for a particular query"
+        users:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/UserInfo"
+    CreateUserRequest:
+      type: "object"
+      required:
+      - "email"
+      - "phone"
+      properties:
+        email:
+          type: "string"
+        phone:
+          type: "string"
+        user_metadata:
+          type: "object"
+          properties: {}
+    UpdateUserRequest:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+        phone:
+          type: "string"
+        user_metadata:
+          type: "object"
+          properties: {}
+    UserResponse:
+      type: "object"
+      required:
+      - "user"
+      properties:
+        user:
+          $ref: "#/components/schemas/UserInfo"
+    UserEventInfo:
+      type: "object"
+      required:
+      - "created_at"
+      - "id"
+      - "ip_addr"
+      - "type"
+      - "user_agent"
+      properties:
+        created_at:
+          type: "string"
+          format: "date-time"
+        id:
+          type: "string"
+        ip_addr:
+          type: "string"
+        type:
+          type: "string"
+        user_agent:
+          type: "string"
+    UserInfo:
+      type: "object"
+      required:
+      - "created_at"
+      - "email"
+      - "email_verified"
+      - "id"
+      - "last_login_at"
+      - "login_count"
+      - "phone"
+      - "phone_verified"
+      - "recent_events"
+      - "status"
+      - "updated_at"
+      - "user_metadata"
+      - "webauthn"
+      - "webauthn_devices"
+      properties:
+        created_at:
+          type: "string"
+          format: "date-time"
+        email:
+          type: "string"
+        email_verified:
+          type: "boolean"
+        id:
+          type: "string"
+        last_login_at:
+          type: "string"
+          format: "date-time"
+        login_count:
+          type: "integer"
+        phone:
+          type: "string"
+        phone_verified:
+          type: "boolean"
+        recent_events:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/UserEventInfo"
+        status:
+          type: "string"
+        updated_at:
+          type: "string"
+          format: "date-time"
+        user_metadata:
+          type: "object"
+          nullable: true
+          properties: {}
+        webauthn:
+          type: "boolean"
+        webauthn_devices:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/WebAuthnDevices"
+    WebAuthnDevices:
+      type: "object"
+      required:
+      - "created_at"
+      - "cred_id"
+      - "friendly_name"
+      - "id"
+      - "last_login_at"
+      - "updated_at"
+      - "usage_count"
+      properties:
+        created_at:
+          type: "string"
+          format: "date-time"
+          description: "The first time this webAuthn device was used to authenticate\
+            \ the user"
+        cred_id:
+          type: "string"
+          description: "The CredID for this webAuthn device"
+        friendly_name:
+          type: "string"
+          description: "The friendly name for the webAuthn device used to authenticate"
+        id:
+          type: "string"
+          description: "The ID of the webAuthn device used for authentication"
+        last_login_at:
+          type: "string"
+          format: "date-time"
+          description: "The last time this webAuthn device was used to authenticate\
+            \ the user"
+        updated_at:
+          type: "string"
+          format: "date-time"
+          description: "The last time this webAuthn device was updated"
+        usage_count:
+          type: "integer"
+          description: "How many times this webAuthn device has been used to authenticate\
+            \ the user"
+    ListDevicesResponse:
+      type: "object"
+      required:
+      - "devices"
+      properties:
+        devices:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/WebAuthnDevices"
+    LayoutConfig:
+      type: "object"
+      required:
+      - "h"
+      - "id"
+      - "w"
+      - "x"
+      - "y"
+      properties:
+        h:
+          type: "integer"
+        id:
+          type: "string"
+        w:
+          type: "integer"
+        x:
+          type: "integer"
+        "y":
+          type: "integer"
+    Layouts:
+      type: "object"
+      required:
+      - "profile"
+      - "registration"
+      properties:
+        profile:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LayoutConfig"
+        registration:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LayoutConfig"
+    UserMetadataFieldType:
+      type: "string"
+      enum:
+      - "string"
+      - "boolean"
+      - "integer"
+      - "date"
+      - "phone"
+      - "email"
+    UserMetadataField:
+      type: "object"
+      required:
+      - "field_name"
+      - "friendly_name"
+      - "id"
+      - "profile"
+      - "registration"
+      - "type"
+      properties:
+        field_name:
+          type: "string"
+        friendly_name:
+          type: "string"
+        id:
+          type: "string"
+        profile:
+          type: "boolean"
+        registration:
+          type: "boolean"
+        type:
+          $ref: "#/components/schemas/UserMetadataFieldType"
+    UserMetadataSchemaResponse:
+      type: "object"
+      required:
+      - "user_metadata_schema"
+      properties:
+        user_metadata_schema:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/UserMetadataField"
+    UserMetadataFieldResponse:
+      type: "object"
+      required:
+      - "user_metadata_field"
+      properties:
+        user_metadata_field:
+          $ref: "#/components/schemas/UserMetadataField"
+    CreateUserMetadataField:
+      type: "object"
+      required:
+      - "friendly_name"
+      - "profile"
+      - "registration"
+      - "type"
+      properties:
+        friendly_name:
+          type: "string"
+        profile:
+          type: "boolean"
+        registration:
+          type: "boolean"
+        type:
+          $ref: "#/components/schemas/UserMetadataFieldType"
+    UpdateUserMetadataField:
+      type: "object"
+      properties:
+        friendly_name:
+          type: "string"
+        profile:
+          type: "boolean"
+        registration:
+          type: "boolean"
+    AppInfo:
+      type: "object"
+      required:
+      - "additional_auth_origins"
+      - "allowed_callback_urls"
+      - "allowed_identifier"
+      - "allowed_logout_urls"
+      - "application_login_uri"
+      - "auth_fallback_method"
+      - "auth_fallback_method_ttl"
+      - "auth_origin"
+      - "created_at"
+      - "default_language"
+      - "ephemeral"
+      - "id"
+      - "layouts"
+      - "login_url"
+      - "name"
+      - "hosted"
+      - "hosted_subdomain"
+      - "passage_branding"
+      - "profile_management"
+      - "public_signup"
+      - "redirect_url"
+      - "refresh_absolute_lifetime"
+      - "refresh_enabled"
+      - "refresh_inactivity_lifetime"
+      - "require_email_verification"
+      - "require_identifier_verification"
+      - "required_identifier"
+      - "role"
+      - "rsa_public_key"
+      - "session_timeout_length"
+      - "type"
+      - "user_metadata_schema"
+      - "technologies"
+      - "element_customization"
+      properties:
+        additional_auth_origins:
+          type: "array"
+          items:
+            type: "string"
+        allowed_callback_urls:
+          description: "The valid URLs where users can be redirected after authentication."
+          type: "array"
+          items:
+            type: "string"
+        allowed_identifier:
+          type: "string"
+        allowed_logout_urls:
+          description: "The valid URLs where users can be redirected after logging\
+            \ out."
+          type: "array"
+          items:
+            type: "string"
+        application_login_uri:
+          description: "A route within your application that redirects to the Authorization\
+            \ URL endpoint."
+          type: "string"
+        auth_fallback_method:
+          type: "string"
+        auth_fallback_method_ttl:
+          type: "integer"
+        auth_origin:
+          type: "string"
+        created_at:
+          type: "string"
+          format: "date-time"
+        default_language:
+          type: "string"
+        ephemeral:
+          type: "boolean"
+        id:
+          type: "string"
+        layouts:
+          $ref: "#/components/schemas/Layouts"
+        login_url:
+          type: "string"
+        name:
+          type: "string"
+        hosted:
+          description: "whether or not the app's login page hosted by passage"
+          type: "boolean"
+        hosted_subdomain:
+          description: "the subdomain of the app's hosted login page"
+          type: "string"
+        passage_branding:
+          type: "boolean"
+        profile_management:
+          type: "boolean"
+        public_signup:
+          type: "boolean"
+        redirect_url:
+          type: "string"
+        refresh_absolute_lifetime:
+          type: "integer"
+        refresh_enabled:
+          type: "boolean"
+        refresh_inactivity_lifetime:
+          type: "integer"
+        require_email_verification:
+          type: "boolean"
+        require_identifier_verification:
+          type: "boolean"
+        required_identifier:
+          type: "string"
+        role:
+          type: "string"
+        rsa_public_key:
+          type: "string"
+        secret:
+          description: "can only be retrieved by an app admin"
+          type: "string"
+        session_timeout_length:
+          type: "integer"
+        type:
+          type: "string"
+          enum:
+          - "complete"
+          - "flex"
+        user_metadata_schema:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/UserMetadataField"
+        technologies:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Technologies"
+        element_customization:
+          $ref: "#/components/schemas/ElementCustomization"
+    Technologies:
+      type: "string"
+      enum:
+      - "react"
+      - "go"
+      - "vue"
+      - "angular"
+      - "python"
+      - "javascript"
+      - "ios"
+      - "android"
+    AppResponse:
+      type: "object"
+      required:
+      - "app"
+      properties:
+        app:
+          $ref: "#/components/schemas/AppInfo"
+    CreateAppRequest:
+      type: "object"
+      properties:
+        allowed_callback_urls:
+          description: "The valid URLs where users can be redirected after authentication."
+          type: "array"
+          items:
+            type: "string"
+        auth_origin:
+          type: "string"
+        hosted:
+          type: "boolean"
+        hosted_subdomain:
+          description: "the subdomain of the app's hosted login page"
+          type: "string"
+          minLength: 3
+          maxLength: 63
+        name:
+          type: "string"
+        redirect_url:
+          type: "string"
+        organization_id:
+          type: "string"
+        technologies:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Technologies"
+        type:
+          type: "string"
+          enum:
+          - "complete"
+          - "flex"
+    UpdateAppRequest:
+      type: "object"
+      properties:
+        additional_auth_origins:
+          type: "array"
+          items:
+            type: "string"
+        allowed_callback_urls:
+          description: "The valid URLs where users can be redirected after authentication."
+          type: "array"
+          items:
+            type: "string"
+        allowed_identifier:
+          type: "string"
+        allowed_logout_urls:
+          description: "The valid URLs where users can be redirected after logging\
+            \ out."
+          type: "array"
+          items:
+            type: "string"
+        application_login_uri:
+          description: "A route within your application that redirects to the Authorization\
+            \ URL endpoint."
+          type: "string"
+        auth_fallback_method:
+          type: "string"
+          enum:
+          - "magic_link"
+          - "otp"
+          - "none"
+        auth_fallback_method_ttl:
+          minimum: 60
+          type: "integer"
+        auth_origin:
+          type: "string"
+        default_language:
+          type: "string"
+        login_url:
+          type: "string"
+        name:
+          type: "string"
+        hosted_subdomain:
+          description: "the subdomain of the app's hosted login page"
+          type: "string"
+          minLength: 3
+          maxLength: 63
+        passage_branding:
+          type: "boolean"
+        profile_management:
+          type: "boolean"
+        public_signup:
+          type: "boolean"
+        redirect_url:
+          description: "A valid URL where users can be redirected after authentication\
+            \ for Embedded Login."
+          type: "string"
+        refresh_absolute_lifetime:
+          type: "integer"
+        refresh_enabled:
+          type: "boolean"
+        refresh_inactivity_lifetime:
+          type: "integer"
+        require_identifier_verification:
+          type: "boolean"
+        session_timeout_length:
+          minimum: 5
+          type: "integer"
+        element_customization:
+          $ref: "#/components/schemas/ElementCustomization"
+    ClaimAppRequest:
+      type: "object"
+      required:
+      - "name"
+      properties:
+        name:
+          type: "string"
+    LayoutsResponse:
+      type: "object"
+      required:
+      - "layouts"
+      properties:
+        layouts:
+          $ref: "#/components/schemas/Layouts"
+    CreateMagicLinkRequest:
+      type: "object"
+      required:
+      - "channel"
+      - "email"
+      - "magic_link_path"
+      - "phone"
+      - "redirect_url"
+      - "send"
+      - "ttl"
+      - "user_id"
+      properties:
+        channel:
+          type: "string"
+        email:
+          type: "string"
+        language:
+          type: "string"
+          description: "language of the email to send (optional)"
+        magic_link_path:
+          type: "string"
+        phone:
+          type: "string"
+        redirect_url:
+          type: "string"
+        send:
+          type: "boolean"
+        ttl:
+          type: "integer"
+        type:
+          type: "string"
+          enum:
+          - "login"
+          - "verify_identifier"
+        user_id:
+          type: "string"
+    MagicLink:
+      type: "object"
+      required:
+      - "activated"
+      - "app_id"
+      - "id"
+      - "identifier"
+      - "redirect_url"
+      - "secret"
+      - "ttl"
+      - "type"
+      - "url"
+      - "user_id"
+      properties:
+        activated:
+          type: "boolean"
+        app_id:
+          type: "string"
+        id:
+          type: "string"
+        identifier:
+          type: "string"
+        redirect_url:
+          type: "string"
+        secret:
+          type: "string"
+        ttl:
+          type: "integer"
+        type:
+          type: "string"
+        url:
+          type: "string"
+        user_id:
+          type: "string"
+    MagicLinkResponse:
+      type: "object"
+      required:
+      - "magic_link"
+      properties:
+        magic_link:
+          $ref: "#/components/schemas/MagicLink"
+    AppStatsResponse:
+      type: "object"
+      required:
+      - "percent_magiclink_users"
+      - "percent_webauthn_users"
+      - "total_users"
+      - "mau_count"
+      properties:
+        percent_magiclink_users:
+          type: "number"
+          format: "double"
+        percent_webauthn_users:
+          type: "number"
+          format: "double"
+        total_users:
+          type: "integer"
+          format: "int64"
+        mau_count:
+          type: "integer"
+          format: "int64"
+          description: "Monthly Active Users"
+    ElementCustomization:
+      type: "object"
+      properties:
+        passage_container_background_color:
+          type: "string"
+          default: "#ffffff"
+          description: "Container background color"
+        passage_container_max_width:
+          type: "integer"
+          default: 300
+          description: "Maximum width of container (px)"
+        passage_input_box_background_color:
+          type: "string"
+          default: "#ffffff"
+          description: "Input box background color (hex)"
+        passage_input_box_border_radius:
+          type: "integer"
+          default: 5
+          description: "Input box border radius (px)"
+        passage_header_font_family:
+          $ref: "#/components/schemas/FontFamily"
+        passage_body_font_family:
+          $ref: "#/components/schemas/FontFamily"
+        passage_header_text_color:
+          type: "string"
+          default: "#000000"
+          description: "Header font colour (hex)"
+        passage_body_text_color:
+          type: "string"
+          default: "#000000"
+          description: "Body font colour (hex)"
+        passage_primary_button_background_color:
+          type: "string"
+          default: "#000000"
+          description: "Primary button background colour (hex)"
+        passage_primary_button_text_color:
+          type: "string"
+          default: "#ffffff"
+          description: "Primary button font colour (hex)"
+        passage_primary_button_hover_color:
+          type: "string"
+          default: "#4d4d4d"
+          description: "Primary button background on hover (hex)"
+        passage_primary_button_border_radius:
+          type: "integer"
+          default: 5
+          description: "Primary button border radius (px)"
+        passage_secondary_button_background_color:
+          type: "string"
+          default: "#ffffff"
+          description: "Secondary button background colour (hex)"
+        passage_secondary_button_text_color:
+          type: "string"
+          default: "#000000"
+          description: "Secondary button font colour (hex)"
+        passage_secondary_button_hover_color:
+          type: "string"
+          default: "#ffffff"
+          description: "Secondary button background on hover (hex)"
+        passage_secondary_button_border_radius:
+          type: "integer"
+          default: 5
+          description: "Secondary button border radius (px)"
+    FontFamily:
+      type: "string"
+      default: "Helvetica"
+      description: "Body font family"
+      enum:
+      - "Helvetica"
+      - "Arial"
+      - "Arial Black"
+      - "Verdana"
+      - "Tahoma"
+      - "Trebuchet MS"
+      - "Impact"
+      - "Gill Sans"
+      - "Times New Roman"
+      - "Georgia"
+      - "Palatino"
+      - "Baskerville"
+      - "Andalé Mono"
+      - "Courier"
+      - "Lucida"
+      - "Monaco"
+      - "Bradley Hand"
+      - "Brush Script MT"
+      - "Luminari"
+      - "Comic Sans MS"
+    GetTypesResponse:
+      type: "object"
+      required:
+      - "types"
+      properties:
+        types:
+          type: "string"
+    Trigger:
+      type: "object"
+      required:
+      - "enabled_functions"
+      properties:
+        enabled_functions:
+          type: "array"
+          items:
+            type: "string"
+          maxItems: 1
+    CreateFunctionRequest:
+      type: "object"
+      required:
+      - "name"
+      properties:
+        name:
+          type: "string"
+    UpdateFunctionRequest:
+      type: "object"
+      required:
+      - "code"
+      - "language"
+      properties:
+        name:
+          type: "string"
+        code:
+          type: "string"
+        language:
+          $ref: "#/components/schemas/Language"
+    ListFunctionsItem:
+      type: "object"
+      required:
+      - "id"
+      - "name"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+    ListFunctionsResponse:
+      type: "object"
+      required:
+      - "functions"
+      properties:
+        functions:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ListFunctionsItem"
+    FunctionResponse:
+      type: "object"
+      required:
+      - "id"
+      - "name"
+      - "code"
+      - "language"
+      - "has_draft"
+      - "secret_keys"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        code:
+          type: "string"
+        language:
+          $ref: "#/components/schemas/Language"
+        has_draft:
+          type: "boolean"
+        secret_keys:
+          type: "array"
+          items:
+            type: "string"
+    ListFunctionVersionsItem:
+      type: "object"
+      required:
+      - "id"
+      - "version"
+      - "created_at"
+      properties:
+        id:
+          type: "string"
+        version:
+          description: "The version number. `0` indicates a draft."
+          type: "integer"
+          minimum: 0
+        created_at:
+          type: "string"
+          format: "date-time"
+    ListFunctionVersionsResponse:
+      type: "object"
+      required:
+      - "function_versions"
+      properties:
+        function_versions:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ListFunctionVersionsItem"
+    GetFunctionVersionResponse:
+      type: "object"
+      required:
+      - "id"
+      - "version"
+      - "created_at"
+      - "code"
+      - "language"
+      properties:
+        id:
+          type: "string"
+        version:
+          type: "integer"
+        created_at:
+          type: "string"
+          format: "date-time"
+        code:
+          type: "string"
+        language:
+          $ref: "#/components/schemas/Language"
+    FunctionSecretKey:
+      type: "string"
+      pattern: "^[A-Za-z0-9_-]+$"
+    CreateFunctionSecretRequest:
+      type: "object"
+      required:
+      - "key"
+      - "value"
+      properties:
+        key:
+          $ref: "#/components/schemas/FunctionSecretKey"
+        value:
+          type: "string"
+    UpdateFunctionSecretRequest:
+      type: "object"
+      properties:
+        key:
+          $ref: "#/components/schemas/FunctionSecretKey"
+        value:
+          type: "string"
+      minProperties: 1
+    Language:
+      type: "string"
+      enum:
+      - "js"
+      - "ts"
+    EventBase:
+      type: "object"
+      required:
+      - "deployment_id"
+      - "event_type"
+      - "timestamp"
+      - "region"
+      properties:
+        deployment_id:
+          description: "The ID of the deployment that caused this event to be generated."
+          type: "string"
+        event_type:
+          enum:
+          - "boot"
+          - "bootFailure"
+          - "log"
+          - "uncaughtException"
+          - "memoryLimit"
+          - "timeLimit"
+          description: "The type of event."
+          type: "string"
+        timestamp:
+          description: "Timestamp for when this event was created, in RFC3339 format."
+          type: "string"
+          format: "date-time"
+        isolate_id:
+          description: "If the event was caused by a running isolate, this field contains\
+            \ the opaque ID of the given isolate."
+          type: "string"
+        region:
+          description: "The region where the event was generated. Refer to https://deno.com/deploy/docs/regions\
+            \ for possible values."
+          type: "string"
+    BootEvent:
+      allOf:
+      - $ref: "#/components/schemas/EventBase"
+      - type: "object"
+        required:
+        - "event"
+        properties:
+          event:
+            type: "object"
+            required:
+            - "boot_time"
+            properties:
+              boot_time:
+                description: "The time it took to boot the isolate, in seconds."
+                type: "number"
+    BootFailureEvent:
+      allOf:
+      - $ref: "#/components/schemas/EventBase"
+      - type: "object"
+        required:
+        - "event"
+        properties:
+          event:
+            type: "object"
+            required:
+            - "msg"
+            properties:
+              msg:
+                description: "A human readable message containing information about\
+                  \ why the isolate failed to boot."
+                type: "string"
+    LogEvent:
+      allOf:
+      - $ref: "#/components/schemas/EventBase"
+      - type: "object"
+        required:
+        - "event"
+        properties:
+          event:
+            type: "object"
+            required:
+            - "msg"
+            - "level"
+            properties:
+              msg:
+                description: "The message that was logged. The message may contain\
+                  \ ANSI escape codes to colorize the message."
+                type: "string"
+              level:
+                enum:
+                - "debug"
+                - "info"
+                - "warning"
+                - "error"
+                type: "string"
+    UncaughtExceptionEvent:
+      allOf:
+      - $ref: "#/components/schemas/EventBase"
+      - type: "object"
+        required:
+        - "event"
+        properties:
+          event:
+            type: "object"
+            required:
+            - "exception"
+            properties:
+              exception:
+                description: "The message of the exception."
+                type: "string"
+    MemoryLimitEvent:
+      allOf:
+      - $ref: "#/components/schemas/EventBase"
+      - type: "object"
+        required:
+        - "event"
+        properties:
+          event:
+            additionalProperties: false
+            type: "object"
+    TimeLimitEvent:
+      allOf:
+      - $ref: "#/components/schemas/EventBase"
+      - type: "object"
+        required:
+        - "event"
+        properties:
+          event:
+            additionalProperties: false
+            type: "object"
+    Event:
+      oneOf:
+      - $ref: "#/components/schemas/BootEvent"
+      - $ref: "#/components/schemas/BootFailureEvent"
+      - $ref: "#/components/schemas/LogEvent"
+      - $ref: "#/components/schemas/UncaughtExceptionEvent"
+      - $ref: "#/components/schemas/MemoryLimitEvent"
+      - $ref: "#/components/schemas/TimeLimitEvent"
+      discriminator:
+        propertyName: "event_type"
+        mapping:
+          boot: "#/components/schemas/BootEvent"
+          bootFailure: "#/components/schemas/BootFailureEvent"
+          log: "#/components/schemas/LogEvent"
+          uncaughtException: "#/components/schemas/UncaughtExceptionEvent"
+          memoryLimit: "#/components/schemas/MemoryLimitEvent"
+          timeLimit: "#/components/schemas/TimeLimitEvent"
+    ListFunctionEventsItem:
+      type: "object"
+      required:
+      - "timestamp"
+      - "data"
+      properties:
+        timestamp:
+          description: "The timestamp of the event as Unix milliseconds."
+          type: "integer"
+          format: "int64"
+        data:
+          $ref: "#/components/schemas/Event"
+    ListFunctionEventsResponse:
+      type: "object"
+      required:
+      - "function_events"
+      - "since"
+      - "until"
+      properties:
+        function_events:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ListFunctionEventsItem"
+          maxItems: 25
+        since:
+          description: "The timestamp offset of the events in this response, as Unix\
+            \ milliseconds."
+          type: "integer"
+          format: "int64"
+        until:
+          description: "The last timestamp of the events in this response, as Unix\
+            \ milliseconds. Use it as the `since` query parameter in the next request\
+            \ to get the next page."
+          type: "integer"
+          format: "int64"
+    EmailProviderConfig:
+      type: "object"
+      nullable: true
+      properties:
+        api_key:
+          type: "string"
+        access_key_id:
+          type: "string"
+        access_key_secret:
+          type: "string"
+        region:
+          type: "string"
+    EmailProvider:
+      type: "object"
+      properties:
+        config:
+          $ref: "#/components/schemas/EmailProviderConfig"
+        enabled:
+          type: "boolean"
+        from_address:
+          type: "string"
+        type:
+          type: "string"
+    EmailProviderResponse:
+      type: "object"
+      required:
+      - "enabled"
+      - "from_address"
+      - "type"
+      properties:
+        enabled:
+          type: "boolean"
+        from_address:
+          type: "string"
+        type:
+          type: "string"
+    SendEmailRequest:
+      type: "object"
+      required:
+      - "html_template"
+      - "recipient_email"
+      - "subject"
+      - "variables"
+      properties:
+        html_template:
+          type: "string"
+        recipient_email:
+          type: "string"
+        subject:
+          type: "string"
+        variables:
+          type: "object"
+          properties: {}
+    EmailTemplateType:
+      type: "string"
+      enum:
+      - "magic_link"
+      - "email_change"
+      - "email_verify"
+      - "otp"
+    CreateEmailTemplateRequest:
+      type: "object"
+      required:
+      - "type"
+      - "html"
+      - "subject"
+      properties:
+        enabled:
+          type: "boolean"
+          default: false
+        type:
+          $ref: "#/components/schemas/EmailTemplateType"
+        html:
+          type: "string"
+        subject:
+          type: "string"
+    UpdateEmailTemplateRequest:
+      type: "object"
+      properties:
+        enabled:
+          type: "boolean"
+        html:
+          type: "string"
+        subject:
+          type: "string"
+    EmailTemplate:
+      type: "object"
+      required:
+      - "enabled"
+      - "type"
+      - "html"
+      - "subject"
+      - "id"
+      properties:
+        id:
+          type: "string"
+          description: "empty string indicates the template is a default template."
+        enabled:
+          type: "boolean"
+          default: false
+        type:
+          $ref: "#/components/schemas/EmailTemplateType"
+        html:
+          type: "string"
+        subject:
+          type: "string"
+    "400Error":
+      type: "object"
+      required:
+      - "code"
+      - "error"
+      properties:
+        code:
+          type: "string"
+          enum:
+          - "invalid_request"
+          - "custom_provider_required"
+        error:
+          type: "string"
+    "401Error":
+      type: "object"
+      required:
+      - "code"
+      - "error"
+      properties:
+        code:
+          type: "string"
+          enum:
+          - "invalid_access_token"
+        error:
+          type: "string"
+    "500Error":
+      type: "object"
+      required:
+      - "code"
+      - "error"
+      properties:
+        code:
+          type: "string"
+          enum:
+          - "internal_server_error"
+        error:
+          type: "string"
+    "404Error":
+      type: "object"
+      required:
+      - "code"
+      - "error"
+      properties:
+        code:
+          type: "string"
+          enum:
+          - "admin_not_found"
+          - "api_key_not_found"
+          - "app_not_found"
+          - "device_not_found"
+          - "email_provider_not_found"
+          - "email_template_not_found"
+          - "event_not_found"
+          - "function_not_found"
+          - "function_secret_key_not_found"
+          - "function_version_not_found"
+          - "metadata_field_not_found"
+          - "user_not_found"
+        error:
+          type: "string"
+    "409Error":
+      type: "object"
+      required:
+      - "code"
+      - "error"
+      properties:
+        code:
+          type: "string"
+          enum:
+          - "cannot_claim_app"
+          - "user_already_admin"
+          - "user_already_organization_member"
+        error:
+          type: "string"
+    "403Error":
+      type: "object"
+      required:
+      - "code"
+      - "error"
+      properties:
+        code:
+          type: "string"
+          enum:
+          - "cannot_create_organization_billing_portal_session"
+          - "cannot_delete_admin"
+          - "cannot_delete_organization_member"
+          - "cannot_self_update_organization_member"
+        error:
+          type: "string"
+  parameters:
+    app_id:
+      name: "app_id"
+      in: "path"
+      description: "App ID"
+      required: true
+      schema:
+        type: "string"
+    api_key_id:
+      name: "api_key_id"
+      in: "path"
+      description: "API key ID"
+      required: true
+      schema:
+        type: "string"
+    event_id:
+      name: "event_id"
+      in: "path"
+      description: "event"
+      required: true
+      schema:
+        type: "string"
+    user_id:
+      name: "user_id"
+      in: "path"
+      description: "User ID"
+      required: true
+      style: "simple"
+      explode: false
+      schema:
+        type: "string"
+    organization_id:
+      name: "organization_id"
+      in: "path"
+      description: "Organization ID"
+      required: true
+      schema:
+        type: "string"
+    organization_member_id:
+      name: "organization_member_id"
+      in: "path"
+      description: "Organization Member ID"
+      required: true
+      schema:
+        type: "string"
+    app_id1:
+      name: "app_id"
+      in: "path"
+      description: "ID of Passage App"
+      required: true
+      schema:
+        type: "string"
+        pattern: "^[A-Za-z0-9]{1,24}$"
+    trigger_name:
+      name: "trigger_name"
+      in: "path"
+      description: "Name of Trigger"
+      required: true
+      schema:
+        type: "string"
+        enum:
+        - "beforeCreateUser"
+        - "onLogin"
+        - "authorizer"
+    function_id:
+      name: "function_id"
+      in: "path"
+      description: "ID of Function"
+      required: true
+      schema:
+        type: "string"
+        pattern: "^[A-Za-z0-9]{24}$"
+    app_id2:
+      name: "app_id"
+      in: "path"
+      description: "ID of Passage App"
+      required: true
+      schema:
+        type: "string"
+    app_id3:
+      name: "app_id"
+      in: "path"
+      description: "ID of Passage App"
+      required: true
+      schema:
+        type: "string"
+        pattern: "^[A-Za-z0-9]{1,24}$"
+    template_id:
+      name: "template_id"
+      in: "path"
+      description: "ID of Email Template"
+      required: true
+      schema:
+        type: "string"
+  securitySchemes:
+    bearerAuth:
+      type: "http"
+      description: "An auth token can be acquired by authenticating to the passage\
+        \ application (app_id=passage) with the Authentication API."
+      scheme: "bearer"
+      bearerFormat: "JWT"
+  examples:
+    newEmailTemplate:
+      summary: "Configuring an email template"
+      value:
+        enabled: false
+        html: "<div>Tap this link to log in to {{.app.name}}: <a href=\"{{.magic_link.url}}\"\
+          >{{.magic_link.url}}</a></div>"
+        subject: "Login - {{ .app.name }}"
+        type: "magic_link"
+    enabledEmailTemplate:
+      summary: "Enabling an email template"
+      value:
+        enabled: true
+    validEmailTemplateResponse:
+      summary: "A valid email template"
+      value:
+        template:
+          id: ""
+          enabled: true
+          html: "<div>Tap this link to log in to {{.app.name}}: <a href=\"{{.magic_link.url}}\"\
+            >{{.magic_link.url}}</a></div>"
+          subject: "Login - {{ .app.name }}"
+          type: "magic_link"
