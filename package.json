@@ -1,33 +1,25 @@
 {
     "version": "2.4.2",
     "devDependencies": {
+        "@types/express": "^4.17.13",
         "@types/jest": "^25.2.1",
         "@types/node": "^13.13.0",
+        "@types/node-fetch": "^2.6.4",
+        "@types/supertest": "^2.0.11",
         "beachball": "^2.20.0",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
         "husky": "^7.0.4",
         "jest": "^25.4.0",
         "ts-jest": "^25.4.0",
-        "typescript": "^3.8.3",
-        
-        "@types/express": "^4.17.13",
-        "@types/node-fetch": "^2.6.4",
-        "@types/supertest": "^2.0.11",
-        "dotenv": "^10.0.0",
-        "express": "^4.17.1",
-        "ts-node-dev": "^1.1.8"
+        "typescript": "^3.8.3"
     },
     "name": "@passageidentity/passage-node",
     "main": "./dist/index.js",
     "typings": "./dist/index.d.ts",
     "scripts": {
-        "prepare": "husky install",
         "test": "jest",
-        "test:watch": "jest --watch",
-        "change": "beachball change",
-        "publish": "beachball publish -y -n",
-        "set-version": "echo '{\"version\":\"'$npm_package_name' '$npm_package_version'\"}' > ./src/utils/config.json",
-        "beachball-bump": "beachball bump",
-        "beachball-check": "beachball check"
+        "test:watch": "jest --watch"
     },
     "keywords": [
         "passage",
@@ -41,7 +33,6 @@
     "description": "",
     "dependencies": {
         "isomorphic-fetch": "^3.0.0",
-
         "jose": "^4.14.4",
         "node-fetch": "^2.6.12"
     },
@@ -50,9 +41,16 @@
     },
     "jest": {
         "transform": {
-          "^.+\\.tsx?$": "ts-jest"
+            "^.+\\.tsx?$": "ts-jest"
         },
         "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-        "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js",
+            "jsx",
+            "json",
+            "node"
+        ]
     }
 }

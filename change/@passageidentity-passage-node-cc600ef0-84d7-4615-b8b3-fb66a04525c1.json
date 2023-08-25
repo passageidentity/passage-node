@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "Generate code with Swagger Codegen",
+  "packageName": "@passageidentity/passage-node",
+  "email": "vanessa.burroughs@passage.id",
+  "dependentChangeType": "patch"
+}
