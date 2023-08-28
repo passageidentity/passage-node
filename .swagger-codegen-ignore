@@ -33,6 +33,5 @@ scripts.sh
 .gitignore
 CHANGELOG.json
 CHANGELOG.md
-jest.config.js
 LICENSE
 passage-passage-mgmt-api-1-swagger.yaml

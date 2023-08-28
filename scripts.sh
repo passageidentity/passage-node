@@ -1,6 +1,6 @@
 #!/bin/bash
+npm i beachball@2.20.0
 
-# Check for the script name provided as an argument
 case "$1" in
   "beachball-bump")
     echo "Running 'beachball bump'"
@@ -23,6 +23,7 @@ case "$1" in
     ;;
   "prepare")
     echo "Running 'husky install'"
+    npm i husky
     npx husky install
     ;;
   *)

@@ -106,6 +106,4 @@ export default class User {
             throw new PassageError('Could not activate user', err as FetchError);
         }
     }
-
-
 }
