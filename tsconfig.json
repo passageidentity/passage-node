@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "esModuleInterop": true,
     "target": "es5",
     "module": "commonjs",
+    "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "dist",
+    "outDir": "lib/esm",
+    "resolveJsonModule": true,
     "rootDir": ".",
-    "lib": [
-      "es6",
-      "dom"
-    ]
+    "skipLibCheck": true
   },
   "exclude": [
-    "dist",
+    "lib",
     "node_modules",
     "**/*.spec.ts"
   ]

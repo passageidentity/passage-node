@@ -142,56 +142,6 @@ describe("EmailProvidersApi", () => {
   })
 })
 
-describe("EmailTemplateApi", () => {
-  let instance: api.EmailTemplateApi
-  beforeEach(function() {
-    instance = new api.EmailTemplateApi(config)
-  });
-
-  test("createEmailTemplateHandler", () => {
-    const body: api.CreateEmailTemplateRequest = {
-  "$ref" : "#/components/examples/newEmailTemplate"
-}
-    const appId: string = "appId_example"
-    return expect(instance.createEmailTemplateHandler(body, appId, {})).resolves.toBe(null)
-  })
-  test("deleteEmailTemplateHandler", () => {
-    const appId: string = "appId_example"
-    const templateId: string = "templateId_example"
-    return expect(instance.deleteEmailTemplateHandler(appId, templateId, {})).resolves.toBe(null)
-  })
-  test("getEmailTemplateHandler", () => {
-    const appId: string = "appId_example"
-    const templateId: string = "templateId_example"
-    return expect(instance.getEmailTemplateHandler(appId, templateId, {})).resolves.toBe(null)
-  })
-  test("listEmailTemplatesHandler", () => {
-    const appId: string = "appId_example"
-    return expect(instance.listEmailTemplatesHandler(appId, {})).resolves.toBe(null)
-  })
-  test("updateEmailTemplateHandler", () => {
-    const appId: string = "appId_example"
-    const templateId: string = "templateId_example"
-    const body: api.UpdateEmailTemplateRequest = {
-  "$ref" : "#/components/examples/enabledEmailTemplate"
-}
-    return expect(instance.updateEmailTemplateHandler(appId, templateId, body, {})).resolves.toBe(null)
-  })
-})
-
-describe("EmailTestApi", () => {
-  let instance: api.EmailTestApi
-  beforeEach(function() {
-    instance = new api.EmailTestApi(config)
-  });
-
-  test("sendTestEmailHandler", () => {
-    const body: api.SendEmailRequest = undefined
-    const appId: string = "appId_example"
-    return expect(instance.sendTestEmailHandler(body, appId, {})).resolves.toBe(null)
-  })
-})
-
 describe("EventsApi", () => {
   let instance: api.EventsApi
   beforeEach(function() {
@@ -295,11 +245,6 @@ describe("UsersApi", () => {
     const appId: string = "appId_example"
     const userId: string = "userId_example"
     return expect(instance.getUser(appId, userId, {})).resolves.toBe(null)
-  })
-  test("importUsers", () => {
-    const csvUserImport: Blob = "csvUserImport_example"
-    const appId: string = "appId_example"
-    return expect(instance.importUsers(csvUserImport, appId, {})).resolves.toBe(null)
   })
   test("listPaginatedUsers", () => {
     const appId: string = "appId_example"
