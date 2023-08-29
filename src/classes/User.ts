@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { FetchError } from 'node-fetch';
 import fetch from '../utils/fetch';
+import { Configuration, UserInfo, UsersApi } from '../generated';
 import { PassageConfig } from '../types/PassageConfig';
 import { WebAuthnDevices, UserObject, UpdateUserPayload, CreateUserPayload } from '../types/User';
 import { PassageError } from './PassageError';
@@ -37,20 +38,17 @@ export default class User {
      * Get a user's object using their user ID.
      *
      * @param {string} userID The Passage user ID
-     * @return {Promise<UserObject>} Passage User object
+     * @return {Promise<UserInfo>} Passage User object
      */
-    async get(userID: string): Promise<UserObject> {
+    async get(userID: string): Promise<UserInfo> {
         if (!this.#apiKey) {
             throw new PassageError('A Passage API key is needed.');
         }
 
         try {
-            const response = await fetch({
-                ...this.#authorizationHeader,
-                method: 'GET',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
-            });
-
+            const config = new Configuration({ apiKey: this.#apiKey });
+            const client = new UsersApi(config);
+            const response = await client.getUser({ appId: this.#appID, userId: userID });
             return response.user;
         } catch (err) {
             throw new PassageError('Could not fetch user.', err as FetchError);
