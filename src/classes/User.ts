@@ -1,15 +1,19 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 import { FetchError } from 'node-fetch';
-import fetch from '../utils/fetch';
+import fetch, { HeadersInit } from 'node-fetch';
+// import fetch from '../utils/fetch';
 import { PassageConfig } from '../types/PassageConfig';
 import { WebAuthnDevices, UserObject, UpdateUserPayload, CreateUserPayload } from '../types/User';
 import { PassageError } from './PassageError';
+
+import { Configuration, HTTPHeaders, UsersApi, UserInfo } from '../generated';
 
 /***/
 export default class User {
     #appID: string;
     #apiKey: string;
-    #authorizationHeader: object | undefined;
+    #authorizationHeader?: HTTPHeaders;
+    #configuration: Configuration;
     id: string;
 
     /**
@@ -24,31 +28,42 @@ export default class User {
 
         if (this.#apiKey) {
             this.#authorizationHeader = {
-                headers: {
-                    Authorization: `Bearer ${this.#apiKey}`,
-                },
+                Authorization: `Bearer ${this.#apiKey}`,
             };
         } else {
             this.#authorizationHeader = undefined;
         }
+
+        this.#configuration = new Configuration({
+            apiKey: this.#apiKey,
+            fetchApi: fetch,
+            headers: this.#authorizationHeader,
+            middleware: [],
+        });
+    }
+
+    private _apiKeyCheck() {
+        if (!this.#apiKey) {
+            throw new PassageError('A Passage API key is needed.');
+        }
+        return;
     }
 
     /**
      * Get a user's object using their user ID.
      *
      * @param {string} userID The Passage user ID
-     * @return {Promise<UserObject>} Passage User object
+     * @return {Promise<UserInfo>} Passage User object
      */
-    async get(userID: string): Promise<UserObject> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed.');
-        }
+    async get(userID: string): Promise<UserInfo> {
+        this._apiKeyCheck();
 
         try {
-            const response = await fetch({
-                ...this.#authorizationHeader,
-                method: 'GET',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
+            const client = new UsersApi(this.#configuration);
+
+            const response = await client.getUser({
+                appId: this.#appID,
+                userId: userID,
             });
 
             return response.user;
@@ -61,18 +76,17 @@ export default class User {
      * Deactivate a user using their user ID.
      *
      * @param {string} userID The Passage user ID
-     * @return {Promise<UserObject>} Passage User object
+     * @return {Promise<UserInfo>} Passage User object
      */
-    async deactivate(userID: string): Promise<UserObject> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed.');
-        }
+    async deactivate(userID: string): Promise<UserInfo> {
+        this._apiKeyCheck();
 
         try {
-            const response = await fetch({
-                ...this.#authorizationHeader,
-                method: 'PATCH',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/deactivate`,
+            const client = new UsersApi(this.#configuration);
+
+            const response = await client.getUser({
+                appId: this.#appID,
+                userId: userID,
             });
 
             return response.user;
