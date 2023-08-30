@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
+import request from 'supertest';
 import Passage from '../src/index';
 import { PassageError } from '../src/classes/PassageError';
-import request from 'supertest';
 import app from '../testServer';
+import { CreateMagicLinkRequest, CreateUserRequest } from '../src/generated';
 
 require('dotenv').config();
 
@@ -63,7 +64,7 @@ describe('Passage API Requests', () => {
                 email: 'chris@passage.id',
                 channel: 'email',
                 ttl: 12,
-            });
+            } as CreateMagicLinkRequest);
             expect(magicLink).toHaveProperty('identifier', 'chris@passage.id');
             expect(magicLink).toHaveProperty('ttl', 12);
         });
@@ -117,7 +118,7 @@ describe('Passage API Requests', () => {
 
             const createdUserWithEmail = await passage.user.create({
                 email: randomEmail,
-            });
+            } as CreateUserRequest);
             expect(createdUserWithEmail).toHaveProperty('email', randomEmail);
 
             const deletedUserWithEmail = await passage.user.delete(createdUserWithEmail.id);
@@ -129,24 +130,24 @@ describe('Passage API Requests', () => {
 
             const createdUserWithEmail = await passage.user.create({
                 email: randomEmail,
-            });
+            } as CreateUserRequest);
             expect(createdUserWithEmail).toHaveProperty('email', randomEmail);
 
             const updatedUserWithEmail = await passage.user.update(createdUserWithEmail.id, {
-                user_metadata: {
+                userMetadata: {
                     example1: 'abc',
                 },
             });
-            expect(updatedUserWithEmail.user_metadata).toMatchObject({
+            expect(updatedUserWithEmail.userMetadata).toMatchObject({
                 example1: 'abc',
             });
 
             const updatedUserWithEmail2 = await passage.user.update(createdUserWithEmail.id, {
-                user_metadata: {
+                userMetadata: {
                     example1: 'xyz',
                 },
             });
-            expect(updatedUserWithEmail2.user_metadata).toMatchObject({
+            expect(updatedUserWithEmail2.userMetadata).toMatchObject({
                 example1: 'xyz',
             });
         });

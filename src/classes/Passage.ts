@@ -1,12 +1,18 @@
 import { Request } from 'express-serve-static-core';
 import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
-import { FetchError } from 'node-fetch';
-import fetch from '../utils/fetch';
-import { AppObject } from '../types/App';
+import fetch, { FetchError } from 'node-fetch';
 import { AuthStrategy } from '../types/AuthStrategy';
-import { MagicLinkObject, MagicLinkRequest } from '../types/MagicLink';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
+import {
+    AppInfo,
+    AppsApi,
+    Configuration,
+    ConfigurationParameters,
+    CreateMagicLinkRequest,
+    MagicLink,
+    MagicLinkApi,
+} from '../generated';
 import User from './User';
 
 /**
@@ -164,20 +170,25 @@ export default class Passage {
      * Create a Magic Link for your app.
      *
      * @param {MagicLinkRequest} magicLinkReq options for creating a MagicLink.
-     * @return {Promise<MagicLinkObject>} Passage MagicLink object
+     * @return {Promise<MagicLink>} Passage MagicLink object
      */
-    async createMagicLink(magicLinkReq: MagicLinkRequest): Promise<MagicLinkObject> {
+    async createMagicLink(magicLinkReq: CreateMagicLinkRequest): Promise<MagicLink> {
         try {
-            const response = await fetch({
-                body: magicLinkReq,
+            const configuration = new Configuration({
+                apiKey: this.#apiKey,
                 headers: {
                     Authorization: `Bearer ${this.#apiKey}`,
                 },
-                method: 'POST',
-                url: `https://api.passage.id/v1/apps/${this.appID}/magic-links/`,
+                fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
+                middleware: [],
+            });
+            const client = new MagicLinkApi(configuration);
+            const response = await client.createMagicLink({
+                appId: this.appID,
+                createMagicLinkRequest: magicLinkReq,
             });
 
-            return response.magic_link;
+            return response.magicLink;
         } catch (err) {
             throw new PassageError('Could not create a magic link for this app.', err as FetchError);
         }
@@ -186,13 +197,17 @@ export default class Passage {
     /**
      * Get App Info about an app
      *
-     * @return {Promise<AppObject>} Passage App object
+     * @return {Promise<AppInfo>} Passage App object
      */
-    async getApp(): Promise<AppObject> {
+    async getApp(): Promise<AppInfo> {
         try {
-            const response = await fetch({
-                method: 'GET',
-                url: `https://api.passage.id/v1/apps/${this.appID}`,
+            const configuration = new Configuration({
+                fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
+                middleware: [],
+            });
+            const client = new AppsApi(configuration);
+            const response = await client.getApp({
+                appId: this.appID,
             });
 
             return response.app;

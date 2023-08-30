@@ -1,12 +1,20 @@
-/* eslint-disable */
 import { FetchError } from 'node-fetch';
-import fetch, { HeadersInit } from 'node-fetch';
-// import fetch from '../utils/fetch';
+import fetch from 'node-fetch';
 import { PassageConfig } from '../types/PassageConfig';
-import { WebAuthnDevices, UserObject, UpdateUserPayload, CreateUserPayload } from '../types/User';
 import { PassageError } from './PassageError';
 
-import { Configuration, HTTPHeaders, UsersApi, UserInfo } from '../generated';
+import {
+    Configuration,
+    ConfigurationParameters,
+    CreateUserRequest,
+    HTTPHeaders,
+    TokensApi,
+    UpdateUserRequest,
+    UsersApi,
+    UserDevicesApi,
+    UserInfo,
+    WebAuthnDevices,
+} from '../generated';
 
 /***/
 export default class User {
@@ -36,17 +44,20 @@ export default class User {
 
         this.#configuration = new Configuration({
             apiKey: this.#apiKey,
-            fetchApi: fetch,
+            fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
             headers: this.#authorizationHeader,
             middleware: [],
         });
     }
 
-    private _apiKeyCheck() {
+    /**
+     * Check if API key exists for this Passage instance
+     * @throws {PassageError} If the API key is missing.
+     */
+    private _apiKeyCheck(): void {
         if (!this.#apiKey) {
             throw new PassageError('A Passage API key is needed.');
         }
-        return;
     }
 
     /**
@@ -84,7 +95,7 @@ export default class User {
         try {
             const client = new UsersApi(this.#configuration);
 
-            const response = await client.getUser({
+            const response = await client.deactivateUser({
                 appId: this.#appID,
                 userId: userID,
             });
@@ -100,19 +111,18 @@ export default class User {
      *
      * @param {string} userID The passage user ID
      * @param {UpdateUserPayload} payload The user attributes to be updated
-     * @return {Promise<UserObject>} Pasasge User Object
+     * @return {Promise<UserInfo>} Pasasge User Object
      */
-    async update(userID: string, payload: UpdateUserPayload): Promise<UserObject> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed.');
-        }
+    async update(userID: string, payload: UpdateUserRequest): Promise<UserInfo> {
+        this._apiKeyCheck();
 
         try {
-            const response = await fetch({
-                ...this.#authorizationHeader,
-                body: payload,
-                method: 'PATCH',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
+            const client = new UsersApi(this.#configuration);
+
+            const response = await client.updateUser({
+                appId: this.#appID,
+                updateUserRequest: payload,
+                userId: userID,
             });
 
             return response.user;
@@ -125,20 +135,18 @@ export default class User {
      * Activate a user using their user ID.
      *
      * @param {string} userID The passage user ID
-     * @return {Promise<UserObject>} Passage User object
+     * @return {Promise<UserInfo>} Passage User object
      */
-    async activate(userID: string): Promise<UserObject> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed');
-        }
+    async activate(userID: string): Promise<UserInfo> {
+        this._apiKeyCheck();
 
         try {
-            const response = await fetch({
-                ...this.#authorizationHeader,
-                method: 'PATCH',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/activate`,
-            });
+            const client = new UsersApi(this.#configuration);
 
+            const response = await client.activateUser({
+                appId: this.#appID,
+                userId: userID,
+            });
             return response.user;
         } catch (err) {
             throw new PassageError('Could not activate user', err as FetchError);
@@ -148,20 +156,18 @@ export default class User {
     /**
      * Create a user.
      *
-     * @param {CreateUserPayload} payload To create the user.
-     * @return {Promise<UserObject>} Passage User object
+     * @param {CreateUserRequest} payload To create the user.
+     * @return {Promise<UserInfo>} Passage User object
      */
-    async create(payload: CreateUserPayload): Promise<UserObject> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed');
-        }
+    async create(payload: CreateUserRequest): Promise<UserInfo> {
+        this._apiKeyCheck();
 
         try {
-            const response = await fetch({
-                ...this.#authorizationHeader,
-                body: payload,
-                method: 'POST',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/`,
+            const client = new UsersApi(this.#configuration);
+
+            const response = await client.createUser({
+                appId: this.#appID,
+                createUserRequest: payload,
             });
 
             return response.user;
@@ -178,15 +184,14 @@ export default class User {
      * @return {boolean} True if user was deleted, false if not
      */
     async delete(userID: string): Promise<boolean> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed');
-        }
+        this._apiKeyCheck();
 
         try {
-            await fetch({
-                ...this.#authorizationHeader,
-                method: 'DELETE',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}`,
+            const client = new UsersApi(this.#configuration);
+
+            await client.deleteUser({
+                appId: this.#appID,
+                userId: userID,
             });
 
             return true;
@@ -202,15 +207,14 @@ export default class User {
      * @return {Promise<Array<WebAuthnDevices>>} List of devices
      */
     async listDevices(userID: string): Promise<Array<WebAuthnDevices>> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed');
-        }
+        this._apiKeyCheck();
 
         try {
-            const response = await fetch({
-                ...this.#authorizationHeader,
-                method: 'GET',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices`,
+            const client = new UserDevicesApi(this.#configuration);
+
+            const response = await client.listUserDevices({
+                appId: this.#appID,
+                userId: userID,
             });
 
             return response.devices;
@@ -227,15 +231,15 @@ export default class User {
      * @return {Promise<boolean>}
      */
     async revokeDevice(userID: string, deviceID: string): Promise<boolean> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed');
-        }
+        this._apiKeyCheck();
 
         try {
-            await fetch({
-                ...this.#authorizationHeader,
-                method: 'DELETE',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/devices/${deviceID}`,
+            const client = new UserDevicesApi(this.#configuration);
+
+            await client.deleteUserDevices({
+                appId: this.#appID,
+                deviceId: deviceID,
+                userId: userID,
             });
 
             return true;
@@ -256,12 +260,12 @@ export default class User {
         }
 
         try {
-            await fetch({
-                ...this.#authorizationHeader,
-                method: 'DELETE',
-                url: `https://api.passage.id/v1/apps/${this.#appID}/users/${userID}/tokens/`,
-            });
+            const client = new TokensApi(this.#configuration);
 
+            await client.revokeUserRefreshTokens({
+                appId: this.#appID,
+                userId: userID,
+            });
             return true;
         } catch (err) {
             throw new PassageError("Could not revoke user's refresh tokens.", err as FetchError);

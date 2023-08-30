@@ -1,8 +1,5 @@
 {
     "version": "2.4.2",
-    "engines": {
-        "node": "20.5.0"
-    },
     "devDependencies": {
         "@types/express": "^4.17.13",
         "@types/jest": "^27.0.1",

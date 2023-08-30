@@ -159,12 +159,12 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'loginCount': json['login_count'],
         'phone': json['phone'],
         'phoneVerified': json['phone_verified'],
-        'recentEvents': ((json['recent_events'] as Array<any>).map(UserEventInfoFromJSON)),
+        'recentEvents': ((json['recent_events'] as Array<any>)?.map(UserEventInfoFromJSON)),
         'status': json['status'],
         'updatedAt': (new Date(json['updated_at'])),
         'userMetadata': json['user_metadata'],
         'webauthn': json['webauthn'],
-        'webauthnDevices': ((json['webauthn_devices'] as Array<any>).map(WebAuthnDevicesFromJSON)),
+        'webauthnDevices': ((json['webauthn_devices'] as Array<any>)?.map(WebAuthnDevicesFromJSON)),
     };
 }
 
@@ -185,12 +185,12 @@ export function UserInfoToJSON(value?: UserInfo | null): any {
         'login_count': value.loginCount,
         'phone': value.phone,
         'phone_verified': value.phoneVerified,
-        'recent_events': ((value.recentEvents as Array<any>).map(UserEventInfoToJSON)),
+        'recent_events': ((value.recentEvents as Array<any>)?.map(UserEventInfoToJSON)),
         'status': value.status,
         'updated_at': (value.updatedAt.toISOString()),
         'user_metadata': value.userMetadata,
         'webauthn': value.webauthn,
-        'webauthn_devices': ((value.webauthnDevices as Array<any>).map(WebAuthnDevicesToJSON)),
+        'webauthn_devices': ((value.webauthnDevices as Array<any>)?.map(WebAuthnDevicesToJSON)),
     };
 }
 
