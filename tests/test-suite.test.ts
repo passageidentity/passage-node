@@ -2,7 +2,7 @@
 import request from 'supertest';
 import Passage from '../src/index';
 import { PassageError } from '../src/classes/PassageError';
-import app from '../testServer';
+import server from '../testServer';
 import { CreateMagicLinkRequest, CreateUserRequest } from '../src/generated';
 
 require('dotenv').config();
@@ -25,21 +25,21 @@ describe('Passage Initialization', () => {
 
     // note that the current token is only valid until Nov.8 2022
     test('authenticateRequestWithCookie', async () => {
-        await request(app).get('/cookie').expect(401); // no token set --> 401
-        await request(app)
+        await request(server).get('/cookie').expect(401); // no token set --> 401
+        await request(server)
             .get('/cookie')
             .set('Cookie', [`psg_auth_token=invalid_token`]) // invalid token set --> 401
             .expect(401);
-        await request(app)
+        await request(server)
             .get('/cookie')
             .set('Cookie', [`psg_auth_token=${appToken}`])
             .expect(200);
     });
 
     test('authenticateRequestWithHeader', async () => {
-        await request(app).get('/header').expect(401); // no token set --> 401
-        await request(app).get('/header').set('Authorization', `Bearer invalid_token`).expect(401);
-        await request(app).get('/header').set('Authorization', `Bearer ${appToken}`).expect(200);
+        await request(server).get('/header').expect(401); // no token set --> 401
+        await request(server).get('/header').set('Authorization', `Bearer invalid_token`).expect(401);
+        await request(server).get('/header').set('Authorization', `Bearer ${appToken}`).expect(200);
     });
 
     test('validAuthToken', async () => {

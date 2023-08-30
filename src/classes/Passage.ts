@@ -1,4 +1,4 @@
-import { Request } from 'express-serve-static-core';
+import { IncomingMessage } from 'http';
 import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
 import fetch, { FetchError } from 'node-fetch';
 import { AuthStrategy } from '../types/AuthStrategy';
@@ -49,10 +49,10 @@ export default class Passage {
      * strategy is given, authenticate the request via cookie (default
      * authentication strategy).
      *
-     * @param {Request} req Express request
+     * @param {IncomingMessage} req http request
      * @return {string} UserID of the Passage user
      */
-    async authenticateRequest(req: Request): Promise<string> {
+    async authenticateRequest(req: IncomingMessage): Promise<string> {
         if (this.authStrategy == 'HEADER') {
             return this.authenticateRequestWithHeader(req);
         } else {
@@ -79,10 +79,10 @@ export default class Passage {
     /**
      * Authenticate a request via the http header.
      *
-     * @param {Request} req Express request
+     * @param {IncomingMessage} req http request
      * @return {string} User ID for Passage User
      */
-    async authenticateRequestWithHeader(req: Request): Promise<string> {
+    async authenticateRequestWithHeader(req: IncomingMessage): Promise<string> {
         const { authorization } = req.headers;
 
         if (!authorization) {
@@ -101,10 +101,10 @@ export default class Passage {
     /**
      * Authenticate request via cookie.
      *
-     * @param {Request} req Express request
+     * @param {IncomingMessage} req http request
      * @return {string} UserID for Passage User
      */
-    async authenticateRequestWithCookie(req: Request): Promise<string> {
+    async authenticateRequestWithCookie(req: IncomingMessage): Promise<string> {
         const cookiesStr = req.headers?.cookie;
         if (!cookiesStr) {
             throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
