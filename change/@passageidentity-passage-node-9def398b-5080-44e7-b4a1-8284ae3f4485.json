@@ -1,0 +1,7 @@
+{
+    "type": "none",
+    "comment": "only publish node on demand",
+    "packageName": "@passageidentity/passage-node",
+    "email": "kevin.flanagan@passage.id",
+    "dependentChangeType": "none"
+}
