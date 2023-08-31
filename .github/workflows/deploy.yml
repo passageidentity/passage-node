@@ -1,51 +1,49 @@
 name: Deploy To NPM
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
+    workflow_dispatch:
 
 env:
-  API_KEY: ${{ secrets.API_KEY }}
-  APP_ID: ${{ secrets.APP_ID }}
-  APP_TOKEN: ${{ secrets.APP_TOKEN }}
-  EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
-  PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
-  NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-  PAT: ${{ secrets.BEACHBALL_PAT }}
+    API_KEY: ${{ secrets.API_KEY }}
+    APP_ID: ${{ secrets.APP_ID }}
+    APP_TOKEN: ${{ secrets.APP_TOKEN }}
+    EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
+    PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+    NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+    PAT: ${{ secrets.BEACHBALL_PAT }}
 
 jobs:
-  publish:
-    name: Deploy To NPM
-    runs-on: ubuntu-latest
+    publish:
+        name: Deploy To NPM
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          token: ${{ env.PAT }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  token: ${{ env.PAT }}
 
-      - name: Unit Test
-        run: npm i && npm run test
+            - name: Unit Test
+              run: npm i && npm run test
 
-      - name: Beachball Check
-        run: |
-          npm run beachball-check
+            - name: Beachball Check
+              run: |
+                  npm run beachball-check
 
-      - name: Beachball Bump
-        run: |
-          npm run beachball-bump
+            - name: Beachball Bump
+              run: |
+                  npm run beachball-bump
 
-      - name: Build
-        run: npm run set-version && npm run tsc
+            - name: Build
+              run: npm run set-version && npm run tsc
 
-      - name: Clear Beachball Changes
-        run: |
-          git reset --hard
+            - name: Clear Beachball Changes
+              run: |
+                  git reset --hard
 
-      - name: Deploy to NPM
-        run: |
-          git config user.email "beachball_bot@passage.id"
-          git config user.name "Beachball Machine Account"
-          git remote set-url origin https://$GITHUB_ACTOR:$PAT@github.com/$GITHUB_REPOSITORY.git
-          npm run publish ${{ env.NPM_ACCESS_TOKEN }}
+            - name: Deploy to NPM
+              run: |
+                  git config user.email "beachball_bot@passage.id"
+                  git config user.name "Beachball Machine Account"
+                  git remote set-url origin https://$GITHUB_ACTOR:$PAT@github.com/$GITHUB_REPOSITORY.git
+                  npm run publish ${{ env.NPM_ACCESS_TOKEN }}
