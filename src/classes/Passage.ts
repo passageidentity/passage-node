@@ -1,6 +1,6 @@
-import { IncomingMessage } from 'http';
+// import { IncomingMessage } from 'http';
 import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
-import fetch, { FetchError } from 'node-fetch';
+import fetch, { FetchError, Request } from 'node-fetch';
 import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
@@ -49,10 +49,10 @@ export default class Passage {
      * strategy is given, authenticate the request via cookie (default
      * authentication strategy).
      *
-     * @param {IncomingMessage} req http request
+     * @param {Request} req fetch request
      * @return {string} UserID of the Passage user
      */
-    async authenticateRequest(req: IncomingMessage): Promise<string> {
+    async authenticateRequest(req: Request): Promise<string> {
         if (this.authStrategy == 'HEADER') {
             return this.authenticateRequestWithHeader(req);
         } else {
@@ -79,11 +79,11 @@ export default class Passage {
     /**
      * Authenticate a request via the http header.
      *
-     * @param {IncomingMessage} req http request
+     * @param {Request} req http request
      * @return {string} User ID for Passage User
      */
-    async authenticateRequestWithHeader(req: IncomingMessage): Promise<string> {
-        const { authorization } = req.headers;
+    async authenticateRequestWithHeader(req: Request): Promise<string> {
+        const authorization = req.headers.get('Authorization');
 
         if (!authorization) {
             throw new PassageError('Header authorization not found. You must catch this error.');
@@ -101,11 +101,14 @@ export default class Passage {
     /**
      * Authenticate request via cookie.
      *
-     * @param {IncomingMessage} req http request
+     * @param {Request} req http request
      * @return {string} UserID for Passage User
      */
-    async authenticateRequestWithCookie(req: IncomingMessage): Promise<string> {
-        const cookiesStr = req.headers?.cookie;
+    async authenticateRequestWithCookie(req: Request): Promise<string> {
+        // const cookiesStr = req.headers?.cookie;
+        const cookiesStr = req.headers.raw()['Cookie'];
+
+        console.log({ cookiesStr });
         if (!cookiesStr) {
             throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
         }

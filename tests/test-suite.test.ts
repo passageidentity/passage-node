@@ -26,6 +26,8 @@ describe('Passage Initialization', () => {
     // note that the current token is only valid until Nov.8 2022
     test('authenticateRequestWithCookie', async () => {
         await request(server).get('/cookie').expect(401); // no token set --> 401
+
+        console.log(await request(server).get('/cookie'));
         await request(server)
             .get('/cookie')
             .set('Cookie', [`psg_auth_token=invalid_token`]) // invalid token set --> 401

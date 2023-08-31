@@ -1,7 +1,8 @@
 import http, { IncomingMessage } from 'http';
+import { Request, Response } from 'node-fetch';
 
 import psg from './src/index';
-import { PassageConfig, ServerResponse } from './src/types/PassageConfig';
+import { PassageConfig } from './src/types/PassageConfig';
 
 const server = http.createServer();
 
@@ -20,44 +21,42 @@ const passageConfigHeader: PassageConfig = {
 };
 
 const passageCookie = new psg(passageConfigCookie);
-const customMiddlewareCookie = async (req: IncomingMessage, res: ServerResponse) => {
+const customMiddlewareCookie = async (req: Request, res: Response) => {
     try {
         const userID = await passageCookie.authenticateRequest(req);
         if (userID) res['userID'] = userID;
     } catch (e) {
-        res.writeHead(401, { 'Content-Type': 'text/plain' });
-        res.end('Could not authenticate user!');
+        throw e;
     }
 };
 
 const passageHeader = new psg(passageConfigHeader);
-const customMiddlewareHeader = async (req: IncomingMessage, res: ServerResponse) => {
+const customMiddlewareHeader = async (req: Request, res: Response) => {
     try {
         const userID = await passageHeader.authenticateRequest(req);
         if (userID) res['userID'] = userID;
     } catch (e) {
-        res.writeHead(401, { 'Content-Type': 'text/plain' });
-        res.end('Could not authenticate user!');
+        throw e;
     }
 };
 
-server.on('request', async (req: IncomingMessage, res: ServerResponse) => {
+server.on('request', async (req: Request, res: Response) => {
     if (req.url === '/cookie') {
         await customMiddlewareCookie(req, res);
         const userID = res['userID'];
         if (userID) {
             const { email }: any = await passageCookie.user.get(userID);
-            res.end(JSON.stringify({ email }));
+            return JSON.stringify({ email });
         }
     } else if (req.url === '/header') {
         await customMiddlewareHeader(req, res);
         const userID = res['userID'];
         if (userID) {
             const { email }: any = await passageHeader.user.get(userID);
-            res.end(JSON.stringify({ email }));
+            return JSON.stringify({ email });
         }
     } else {
-        res.end('Not Found');
+        throw 'Not Found';
     }
 });
 
