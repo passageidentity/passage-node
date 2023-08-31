@@ -1,8 +1,8 @@
 import Passage from './classes/Passage';
-export * from './types/App';
 export * from './types/AuthStrategy';
 export * from './types/JWKS';
 export * from './types/PassageConfig';
+export * from './generated/models';
 
 module.exports = Passage;
 
