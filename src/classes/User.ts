@@ -211,6 +211,31 @@ export default class User {
     }
 
     /**
+     * Revoke a user's device using their user ID and the device ID.
+     *
+     * @param {string} userID The Passage user ID
+     * @param {string} deviceID The Passage user's device ID
+     * @return {Promise<boolean>}
+     */
+    async revokeDevice(userID: string, deviceID: string): Promise<boolean> {
+        this._apiKeyCheck();
+
+        try {
+            const client = new UserDevicesApi(this.#configuration);
+
+            await client.deleteUserDevices({
+                appId: this.#appID,
+                deviceId: deviceID,
+                userId: userID,
+            });
+
+            return true;
+        } catch (err) {
+            throw new PassageError("Could not delete user's device", err as FetchError);
+        }
+    }
+
+    /**
      * Revokes all of a user's Refresh Tokens using their User ID.
      *
      * @param {string} userID The Passage user ID
