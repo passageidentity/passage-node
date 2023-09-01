@@ -15,6 +15,7 @@ import {
     ResponseError,
 } from '../generated';
 import User from './User';
+import passageNodeConfig from '../utils/config.json';
 
 /**
  * Passage Class
@@ -178,7 +179,8 @@ export default class Passage {
             const configuration = new Configuration({
                 apiKey: this.#apiKey,
                 headers: {
-                    Authorization: `Bearer ${this.#apiKey}`,
+                    'Authorization': `Bearer ${this.#apiKey}`,
+                    'Passage-Version': passageNodeConfig.version,
                 },
                 fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
                 middleware: [],
@@ -205,6 +207,9 @@ export default class Passage {
             const configuration = new Configuration({
                 fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
                 middleware: [],
+                headers: {
+                    'Passage-Version': passageNodeConfig.version,
+                },
             });
             const client = new AppsApi(configuration);
             const response = await client.getApp({
