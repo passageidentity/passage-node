@@ -36,7 +36,7 @@ export interface AuthorizerHeaders {
      * @type {string}
      * @memberof AuthorizerHeaders
      */
-    userAgent?: string;
+    user_agent?: string;
 }
 
 /**
@@ -61,7 +61,7 @@ export function AuthorizerHeadersFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'authorization': json['authorization'],
         'ip': !exists(json, 'ip') ? undefined : json['ip'],
-        'userAgent': !exists(json, 'user_agent') ? undefined : json['user_agent'],
+        'user_agent': !exists(json, 'user_agent') ? undefined : json['user_agent'],
     };
 }
 
@@ -76,7 +76,7 @@ export function AuthorizerHeadersToJSON(value?: AuthorizerHeaders | null): any {
         
         'authorization': value.authorization,
         'ip': value.ip,
-        'user_agent': value.userAgent,
+        'user_agent': value.user_agent,
     };
 }
 

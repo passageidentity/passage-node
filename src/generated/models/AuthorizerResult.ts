@@ -24,7 +24,7 @@ export interface AuthorizerResult {
      * @type {boolean}
      * @memberof AuthorizerResult
      */
-    denyAccess: boolean;
+    deny_access: boolean;
     /**
      * 
      * @type {string}
@@ -36,7 +36,7 @@ export interface AuthorizerResult {
      * @type {string}
      * @memberof AuthorizerResult
      */
-    userId?: string;
+    user_id?: string;
 }
 
 /**
@@ -44,7 +44,7 @@ export interface AuthorizerResult {
  */
 export function instanceOfAuthorizerResult(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "denyAccess" in value;
+    isInstance = isInstance && "deny_access" in value;
 
     return isInstance;
 }
@@ -59,9 +59,9 @@ export function AuthorizerResultFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'denyAccess': json['deny_access'],
+        'deny_access': json['deny_access'],
         'reason': !exists(json, 'reason') ? undefined : json['reason'],
-        'userId': !exists(json, 'user_id') ? undefined : json['user_id'],
+        'user_id': !exists(json, 'user_id') ? undefined : json['user_id'],
     };
 }
 
@@ -74,9 +74,9 @@ export function AuthorizerResultToJSON(value?: AuthorizerResult | null): any {
     }
     return {
         
-        'deny_access': value.denyAccess,
+        'deny_access': value.deny_access,
         'reason': value.reason,
-        'user_id': value.userId,
+        'user_id': value.user_id,
     };
 }
 

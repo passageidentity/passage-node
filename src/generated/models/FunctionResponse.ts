@@ -55,13 +55,13 @@ export interface FunctionResponse {
      * @type {boolean}
      * @memberof FunctionResponse
      */
-    hasDraft: boolean;
+    has_draft: boolean;
     /**
      * 
      * @type {Array<string>}
      * @memberof FunctionResponse
      */
-    secretKeys: Array<string>;
+    secret_keys: Array<string>;
 }
 
 /**
@@ -73,8 +73,8 @@ export function instanceOfFunctionResponse(value: object): boolean {
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "code" in value;
     isInstance = isInstance && "language" in value;
-    isInstance = isInstance && "hasDraft" in value;
-    isInstance = isInstance && "secretKeys" in value;
+    isInstance = isInstance && "has_draft" in value;
+    isInstance = isInstance && "secret_keys" in value;
 
     return isInstance;
 }
@@ -93,8 +93,8 @@ export function FunctionResponseFromJSONTyped(json: any, ignoreDiscriminator: bo
         'name': json['name'],
         'code': json['code'],
         'language': LanguageFromJSON(json['language']),
-        'hasDraft': json['has_draft'],
-        'secretKeys': json['secret_keys'],
+        'has_draft': json['has_draft'],
+        'secret_keys': json['secret_keys'],
     };
 }
 
@@ -111,8 +111,8 @@ export function FunctionResponseToJSON(value?: FunctionResponse | null): any {
         'name': value.name,
         'code': value.code,
         'language': LanguageToJSON(value.language),
-        'has_draft': value.hasDraft,
-        'secret_keys': value.secretKeys,
+        'has_draft': value.has_draft,
+        'secret_keys': value.secret_keys,
     };
 }
 

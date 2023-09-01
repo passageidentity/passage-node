@@ -30,7 +30,7 @@ export interface MagicLink {
      * @type {string}
      * @memberof MagicLink
      */
-    appId: string;
+    app_id: string;
     /**
      * 
      * @type {string}
@@ -48,7 +48,7 @@ export interface MagicLink {
      * @type {string}
      * @memberof MagicLink
      */
-    redirectUrl: string;
+    redirect_url: string;
     /**
      * 
      * @type {string}
@@ -78,7 +78,7 @@ export interface MagicLink {
      * @type {string}
      * @memberof MagicLink
      */
-    userId: string;
+    user_id: string;
 }
 
 /**
@@ -87,15 +87,15 @@ export interface MagicLink {
 export function instanceOfMagicLink(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "activated" in value;
-    isInstance = isInstance && "appId" in value;
+    isInstance = isInstance && "app_id" in value;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "identifier" in value;
-    isInstance = isInstance && "redirectUrl" in value;
+    isInstance = isInstance && "redirect_url" in value;
     isInstance = isInstance && "secret" in value;
     isInstance = isInstance && "ttl" in value;
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "url" in value;
-    isInstance = isInstance && "userId" in value;
+    isInstance = isInstance && "user_id" in value;
 
     return isInstance;
 }
@@ -111,15 +111,15 @@ export function MagicLinkFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'activated': json['activated'],
-        'appId': json['app_id'],
+        'app_id': json['app_id'],
         'id': json['id'],
         'identifier': json['identifier'],
-        'redirectUrl': json['redirect_url'],
+        'redirect_url': json['redirect_url'],
         'secret': json['secret'],
         'ttl': json['ttl'],
         'type': json['type'],
         'url': json['url'],
-        'userId': json['user_id'],
+        'user_id': json['user_id'],
     };
 }
 
@@ -133,15 +133,15 @@ export function MagicLinkToJSON(value?: MagicLink | null): any {
     return {
         
         'activated': value.activated,
-        'app_id': value.appId,
+        'app_id': value.app_id,
         'id': value.id,
         'identifier': value.identifier,
-        'redirect_url': value.redirectUrl,
+        'redirect_url': value.redirect_url,
         'secret': value.secret,
         'ttl': value.ttl,
         'type': value.type,
         'url': value.url,
-        'user_id': value.userId,
+        'user_id': value.user_id,
     };
 }
 

@@ -31,61 +31,61 @@ export interface UpdateAppRequest {
      * @type {Array<string>}
      * @memberof UpdateAppRequest
      */
-    additionalAuthOrigins?: Array<string>;
+    additional_auth_origins?: Array<string>;
     /**
      * The valid URLs where users can be redirected after authentication.
      * @type {Array<string>}
      * @memberof UpdateAppRequest
      */
-    allowedCallbackUrls?: Array<string>;
+    allowed_callback_urls?: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof UpdateAppRequest
      */
-    allowedIdentifier?: string;
+    allowed_identifier?: string;
     /**
      * The valid URLs where users can be redirected after logging out.
      * @type {Array<string>}
      * @memberof UpdateAppRequest
      */
-    allowedLogoutUrls?: Array<string>;
+    allowed_logout_urls?: Array<string>;
     /**
      * A route within your application that redirects to the Authorization URL endpoint.
      * @type {string}
      * @memberof UpdateAppRequest
      */
-    applicationLoginUri?: string;
+    application_login_uri?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateAppRequest
      */
-    authFallbackMethod?: UpdateAppRequestAuthFallbackMethodEnum;
+    auth_fallback_method?: UpdateAppRequestAuthFallbackMethodEnum;
     /**
      * 
      * @type {number}
      * @memberof UpdateAppRequest
      */
-    authFallbackMethodTtl?: number;
+    auth_fallback_method_ttl?: number;
     /**
      * 
      * @type {string}
      * @memberof UpdateAppRequest
      */
-    authOrigin?: string;
+    auth_origin?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateAppRequest
      */
-    defaultLanguage?: string;
+    default_language?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateAppRequest
      */
-    loginUrl?: string;
+    login_url?: string;
     /**
      * 
      * @type {string}
@@ -97,67 +97,67 @@ export interface UpdateAppRequest {
      * @type {string}
      * @memberof UpdateAppRequest
      */
-    hostedSubdomain?: string;
+    hosted_subdomain?: string;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateAppRequest
      */
-    passageBranding?: boolean;
+    passage_branding?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateAppRequest
      */
-    profileManagement?: boolean;
+    profile_management?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateAppRequest
      */
-    publicSignup?: boolean;
+    public_signup?: boolean;
     /**
      * A valid URL where users can be redirected after authentication for Embedded Login.
      * @type {string}
      * @memberof UpdateAppRequest
      */
-    redirectUrl?: string;
+    redirect_url?: string;
     /**
      * 
      * @type {number}
      * @memberof UpdateAppRequest
      */
-    refreshAbsoluteLifetime?: number;
+    refresh_absolute_lifetime?: number;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateAppRequest
      */
-    refreshEnabled?: boolean;
+    refresh_enabled?: boolean;
     /**
      * 
      * @type {number}
      * @memberof UpdateAppRequest
      */
-    refreshInactivityLifetime?: number;
+    refresh_inactivity_lifetime?: number;
     /**
      * 
      * @type {boolean}
      * @memberof UpdateAppRequest
      */
-    requireIdentifierVerification?: boolean;
+    require_identifier_verification?: boolean;
     /**
      * 
      * @type {number}
      * @memberof UpdateAppRequest
      */
-    sessionTimeoutLength?: number;
+    session_timeout_length?: number;
     /**
      * 
      * @type {ElementCustomization}
      * @memberof UpdateAppRequest
      */
-    elementCustomization?: ElementCustomization;
+    element_customization?: ElementCustomization;
 }
 
 
@@ -191,28 +191,28 @@ export function UpdateAppRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'additionalAuthOrigins': !exists(json, 'additional_auth_origins') ? undefined : json['additional_auth_origins'],
-        'allowedCallbackUrls': !exists(json, 'allowed_callback_urls') ? undefined : json['allowed_callback_urls'],
-        'allowedIdentifier': !exists(json, 'allowed_identifier') ? undefined : json['allowed_identifier'],
-        'allowedLogoutUrls': !exists(json, 'allowed_logout_urls') ? undefined : json['allowed_logout_urls'],
-        'applicationLoginUri': !exists(json, 'application_login_uri') ? undefined : json['application_login_uri'],
-        'authFallbackMethod': !exists(json, 'auth_fallback_method') ? undefined : json['auth_fallback_method'],
-        'authFallbackMethodTtl': !exists(json, 'auth_fallback_method_ttl') ? undefined : json['auth_fallback_method_ttl'],
-        'authOrigin': !exists(json, 'auth_origin') ? undefined : json['auth_origin'],
-        'defaultLanguage': !exists(json, 'default_language') ? undefined : json['default_language'],
-        'loginUrl': !exists(json, 'login_url') ? undefined : json['login_url'],
+        'additional_auth_origins': !exists(json, 'additional_auth_origins') ? undefined : json['additional_auth_origins'],
+        'allowed_callback_urls': !exists(json, 'allowed_callback_urls') ? undefined : json['allowed_callback_urls'],
+        'allowed_identifier': !exists(json, 'allowed_identifier') ? undefined : json['allowed_identifier'],
+        'allowed_logout_urls': !exists(json, 'allowed_logout_urls') ? undefined : json['allowed_logout_urls'],
+        'application_login_uri': !exists(json, 'application_login_uri') ? undefined : json['application_login_uri'],
+        'auth_fallback_method': !exists(json, 'auth_fallback_method') ? undefined : json['auth_fallback_method'],
+        'auth_fallback_method_ttl': !exists(json, 'auth_fallback_method_ttl') ? undefined : json['auth_fallback_method_ttl'],
+        'auth_origin': !exists(json, 'auth_origin') ? undefined : json['auth_origin'],
+        'default_language': !exists(json, 'default_language') ? undefined : json['default_language'],
+        'login_url': !exists(json, 'login_url') ? undefined : json['login_url'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'hostedSubdomain': !exists(json, 'hosted_subdomain') ? undefined : json['hosted_subdomain'],
-        'passageBranding': !exists(json, 'passage_branding') ? undefined : json['passage_branding'],
-        'profileManagement': !exists(json, 'profile_management') ? undefined : json['profile_management'],
-        'publicSignup': !exists(json, 'public_signup') ? undefined : json['public_signup'],
-        'redirectUrl': !exists(json, 'redirect_url') ? undefined : json['redirect_url'],
-        'refreshAbsoluteLifetime': !exists(json, 'refresh_absolute_lifetime') ? undefined : json['refresh_absolute_lifetime'],
-        'refreshEnabled': !exists(json, 'refresh_enabled') ? undefined : json['refresh_enabled'],
-        'refreshInactivityLifetime': !exists(json, 'refresh_inactivity_lifetime') ? undefined : json['refresh_inactivity_lifetime'],
-        'requireIdentifierVerification': !exists(json, 'require_identifier_verification') ? undefined : json['require_identifier_verification'],
-        'sessionTimeoutLength': !exists(json, 'session_timeout_length') ? undefined : json['session_timeout_length'],
-        'elementCustomization': !exists(json, 'element_customization') ? undefined : ElementCustomizationFromJSON(json['element_customization']),
+        'hosted_subdomain': !exists(json, 'hosted_subdomain') ? undefined : json['hosted_subdomain'],
+        'passage_branding': !exists(json, 'passage_branding') ? undefined : json['passage_branding'],
+        'profile_management': !exists(json, 'profile_management') ? undefined : json['profile_management'],
+        'public_signup': !exists(json, 'public_signup') ? undefined : json['public_signup'],
+        'redirect_url': !exists(json, 'redirect_url') ? undefined : json['redirect_url'],
+        'refresh_absolute_lifetime': !exists(json, 'refresh_absolute_lifetime') ? undefined : json['refresh_absolute_lifetime'],
+        'refresh_enabled': !exists(json, 'refresh_enabled') ? undefined : json['refresh_enabled'],
+        'refresh_inactivity_lifetime': !exists(json, 'refresh_inactivity_lifetime') ? undefined : json['refresh_inactivity_lifetime'],
+        'require_identifier_verification': !exists(json, 'require_identifier_verification') ? undefined : json['require_identifier_verification'],
+        'session_timeout_length': !exists(json, 'session_timeout_length') ? undefined : json['session_timeout_length'],
+        'element_customization': !exists(json, 'element_customization') ? undefined : ElementCustomizationFromJSON(json['element_customization']),
     };
 }
 
@@ -225,28 +225,28 @@ export function UpdateAppRequestToJSON(value?: UpdateAppRequest | null): any {
     }
     return {
         
-        'additional_auth_origins': value.additionalAuthOrigins,
-        'allowed_callback_urls': value.allowedCallbackUrls,
-        'allowed_identifier': value.allowedIdentifier,
-        'allowed_logout_urls': value.allowedLogoutUrls,
-        'application_login_uri': value.applicationLoginUri,
-        'auth_fallback_method': value.authFallbackMethod,
-        'auth_fallback_method_ttl': value.authFallbackMethodTtl,
-        'auth_origin': value.authOrigin,
-        'default_language': value.defaultLanguage,
-        'login_url': value.loginUrl,
+        'additional_auth_origins': value.additional_auth_origins,
+        'allowed_callback_urls': value.allowed_callback_urls,
+        'allowed_identifier': value.allowed_identifier,
+        'allowed_logout_urls': value.allowed_logout_urls,
+        'application_login_uri': value.application_login_uri,
+        'auth_fallback_method': value.auth_fallback_method,
+        'auth_fallback_method_ttl': value.auth_fallback_method_ttl,
+        'auth_origin': value.auth_origin,
+        'default_language': value.default_language,
+        'login_url': value.login_url,
         'name': value.name,
-        'hosted_subdomain': value.hostedSubdomain,
-        'passage_branding': value.passageBranding,
-        'profile_management': value.profileManagement,
-        'public_signup': value.publicSignup,
-        'redirect_url': value.redirectUrl,
-        'refresh_absolute_lifetime': value.refreshAbsoluteLifetime,
-        'refresh_enabled': value.refreshEnabled,
-        'refresh_inactivity_lifetime': value.refreshInactivityLifetime,
-        'require_identifier_verification': value.requireIdentifierVerification,
-        'session_timeout_length': value.sessionTimeoutLength,
-        'element_customization': ElementCustomizationToJSON(value.elementCustomization),
+        'hosted_subdomain': value.hosted_subdomain,
+        'passage_branding': value.passage_branding,
+        'profile_management': value.profile_management,
+        'public_signup': value.public_signup,
+        'redirect_url': value.redirect_url,
+        'refresh_absolute_lifetime': value.refresh_absolute_lifetime,
+        'refresh_enabled': value.refresh_enabled,
+        'refresh_inactivity_lifetime': value.refresh_inactivity_lifetime,
+        'require_identifier_verification': value.require_identifier_verification,
+        'session_timeout_length': value.session_timeout_length,
+        'element_customization': ElementCustomizationToJSON(value.element_customization),
     };
 }
 

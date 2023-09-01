@@ -31,7 +31,7 @@ export interface UserMetadataFieldResponse {
      * @type {UserMetadataField}
      * @memberof UserMetadataFieldResponse
      */
-    userMetadataField: UserMetadataField;
+    user_metadata_field: UserMetadataField;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface UserMetadataFieldResponse {
  */
 export function instanceOfUserMetadataFieldResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "userMetadataField" in value;
+    isInstance = isInstance && "user_metadata_field" in value;
 
     return isInstance;
 }
@@ -54,7 +54,7 @@ export function UserMetadataFieldResponseFromJSONTyped(json: any, ignoreDiscrimi
     }
     return {
         
-        'userMetadataField': UserMetadataFieldFromJSON(json['user_metadata_field']),
+        'user_metadata_field': UserMetadataFieldFromJSON(json['user_metadata_field']),
     };
 }
 
@@ -67,7 +67,7 @@ export function UserMetadataFieldResponseToJSON(value?: UserMetadataFieldRespons
     }
     return {
         
-        'user_metadata_field': UserMetadataFieldToJSON(value.userMetadataField),
+        'user_metadata_field': UserMetadataFieldToJSON(value.user_metadata_field),
     };
 }
 

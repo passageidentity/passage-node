@@ -49,25 +49,25 @@ export interface UserCSVImportResponse {
      * @type {number}
      * @memberof UserCSVImportResponse
      */
-    numUsersErrored: number;
+    num_users_errored: number;
     /**
      * 
      * @type {number}
      * @memberof UserCSVImportResponse
      */
-    numUsersExisting: number;
+    num_users_existing: number;
     /**
      * 
      * @type {number}
      * @memberof UserCSVImportResponse
      */
-    numUsersImported: number;
+    num_users_imported: number;
     /**
      * 
      * @type {number}
      * @memberof UserCSVImportResponse
      */
-    numUsersReceived: number;
+    num_users_received: number;
 }
 
 /**
@@ -78,10 +78,10 @@ export function instanceOfUserCSVImportResponse(value: object): boolean {
     isInstance = isInstance && "errors" in value;
     isInstance = isInstance && "existing" in value;
     isInstance = isInstance && "imported" in value;
-    isInstance = isInstance && "numUsersErrored" in value;
-    isInstance = isInstance && "numUsersExisting" in value;
-    isInstance = isInstance && "numUsersImported" in value;
-    isInstance = isInstance && "numUsersReceived" in value;
+    isInstance = isInstance && "num_users_errored" in value;
+    isInstance = isInstance && "num_users_existing" in value;
+    isInstance = isInstance && "num_users_imported" in value;
+    isInstance = isInstance && "num_users_received" in value;
 
     return isInstance;
 }
@@ -99,10 +99,10 @@ export function UserCSVImportResponseFromJSONTyped(json: any, ignoreDiscriminato
         'errors': ((json['errors'] as Array<any>).map(UserCSVImportErrorFromJSON)),
         'existing': json['existing'],
         'imported': json['imported'],
-        'numUsersErrored': json['num_users_errored'],
-        'numUsersExisting': json['num_users_existing'],
-        'numUsersImported': json['num_users_imported'],
-        'numUsersReceived': json['num_users_received'],
+        'num_users_errored': json['num_users_errored'],
+        'num_users_existing': json['num_users_existing'],
+        'num_users_imported': json['num_users_imported'],
+        'num_users_received': json['num_users_received'],
     };
 }
 
@@ -118,10 +118,10 @@ export function UserCSVImportResponseToJSON(value?: UserCSVImportResponse | null
         'errors': ((value.errors as Array<any>).map(UserCSVImportErrorToJSON)),
         'existing': value.existing,
         'imported': value.imported,
-        'num_users_errored': value.numUsersErrored,
-        'num_users_existing': value.numUsersExisting,
-        'num_users_imported': value.numUsersImported,
-        'num_users_received': value.numUsersReceived,
+        'num_users_errored': value.num_users_errored,
+        'num_users_existing': value.num_users_existing,
+        'num_users_imported': value.num_users_imported,
+        'num_users_received': value.num_users_received,
     };
 }
 

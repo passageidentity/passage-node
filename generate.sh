@@ -1,16 +1,18 @@
-#!/bin/bash
-set -e
+# #!/bin/bash
+# set -e
 
 if [ -z "$1" ]; then
-  echo "Required input file parameter is missing."
+  echo "Required generator file is missing."
   exit 1
 fi
 
-input="$1"
+file="$1"
 
-openapi-generator generate \
+rm -rf ./src/generated
+npm install @openapitools/openapi-generator-cli -g
+
+openapi-generator-cli generate \
+  -i "$file" \
   -g typescript-fetch \
-  -i "$input" \
-  -o ./src/generated
-
-npx prettier -w ./src/generated
+  -o ./src/generated \
+  --additional-properties=modelPropertyNaming=original

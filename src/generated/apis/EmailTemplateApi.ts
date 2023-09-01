@@ -22,7 +22,7 @@ import type {
   Model400Error,
   Model404Error,
   UpdateEmailTemplateRequest,
-} from '../models';
+} from '../models/index';
 import {
     CreateEmailTemplateHandler201ResponseFromJSON,
     CreateEmailTemplateHandler201ResponseToJSON,
@@ -38,7 +38,7 @@ import {
     Model404ErrorToJSON,
     UpdateEmailTemplateRequestFromJSON,
     UpdateEmailTemplateRequestToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface CreateEmailTemplateHandlerRequest {
     appId: string;

@@ -31,7 +31,7 @@ export interface ListApiKeysResponse {
      * @type {Array<ApiKey>}
      * @memberof ListApiKeysResponse
      */
-    apiKeys: Array<ApiKey>;
+    api_keys: Array<ApiKey>;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface ListApiKeysResponse {
  */
 export function instanceOfListApiKeysResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "apiKeys" in value;
+    isInstance = isInstance && "api_keys" in value;
 
     return isInstance;
 }
@@ -54,7 +54,7 @@ export function ListApiKeysResponseFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'apiKeys': ((json['api_keys'] as Array<any>).map(ApiKeyFromJSON)),
+        'api_keys': ((json['api_keys'] as Array<any>).map(ApiKeyFromJSON)),
     };
 }
 
@@ -67,7 +67,7 @@ export function ListApiKeysResponseToJSON(value?: ListApiKeysResponse | null): a
     }
     return {
         
-        'api_keys': ((value.apiKeys as Array<any>).map(ApiKeyToJSON)),
+        'api_keys': ((value.api_keys as Array<any>).map(ApiKeyToJSON)),
     };
 }
 

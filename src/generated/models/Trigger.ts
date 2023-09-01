@@ -24,7 +24,7 @@ export interface Trigger {
      * @type {Array<string>}
      * @memberof Trigger
      */
-    enabledFunctions: Array<string>;
+    enabled_functions: Array<string>;
 }
 
 /**
@@ -32,7 +32,7 @@ export interface Trigger {
  */
 export function instanceOfTrigger(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "enabledFunctions" in value;
+    isInstance = isInstance && "enabled_functions" in value;
 
     return isInstance;
 }
@@ -47,7 +47,7 @@ export function TriggerFromJSONTyped(json: any, ignoreDiscriminator: boolean): T
     }
     return {
         
-        'enabledFunctions': json['enabled_functions'],
+        'enabled_functions': json['enabled_functions'],
     };
 }
 
@@ -60,7 +60,7 @@ export function TriggerToJSON(value?: Trigger | null): any {
     }
     return {
         
-        'enabled_functions': value.enabledFunctions,
+        'enabled_functions': value.enabled_functions,
     };
 }
 

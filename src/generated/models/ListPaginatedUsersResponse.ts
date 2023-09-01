@@ -37,13 +37,13 @@ export interface ListPaginatedUsersResponse {
      * @type {PaginatedLinks}
      * @memberof ListPaginatedUsersResponse
      */
-    links: PaginatedLinks;
+    _links: PaginatedLinks;
     /**
      * time anchor (Unix timestamp) --> all users returned created before this timestamp
      * @type {number}
      * @memberof ListPaginatedUsersResponse
      */
-    createdBefore: number;
+    created_before: number;
     /**
      * 
      * @type {number}
@@ -61,7 +61,7 @@ export interface ListPaginatedUsersResponse {
      * @type {number}
      * @memberof ListPaginatedUsersResponse
      */
-    totalUsers: number;
+    total_users: number;
     /**
      * 
      * @type {Array<UserInfo>}
@@ -75,11 +75,11 @@ export interface ListPaginatedUsersResponse {
  */
 export function instanceOfListPaginatedUsersResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "links" in value;
-    isInstance = isInstance && "createdBefore" in value;
+    isInstance = isInstance && "_links" in value;
+    isInstance = isInstance && "created_before" in value;
     isInstance = isInstance && "limit" in value;
     isInstance = isInstance && "page" in value;
-    isInstance = isInstance && "totalUsers" in value;
+    isInstance = isInstance && "total_users" in value;
     isInstance = isInstance && "users" in value;
 
     return isInstance;
@@ -95,11 +95,11 @@ export function ListPaginatedUsersResponseFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'links': PaginatedLinksFromJSON(json['_links']),
-        'createdBefore': json['created_before'],
+        '_links': PaginatedLinksFromJSON(json['_links']),
+        'created_before': json['created_before'],
         'limit': json['limit'],
         'page': json['page'],
-        'totalUsers': json['total_users'],
+        'total_users': json['total_users'],
         'users': ((json['users'] as Array<any>).map(UserInfoFromJSON)),
     };
 }
@@ -113,11 +113,11 @@ export function ListPaginatedUsersResponseToJSON(value?: ListPaginatedUsersRespo
     }
     return {
         
-        '_links': PaginatedLinksToJSON(value.links),
-        'created_before': value.createdBefore,
+        '_links': PaginatedLinksToJSON(value._links),
+        'created_before': value.created_before,
         'limit': value.limit,
         'page': value.page,
-        'total_users': value.totalUsers,
+        'total_users': value.total_users,
         'users': ((value.users as Array<any>).map(UserInfoToJSON)),
     };
 }

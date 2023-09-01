@@ -37,13 +37,13 @@ export interface ListPaginatedEventsResponse {
      * @type {PaginatedLinks}
      * @memberof ListPaginatedEventsResponse
      */
-    links: PaginatedLinks;
+    _links: PaginatedLinks;
     /**
      * time anchor (Unix timestamp) --> all events returned were created before this timestamp
      * @type {number}
      * @memberof ListPaginatedEventsResponse
      */
-    createdBefore: number;
+    created_before: number;
     /**
      * 
      * @type {Array<EventInfo>}
@@ -67,7 +67,7 @@ export interface ListPaginatedEventsResponse {
      * @type {number}
      * @memberof ListPaginatedEventsResponse
      */
-    totalEvents: number;
+    total_events: number;
 }
 
 /**
@@ -75,12 +75,12 @@ export interface ListPaginatedEventsResponse {
  */
 export function instanceOfListPaginatedEventsResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "links" in value;
-    isInstance = isInstance && "createdBefore" in value;
+    isInstance = isInstance && "_links" in value;
+    isInstance = isInstance && "created_before" in value;
     isInstance = isInstance && "events" in value;
     isInstance = isInstance && "limit" in value;
     isInstance = isInstance && "page" in value;
-    isInstance = isInstance && "totalEvents" in value;
+    isInstance = isInstance && "total_events" in value;
 
     return isInstance;
 }
@@ -95,12 +95,12 @@ export function ListPaginatedEventsResponseFromJSONTyped(json: any, ignoreDiscri
     }
     return {
         
-        'links': PaginatedLinksFromJSON(json['_links']),
-        'createdBefore': json['created_before'],
+        '_links': PaginatedLinksFromJSON(json['_links']),
+        'created_before': json['created_before'],
         'events': ((json['events'] as Array<any>).map(EventInfoFromJSON)),
         'limit': json['limit'],
         'page': json['page'],
-        'totalEvents': json['total_events'],
+        'total_events': json['total_events'],
     };
 }
 
@@ -113,12 +113,12 @@ export function ListPaginatedEventsResponseToJSON(value?: ListPaginatedEventsRes
     }
     return {
         
-        '_links': PaginatedLinksToJSON(value.links),
-        'created_before': value.createdBefore,
+        '_links': PaginatedLinksToJSON(value._links),
+        'created_before': value.created_before,
         'events': ((value.events as Array<any>).map(EventInfoToJSON)),
         'limit': value.limit,
         'page': value.page,
-        'total_events': value.totalEvents,
+        'total_events': value.total_events,
     };
 }
 

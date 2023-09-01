@@ -24,25 +24,25 @@ export interface AppStatsResponse {
      * @type {number}
      * @memberof AppStatsResponse
      */
-    percentMagiclinkUsers: number;
+    percent_magiclink_users: number;
     /**
      * 
      * @type {number}
      * @memberof AppStatsResponse
      */
-    percentWebauthnUsers: number;
+    percent_webauthn_users: number;
     /**
      * 
      * @type {number}
      * @memberof AppStatsResponse
      */
-    totalUsers: number;
+    total_users: number;
     /**
      * Monthly Active Users
      * @type {number}
      * @memberof AppStatsResponse
      */
-    mauCount: number;
+    mau_count: number;
 }
 
 /**
@@ -50,10 +50,10 @@ export interface AppStatsResponse {
  */
 export function instanceOfAppStatsResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "percentMagiclinkUsers" in value;
-    isInstance = isInstance && "percentWebauthnUsers" in value;
-    isInstance = isInstance && "totalUsers" in value;
-    isInstance = isInstance && "mauCount" in value;
+    isInstance = isInstance && "percent_magiclink_users" in value;
+    isInstance = isInstance && "percent_webauthn_users" in value;
+    isInstance = isInstance && "total_users" in value;
+    isInstance = isInstance && "mau_count" in value;
 
     return isInstance;
 }
@@ -68,10 +68,10 @@ export function AppStatsResponseFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'percentMagiclinkUsers': json['percent_magiclink_users'],
-        'percentWebauthnUsers': json['percent_webauthn_users'],
-        'totalUsers': json['total_users'],
-        'mauCount': json['mau_count'],
+        'percent_magiclink_users': json['percent_magiclink_users'],
+        'percent_webauthn_users': json['percent_webauthn_users'],
+        'total_users': json['total_users'],
+        'mau_count': json['mau_count'],
     };
 }
 
@@ -84,10 +84,10 @@ export function AppStatsResponseToJSON(value?: AppStatsResponse | null): any {
     }
     return {
         
-        'percent_magiclink_users': value.percentMagiclinkUsers,
-        'percent_webauthn_users': value.percentWebauthnUsers,
-        'total_users': value.totalUsers,
-        'mau_count': value.mauCount,
+        'percent_magiclink_users': value.percent_magiclink_users,
+        'percent_webauthn_users': value.percent_webauthn_users,
+        'total_users': value.total_users,
+        'mau_count': value.mau_count,
     };
 }
 

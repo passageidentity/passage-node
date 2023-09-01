@@ -31,13 +31,13 @@ export interface LogEvent {
      * @type {string}
      * @memberof LogEvent
      */
-    deploymentId: string;
+    deployment_id: string;
     /**
      * The type of event.
      * @type {string}
      * @memberof LogEvent
      */
-    eventType: LogEventEventTypeEnum;
+    event_type: LogEventEventTypeEnum;
     /**
      * Timestamp for when this event was created, in RFC3339 format.
      * @type {Date}
@@ -49,7 +49,7 @@ export interface LogEvent {
      * @type {string}
      * @memberof LogEvent
      */
-    isolateId?: string;
+    isolate_id?: string;
     /**
      * The region where the event was generated. Refer to https://deno.com/deploy/docs/regions for possible values.
      * @type {string}
@@ -84,8 +84,8 @@ export type LogEventEventTypeEnum = typeof LogEventEventTypeEnum[keyof typeof Lo
  */
 export function instanceOfLogEvent(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "deploymentId" in value;
-    isInstance = isInstance && "eventType" in value;
+    isInstance = isInstance && "deployment_id" in value;
+    isInstance = isInstance && "event_type" in value;
     isInstance = isInstance && "timestamp" in value;
     isInstance = isInstance && "region" in value;
     isInstance = isInstance && "event" in value;
@@ -103,10 +103,10 @@ export function LogEventFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
-        'deploymentId': json['deployment_id'],
-        'eventType': json['event_type'],
+        'deployment_id': json['deployment_id'],
+        'event_type': json['event_type'],
         'timestamp': (new Date(json['timestamp'])),
-        'isolateId': !exists(json, 'isolate_id') ? undefined : json['isolate_id'],
+        'isolate_id': !exists(json, 'isolate_id') ? undefined : json['isolate_id'],
         'region': json['region'],
         'event': LogEventAllOfEventFromJSON(json['event']),
     };
@@ -121,10 +121,10 @@ export function LogEventToJSON(value?: LogEvent | null): any {
     }
     return {
         
-        'deployment_id': value.deploymentId,
-        'event_type': value.eventType,
+        'deployment_id': value.deployment_id,
+        'event_type': value.event_type,
         'timestamp': (value.timestamp.toISOString()),
-        'isolate_id': value.isolateId,
+        'isolate_id': value.isolate_id,
         'region': value.region,
         'event': LogEventAllOfEventToJSON(value.event),
     };

@@ -24,7 +24,7 @@ export interface UpdateUserMetadataField {
      * @type {string}
      * @memberof UpdateUserMetadataField
      */
-    friendlyName?: string;
+    friendly_name?: string;
     /**
      * 
      * @type {boolean}
@@ -58,7 +58,7 @@ export function UpdateUserMetadataFieldFromJSONTyped(json: any, ignoreDiscrimina
     }
     return {
         
-        'friendlyName': !exists(json, 'friendly_name') ? undefined : json['friendly_name'],
+        'friendly_name': !exists(json, 'friendly_name') ? undefined : json['friendly_name'],
         'profile': !exists(json, 'profile') ? undefined : json['profile'],
         'registration': !exists(json, 'registration') ? undefined : json['registration'],
     };
@@ -73,7 +73,7 @@ export function UpdateUserMetadataFieldToJSON(value?: UpdateUserMetadataField | 
     }
     return {
         
-        'friendly_name': value.friendlyName,
+        'friendly_name': value.friendly_name,
         'profile': value.profile,
         'registration': value.registration,
     };

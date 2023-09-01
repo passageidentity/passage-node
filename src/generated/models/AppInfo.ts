@@ -49,61 +49,61 @@ export interface AppInfo {
      * @type {Array<string>}
      * @memberof AppInfo
      */
-    additionalAuthOrigins: Array<string>;
+    additional_auth_origins: Array<string>;
     /**
      * The valid URLs where users can be redirected after authentication.
      * @type {Array<string>}
      * @memberof AppInfo
      */
-    allowedCallbackUrls: Array<string>;
+    allowed_callback_urls: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    allowedIdentifier: string;
+    allowed_identifier: string;
     /**
      * The valid URLs where users can be redirected after logging out.
      * @type {Array<string>}
      * @memberof AppInfo
      */
-    allowedLogoutUrls: Array<string>;
+    allowed_logout_urls: Array<string>;
     /**
      * A route within your application that redirects to the Authorization URL endpoint.
      * @type {string}
      * @memberof AppInfo
      */
-    applicationLoginUri: string;
+    application_login_uri: string;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    authFallbackMethod: string;
+    auth_fallback_method: string;
     /**
      * 
      * @type {number}
      * @memberof AppInfo
      */
-    authFallbackMethodTtl: number;
+    auth_fallback_method_ttl: number;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    authOrigin: string;
+    auth_origin: string;
     /**
      * 
      * @type {Date}
      * @memberof AppInfo
      */
-    createdAt: Date;
+    created_at: Date;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    defaultLanguage: string;
+    default_language: string;
     /**
      * 
      * @type {boolean}
@@ -127,7 +127,7 @@ export interface AppInfo {
      * @type {string}
      * @memberof AppInfo
      */
-    loginUrl: string;
+    login_url: string;
     /**
      * 
      * @type {string}
@@ -145,67 +145,67 @@ export interface AppInfo {
      * @type {string}
      * @memberof AppInfo
      */
-    hostedSubdomain: string;
+    hosted_subdomain: string;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    passageBranding: boolean;
+    passage_branding: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    profileManagement: boolean;
+    profile_management: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    publicSignup: boolean;
+    public_signup: boolean;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    redirectUrl: string;
+    redirect_url: string;
     /**
      * 
      * @type {number}
      * @memberof AppInfo
      */
-    refreshAbsoluteLifetime: number;
+    refresh_absolute_lifetime: number;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    refreshEnabled: boolean;
+    refresh_enabled: boolean;
     /**
      * 
      * @type {number}
      * @memberof AppInfo
      */
-    refreshInactivityLifetime: number;
+    refresh_inactivity_lifetime: number;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    requireEmailVerification: boolean;
+    require_email_verification: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    requireIdentifierVerification: boolean;
+    require_identifier_verification: boolean;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    requiredIdentifier: string;
+    required_identifier: string;
     /**
      * 
      * @type {string}
@@ -217,7 +217,7 @@ export interface AppInfo {
      * @type {string}
      * @memberof AppInfo
      */
-    rsaPublicKey: string;
+    rsa_public_key: string;
     /**
      * can only be retrieved by an app admin
      * @type {string}
@@ -229,7 +229,7 @@ export interface AppInfo {
      * @type {number}
      * @memberof AppInfo
      */
-    sessionTimeoutLength: number;
+    session_timeout_length: number;
     /**
      * 
      * @type {string}
@@ -241,7 +241,7 @@ export interface AppInfo {
      * @type {Array<UserMetadataField>}
      * @memberof AppInfo
      */
-    userMetadataSchema: Array<UserMetadataField>;
+    user_metadata_schema: Array<UserMetadataField>;
     /**
      * 
      * @type {Array<Technologies>}
@@ -253,7 +253,7 @@ export interface AppInfo {
      * @type {ElementCustomization}
      * @memberof AppInfo
      */
-    elementCustomization: ElementCustomization;
+    element_customization: ElementCustomization;
 }
 
 
@@ -272,40 +272,40 @@ export type AppInfoTypeEnum = typeof AppInfoTypeEnum[keyof typeof AppInfoTypeEnu
  */
 export function instanceOfAppInfo(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "additionalAuthOrigins" in value;
-    isInstance = isInstance && "allowedCallbackUrls" in value;
-    isInstance = isInstance && "allowedIdentifier" in value;
-    isInstance = isInstance && "allowedLogoutUrls" in value;
-    isInstance = isInstance && "applicationLoginUri" in value;
-    isInstance = isInstance && "authFallbackMethod" in value;
-    isInstance = isInstance && "authFallbackMethodTtl" in value;
-    isInstance = isInstance && "authOrigin" in value;
-    isInstance = isInstance && "createdAt" in value;
-    isInstance = isInstance && "defaultLanguage" in value;
+    isInstance = isInstance && "additional_auth_origins" in value;
+    isInstance = isInstance && "allowed_callback_urls" in value;
+    isInstance = isInstance && "allowed_identifier" in value;
+    isInstance = isInstance && "allowed_logout_urls" in value;
+    isInstance = isInstance && "application_login_uri" in value;
+    isInstance = isInstance && "auth_fallback_method" in value;
+    isInstance = isInstance && "auth_fallback_method_ttl" in value;
+    isInstance = isInstance && "auth_origin" in value;
+    isInstance = isInstance && "created_at" in value;
+    isInstance = isInstance && "default_language" in value;
     isInstance = isInstance && "ephemeral" in value;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "layouts" in value;
-    isInstance = isInstance && "loginUrl" in value;
+    isInstance = isInstance && "login_url" in value;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "hosted" in value;
-    isInstance = isInstance && "hostedSubdomain" in value;
-    isInstance = isInstance && "passageBranding" in value;
-    isInstance = isInstance && "profileManagement" in value;
-    isInstance = isInstance && "publicSignup" in value;
-    isInstance = isInstance && "redirectUrl" in value;
-    isInstance = isInstance && "refreshAbsoluteLifetime" in value;
-    isInstance = isInstance && "refreshEnabled" in value;
-    isInstance = isInstance && "refreshInactivityLifetime" in value;
-    isInstance = isInstance && "requireEmailVerification" in value;
-    isInstance = isInstance && "requireIdentifierVerification" in value;
-    isInstance = isInstance && "requiredIdentifier" in value;
+    isInstance = isInstance && "hosted_subdomain" in value;
+    isInstance = isInstance && "passage_branding" in value;
+    isInstance = isInstance && "profile_management" in value;
+    isInstance = isInstance && "public_signup" in value;
+    isInstance = isInstance && "redirect_url" in value;
+    isInstance = isInstance && "refresh_absolute_lifetime" in value;
+    isInstance = isInstance && "refresh_enabled" in value;
+    isInstance = isInstance && "refresh_inactivity_lifetime" in value;
+    isInstance = isInstance && "require_email_verification" in value;
+    isInstance = isInstance && "require_identifier_verification" in value;
+    isInstance = isInstance && "required_identifier" in value;
     isInstance = isInstance && "role" in value;
-    isInstance = isInstance && "rsaPublicKey" in value;
-    isInstance = isInstance && "sessionTimeoutLength" in value;
+    isInstance = isInstance && "rsa_public_key" in value;
+    isInstance = isInstance && "session_timeout_length" in value;
     isInstance = isInstance && "type" in value;
-    isInstance = isInstance && "userMetadataSchema" in value;
+    isInstance = isInstance && "user_metadata_schema" in value;
     isInstance = isInstance && "technologies" in value;
-    isInstance = isInstance && "elementCustomization" in value;
+    isInstance = isInstance && "element_customization" in value;
 
     return isInstance;
 }
@@ -320,41 +320,41 @@ export function AppInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
     }
     return {
         
-        'additionalAuthOrigins': json['additional_auth_origins'],
-        'allowedCallbackUrls': json['allowed_callback_urls'],
-        'allowedIdentifier': json['allowed_identifier'],
-        'allowedLogoutUrls': json['allowed_logout_urls'],
-        'applicationLoginUri': json['application_login_uri'],
-        'authFallbackMethod': json['auth_fallback_method'],
-        'authFallbackMethodTtl': json['auth_fallback_method_ttl'],
-        'authOrigin': json['auth_origin'],
-        'createdAt': (new Date(json['created_at'])),
-        'defaultLanguage': json['default_language'],
+        'additional_auth_origins': json['additional_auth_origins'],
+        'allowed_callback_urls': json['allowed_callback_urls'],
+        'allowed_identifier': json['allowed_identifier'],
+        'allowed_logout_urls': json['allowed_logout_urls'],
+        'application_login_uri': json['application_login_uri'],
+        'auth_fallback_method': json['auth_fallback_method'],
+        'auth_fallback_method_ttl': json['auth_fallback_method_ttl'],
+        'auth_origin': json['auth_origin'],
+        'created_at': (new Date(json['created_at'])),
+        'default_language': json['default_language'],
         'ephemeral': json['ephemeral'],
         'id': json['id'],
         'layouts': LayoutsFromJSON(json['layouts']),
-        'loginUrl': json['login_url'],
+        'login_url': json['login_url'],
         'name': json['name'],
         'hosted': json['hosted'],
-        'hostedSubdomain': json['hosted_subdomain'],
-        'passageBranding': json['passage_branding'],
-        'profileManagement': json['profile_management'],
-        'publicSignup': json['public_signup'],
-        'redirectUrl': json['redirect_url'],
-        'refreshAbsoluteLifetime': json['refresh_absolute_lifetime'],
-        'refreshEnabled': json['refresh_enabled'],
-        'refreshInactivityLifetime': json['refresh_inactivity_lifetime'],
-        'requireEmailVerification': json['require_email_verification'],
-        'requireIdentifierVerification': json['require_identifier_verification'],
-        'requiredIdentifier': json['required_identifier'],
+        'hosted_subdomain': json['hosted_subdomain'],
+        'passage_branding': json['passage_branding'],
+        'profile_management': json['profile_management'],
+        'public_signup': json['public_signup'],
+        'redirect_url': json['redirect_url'],
+        'refresh_absolute_lifetime': json['refresh_absolute_lifetime'],
+        'refresh_enabled': json['refresh_enabled'],
+        'refresh_inactivity_lifetime': json['refresh_inactivity_lifetime'],
+        'require_email_verification': json['require_email_verification'],
+        'require_identifier_verification': json['require_identifier_verification'],
+        'required_identifier': json['required_identifier'],
         'role': json['role'],
-        'rsaPublicKey': json['rsa_public_key'],
+        'rsa_public_key': json['rsa_public_key'],
         'secret': !exists(json, 'secret') ? undefined : json['secret'],
-        'sessionTimeoutLength': json['session_timeout_length'],
+        'session_timeout_length': json['session_timeout_length'],
         'type': json['type'],
-        'userMetadataSchema': ((json['user_metadata_schema'] as Array<any>).map(UserMetadataFieldFromJSON)),
+        'user_metadata_schema': ((json['user_metadata_schema'] as Array<any>).map(UserMetadataFieldFromJSON)),
         'technologies': ((json['technologies'] as Array<any>).map(TechnologiesFromJSON)),
-        'elementCustomization': ElementCustomizationFromJSON(json['element_customization']),
+        'element_customization': ElementCustomizationFromJSON(json['element_customization']),
     };
 }
 
@@ -367,41 +367,41 @@ export function AppInfoToJSON(value?: AppInfo | null): any {
     }
     return {
         
-        'additional_auth_origins': value.additionalAuthOrigins,
-        'allowed_callback_urls': value.allowedCallbackUrls,
-        'allowed_identifier': value.allowedIdentifier,
-        'allowed_logout_urls': value.allowedLogoutUrls,
-        'application_login_uri': value.applicationLoginUri,
-        'auth_fallback_method': value.authFallbackMethod,
-        'auth_fallback_method_ttl': value.authFallbackMethodTtl,
-        'auth_origin': value.authOrigin,
-        'created_at': (value.createdAt.toISOString()),
-        'default_language': value.defaultLanguage,
+        'additional_auth_origins': value.additional_auth_origins,
+        'allowed_callback_urls': value.allowed_callback_urls,
+        'allowed_identifier': value.allowed_identifier,
+        'allowed_logout_urls': value.allowed_logout_urls,
+        'application_login_uri': value.application_login_uri,
+        'auth_fallback_method': value.auth_fallback_method,
+        'auth_fallback_method_ttl': value.auth_fallback_method_ttl,
+        'auth_origin': value.auth_origin,
+        'created_at': (value.created_at.toISOString()),
+        'default_language': value.default_language,
         'ephemeral': value.ephemeral,
         'id': value.id,
         'layouts': LayoutsToJSON(value.layouts),
-        'login_url': value.loginUrl,
+        'login_url': value.login_url,
         'name': value.name,
         'hosted': value.hosted,
-        'hosted_subdomain': value.hostedSubdomain,
-        'passage_branding': value.passageBranding,
-        'profile_management': value.profileManagement,
-        'public_signup': value.publicSignup,
-        'redirect_url': value.redirectUrl,
-        'refresh_absolute_lifetime': value.refreshAbsoluteLifetime,
-        'refresh_enabled': value.refreshEnabled,
-        'refresh_inactivity_lifetime': value.refreshInactivityLifetime,
-        'require_email_verification': value.requireEmailVerification,
-        'require_identifier_verification': value.requireIdentifierVerification,
-        'required_identifier': value.requiredIdentifier,
+        'hosted_subdomain': value.hosted_subdomain,
+        'passage_branding': value.passage_branding,
+        'profile_management': value.profile_management,
+        'public_signup': value.public_signup,
+        'redirect_url': value.redirect_url,
+        'refresh_absolute_lifetime': value.refresh_absolute_lifetime,
+        'refresh_enabled': value.refresh_enabled,
+        'refresh_inactivity_lifetime': value.refresh_inactivity_lifetime,
+        'require_email_verification': value.require_email_verification,
+        'require_identifier_verification': value.require_identifier_verification,
+        'required_identifier': value.required_identifier,
         'role': value.role,
-        'rsa_public_key': value.rsaPublicKey,
+        'rsa_public_key': value.rsa_public_key,
         'secret': value.secret,
-        'session_timeout_length': value.sessionTimeoutLength,
+        'session_timeout_length': value.session_timeout_length,
         'type': value.type,
-        'user_metadata_schema': ((value.userMetadataSchema as Array<any>).map(UserMetadataFieldToJSON)),
+        'user_metadata_schema': ((value.user_metadata_schema as Array<any>).map(UserMetadataFieldToJSON)),
         'technologies': ((value.technologies as Array<any>).map(TechnologiesToJSON)),
-        'element_customization': ElementCustomizationToJSON(value.elementCustomization),
+        'element_customization': ElementCustomizationToJSON(value.element_customization),
     };
 }
 

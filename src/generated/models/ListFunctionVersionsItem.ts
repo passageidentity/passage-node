@@ -36,7 +36,7 @@ export interface ListFunctionVersionsItem {
      * @type {Date}
      * @memberof ListFunctionVersionsItem
      */
-    createdAt: Date;
+    created_at: Date;
 }
 
 /**
@@ -46,7 +46,7 @@ export function instanceOfListFunctionVersionsItem(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "version" in value;
-    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "created_at" in value;
 
     return isInstance;
 }
@@ -63,7 +63,7 @@ export function ListFunctionVersionsItemFromJSONTyped(json: any, ignoreDiscrimin
         
         'id': json['id'],
         'version': json['version'],
-        'createdAt': (new Date(json['created_at'])),
+        'created_at': (new Date(json['created_at'])),
     };
 }
 
@@ -78,7 +78,7 @@ export function ListFunctionVersionsItemToJSON(value?: ListFunctionVersionsItem 
         
         'id': value.id,
         'version': value.version,
-        'created_at': (value.createdAt.toISOString()),
+        'created_at': (value.created_at.toISOString()),
     };
 }
 

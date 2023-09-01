@@ -24,7 +24,7 @@ export interface CreatedApiKey {
      * @type {string}
      * @memberof CreatedApiKey
      */
-    createdAt: string;
+    created_at: string;
     /**
      * 
      * @type {string}
@@ -36,7 +36,7 @@ export interface CreatedApiKey {
      * @type {string}
      * @memberof CreatedApiKey
      */
-    keyPrefix: string;
+    key_prefix: string;
     /**
      * 
      * @type {string}
@@ -54,7 +54,7 @@ export interface CreatedApiKey {
      * @type {string}
      * @memberof CreatedApiKey
      */
-    plaintextKey: string;
+    plaintext_key: string;
 }
 
 /**
@@ -62,12 +62,12 @@ export interface CreatedApiKey {
  */
 export function instanceOfCreatedApiKey(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "keyPrefix" in value;
+    isInstance = isInstance && "key_prefix" in value;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "role" in value;
-    isInstance = isInstance && "plaintextKey" in value;
+    isInstance = isInstance && "plaintext_key" in value;
 
     return isInstance;
 }
@@ -82,12 +82,12 @@ export function CreatedApiKeyFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'createdAt': json['created_at'],
+        'created_at': json['created_at'],
         'id': json['id'],
-        'keyPrefix': json['key_prefix'],
+        'key_prefix': json['key_prefix'],
         'name': json['name'],
         'role': json['role'],
-        'plaintextKey': json['plaintext_key'],
+        'plaintext_key': json['plaintext_key'],
     };
 }
 
@@ -100,12 +100,12 @@ export function CreatedApiKeyToJSON(value?: CreatedApiKey | null): any {
     }
     return {
         
-        'created_at': value.createdAt,
+        'created_at': value.created_at,
         'id': value.id,
-        'key_prefix': value.keyPrefix,
+        'key_prefix': value.key_prefix,
         'name': value.name,
         'role': value.role,
-        'plaintext_key': value.plaintextKey,
+        'plaintext_key': value.plaintext_key,
     };
 }
 

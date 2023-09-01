@@ -172,14 +172,20 @@ export class BaseAPI {
             }))
         };
 
+        let body: any;
+        if (isFormData(overriddenInit.body)
+            || (overriddenInit.body instanceof URLSearchParams)
+            || isBlob(overriddenInit.body)) {
+          body = overriddenInit.body;
+        } else if (this.isJsonMime(headers['Content-Type'])) {
+          body = JSON.stringify(overriddenInit.body);
+        } else {
+          body = overriddenInit.body;
+        }
+
         const init: RequestInit = {
             ...overriddenInit,
-            body:
-                isFormData(overriddenInit.body) ||
-                overriddenInit.body instanceof URLSearchParams ||
-                isBlob(overriddenInit.body)
-                    ? overriddenInit.body
-                    : JSON.stringify(overriddenInit.body),
+            body
         };
 
         return { url, init };
@@ -199,7 +205,6 @@ export class BaseAPI {
         try {
             response = await (this.configuration.fetchApi || fetch)(fetchParams.url, fetchParams.init);
         } catch (e) {
-            console.log({fetchApi: this.fetchApi})
             for (const middleware of this.middleware) {
                 if (middleware.onError) {
                     response = await middleware.onError({

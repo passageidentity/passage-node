@@ -31,7 +31,7 @@ export interface ListFunctionVersionsResponse {
      * @type {Array<ListFunctionVersionsItem>}
      * @memberof ListFunctionVersionsResponse
      */
-    functionVersions: Array<ListFunctionVersionsItem>;
+    function_versions: Array<ListFunctionVersionsItem>;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface ListFunctionVersionsResponse {
  */
 export function instanceOfListFunctionVersionsResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "functionVersions" in value;
+    isInstance = isInstance && "function_versions" in value;
 
     return isInstance;
 }
@@ -54,7 +54,7 @@ export function ListFunctionVersionsResponseFromJSONTyped(json: any, ignoreDiscr
     }
     return {
         
-        'functionVersions': ((json['function_versions'] as Array<any>).map(ListFunctionVersionsItemFromJSON)),
+        'function_versions': ((json['function_versions'] as Array<any>).map(ListFunctionVersionsItemFromJSON)),
     };
 }
 
@@ -67,7 +67,7 @@ export function ListFunctionVersionsResponseToJSON(value?: ListFunctionVersionsR
     }
     return {
         
-        'function_versions': ((value.functionVersions as Array<any>).map(ListFunctionVersionsItemToJSON)),
+        'function_versions': ((value.function_versions as Array<any>).map(ListFunctionVersionsItemToJSON)),
     };
 }
 

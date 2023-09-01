@@ -31,7 +31,7 @@ export interface MagicLinkResponse {
      * @type {MagicLink}
      * @memberof MagicLinkResponse
      */
-    magicLink: MagicLink;
+    magic_link: MagicLink;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface MagicLinkResponse {
  */
 export function instanceOfMagicLinkResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "magicLink" in value;
+    isInstance = isInstance && "magic_link" in value;
 
     return isInstance;
 }
@@ -54,7 +54,7 @@ export function MagicLinkResponseFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'magicLink': MagicLinkFromJSON(json['magic_link']),
+        'magic_link': MagicLinkFromJSON(json['magic_link']),
     };
 }
 
@@ -67,7 +67,7 @@ export function MagicLinkResponseToJSON(value?: MagicLinkResponse | null): any {
     }
     return {
         
-        'magic_link': MagicLinkToJSON(value.magicLink),
+        'magic_link': MagicLinkToJSON(value.magic_link),
     };
 }
 

@@ -31,7 +31,7 @@ export interface UserMetadataSchemaResponse {
      * @type {Array<UserMetadataField>}
      * @memberof UserMetadataSchemaResponse
      */
-    userMetadataSchema: Array<UserMetadataField>;
+    user_metadata_schema: Array<UserMetadataField>;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface UserMetadataSchemaResponse {
  */
 export function instanceOfUserMetadataSchemaResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "userMetadataSchema" in value;
+    isInstance = isInstance && "user_metadata_schema" in value;
 
     return isInstance;
 }
@@ -54,7 +54,7 @@ export function UserMetadataSchemaResponseFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'userMetadataSchema': ((json['user_metadata_schema'] as Array<any>).map(UserMetadataFieldFromJSON)),
+        'user_metadata_schema': ((json['user_metadata_schema'] as Array<any>).map(UserMetadataFieldFromJSON)),
     };
 }
 
@@ -67,7 +67,7 @@ export function UserMetadataSchemaResponseToJSON(value?: UserMetadataSchemaRespo
     }
     return {
         
-        'user_metadata_schema': ((value.userMetadataSchema as Array<any>).map(UserMetadataFieldToJSON)),
+        'user_metadata_schema': ((value.user_metadata_schema as Array<any>).map(UserMetadataFieldToJSON)),
     };
 }
 

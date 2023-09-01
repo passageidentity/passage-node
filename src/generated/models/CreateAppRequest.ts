@@ -31,13 +31,13 @@ export interface CreateAppRequest {
      * @type {Array<string>}
      * @memberof CreateAppRequest
      */
-    allowedCallbackUrls?: Array<string>;
+    allowed_callback_urls?: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof CreateAppRequest
      */
-    authOrigin?: string;
+    auth_origin?: string;
     /**
      * 
      * @type {boolean}
@@ -49,7 +49,7 @@ export interface CreateAppRequest {
      * @type {string}
      * @memberof CreateAppRequest
      */
-    hostedSubdomain?: string;
+    hosted_subdomain?: string;
     /**
      * 
      * @type {string}
@@ -61,13 +61,13 @@ export interface CreateAppRequest {
      * @type {string}
      * @memberof CreateAppRequest
      */
-    redirectUrl?: string;
+    redirect_url?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateAppRequest
      */
-    organizationId?: string;
+    organization_id?: string;
     /**
      * 
      * @type {Array<Technologies>}
@@ -112,13 +112,13 @@ export function CreateAppRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'allowedCallbackUrls': !exists(json, 'allowed_callback_urls') ? undefined : json['allowed_callback_urls'],
-        'authOrigin': !exists(json, 'auth_origin') ? undefined : json['auth_origin'],
+        'allowed_callback_urls': !exists(json, 'allowed_callback_urls') ? undefined : json['allowed_callback_urls'],
+        'auth_origin': !exists(json, 'auth_origin') ? undefined : json['auth_origin'],
         'hosted': !exists(json, 'hosted') ? undefined : json['hosted'],
-        'hostedSubdomain': !exists(json, 'hosted_subdomain') ? undefined : json['hosted_subdomain'],
+        'hosted_subdomain': !exists(json, 'hosted_subdomain') ? undefined : json['hosted_subdomain'],
         'name': !exists(json, 'name') ? undefined : json['name'],
-        'redirectUrl': !exists(json, 'redirect_url') ? undefined : json['redirect_url'],
-        'organizationId': !exists(json, 'organization_id') ? undefined : json['organization_id'],
+        'redirect_url': !exists(json, 'redirect_url') ? undefined : json['redirect_url'],
+        'organization_id': !exists(json, 'organization_id') ? undefined : json['organization_id'],
         'technologies': !exists(json, 'technologies') ? undefined : ((json['technologies'] as Array<any>).map(TechnologiesFromJSON)),
         'type': !exists(json, 'type') ? undefined : json['type'],
     };
@@ -133,13 +133,13 @@ export function CreateAppRequestToJSON(value?: CreateAppRequest | null): any {
     }
     return {
         
-        'allowed_callback_urls': value.allowedCallbackUrls,
-        'auth_origin': value.authOrigin,
+        'allowed_callback_urls': value.allowed_callback_urls,
+        'auth_origin': value.auth_origin,
         'hosted': value.hosted,
-        'hosted_subdomain': value.hostedSubdomain,
+        'hosted_subdomain': value.hosted_subdomain,
         'name': value.name,
-        'redirect_url': value.redirectUrl,
-        'organization_id': value.organizationId,
+        'redirect_url': value.redirect_url,
+        'organization_id': value.organization_id,
         'technologies': value.technologies === undefined ? undefined : ((value.technologies as Array<any>).map(TechnologiesToJSON)),
         'type': value.type,
     };

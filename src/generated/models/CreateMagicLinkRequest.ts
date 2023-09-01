@@ -42,7 +42,7 @@ export interface CreateMagicLinkRequest {
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    magicLinkPath: string;
+    magic_link_path: string;
     /**
      * 
      * @type {string}
@@ -54,7 +54,7 @@ export interface CreateMagicLinkRequest {
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    redirectUrl: string;
+    redirect_url: string;
     /**
      * 
      * @type {boolean}
@@ -78,7 +78,7 @@ export interface CreateMagicLinkRequest {
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    userId: string;
+    user_id: string;
 }
 
 
@@ -99,12 +99,12 @@ export function instanceOfCreateMagicLinkRequest(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "channel" in value;
     isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "magicLinkPath" in value;
+    isInstance = isInstance && "magic_link_path" in value;
     isInstance = isInstance && "phone" in value;
-    isInstance = isInstance && "redirectUrl" in value;
+    isInstance = isInstance && "redirect_url" in value;
     isInstance = isInstance && "send" in value;
     isInstance = isInstance && "ttl" in value;
-    isInstance = isInstance && "userId" in value;
+    isInstance = isInstance && "user_id" in value;
 
     return isInstance;
 }
@@ -122,13 +122,13 @@ export function CreateMagicLinkRequestFromJSONTyped(json: any, ignoreDiscriminat
         'channel': json['channel'],
         'email': json['email'],
         'language': !exists(json, 'language') ? undefined : json['language'],
-        'magicLinkPath': json['magic_link_path'],
+        'magic_link_path': json['magic_link_path'],
         'phone': json['phone'],
-        'redirectUrl': json['redirect_url'],
+        'redirect_url': json['redirect_url'],
         'send': json['send'],
         'ttl': json['ttl'],
         'type': !exists(json, 'type') ? undefined : json['type'],
-        'userId': json['user_id'],
+        'user_id': json['user_id'],
     };
 }
 
@@ -144,13 +144,13 @@ export function CreateMagicLinkRequestToJSON(value?: CreateMagicLinkRequest | nu
         'channel': value.channel,
         'email': value.email,
         'language': value.language,
-        'magic_link_path': value.magicLinkPath,
+        'magic_link_path': value.magic_link_path,
         'phone': value.phone,
-        'redirect_url': value.redirectUrl,
+        'redirect_url': value.redirect_url,
         'send': value.send,
         'ttl': value.ttl,
         'type': value.type,
-        'user_id': value.userId,
+        'user_id': value.user_id,
     };
 }
 

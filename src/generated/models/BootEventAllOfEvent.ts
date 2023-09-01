@@ -24,7 +24,7 @@ export interface BootEventAllOfEvent {
      * @type {number}
      * @memberof BootEventAllOfEvent
      */
-    bootTime: number;
+    boot_time: number;
 }
 
 /**
@@ -32,7 +32,7 @@ export interface BootEventAllOfEvent {
  */
 export function instanceOfBootEventAllOfEvent(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "bootTime" in value;
+    isInstance = isInstance && "boot_time" in value;
 
     return isInstance;
 }
@@ -47,7 +47,7 @@ export function BootEventAllOfEventFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'bootTime': json['boot_time'],
+        'boot_time': json['boot_time'],
     };
 }
 
@@ -60,7 +60,7 @@ export function BootEventAllOfEventToJSON(value?: BootEventAllOfEvent | null): a
     }
     return {
         
-        'boot_time': value.bootTime,
+        'boot_time': value.boot_time,
     };
 }
 

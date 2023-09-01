@@ -18,7 +18,7 @@ import type {
   Model401Error,
   Model404Error,
   Model500Error,
-} from '../models';
+} from '../models/index';
 import {
     Model401ErrorFromJSON,
     Model401ErrorToJSON,
@@ -26,7 +26,7 @@ import {
     Model404ErrorToJSON,
     Model500ErrorFromJSON,
     Model500ErrorToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface RevokeUserRefreshTokensRequest {
     appId: string;

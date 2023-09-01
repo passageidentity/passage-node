@@ -21,7 +21,7 @@ import type {
   Model401Error,
   Model404Error,
   Model500Error,
-} from '../models';
+} from '../models/index';
 import {
     CreateMagicLinkRequestFromJSON,
     CreateMagicLinkRequestToJSON,
@@ -35,7 +35,7 @@ import {
     Model404ErrorToJSON,
     Model500ErrorFromJSON,
     Model500ErrorToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface CreateMagicLinkOperationRequest {
     appId: string;

@@ -22,10 +22,8 @@ models/AuthorizerResult.ts
 models/AuthorizerTestRequest.ts
 models/AuthorizerTestResponse.ts
 models/BootEvent.ts
-models/BootEventAllOf.ts
 models/BootEventAllOfEvent.ts
 models/BootFailureEvent.ts
-models/BootFailureEventAllOf.ts
 models/BootFailureEventAllOfEvent.ts
 models/ClaimAppRequest.ts
 models/CreateApiKeyRequest.ts
@@ -39,7 +37,6 @@ models/CreateMagicLinkRequest.ts
 models/CreateUserMetadataField.ts
 models/CreateUserRequest.ts
 models/CreatedApiKey.ts
-models/CreatedApiKeyAllOf.ts
 models/ElementCustomization.ts
 models/EmailProvider.ts
 models/EmailProviderConfig.ts
@@ -72,12 +69,10 @@ models/ListFunctionsResponse.ts
 models/ListPaginatedEventsResponse.ts
 models/ListPaginatedUsersResponse.ts
 models/LogEvent.ts
-models/LogEventAllOf.ts
 models/LogEventAllOfEvent.ts
 models/MagicLink.ts
 models/MagicLinkResponse.ts
 models/MemoryLimitEvent.ts
-models/MemoryLimitEventAllOf.ts
 models/Model400Error.ts
 models/Model401Error.ts
 models/Model403Error.ts
@@ -91,7 +86,6 @@ models/TestError.ts
 models/TimeLimitEvent.ts
 models/Trigger.ts
 models/UncaughtExceptionEvent.ts
-models/UncaughtExceptionEventAllOf.ts
 models/UncaughtExceptionEventAllOfEvent.ts
 models/UpdateApiKeyRequest.ts
 models/UpdateAppRequest.ts

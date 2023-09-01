@@ -24,7 +24,7 @@ import type {
   Model404Error,
   Model500Error,
   UpdateApiKeyRequest,
-} from '../models';
+} from '../models/index';
 import {
     ApiKeyResponseFromJSON,
     ApiKeyResponseToJSON,
@@ -44,7 +44,7 @@ import {
     Model500ErrorToJSON,
     UpdateApiKeyRequestFromJSON,
     UpdateApiKeyRequestToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface CreateApikeyRequest {
     appId: string;

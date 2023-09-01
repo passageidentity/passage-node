@@ -36,7 +36,7 @@ export interface CreateUserRequest {
      * @type {object}
      * @memberof CreateUserRequest
      */
-    userMetadata?: object;
+    user_metadata?: object;
 }
 
 /**
@@ -62,7 +62,7 @@ export function CreateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'email': json['email'],
         'phone': json['phone'],
-        'userMetadata': !exists(json, 'user_metadata') ? undefined : json['user_metadata'],
+        'user_metadata': !exists(json, 'user_metadata') ? undefined : json['user_metadata'],
     };
 }
 
@@ -77,7 +77,7 @@ export function CreateUserRequestToJSON(value?: CreateUserRequest | null): any {
         
         'email': value.email,
         'phone': value.phone,
-        'user_metadata': value.userMetadata,
+        'user_metadata': value.user_metadata,
     };
 }
 

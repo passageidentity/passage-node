@@ -1,6 +1,6 @@
 import { Request } from 'express-serve-static-core';
 import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
-import fetch, { FetchError } from 'node-fetch';
+import fetch from 'node-fetch';
 import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
@@ -12,6 +12,7 @@ import {
     CreateMagicLinkRequest,
     MagicLink,
     MagicLinkApi,
+    ResponseError,
 } from '../generated';
 import User from './User';
 
@@ -188,9 +189,9 @@ export default class Passage {
                 createMagicLinkRequest: magicLinkReq,
             });
 
-            return response.magicLink;
+            return response.magic_link;
         } catch (err) {
-            throw new PassageError('Could not create a magic link for this app.', err as FetchError);
+            throw new PassageError('Could not create a magic link for this app.', err as ResponseError);
         }
     }
 
@@ -212,7 +213,7 @@ export default class Passage {
 
             return response.app;
         } catch (err) {
-            throw new PassageError('Could not fetch app.', err as FetchError);
+            throw new PassageError('Could not fetch app.', err as ResponseError);
         }
     }
 }

@@ -31,7 +31,7 @@ export interface CreateUserMetadataField {
      * @type {string}
      * @memberof CreateUserMetadataField
      */
-    friendlyName: string;
+    friendly_name: string;
     /**
      * 
      * @type {boolean}
@@ -57,7 +57,7 @@ export interface CreateUserMetadataField {
  */
 export function instanceOfCreateUserMetadataField(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "friendlyName" in value;
+    isInstance = isInstance && "friendly_name" in value;
     isInstance = isInstance && "profile" in value;
     isInstance = isInstance && "registration" in value;
     isInstance = isInstance && "type" in value;
@@ -75,7 +75,7 @@ export function CreateUserMetadataFieldFromJSONTyped(json: any, ignoreDiscrimina
     }
     return {
         
-        'friendlyName': json['friendly_name'],
+        'friendly_name': json['friendly_name'],
         'profile': json['profile'],
         'registration': json['registration'],
         'type': UserMetadataFieldTypeFromJSON(json['type']),
@@ -91,7 +91,7 @@ export function CreateUserMetadataFieldToJSON(value?: CreateUserMetadataField | 
     }
     return {
         
-        'friendly_name': value.friendlyName,
+        'friendly_name': value.friendly_name,
         'profile': value.profile,
         'registration': value.registration,
         'type': UserMetadataFieldTypeToJSON(value.type),

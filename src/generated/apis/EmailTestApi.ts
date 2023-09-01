@@ -18,7 +18,7 @@ import type {
   Model400Error,
   Model500Error,
   SendEmailRequest,
-} from '../models';
+} from '../models/index';
 import {
     Model400ErrorFromJSON,
     Model400ErrorToJSON,
@@ -26,7 +26,7 @@ import {
     Model500ErrorToJSON,
     SendEmailRequestFromJSON,
     SendEmailRequestToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface SendTestEmailHandlerRequest {
     appId: string;

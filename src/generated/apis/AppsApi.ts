@@ -25,7 +25,7 @@ import type {
   Model409Error,
   Model500Error,
   UpdateAppRequest,
-} from '../models';
+} from '../models/index';
 import {
     AppResponseFromJSON,
     AppResponseToJSON,
@@ -47,7 +47,7 @@ import {
     Model500ErrorToJSON,
     UpdateAppRequestFromJSON,
     UpdateAppRequestToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface ClaimAppOperationRequest {
     appId: string;

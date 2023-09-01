@@ -24,13 +24,13 @@ export interface SendEmailRequest {
      * @type {string}
      * @memberof SendEmailRequest
      */
-    htmlTemplate: string;
+    html_template: string;
     /**
      * 
      * @type {string}
      * @memberof SendEmailRequest
      */
-    recipientEmail: string;
+    recipient_email: string;
     /**
      * 
      * @type {string}
@@ -50,8 +50,8 @@ export interface SendEmailRequest {
  */
 export function instanceOfSendEmailRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "htmlTemplate" in value;
-    isInstance = isInstance && "recipientEmail" in value;
+    isInstance = isInstance && "html_template" in value;
+    isInstance = isInstance && "recipient_email" in value;
     isInstance = isInstance && "subject" in value;
     isInstance = isInstance && "variables" in value;
 
@@ -68,8 +68,8 @@ export function SendEmailRequestFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'htmlTemplate': json['html_template'],
-        'recipientEmail': json['recipient_email'],
+        'html_template': json['html_template'],
+        'recipient_email': json['recipient_email'],
         'subject': json['subject'],
         'variables': json['variables'],
     };
@@ -84,8 +84,8 @@ export function SendEmailRequestToJSON(value?: SendEmailRequest | null): any {
     }
     return {
         
-        'html_template': value.htmlTemplate,
-        'recipient_email': value.recipientEmail,
+        'html_template': value.html_template,
+        'recipient_email': value.recipient_email,
         'subject': value.subject,
         'variables': value.variables,
     };

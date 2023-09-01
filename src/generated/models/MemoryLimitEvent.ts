@@ -24,13 +24,13 @@ export interface MemoryLimitEvent {
      * @type {string}
      * @memberof MemoryLimitEvent
      */
-    deploymentId: string;
+    deployment_id: string;
     /**
      * The type of event.
      * @type {string}
      * @memberof MemoryLimitEvent
      */
-    eventType: MemoryLimitEventEventTypeEnum;
+    event_type: MemoryLimitEventEventTypeEnum;
     /**
      * Timestamp for when this event was created, in RFC3339 format.
      * @type {Date}
@@ -42,7 +42,7 @@ export interface MemoryLimitEvent {
      * @type {string}
      * @memberof MemoryLimitEvent
      */
-    isolateId?: string;
+    isolate_id?: string;
     /**
      * The region where the event was generated. Refer to https://deno.com/deploy/docs/regions for possible values.
      * @type {string}
@@ -77,8 +77,8 @@ export type MemoryLimitEventEventTypeEnum = typeof MemoryLimitEventEventTypeEnum
  */
 export function instanceOfMemoryLimitEvent(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "deploymentId" in value;
-    isInstance = isInstance && "eventType" in value;
+    isInstance = isInstance && "deployment_id" in value;
+    isInstance = isInstance && "event_type" in value;
     isInstance = isInstance && "timestamp" in value;
     isInstance = isInstance && "region" in value;
     isInstance = isInstance && "event" in value;
@@ -96,10 +96,10 @@ export function MemoryLimitEventFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'deploymentId': json['deployment_id'],
-        'eventType': json['event_type'],
+        'deployment_id': json['deployment_id'],
+        'event_type': json['event_type'],
         'timestamp': (new Date(json['timestamp'])),
-        'isolateId': !exists(json, 'isolate_id') ? undefined : json['isolate_id'],
+        'isolate_id': !exists(json, 'isolate_id') ? undefined : json['isolate_id'],
         'region': json['region'],
         'event': json['event'],
     };
@@ -114,10 +114,10 @@ export function MemoryLimitEventToJSON(value?: MemoryLimitEvent | null): any {
     }
     return {
         
-        'deployment_id': value.deploymentId,
-        'event_type': value.eventType,
+        'deployment_id': value.deployment_id,
+        'event_type': value.event_type,
         'timestamp': (value.timestamp.toISOString()),
-        'isolate_id': value.isolateId,
+        'isolate_id': value.isolate_id,
         'region': value.region,
         'event': value.event,
     };

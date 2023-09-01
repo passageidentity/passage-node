@@ -24,7 +24,7 @@ export interface EventInfo {
      * @type {string}
      * @memberof EventInfo
      */
-    createdAt: string;
+    created_at: string;
     /**
      * 
      * @type {object}
@@ -48,7 +48,7 @@ export interface EventInfo {
      * @type {string}
      * @memberof EventInfo
      */
-    ipAddr: string;
+    ip_addr: string;
     /**
      * 
      * @type {string}
@@ -60,13 +60,13 @@ export interface EventInfo {
      * @type {string}
      * @memberof EventInfo
      */
-    userAgent: string;
+    user_agent: string;
     /**
      * 
      * @type {string}
      * @memberof EventInfo
      */
-    userId: string;
+    user_id: string;
 }
 
 /**
@@ -74,14 +74,14 @@ export interface EventInfo {
  */
 export function instanceOfEventInfo(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "data" in value;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "identifier" in value;
-    isInstance = isInstance && "ipAddr" in value;
+    isInstance = isInstance && "ip_addr" in value;
     isInstance = isInstance && "type" in value;
-    isInstance = isInstance && "userAgent" in value;
-    isInstance = isInstance && "userId" in value;
+    isInstance = isInstance && "user_agent" in value;
+    isInstance = isInstance && "user_id" in value;
 
     return isInstance;
 }
@@ -96,14 +96,14 @@ export function EventInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
-        'createdAt': json['created_at'],
+        'created_at': json['created_at'],
         'data': json['data'],
         'id': json['id'],
         'identifier': json['identifier'],
-        'ipAddr': json['ip_addr'],
+        'ip_addr': json['ip_addr'],
         'type': json['type'],
-        'userAgent': json['user_agent'],
-        'userId': json['user_id'],
+        'user_agent': json['user_agent'],
+        'user_id': json['user_id'],
     };
 }
 
@@ -116,14 +116,14 @@ export function EventInfoToJSON(value?: EventInfo | null): any {
     }
     return {
         
-        'created_at': value.createdAt,
+        'created_at': value.created_at,
         'data': value.data,
         'id': value.id,
         'identifier': value.identifier,
-        'ip_addr': value.ipAddr,
+        'ip_addr': value.ip_addr,
         'type': value.type,
-        'user_agent': value.userAgent,
-        'user_id': value.userId,
+        'user_agent': value.user_agent,
+        'user_id': value.user_id,
     };
 }
 

@@ -1,4 +1,4 @@
-import fetch, { FetchError } from 'node-fetch';
+import fetch from 'node-fetch';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
 import passageNodeConfig from '../utils/config.json';
@@ -8,6 +8,7 @@ import {
     ConfigurationParameters,
     CreateUserRequest,
     HTTPHeaders,
+    ResponseError,
     TokensApi,
     UpdateUserRequest,
     UsersApi,
@@ -76,7 +77,7 @@ export default class User {
 
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not fetch user.', err as FetchError);
+            throw new PassageError('Could not fetch user.', err as ResponseError);
         }
     }
 
@@ -97,7 +98,7 @@ export default class User {
 
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not deactivate user.', err as FetchError);
+            throw new PassageError('Could not deactivate user.', err as ResponseError);
         }
     }
 
@@ -120,7 +121,7 @@ export default class User {
 
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not update user.', err as FetchError);
+            throw new PassageError('Could not update user.', err as ResponseError);
         }
     }
 
@@ -140,7 +141,7 @@ export default class User {
             });
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not activate user', err as FetchError);
+            throw new PassageError('Could not activate user', err as ResponseError);
         }
     }
 
@@ -161,7 +162,7 @@ export default class User {
 
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not create user', err as FetchError);
+            throw new PassageError('Could not create user', err as ResponseError);
         }
     }
 
@@ -183,7 +184,7 @@ export default class User {
 
             return true;
         } catch (err) {
-            throw new PassageError('Could not delete user.', err as FetchError);
+            throw new PassageError('Could not delete user.', err as ResponseError);
         }
     }
 
@@ -206,7 +207,7 @@ export default class User {
 
             return response.devices;
         } catch (err) {
-            throw new PassageError("Could not fetch user's devices.", err as FetchError);
+            throw new PassageError("Could not fetch user's devices.", err as ResponseError);
         }
     }
 
@@ -231,7 +232,7 @@ export default class User {
 
             return true;
         } catch (err) {
-            throw new PassageError("Could not delete user's device", err as FetchError);
+            throw new PassageError("Could not delete user's device", err as ResponseError);
         }
     }
 
@@ -255,7 +256,7 @@ export default class User {
             });
             return true;
         } catch (err) {
-            throw new PassageError("Could not revoke user's refresh tokens.", err as FetchError);
+            throw new PassageError("Could not revoke user's refresh tokens.", err as ResponseError);
         }
     }
 }

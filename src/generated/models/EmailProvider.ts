@@ -43,7 +43,7 @@ export interface EmailProvider {
      * @type {string}
      * @memberof EmailProvider
      */
-    fromAddress?: string;
+    from_address?: string;
     /**
      * 
      * @type {string}
@@ -73,7 +73,7 @@ export function EmailProviderFromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'config': !exists(json, 'config') ? undefined : EmailProviderConfigFromJSON(json['config']),
         'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
-        'fromAddress': !exists(json, 'from_address') ? undefined : json['from_address'],
+        'from_address': !exists(json, 'from_address') ? undefined : json['from_address'],
         'type': !exists(json, 'type') ? undefined : json['type'],
     };
 }
@@ -89,7 +89,7 @@ export function EmailProviderToJSON(value?: EmailProvider | null): any {
         
         'config': EmailProviderConfigToJSON(value.config),
         'enabled': value.enabled,
-        'from_address': value.fromAddress,
+        'from_address': value.from_address,
         'type': value.type,
     };
 }

@@ -43,7 +43,7 @@ export interface GetFunctionVersionResponse {
      * @type {Date}
      * @memberof GetFunctionVersionResponse
      */
-    createdAt: Date;
+    created_at: Date;
     /**
      * 
      * @type {string}
@@ -65,7 +65,7 @@ export function instanceOfGetFunctionVersionResponse(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "version" in value;
-    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "code" in value;
     isInstance = isInstance && "language" in value;
 
@@ -84,7 +84,7 @@ export function GetFunctionVersionResponseFromJSONTyped(json: any, ignoreDiscrim
         
         'id': json['id'],
         'version': json['version'],
-        'createdAt': (new Date(json['created_at'])),
+        'created_at': (new Date(json['created_at'])),
         'code': json['code'],
         'language': LanguageFromJSON(json['language']),
     };
@@ -101,7 +101,7 @@ export function GetFunctionVersionResponseToJSON(value?: GetFunctionVersionRespo
         
         'id': value.id,
         'version': value.version,
-        'created_at': (value.createdAt.toISOString()),
+        'created_at': (value.created_at.toISOString()),
         'code': value.code,
         'language': LanguageToJSON(value.language),
     };

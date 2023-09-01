@@ -60,7 +60,7 @@ import {
  * 
  * @export
  */
-export type Event = { eventType: 'boot' } & BootEvent | { eventType: 'bootFailure' } & BootFailureEvent | { eventType: 'log' } & LogEvent | { eventType: 'memoryLimit' } & MemoryLimitEvent | { eventType: 'timeLimit' } & TimeLimitEvent | { eventType: 'uncaughtException' } & UncaughtExceptionEvent;
+export type Event = { event_type: 'boot' } & BootEvent | { event_type: 'bootFailure' } & BootFailureEvent | { event_type: 'log' } & LogEvent | { event_type: 'memoryLimit' } & MemoryLimitEvent | { event_type: 'timeLimit' } & TimeLimitEvent | { event_type: 'uncaughtException' } & UncaughtExceptionEvent;
 
 export function EventFromJSON(json: any): Event {
     return EventFromJSONTyped(json, false);
@@ -70,21 +70,21 @@ export function EventFromJSONTyped(json: any, ignoreDiscriminator: boolean): Eve
     if ((json === undefined) || (json === null)) {
         return json;
     }
-    switch (json['eventType']) {
+    switch (json['event_type']) {
         case 'boot':
-            return {...BootEventFromJSONTyped(json, true), eventType: 'boot'};
+            return {...BootEventFromJSONTyped(json, true), event_type: 'boot'};
         case 'bootFailure':
-            return {...BootFailureEventFromJSONTyped(json, true), eventType: 'bootFailure'};
+            return {...BootFailureEventFromJSONTyped(json, true), event_type: 'bootFailure'};
         case 'log':
-            return {...LogEventFromJSONTyped(json, true), eventType: 'log'};
+            return {...LogEventFromJSONTyped(json, true), event_type: 'log'};
         case 'memoryLimit':
-            return {...MemoryLimitEventFromJSONTyped(json, true), eventType: 'memoryLimit'};
+            return {...MemoryLimitEventFromJSONTyped(json, true), event_type: 'memoryLimit'};
         case 'timeLimit':
-            return {...TimeLimitEventFromJSONTyped(json, true), eventType: 'timeLimit'};
+            return {...TimeLimitEventFromJSONTyped(json, true), event_type: 'timeLimit'};
         case 'uncaughtException':
-            return {...UncaughtExceptionEventFromJSONTyped(json, true), eventType: 'uncaughtException'};
+            return {...UncaughtExceptionEventFromJSONTyped(json, true), event_type: 'uncaughtException'};
         default:
-            throw new Error(`No variant of Event exists with 'eventType=${json['eventType']}'`);
+            throw new Error(`No variant of Event exists with 'event_type=${json['event_type']}'`);
     }
 }
 
@@ -95,7 +95,7 @@ export function EventToJSON(value?: Event | null): any {
     if (value === null) {
         return null;
     }
-    switch (value['eventType']) {
+    switch (value['event_type']) {
         case 'boot':
             return BootEventToJSON(value);
         case 'bootFailure':
@@ -109,7 +109,7 @@ export function EventToJSON(value?: Event | null): any {
         case 'uncaughtException':
             return UncaughtExceptionEventToJSON(value);
         default:
-            throw new Error(`No variant of Event exists with 'eventType=${value['eventType']}'`);
+            throw new Error(`No variant of Event exists with 'event_type=${value['event_type']}'`);
     }
 
 }

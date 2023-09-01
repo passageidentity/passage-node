@@ -31,7 +31,7 @@ export interface ApiKeyResponse {
      * @type {ApiKey}
      * @memberof ApiKeyResponse
      */
-    apiKey: ApiKey;
+    api_key: ApiKey;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface ApiKeyResponse {
  */
 export function instanceOfApiKeyResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "apiKey" in value;
+    isInstance = isInstance && "api_key" in value;
 
     return isInstance;
 }
@@ -54,7 +54,7 @@ export function ApiKeyResponseFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
-        'apiKey': ApiKeyFromJSON(json['api_key']),
+        'api_key': ApiKeyFromJSON(json['api_key']),
     };
 }
 
@@ -67,7 +67,7 @@ export function ApiKeyResponseToJSON(value?: ApiKeyResponse | null): any {
     }
     return {
         
-        'api_key': ApiKeyToJSON(value.apiKey),
+        'api_key': ApiKeyToJSON(value.api_key),
     };
 }
 

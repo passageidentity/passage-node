@@ -24,7 +24,7 @@ export interface ApiKey {
      * @type {string}
      * @memberof ApiKey
      */
-    createdAt: string;
+    created_at: string;
     /**
      * 
      * @type {string}
@@ -36,7 +36,7 @@ export interface ApiKey {
      * @type {string}
      * @memberof ApiKey
      */
-    keyPrefix: string;
+    key_prefix: string;
     /**
      * 
      * @type {string}
@@ -56,9 +56,9 @@ export interface ApiKey {
  */
 export function instanceOfApiKey(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "keyPrefix" in value;
+    isInstance = isInstance && "key_prefix" in value;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "role" in value;
 
@@ -75,9 +75,9 @@ export function ApiKeyFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ap
     }
     return {
         
-        'createdAt': json['created_at'],
+        'created_at': json['created_at'],
         'id': json['id'],
-        'keyPrefix': json['key_prefix'],
+        'key_prefix': json['key_prefix'],
         'name': json['name'],
         'role': json['role'],
     };
@@ -92,9 +92,9 @@ export function ApiKeyToJSON(value?: ApiKey | null): any {
     }
     return {
         
-        'created_at': value.createdAt,
+        'created_at': value.created_at,
         'id': value.id,
-        'key_prefix': value.keyPrefix,
+        'key_prefix': value.key_prefix,
         'name': value.name,
         'role': value.role,
     };

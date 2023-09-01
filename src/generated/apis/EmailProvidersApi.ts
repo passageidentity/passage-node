@@ -20,7 +20,7 @@ import type {
   Model400Error,
   Model404Error,
   Model500Error,
-} from '../models';
+} from '../models/index';
 import {
     EmailProviderFromJSON,
     EmailProviderToJSON,
@@ -32,7 +32,7 @@ import {
     Model404ErrorToJSON,
     Model500ErrorFromJSON,
     Model500ErrorToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface CreateEmailProviderHandlerRequest {
     appId: string;

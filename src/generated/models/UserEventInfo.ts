@@ -24,7 +24,7 @@ export interface UserEventInfo {
      * @type {Date}
      * @memberof UserEventInfo
      */
-    createdAt: Date;
+    created_at: Date;
     /**
      * 
      * @type {string}
@@ -36,7 +36,7 @@ export interface UserEventInfo {
      * @type {string}
      * @memberof UserEventInfo
      */
-    ipAddr: string;
+    ip_addr: string;
     /**
      * 
      * @type {string}
@@ -48,7 +48,7 @@ export interface UserEventInfo {
      * @type {string}
      * @memberof UserEventInfo
      */
-    userAgent: string;
+    user_agent: string;
 }
 
 /**
@@ -56,11 +56,11 @@ export interface UserEventInfo {
  */
 export function instanceOfUserEventInfo(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "ipAddr" in value;
+    isInstance = isInstance && "ip_addr" in value;
     isInstance = isInstance && "type" in value;
-    isInstance = isInstance && "userAgent" in value;
+    isInstance = isInstance && "user_agent" in value;
 
     return isInstance;
 }
@@ -75,11 +75,11 @@ export function UserEventInfoFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'createdAt': (new Date(json['created_at'])),
+        'created_at': (new Date(json['created_at'])),
         'id': json['id'],
-        'ipAddr': json['ip_addr'],
+        'ip_addr': json['ip_addr'],
         'type': json['type'],
-        'userAgent': json['user_agent'],
+        'user_agent': json['user_agent'],
     };
 }
 
@@ -92,11 +92,11 @@ export function UserEventInfoToJSON(value?: UserEventInfo | null): any {
     }
     return {
         
-        'created_at': (value.createdAt.toISOString()),
+        'created_at': (value.created_at.toISOString()),
         'id': value.id,
-        'ip_addr': value.ipAddr,
+        'ip_addr': value.ip_addr,
         'type': value.type,
-        'user_agent': value.userAgent,
+        'user_agent': value.user_agent,
     };
 }
 

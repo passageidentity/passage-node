@@ -31,97 +31,97 @@ export interface ElementCustomization {
      * @type {string}
      * @memberof ElementCustomization
      */
-    passageContainerBackgroundColor?: string;
+    passage_container_background_color?: string;
     /**
      * Maximum width of container (px)
      * @type {number}
      * @memberof ElementCustomization
      */
-    passageContainerMaxWidth?: number;
+    passage_container_max_width?: number;
     /**
      * Input box background color (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passageInputBoxBackgroundColor?: string;
+    passage_input_box_background_color?: string;
     /**
      * Input box border radius (px)
      * @type {number}
      * @memberof ElementCustomization
      */
-    passageInputBoxBorderRadius?: number;
+    passage_input_box_border_radius?: number;
     /**
      * 
      * @type {FontFamily}
      * @memberof ElementCustomization
      */
-    passageHeaderFontFamily?: FontFamily;
+    passage_header_font_family?: FontFamily;
     /**
      * 
      * @type {FontFamily}
      * @memberof ElementCustomization
      */
-    passageBodyFontFamily?: FontFamily;
+    passage_body_font_family?: FontFamily;
     /**
      * Header font colour (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passageHeaderTextColor?: string;
+    passage_header_text_color?: string;
     /**
      * Body font colour (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passageBodyTextColor?: string;
+    passage_body_text_color?: string;
     /**
      * Primary button background colour (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passagePrimaryButtonBackgroundColor?: string;
+    passage_primary_button_background_color?: string;
     /**
      * Primary button font colour (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passagePrimaryButtonTextColor?: string;
+    passage_primary_button_text_color?: string;
     /**
      * Primary button background on hover (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passagePrimaryButtonHoverColor?: string;
+    passage_primary_button_hover_color?: string;
     /**
      * Primary button border radius (px)
      * @type {number}
      * @memberof ElementCustomization
      */
-    passagePrimaryButtonBorderRadius?: number;
+    passage_primary_button_border_radius?: number;
     /**
      * Secondary button background colour (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passageSecondaryButtonBackgroundColor?: string;
+    passage_secondary_button_background_color?: string;
     /**
      * Secondary button font colour (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passageSecondaryButtonTextColor?: string;
+    passage_secondary_button_text_color?: string;
     /**
      * Secondary button background on hover (hex)
      * @type {string}
      * @memberof ElementCustomization
      */
-    passageSecondaryButtonHoverColor?: string;
+    passage_secondary_button_hover_color?: string;
     /**
      * Secondary button border radius (px)
      * @type {number}
      * @memberof ElementCustomization
      */
-    passageSecondaryButtonBorderRadius?: number;
+    passage_secondary_button_border_radius?: number;
 }
 
 /**
@@ -143,22 +143,22 @@ export function ElementCustomizationFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'passageContainerBackgroundColor': !exists(json, 'passage_container_background_color') ? undefined : json['passage_container_background_color'],
-        'passageContainerMaxWidth': !exists(json, 'passage_container_max_width') ? undefined : json['passage_container_max_width'],
-        'passageInputBoxBackgroundColor': !exists(json, 'passage_input_box_background_color') ? undefined : json['passage_input_box_background_color'],
-        'passageInputBoxBorderRadius': !exists(json, 'passage_input_box_border_radius') ? undefined : json['passage_input_box_border_radius'],
-        'passageHeaderFontFamily': !exists(json, 'passage_header_font_family') ? undefined : FontFamilyFromJSON(json['passage_header_font_family']),
-        'passageBodyFontFamily': !exists(json, 'passage_body_font_family') ? undefined : FontFamilyFromJSON(json['passage_body_font_family']),
-        'passageHeaderTextColor': !exists(json, 'passage_header_text_color') ? undefined : json['passage_header_text_color'],
-        'passageBodyTextColor': !exists(json, 'passage_body_text_color') ? undefined : json['passage_body_text_color'],
-        'passagePrimaryButtonBackgroundColor': !exists(json, 'passage_primary_button_background_color') ? undefined : json['passage_primary_button_background_color'],
-        'passagePrimaryButtonTextColor': !exists(json, 'passage_primary_button_text_color') ? undefined : json['passage_primary_button_text_color'],
-        'passagePrimaryButtonHoverColor': !exists(json, 'passage_primary_button_hover_color') ? undefined : json['passage_primary_button_hover_color'],
-        'passagePrimaryButtonBorderRadius': !exists(json, 'passage_primary_button_border_radius') ? undefined : json['passage_primary_button_border_radius'],
-        'passageSecondaryButtonBackgroundColor': !exists(json, 'passage_secondary_button_background_color') ? undefined : json['passage_secondary_button_background_color'],
-        'passageSecondaryButtonTextColor': !exists(json, 'passage_secondary_button_text_color') ? undefined : json['passage_secondary_button_text_color'],
-        'passageSecondaryButtonHoverColor': !exists(json, 'passage_secondary_button_hover_color') ? undefined : json['passage_secondary_button_hover_color'],
-        'passageSecondaryButtonBorderRadius': !exists(json, 'passage_secondary_button_border_radius') ? undefined : json['passage_secondary_button_border_radius'],
+        'passage_container_background_color': !exists(json, 'passage_container_background_color') ? undefined : json['passage_container_background_color'],
+        'passage_container_max_width': !exists(json, 'passage_container_max_width') ? undefined : json['passage_container_max_width'],
+        'passage_input_box_background_color': !exists(json, 'passage_input_box_background_color') ? undefined : json['passage_input_box_background_color'],
+        'passage_input_box_border_radius': !exists(json, 'passage_input_box_border_radius') ? undefined : json['passage_input_box_border_radius'],
+        'passage_header_font_family': !exists(json, 'passage_header_font_family') ? undefined : FontFamilyFromJSON(json['passage_header_font_family']),
+        'passage_body_font_family': !exists(json, 'passage_body_font_family') ? undefined : FontFamilyFromJSON(json['passage_body_font_family']),
+        'passage_header_text_color': !exists(json, 'passage_header_text_color') ? undefined : json['passage_header_text_color'],
+        'passage_body_text_color': !exists(json, 'passage_body_text_color') ? undefined : json['passage_body_text_color'],
+        'passage_primary_button_background_color': !exists(json, 'passage_primary_button_background_color') ? undefined : json['passage_primary_button_background_color'],
+        'passage_primary_button_text_color': !exists(json, 'passage_primary_button_text_color') ? undefined : json['passage_primary_button_text_color'],
+        'passage_primary_button_hover_color': !exists(json, 'passage_primary_button_hover_color') ? undefined : json['passage_primary_button_hover_color'],
+        'passage_primary_button_border_radius': !exists(json, 'passage_primary_button_border_radius') ? undefined : json['passage_primary_button_border_radius'],
+        'passage_secondary_button_background_color': !exists(json, 'passage_secondary_button_background_color') ? undefined : json['passage_secondary_button_background_color'],
+        'passage_secondary_button_text_color': !exists(json, 'passage_secondary_button_text_color') ? undefined : json['passage_secondary_button_text_color'],
+        'passage_secondary_button_hover_color': !exists(json, 'passage_secondary_button_hover_color') ? undefined : json['passage_secondary_button_hover_color'],
+        'passage_secondary_button_border_radius': !exists(json, 'passage_secondary_button_border_radius') ? undefined : json['passage_secondary_button_border_radius'],
     };
 }
 
@@ -171,22 +171,22 @@ export function ElementCustomizationToJSON(value?: ElementCustomization | null):
     }
     return {
         
-        'passage_container_background_color': value.passageContainerBackgroundColor,
-        'passage_container_max_width': value.passageContainerMaxWidth,
-        'passage_input_box_background_color': value.passageInputBoxBackgroundColor,
-        'passage_input_box_border_radius': value.passageInputBoxBorderRadius,
-        'passage_header_font_family': FontFamilyToJSON(value.passageHeaderFontFamily),
-        'passage_body_font_family': FontFamilyToJSON(value.passageBodyFontFamily),
-        'passage_header_text_color': value.passageHeaderTextColor,
-        'passage_body_text_color': value.passageBodyTextColor,
-        'passage_primary_button_background_color': value.passagePrimaryButtonBackgroundColor,
-        'passage_primary_button_text_color': value.passagePrimaryButtonTextColor,
-        'passage_primary_button_hover_color': value.passagePrimaryButtonHoverColor,
-        'passage_primary_button_border_radius': value.passagePrimaryButtonBorderRadius,
-        'passage_secondary_button_background_color': value.passageSecondaryButtonBackgroundColor,
-        'passage_secondary_button_text_color': value.passageSecondaryButtonTextColor,
-        'passage_secondary_button_hover_color': value.passageSecondaryButtonHoverColor,
-        'passage_secondary_button_border_radius': value.passageSecondaryButtonBorderRadius,
+        'passage_container_background_color': value.passage_container_background_color,
+        'passage_container_max_width': value.passage_container_max_width,
+        'passage_input_box_background_color': value.passage_input_box_background_color,
+        'passage_input_box_border_radius': value.passage_input_box_border_radius,
+        'passage_header_font_family': FontFamilyToJSON(value.passage_header_font_family),
+        'passage_body_font_family': FontFamilyToJSON(value.passage_body_font_family),
+        'passage_header_text_color': value.passage_header_text_color,
+        'passage_body_text_color': value.passage_body_text_color,
+        'passage_primary_button_background_color': value.passage_primary_button_background_color,
+        'passage_primary_button_text_color': value.passage_primary_button_text_color,
+        'passage_primary_button_hover_color': value.passage_primary_button_hover_color,
+        'passage_primary_button_border_radius': value.passage_primary_button_border_radius,
+        'passage_secondary_button_background_color': value.passage_secondary_button_background_color,
+        'passage_secondary_button_text_color': value.passage_secondary_button_text_color,
+        'passage_secondary_button_hover_color': value.passage_secondary_button_hover_color,
+        'passage_secondary_button_border_radius': value.passage_secondary_button_border_radius,
     };
 }
 

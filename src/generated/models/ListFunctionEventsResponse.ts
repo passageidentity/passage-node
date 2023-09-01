@@ -31,7 +31,7 @@ export interface ListFunctionEventsResponse {
      * @type {Array<ListFunctionEventsItem>}
      * @memberof ListFunctionEventsResponse
      */
-    functionEvents: Array<ListFunctionEventsItem>;
+    function_events: Array<ListFunctionEventsItem>;
     /**
      * The timestamp offset of the events in this response, as Unix milliseconds.
      * @type {number}
@@ -51,7 +51,7 @@ export interface ListFunctionEventsResponse {
  */
 export function instanceOfListFunctionEventsResponse(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "functionEvents" in value;
+    isInstance = isInstance && "function_events" in value;
     isInstance = isInstance && "since" in value;
     isInstance = isInstance && "until" in value;
 
@@ -68,7 +68,7 @@ export function ListFunctionEventsResponseFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'functionEvents': ((json['function_events'] as Array<any>).map(ListFunctionEventsItemFromJSON)),
+        'function_events': ((json['function_events'] as Array<any>).map(ListFunctionEventsItemFromJSON)),
         'since': json['since'],
         'until': json['until'],
     };
@@ -83,7 +83,7 @@ export function ListFunctionEventsResponseToJSON(value?: ListFunctionEventsRespo
     }
     return {
         
-        'function_events': ((value.functionEvents as Array<any>).map(ListFunctionEventsItemToJSON)),
+        'function_events': ((value.function_events as Array<any>).map(ListFunctionEventsItemToJSON)),
         'since': value.since,
         'until': value.until,
     };

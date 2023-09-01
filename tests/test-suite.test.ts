@@ -134,20 +134,20 @@ describe('Passage API Requests', () => {
             expect(createdUserWithEmail).toHaveProperty('email', randomEmail);
 
             const updatedUserWithEmail = await passage.user.update(createdUserWithEmail.id, {
-                userMetadata: {
+                user_metadata: {
                     example1: 'abc',
                 },
             });
-            expect(updatedUserWithEmail.userMetadata).toMatchObject({
+            expect(updatedUserWithEmail.user_metadata).toMatchObject({
                 example1: 'abc',
             });
 
             const updatedUserWithEmail2 = await passage.user.update(createdUserWithEmail.id, {
-                userMetadata: {
+                user_metadata: {
                     example1: 'xyz',
                 },
             });
-            expect(updatedUserWithEmail2.userMetadata).toMatchObject({
+            expect(updatedUserWithEmail2.user_metadata).toMatchObject({
                 example1: 'xyz',
             });
         });

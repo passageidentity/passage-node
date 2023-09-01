@@ -24,19 +24,19 @@ export interface EmailProviderConfig {
      * @type {string}
      * @memberof EmailProviderConfig
      */
-    apiKey?: string;
+    api_key?: string;
     /**
      * 
      * @type {string}
      * @memberof EmailProviderConfig
      */
-    accessKeyId?: string;
+    access_key_id?: string;
     /**
      * 
      * @type {string}
      * @memberof EmailProviderConfig
      */
-    accessKeySecret?: string;
+    access_key_secret?: string;
     /**
      * 
      * @type {string}
@@ -64,9 +64,9 @@ export function EmailProviderConfigFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
-        'apiKey': !exists(json, 'api_key') ? undefined : json['api_key'],
-        'accessKeyId': !exists(json, 'access_key_id') ? undefined : json['access_key_id'],
-        'accessKeySecret': !exists(json, 'access_key_secret') ? undefined : json['access_key_secret'],
+        'api_key': !exists(json, 'api_key') ? undefined : json['api_key'],
+        'access_key_id': !exists(json, 'access_key_id') ? undefined : json['access_key_id'],
+        'access_key_secret': !exists(json, 'access_key_secret') ? undefined : json['access_key_secret'],
         'region': !exists(json, 'region') ? undefined : json['region'],
     };
 }
@@ -80,9 +80,9 @@ export function EmailProviderConfigToJSON(value?: EmailProviderConfig | null): a
     }
     return {
         
-        'api_key': value.apiKey,
-        'access_key_id': value.accessKeyId,
-        'access_key_secret': value.accessKeySecret,
+        'api_key': value.api_key,
+        'access_key_id': value.access_key_id,
+        'access_key_secret': value.access_key_secret,
         'region': value.region,
     };
 }

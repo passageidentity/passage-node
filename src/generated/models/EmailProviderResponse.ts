@@ -30,7 +30,7 @@ export interface EmailProviderResponse {
      * @type {string}
      * @memberof EmailProviderResponse
      */
-    fromAddress: string;
+    from_address: string;
     /**
      * 
      * @type {string}
@@ -45,7 +45,7 @@ export interface EmailProviderResponse {
 export function instanceOfEmailProviderResponse(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "enabled" in value;
-    isInstance = isInstance && "fromAddress" in value;
+    isInstance = isInstance && "from_address" in value;
     isInstance = isInstance && "type" in value;
 
     return isInstance;
@@ -62,7 +62,7 @@ export function EmailProviderResponseFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'enabled': json['enabled'],
-        'fromAddress': json['from_address'],
+        'from_address': json['from_address'],
         'type': json['type'],
     };
 }
@@ -77,7 +77,7 @@ export function EmailProviderResponseToJSON(value?: EmailProviderResponse | null
     return {
         
         'enabled': value.enabled,
-        'from_address': value.fromAddress,
+        'from_address': value.from_address,
         'type': value.type,
     };
 }

@@ -24,7 +24,7 @@ import type {
   UpdateUserRequest,
   UserCSVImportResponse,
   UserResponse,
-} from '../models';
+} from '../models/index';
 import {
     CreateUserRequestFromJSON,
     CreateUserRequestToJSON,
@@ -44,7 +44,7 @@ import {
     UserCSVImportResponseToJSON,
     UserResponseFromJSON,
     UserResponseToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface ActivateUserRequest {
     appId: string;

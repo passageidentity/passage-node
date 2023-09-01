@@ -25,7 +25,7 @@ import type {
   UpdateUserMetadataField,
   UserMetadataFieldResponse,
   UserMetadataSchemaResponse,
-} from '../models';
+} from '../models/index';
 import {
     CreateUserMetadataFieldFromJSON,
     CreateUserMetadataFieldToJSON,
@@ -47,7 +47,7 @@ import {
     UserMetadataFieldResponseToJSON,
     UserMetadataSchemaResponseFromJSON,
     UserMetadataSchemaResponseToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface AddAppMetadataSchemaRequest {
     appId: string;

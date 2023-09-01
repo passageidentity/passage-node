@@ -37,7 +37,7 @@ export interface UserInfo {
      * @type {Date}
      * @memberof UserInfo
      */
-    createdAt: Date;
+    created_at: Date;
     /**
      * 
      * @type {string}
@@ -49,7 +49,7 @@ export interface UserInfo {
      * @type {boolean}
      * @memberof UserInfo
      */
-    emailVerified: boolean;
+    email_verified: boolean;
     /**
      * 
      * @type {string}
@@ -61,13 +61,13 @@ export interface UserInfo {
      * @type {Date}
      * @memberof UserInfo
      */
-    lastLoginAt: Date;
+    last_login_at: Date;
     /**
      * 
      * @type {number}
      * @memberof UserInfo
      */
-    loginCount: number;
+    login_count: number;
     /**
      * 
      * @type {string}
@@ -79,13 +79,13 @@ export interface UserInfo {
      * @type {boolean}
      * @memberof UserInfo
      */
-    phoneVerified: boolean;
+    phone_verified: boolean;
     /**
      * 
      * @type {Array<UserEventInfo>}
      * @memberof UserInfo
      */
-    recentEvents: Array<UserEventInfo>;
+    recent_events: Array<UserEventInfo>;
     /**
      * 
      * @type {string}
@@ -97,13 +97,13 @@ export interface UserInfo {
      * @type {Date}
      * @memberof UserInfo
      */
-    updatedAt: Date;
+    updated_at: Date;
     /**
      * 
      * @type {object}
      * @memberof UserInfo
      */
-    userMetadata: object | null;
+    user_metadata: object | null;
     /**
      * 
      * @type {boolean}
@@ -115,7 +115,7 @@ export interface UserInfo {
      * @type {Array<WebAuthnDevices>}
      * @memberof UserInfo
      */
-    webauthnDevices: Array<WebAuthnDevices>;
+    webauthn_devices: Array<WebAuthnDevices>;
 }
 
 /**
@@ -123,20 +123,20 @@ export interface UserInfo {
  */
 export function instanceOfUserInfo(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "emailVerified" in value;
+    isInstance = isInstance && "email_verified" in value;
     isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "lastLoginAt" in value;
-    isInstance = isInstance && "loginCount" in value;
+    isInstance = isInstance && "last_login_at" in value;
+    isInstance = isInstance && "login_count" in value;
     isInstance = isInstance && "phone" in value;
-    isInstance = isInstance && "phoneVerified" in value;
-    isInstance = isInstance && "recentEvents" in value;
+    isInstance = isInstance && "phone_verified" in value;
+    isInstance = isInstance && "recent_events" in value;
     isInstance = isInstance && "status" in value;
-    isInstance = isInstance && "updatedAt" in value;
-    isInstance = isInstance && "userMetadata" in value;
+    isInstance = isInstance && "updated_at" in value;
+    isInstance = isInstance && "user_metadata" in value;
     isInstance = isInstance && "webauthn" in value;
-    isInstance = isInstance && "webauthnDevices" in value;
+    isInstance = isInstance && "webauthn_devices" in value;
 
     return isInstance;
 }
@@ -151,20 +151,20 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     }
     return {
         
-        'createdAt': (new Date(json['created_at'])),
+        'created_at': (new Date(json['created_at'])),
         'email': json['email'],
-        'emailVerified': json['email_verified'],
+        'email_verified': json['email_verified'],
         'id': json['id'],
-        'lastLoginAt': (new Date(json['last_login_at'])),
-        'loginCount': json['login_count'],
+        'last_login_at': (new Date(json['last_login_at'])),
+        'login_count': json['login_count'],
         'phone': json['phone'],
-        'phoneVerified': json['phone_verified'],
-        'recentEvents': ((json['recent_events'] as Array<any>)?.map(UserEventInfoFromJSON)),
+        'phone_verified': json['phone_verified'],
+        'recent_events': ((json['recent_events'] as Array<any>)?.map(UserEventInfoFromJSON)),
         'status': json['status'],
-        'updatedAt': (new Date(json['updated_at'])),
-        'userMetadata': json['user_metadata'],
+        'updated_at': (new Date(json['updated_at'])),
+        'user_metadata': json['user_metadata'],
         'webauthn': json['webauthn'],
-        'webauthnDevices': ((json['webauthn_devices'] as Array<any>)?.map(WebAuthnDevicesFromJSON)),
+        'webauthn_devices': ((json['webauthn_devices'] as Array<any>)?.map(WebAuthnDevicesFromJSON)),
     };
 }
 
@@ -177,20 +177,20 @@ export function UserInfoToJSON(value?: UserInfo | null): any {
     }
     return {
         
-        'created_at': (value.createdAt.toISOString()),
+        'created_at': (value.created_at.toISOString()),
         'email': value.email,
-        'email_verified': value.emailVerified,
+        'email_verified': value.email_verified,
         'id': value.id,
-        'last_login_at': (value.lastLoginAt.toISOString()),
-        'login_count': value.loginCount,
+        'last_login_at': (value.last_login_at.toISOString()),
+        'login_count': value.login_count,
         'phone': value.phone,
-        'phone_verified': value.phoneVerified,
-        'recent_events': ((value.recentEvents as Array<any>)?.map(UserEventInfoToJSON)),
+        'phone_verified': value.phone_verified,
+        'recent_events': ((value.recent_events as Array<any>)?.map(UserEventInfoToJSON)),
         'status': value.status,
-        'updated_at': (value.updatedAt.toISOString()),
-        'user_metadata': value.userMetadata,
+        'updated_at': (value.updated_at.toISOString()),
+        'user_metadata': value.user_metadata,
         'webauthn': value.webauthn,
-        'webauthn_devices': ((value.webauthnDevices as Array<any>)?.map(WebAuthnDevicesToJSON)),
+        'webauthn_devices': ((value.webauthn_devices as Array<any>)?.map(WebAuthnDevicesToJSON)),
     };
 }
 
