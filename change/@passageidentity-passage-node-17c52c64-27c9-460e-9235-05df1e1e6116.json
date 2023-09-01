@@ -1,0 +1,7 @@
+{
+    "type": "minor",
+    "comment": "Autogenerate API files with openAPI generator",
+    "packageName": "@passageidentity/passage-node",
+    "email": "vanessa.burroughs@passage.id",
+    "dependentChangeType": "patch"
+}
