@@ -41,7 +41,6 @@ export default class User {
 
         this.#configuration = new Configuration({
             accessToken: this.#apiKey,
-            apiKey: this.#apiKey,
             fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
             headers: this.#authorizationHeader,
             middleware: [],
