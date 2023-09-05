@@ -1,13 +1,10 @@
-import fetch from 'node-fetch';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
-import passageNodeConfig from '../utils/config.json';
+import apiConfiguration from '../utils/apiConfiguration';
 
 import {
     Configuration,
-    ConfigurationParameters,
     CreateUserRequest,
-    HTTPHeaders,
     ResponseError,
     TokensApi,
     UpdateUserRequest,
@@ -21,7 +18,6 @@ import {
 export default class User {
     #appID: string;
     #apiKey: string;
-    #authorizationHeader?: HTTPHeaders;
     #client: UsersApi;
     #configuration: Configuration;
     id: string;
@@ -35,15 +31,9 @@ export default class User {
         this.#appID = config.appID ? config.appID : '';
         this.#apiKey = config.apiKey ? config.apiKey : '';
         this.id = '';
-        this.#authorizationHeader = {
-            'Passage-Version': passageNodeConfig.version,
-        };
 
-        this.#configuration = new Configuration({
+        this.#configuration = apiConfiguration({
             accessToken: this.#apiKey,
-            fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
-            headers: this.#authorizationHeader,
-            middleware: [],
         });
 
         this.#client = new UsersApi(this.#configuration);

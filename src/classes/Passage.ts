@@ -1,21 +1,11 @@
 import { Request } from 'express-serve-static-core';
 import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
-import fetch from 'node-fetch';
 import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
-import {
-    AppInfo,
-    AppsApi,
-    Configuration,
-    ConfigurationParameters,
-    CreateMagicLinkRequest,
-    MagicLink,
-    MagicLinkApi,
-    ResponseError,
-} from '../generated';
 import User from './User';
-import passageNodeConfig from '../utils/config.json';
+import { AppInfo, AppsApi, CreateMagicLinkRequest, MagicLink, MagicLinkApi, ResponseError } from '../generated';
+import apiConfiguration from '../utils/apiConfiguration';
 
 /**
  * Passage Class
@@ -176,14 +166,8 @@ export default class Passage {
      */
     async createMagicLink(magicLinkReq: CreateMagicLinkRequest): Promise<MagicLink> {
         try {
-            const configuration = new Configuration({
-                apiKey: this.#apiKey,
-                headers: {
-                    'Authorization': `Bearer ${this.#apiKey}`,
-                    'Passage-Version': passageNodeConfig.version,
-                },
-                fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
-                middleware: [],
+            const configuration = apiConfiguration({
+                accessToken: this.#apiKey,
             });
             const client = new MagicLinkApi(configuration);
             const response = await client.createMagicLink({
@@ -204,12 +188,8 @@ export default class Passage {
      */
     async getApp(): Promise<AppInfo> {
         try {
-            const configuration = new Configuration({
-                fetchApi: fetch as unknown as ConfigurationParameters['fetchApi'],
-                middleware: [],
-                headers: {
-                    'Passage-Version': passageNodeConfig.version,
-                },
+            const configuration = apiConfiguration({
+                accessToken: this.#apiKey,
             });
             const client = new AppsApi(configuration);
             const response = await client.getApp({
