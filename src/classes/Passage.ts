@@ -4,7 +4,7 @@ import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
 import User from './User';
-import { AppInfo, AppsApi, CreateMagicLinkRequest, MagicLink, MagicLinkApi, ResponseError } from '../generated';
+import { AppInfo, AppsApi, CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from '../generated';
 import apiConfiguration from '../utils/apiConfiguration';
 
 /**
@@ -169,7 +169,7 @@ export default class Passage {
             const configuration = apiConfiguration({
                 accessToken: this.#apiKey,
             });
-            const client = new MagicLinkApi(configuration);
+            const client = new MagicLinksApi(configuration);
             const response = await client.createMagicLink({
                 appId: this.appID,
                 createMagicLinkRequest: magicLinkReq,
