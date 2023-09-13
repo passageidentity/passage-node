@@ -11,6 +11,7 @@ export * from './Layouts';
 export * from './ListDevicesResponse';
 export * from './MagicLink';
 export * from './MagicLinkResponse';
+export * from './MagicLinkType';
 export * from './Model400Error';
 export * from './Model401Error';
 export * from './Model404Error';

@@ -1,6 +1,6 @@
 .openapi-generator-ignore
 apis/AppsApi.ts
-apis/MagicLinkApi.ts
+apis/MagicLinksApi.ts
 apis/TokensApi.ts
 apis/UserDevicesApi.ts
 apis/UsersApi.ts
@@ -17,6 +17,7 @@ models/Layouts.ts
 models/ListDevicesResponse.ts
 models/MagicLink.ts
 models/MagicLinkResponse.ts
+models/MagicLinkType.ts
 models/Model400Error.ts
 models/Model401Error.ts
 models/Model404Error.ts
