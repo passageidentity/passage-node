@@ -142,6 +142,12 @@ export interface AppInfo {
     hosted_subdomain: string;
     /**
      * 
+     * @type {number}
+     * @memberof AppInfo
+     */
+    id_token_lifetime?: number;
+    /**
+     * 
      * @type {boolean}
      * @memberof AppInfo
      */
@@ -329,6 +335,7 @@ export function AppInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
         'name': json['name'],
         'hosted': json['hosted'],
         'hosted_subdomain': json['hosted_subdomain'],
+        'id_token_lifetime': !exists(json, 'id_token_lifetime') ? undefined : json['id_token_lifetime'],
         'passage_branding': json['passage_branding'],
         'profile_management': json['profile_management'],
         'public_signup': json['public_signup'],
@@ -375,6 +382,7 @@ export function AppInfoToJSON(value?: AppInfo | null): any {
         'name': value.name,
         'hosted': value.hosted,
         'hosted_subdomain': value.hosted_subdomain,
+        'id_token_lifetime': value.id_token_lifetime,
         'passage_branding': value.passage_branding,
         'profile_management': value.profile_management,
         'public_signup': value.public_signup,

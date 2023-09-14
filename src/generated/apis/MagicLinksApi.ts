@@ -45,7 +45,7 @@ export interface CreateMagicLinkOperationRequest {
 /**
  * 
  */
-export class MagicLinkApi extends runtime.BaseAPI {
+export class MagicLinksApi extends runtime.BaseAPI {
 
     /**
      * Create magic link for a user.
