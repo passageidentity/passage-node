@@ -1,0 +1,7 @@
+{
+    "type": "none",
+    "comment": "SDK updates",
+    "packageName": "@passageidentity/passage-node",
+    "email": "bert.ramirez@agilebits.com",
+    "dependentChangeType": "none"
+}
