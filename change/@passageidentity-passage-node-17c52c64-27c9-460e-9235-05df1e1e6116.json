@@ -1,7 +1,7 @@
 {
     "type": "minor",
-    "comment": "Autogenerate API files with openAPI generator",
+    "comment": "Potentially introduces Typescript errors. Several type names have been added and changed",
     "packageName": "@passageidentity/passage-node",
     "email": "vanessa.burroughs@passage.id",
-    "dependentChangeType": "patch"
+    "dependentChangeType": "minor"
 }
