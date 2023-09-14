@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { MagicLinkType } from './MagicLinkType';
+import {
+    MagicLinkTypeFromJSON,
+    MagicLinkTypeFromJSONTyped,
+    MagicLinkTypeToJSON,
+} from './MagicLinkType';
+
 /**
  * 
  * @export
@@ -24,7 +31,7 @@ export interface CreateMagicLinkRequest {
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    channel: string;
+    channel: CreateMagicLinkRequestChannelEnum;
     /**
      * 
      * @type {string}
@@ -69,10 +76,10 @@ export interface CreateMagicLinkRequest {
     ttl: number;
     /**
      * 
-     * @type {string}
+     * @type {MagicLinkType}
      * @memberof CreateMagicLinkRequest
      */
-    type?: CreateMagicLinkRequestTypeEnum;
+    type?: MagicLinkType;
     /**
      * 
      * @type {string}
@@ -85,11 +92,11 @@ export interface CreateMagicLinkRequest {
 /**
  * @export
  */
-export const CreateMagicLinkRequestTypeEnum = {
-    Login: 'login',
-    VerifyIdentifier: 'verify_identifier'
+export const CreateMagicLinkRequestChannelEnum = {
+    Email: 'email',
+    Phone: 'phone'
 } as const;
-export type CreateMagicLinkRequestTypeEnum = typeof CreateMagicLinkRequestTypeEnum[keyof typeof CreateMagicLinkRequestTypeEnum];
+export type CreateMagicLinkRequestChannelEnum = typeof CreateMagicLinkRequestChannelEnum[keyof typeof CreateMagicLinkRequestChannelEnum];
 
 
 /**
@@ -127,7 +134,7 @@ export function CreateMagicLinkRequestFromJSONTyped(json: any, ignoreDiscriminat
         'redirect_url': json['redirect_url'],
         'send': json['send'],
         'ttl': json['ttl'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
+        'type': !exists(json, 'type') ? undefined : MagicLinkTypeFromJSON(json['type']),
         'user_id': json['user_id'],
     };
 }
@@ -149,7 +156,7 @@ export function CreateMagicLinkRequestToJSON(value?: CreateMagicLinkRequest | nu
         'redirect_url': value.redirect_url,
         'send': value.send,
         'ttl': value.ttl,
-        'type': value.type,
+        'type': MagicLinkTypeToJSON(value.type),
         'user_id': value.user_id,
     };
 }

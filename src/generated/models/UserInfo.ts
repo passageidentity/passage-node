@@ -25,6 +25,12 @@ import {
     WebAuthnDevicesFromJSONTyped,
     WebAuthnDevicesToJSON,
 } from './WebAuthnDevices';
+import type { WebAuthnType } from './WebAuthnType';
+import {
+    WebAuthnTypeFromJSON,
+    WebAuthnTypeFromJSONTyped,
+    WebAuthnTypeToJSON,
+} from './WebAuthnType';
 
 /**
  * 
@@ -116,6 +122,12 @@ export interface UserInfo {
      * @memberof UserInfo
      */
     webauthn_devices: Array<WebAuthnDevices>;
+    /**
+     * List of credential types that have been used for authentication
+     * @type {Array<WebAuthnType>}
+     * @memberof UserInfo
+     */
+    webauthn_types?: Array<WebAuthnType>;
 }
 
 /**
@@ -159,12 +171,13 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'login_count': json['login_count'],
         'phone': json['phone'],
         'phone_verified': json['phone_verified'],
-        'recent_events': ((json['recent_events'] as Array<any>)?.map(UserEventInfoFromJSON)),
+        'recent_events': ((json['recent_events'] as Array<any>).map(UserEventInfoFromJSON)),
         'status': json['status'],
         'updated_at': (new Date(json['updated_at'])),
         'user_metadata': json['user_metadata'],
         'webauthn': json['webauthn'],
-        'webauthn_devices': ((json['webauthn_devices'] as Array<any>)?.map(WebAuthnDevicesFromJSON)),
+        'webauthn_devices': ((json['webauthn_devices'] as Array<any>).map(WebAuthnDevicesFromJSON)),
+        'webauthn_types': !exists(json, 'webauthn_types') ? undefined : ((json['webauthn_types'] as Array<any>).map(WebAuthnTypeFromJSON)),
     };
 }
 
@@ -185,12 +198,13 @@ export function UserInfoToJSON(value?: UserInfo | null): any {
         'login_count': value.login_count,
         'phone': value.phone,
         'phone_verified': value.phone_verified,
-        'recent_events': ((value.recent_events as Array<any>)?.map(UserEventInfoToJSON)),
+        'recent_events': ((value.recent_events as Array<any>).map(UserEventInfoToJSON)),
         'status': value.status,
         'updated_at': (value.updated_at.toISOString()),
         'user_metadata': value.user_metadata,
         'webauthn': value.webauthn,
-        'webauthn_devices': ((value.webauthn_devices as Array<any>)?.map(WebAuthnDevicesToJSON)),
+        'webauthn_devices': ((value.webauthn_devices as Array<any>).map(WebAuthnDevicesToJSON)),
+        'webauthn_types': value.webauthn_types === undefined ? undefined : ((value.webauthn_types as Array<any>).map(WebAuthnTypeToJSON)),
     };
 }
 

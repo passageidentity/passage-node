@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { MagicLinkType } from './MagicLinkType';
+import {
+    MagicLinkTypeFromJSON,
+    MagicLinkTypeFromJSONTyped,
+    MagicLinkTypeToJSON,
+} from './MagicLinkType';
+
 /**
  * 
  * @export
@@ -63,10 +70,10 @@ export interface MagicLink {
     ttl: number;
     /**
      * 
-     * @type {string}
+     * @type {MagicLinkType}
      * @memberof MagicLink
      */
-    type: string;
+    type: MagicLinkType;
     /**
      * 
      * @type {string}
@@ -117,7 +124,7 @@ export function MagicLinkFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'redirect_url': json['redirect_url'],
         'secret': json['secret'],
         'ttl': json['ttl'],
-        'type': json['type'],
+        'type': MagicLinkTypeFromJSON(json['type']),
         'url': json['url'],
         'user_id': json['user_id'],
     };
@@ -139,7 +146,7 @@ export function MagicLinkToJSON(value?: MagicLink | null): any {
         'redirect_url': value.redirect_url,
         'secret': value.secret,
         'ttl': value.ttl,
-        'type': value.type,
+        'type': MagicLinkTypeToJSON(value.type),
         'url': value.url,
         'user_id': value.user_id,
     };
