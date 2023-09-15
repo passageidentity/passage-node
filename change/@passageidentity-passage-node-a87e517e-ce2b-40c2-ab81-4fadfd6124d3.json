@@ -1,6 +1,6 @@
 {
     "type": "none",
-    "comment": "only publish node on demand",
+    "comment": "Repo maintenance",
     "packageName": "@passageidentity/passage-node",
     "email": "kevin.flanagan@passage.id",
     "dependentChangeType": "none"

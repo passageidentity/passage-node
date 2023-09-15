@@ -2,6 +2,35 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Fri, 15 Sep 2023 17:12:46 GMT",
+            "version": "2.5.0",
+            "tag": "@passageidentity/passage-node_v2.5.0",
+            "comments": {
+                "none": [
+                    {
+                        "author": "kevin.flanagan@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "3f2e3651fd892c10967826a02876d652ec7055e2",
+                        "comment": "only publish node on demand"
+                    }
+                ],
+                "minor": [
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "28896fabbe03c4948df2b268d2dc71ce841cd965",
+                        "comment": "SDK is now generated with openapi-generator"
+                    },
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "e57821095beb74ccf7a373b848c376048938aada",
+                        "comment": "Potentially introduces Typescript errors. Several type names have been added and changed"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Fri, 11 Aug 2023 15:16:54 GMT",
             "tag": "@passageidentity/passage-node_v2.4.2",
             "version": "2.4.2",

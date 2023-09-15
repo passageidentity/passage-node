@@ -1,8 +1,17 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 11 Aug 2023 15:16:54 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Sep 2023 17:12:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.5.0
+
+Fri, 15 Sep 2023 17:12:46 GMT
+
+### Minor changes
+
+-   SDK is now generated with openapi-generator (vanessa.burroughs@passage.id)
+-   Potentially introduces Typescript errors. Several type names have been added and changed (vanessa.burroughs@passage.id)
 
 ## 2.4.2
 
