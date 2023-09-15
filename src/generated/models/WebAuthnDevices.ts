@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { WebAuthnType } from './WebAuthnType';
+import {
+    WebAuthnTypeFromJSON,
+    WebAuthnTypeFromJSONTyped,
+    WebAuthnTypeToJSON,
+} from './WebAuthnType';
+
 /**
  * 
  * @export
@@ -50,6 +57,12 @@ export interface WebAuthnDevices {
      */
     last_login_at: Date;
     /**
+     * 
+     * @type {WebAuthnType}
+     * @memberof WebAuthnDevices
+     */
+    type: WebAuthnType;
+    /**
      * The last time this webAuthn device was updated
      * @type {Date}
      * @memberof WebAuthnDevices
@@ -73,6 +86,7 @@ export function instanceOfWebAuthnDevices(value: object): boolean {
     isInstance = isInstance && "friendly_name" in value;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "last_login_at" in value;
+    isInstance = isInstance && "type" in value;
     isInstance = isInstance && "updated_at" in value;
     isInstance = isInstance && "usage_count" in value;
 
@@ -94,6 +108,7 @@ export function WebAuthnDevicesFromJSONTyped(json: any, ignoreDiscriminator: boo
         'friendly_name': json['friendly_name'],
         'id': json['id'],
         'last_login_at': (new Date(json['last_login_at'])),
+        'type': WebAuthnTypeFromJSON(json['type']),
         'updated_at': (new Date(json['updated_at'])),
         'usage_count': json['usage_count'],
     };
@@ -113,6 +128,7 @@ export function WebAuthnDevicesToJSON(value?: WebAuthnDevices | null): any {
         'friendly_name': value.friendly_name,
         'id': value.id,
         'last_login_at': (value.last_login_at.toISOString()),
+        'type': WebAuthnTypeToJSON(value.type),
         'updated_at': (value.updated_at.toISOString()),
         'usage_count': value.usage_count,
     };
