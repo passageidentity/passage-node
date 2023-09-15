@@ -1,0 +1,7 @@
+{
+    "type": "none",
+    "comment": "Repo maintenance",
+    "packageName": "@passageidentity/passage-node",
+    "email": "kevin.flanagan@passage.id",
+    "dependentChangeType": "none"
+}
