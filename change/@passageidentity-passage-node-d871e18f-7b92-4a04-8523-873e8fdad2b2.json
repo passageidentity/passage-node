@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "Update Beachball publish token command",
+    "packageName": "@passageidentity/passage-node",
+    "email": "vanessa.burroughs@passage.id",
+    "dependentChangeType": "patch"
+}
