@@ -1,6 +1,6 @@
 {
     "type": "none",
-    "comment": "Repo maintenance",
+    "comment": "sync repo",
     "packageName": "@passageidentity/passage-node",
     "email": "kevin.flanagan@passage.id",
     "dependentChangeType": "none"

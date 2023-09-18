@@ -1,7 +1,0 @@
-{
-    "type": "patch",
-    "comment": "Include changelog in published package",
-    "packageName": "@passageidentity/passage-node",
-    "email": "kevin.flanagan@passage.id",
-    "dependentChangeType": "patch"
-}

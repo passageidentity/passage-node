@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 15 Sep 2023 17:12:46 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Sep 2023 18:06:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.5.1
+
+Fri, 15 Sep 2023 18:06:19 GMT
+
+### Patches
+
+-   Include changelog in published package (kevin.flanagan@passage.id)
 
 ## 2.5.0
 
