@@ -4,7 +4,7 @@
 
 # passage-node
 
-This Node.js SDK allows for verification of server-side authentication for applications using [Passage](https://passage.id)
+This Node.js SDK allows for verification of server-side authentication for applications using [Passage](https://passage.id).
 
 Install this package using npm.
 

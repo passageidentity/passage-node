@@ -232,9 +232,7 @@ export default class User {
      * @return {Promise<boolean>}
      */
     async signOut(userID: string): Promise<boolean> {
-        if (!this.#apiKey) {
-            throw new PassageError('A Passage API key is needed');
-        }
+        this._apiKeyCheck();
 
         try {
             const client = new TokensApi(this.#configuration);
