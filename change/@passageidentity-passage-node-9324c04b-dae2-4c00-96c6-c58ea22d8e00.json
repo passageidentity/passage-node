@@ -1,7 +1,0 @@
-{
-    "type": "patch",
-    "comment": "Pin beachball to version 2.33.3",
-    "packageName": "@passageidentity/passage-node",
-    "email": "vanessa.burroughs@passage.id",
-    "dependentChangeType": "patch"
-}

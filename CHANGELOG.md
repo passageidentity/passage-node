@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 15 Sep 2023 18:06:19 GMT and should not be manually modified.
+This log was last generated on Mon, 18 Sep 2023 16:20:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.5.2
+
+Mon, 18 Sep 2023 16:20:27 GMT
+
+### Patches
+
+-   Pin beachball to version 2.33.3 (vanessa.burroughs@passage.id)
 
 ## 2.5.1
 

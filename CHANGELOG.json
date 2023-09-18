@@ -2,6 +2,29 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Mon, 18 Sep 2023 16:20:27 GMT",
+            "tag": "@passageidentity/passage-node_v2.5.2",
+            "version": "2.5.2",
+            "comments": {
+                "none": [
+                    {
+                        "author": "kevin.flanagan@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "2eb0de4d4dfd15d0baf035b25484f5fd43b78375",
+                        "comment": "sync repo"
+                    }
+                ],
+                "patch": [
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "2eb0de4d4dfd15d0baf035b25484f5fd43b78375",
+                        "comment": "Pin beachball to version 2.33.3"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Fri, 15 Sep 2023 18:06:19 GMT",
             "version": "2.5.1",
             "tag": "@passageidentity/passage-node_v2.5.1",
