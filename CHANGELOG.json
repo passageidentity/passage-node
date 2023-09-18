@@ -2,6 +2,29 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Fri, 15 Sep 2023 18:06:19 GMT",
+            "version": "2.5.1",
+            "tag": "@passageidentity/passage-node_v2.5.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "kevin.flanagan@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "8b8d9b6bb58286c639e502aa98e1b2c4416548ce",
+                        "comment": "Include changelog in published package"
+                    }
+                ],
+                "none": [
+                    {
+                        "author": "kevin.flanagan@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "2581625ba134257f5e9e66bc1874fd905fec43dd",
+                        "comment": "Repo maintenance"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Fri, 15 Sep 2023 17:12:46 GMT",
             "version": "2.5.0",
             "tag": "@passageidentity/passage-node_v2.5.0",
