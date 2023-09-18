@@ -46,4 +46,4 @@ jobs:
                   git config user.email "beachball_bot@passage.id"
                   git config user.name "Beachball Machine Account"
                   git remote set-url origin https://$GITHUB_ACTOR:$PAT@github.com/$GITHUB_REPOSITORY.git
-                  npm run publish ${{ env.NPM_ACCESS_TOKEN }}
+                  npm run publish -- --token ${{ env.NPM_ACCESS_TOKEN }}
