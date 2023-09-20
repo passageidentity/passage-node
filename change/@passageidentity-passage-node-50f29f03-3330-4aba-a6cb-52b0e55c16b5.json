@@ -1,0 +1,7 @@
+{
+    "type": "none",
+    "comment": "remove the -n option to beachball since we are passing --token now in CI",
+    "packageName": "@passageidentity/passage-node",
+    "email": "blayne.bayer@passage.id",
+    "dependentChangeType": "none"
+}
