@@ -2,6 +2,35 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Wed, 20 Sep 2023 15:48:55 GMT",
+            "version": "2.5.3",
+            "tag": "@passageidentity/passage-node_v2.5.3",
+            "comments": {
+                "none": [
+                    {
+                        "author": "blayne.bayer@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "9b4e74c59fc880394cd7449122c75039b8d6073b",
+                        "comment": "update beachball call"
+                    },
+                    {
+                        "author": "blayne.bayer@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "9b4e74c59fc880394cd7449122c75039b8d6073b",
+                        "comment": "remove the -n option to beachball since we are passing --token now in CI"
+                    }
+                ],
+                "patch": [
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "9b4e74c59fc880394cd7449122c75039b8d6073b",
+                        "comment": "Update Beachball publish token command"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Mon, 18 Sep 2023 16:20:27 GMT",
             "tag": "@passageidentity/passage-node_v2.5.2",
             "version": "2.5.2",
