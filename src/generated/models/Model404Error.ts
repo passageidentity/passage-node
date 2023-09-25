@@ -42,6 +42,7 @@ export const Model404ErrorCodeEnum = {
     ApiKeyNotFound: 'api_key_not_found',
     AppNotFound: 'app_not_found',
     DeviceNotFound: 'device_not_found',
+    DomainNotFound: 'domain_not_found',
     EmailProviderNotFound: 'email_provider_not_found',
     EmailTemplateNotFound: 'email_template_not_found',
     EventNotFound: 'event_not_found',
