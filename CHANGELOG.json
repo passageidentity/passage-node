@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Mon, 02 Oct 2023 20:13:35 GMT",
+            "version": "2.6.0",
+            "tag": "@passageidentity/passage-node_v2.6.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "a27970184d74284581306b68af14e7724ecf6178",
+                        "comment": "New API Element customization variables"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Wed, 20 Sep 2023 15:48:55 GMT",
             "version": "2.5.3",
             "tag": "@passageidentity/passage-node_v2.5.3",

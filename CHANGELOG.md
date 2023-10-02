@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 20 Sep 2023 15:48:55 GMT and should not be manually modified.
+This log was last generated on Mon, 02 Oct 2023 20:13:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.6.0
+
+Mon, 02 Oct 2023 20:13:35 GMT
+
+### Minor changes
+
+-   New API Element customization variables (vanessa.burroughs@passage.id)
 
 ## 2.5.3
 
