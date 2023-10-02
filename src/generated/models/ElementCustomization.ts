@@ -99,6 +99,18 @@ export interface ElementCustomization {
      */
     passage_primary_button_border_radius?: number;
     /**
+     * Primary button border color
+     * @type {string}
+     * @memberof ElementCustomization
+     */
+    passage_primary_button_border_color?: string;
+    /**
+     * Primary button border width (px)
+     * @type {number}
+     * @memberof ElementCustomization
+     */
+    passage_primary_button_border_width?: number;
+    /**
      * Secondary button background colour (hex)
      * @type {string}
      * @memberof ElementCustomization
@@ -122,6 +134,18 @@ export interface ElementCustomization {
      * @memberof ElementCustomization
      */
     passage_secondary_button_border_radius?: number;
+    /**
+     * Secondary button border color
+     * @type {string}
+     * @memberof ElementCustomization
+     */
+    passage_secondary_button_border_color?: string;
+    /**
+     * Secondary button border width (px)
+     * @type {number}
+     * @memberof ElementCustomization
+     */
+    passage_secondary_button_border_width?: number;
 }
 
 /**
@@ -155,10 +179,14 @@ export function ElementCustomizationFromJSONTyped(json: any, ignoreDiscriminator
         'passage_primary_button_text_color': !exists(json, 'passage_primary_button_text_color') ? undefined : json['passage_primary_button_text_color'],
         'passage_primary_button_hover_color': !exists(json, 'passage_primary_button_hover_color') ? undefined : json['passage_primary_button_hover_color'],
         'passage_primary_button_border_radius': !exists(json, 'passage_primary_button_border_radius') ? undefined : json['passage_primary_button_border_radius'],
+        'passage_primary_button_border_color': !exists(json, 'passage_primary_button_border_color') ? undefined : json['passage_primary_button_border_color'],
+        'passage_primary_button_border_width': !exists(json, 'passage_primary_button_border_width') ? undefined : json['passage_primary_button_border_width'],
         'passage_secondary_button_background_color': !exists(json, 'passage_secondary_button_background_color') ? undefined : json['passage_secondary_button_background_color'],
         'passage_secondary_button_text_color': !exists(json, 'passage_secondary_button_text_color') ? undefined : json['passage_secondary_button_text_color'],
         'passage_secondary_button_hover_color': !exists(json, 'passage_secondary_button_hover_color') ? undefined : json['passage_secondary_button_hover_color'],
         'passage_secondary_button_border_radius': !exists(json, 'passage_secondary_button_border_radius') ? undefined : json['passage_secondary_button_border_radius'],
+        'passage_secondary_button_border_color': !exists(json, 'passage_secondary_button_border_color') ? undefined : json['passage_secondary_button_border_color'],
+        'passage_secondary_button_border_width': !exists(json, 'passage_secondary_button_border_width') ? undefined : json['passage_secondary_button_border_width'],
     };
 }
 
@@ -183,10 +211,14 @@ export function ElementCustomizationToJSON(value?: ElementCustomization | null):
         'passage_primary_button_text_color': value.passage_primary_button_text_color,
         'passage_primary_button_hover_color': value.passage_primary_button_hover_color,
         'passage_primary_button_border_radius': value.passage_primary_button_border_radius,
+        'passage_primary_button_border_color': value.passage_primary_button_border_color,
+        'passage_primary_button_border_width': value.passage_primary_button_border_width,
         'passage_secondary_button_background_color': value.passage_secondary_button_background_color,
         'passage_secondary_button_text_color': value.passage_secondary_button_text_color,
         'passage_secondary_button_hover_color': value.passage_secondary_button_hover_color,
         'passage_secondary_button_border_radius': value.passage_secondary_button_border_radius,
+        'passage_secondary_button_border_color': value.passage_secondary_button_border_color,
+        'passage_secondary_button_border_width': value.passage_secondary_button_border_width,
     };
 }
 
