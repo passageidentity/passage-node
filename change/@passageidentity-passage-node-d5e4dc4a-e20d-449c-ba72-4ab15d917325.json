@@ -1,0 +1,7 @@
+{
+    "type": "minor",
+    "comment": "New API Element customization variables",
+    "packageName": "@passageidentity/passage-node",
+    "email": "vanessa.burroughs@passage.id",
+    "dependentChangeType": "patch"
+}
