@@ -24,4 +24,5 @@ export * from './UserMetadataField';
 export * from './UserMetadataFieldType';
 export * from './UserResponse';
 export * from './WebAuthnDevices';
+export * from './WebAuthnIcons';
 export * from './WebAuthnType';

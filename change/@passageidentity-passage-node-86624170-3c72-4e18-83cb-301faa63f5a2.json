@@ -1,0 +1,7 @@
+{
+    "type": "minor",
+    "comment": "add dark mode settings to AppInfo",
+    "packageName": "@passageidentity/passage-node",
+    "email": "bert.ramirez@agilebits.com",
+    "dependentChangeType": "patch"
+}

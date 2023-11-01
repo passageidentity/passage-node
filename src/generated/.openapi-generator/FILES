@@ -30,6 +30,7 @@ models/UserMetadataField.ts
 models/UserMetadataFieldType.ts
 models/UserResponse.ts
 models/WebAuthnDevices.ts
+models/WebAuthnIcons.ts
 models/WebAuthnType.ts
 models/index.ts
 runtime.ts
