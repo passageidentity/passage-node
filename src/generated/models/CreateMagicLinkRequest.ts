@@ -13,6 +13,12 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { MagicLinkChannel } from './MagicLinkChannel';
+import {
+    MagicLinkChannelFromJSON,
+    MagicLinkChannelFromJSONTyped,
+    MagicLinkChannelToJSON,
+} from './MagicLinkChannel';
 import type { MagicLinkType } from './MagicLinkType';
 import {
     MagicLinkTypeFromJSON,
@@ -28,10 +34,10 @@ import {
 export interface CreateMagicLinkRequest {
     /**
      * 
-     * @type {string}
+     * @type {MagicLinkChannel}
      * @memberof CreateMagicLinkRequest
      */
-    channel: CreateMagicLinkRequestChannelEnum;
+    channel: MagicLinkChannel;
     /**
      * 
      * @type {string}
@@ -88,17 +94,6 @@ export interface CreateMagicLinkRequest {
     user_id: string;
 }
 
-
-/**
- * @export
- */
-export const CreateMagicLinkRequestChannelEnum = {
-    Email: 'email',
-    Phone: 'phone'
-} as const;
-export type CreateMagicLinkRequestChannelEnum = typeof CreateMagicLinkRequestChannelEnum[keyof typeof CreateMagicLinkRequestChannelEnum];
-
-
 /**
  * Check if a given object implements the CreateMagicLinkRequest interface.
  */
@@ -126,7 +121,7 @@ export function CreateMagicLinkRequestFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'channel': json['channel'],
+        'channel': MagicLinkChannelFromJSON(json['channel']),
         'email': json['email'],
         'language': !exists(json, 'language') ? undefined : json['language'],
         'magic_link_path': json['magic_link_path'],
@@ -148,7 +143,7 @@ export function CreateMagicLinkRequestToJSON(value?: CreateMagicLinkRequest | nu
     }
     return {
         
-        'channel': value.channel,
+        'channel': MagicLinkChannelToJSON(value.channel),
         'email': value.email,
         'language': value.language,
         'magic_link_path': value.magic_link_path,

@@ -13,6 +13,12 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { AuthMethods } from './AuthMethods';
+import {
+    AuthMethodsFromJSON,
+    AuthMethodsFromJSONTyped,
+    AuthMethodsToJSON,
+} from './AuthMethods';
 import type { ElementCustomization } from './ElementCustomization';
 import {
     ElementCustomizationFromJSON,
@@ -75,17 +81,25 @@ export interface AppInfo {
      */
     application_login_uri: string;
     /**
-     * 
+     * Deprecated Property. Please refer to `auth_methods` to view settings for individual authentication methods.
      * @type {string}
      * @memberof AppInfo
+     * @deprecated
      */
     auth_fallback_method: string;
     /**
-     * 
+     * Deprecated Property. Please refer to `auth_methods` to view settings for individual authentication methods.
      * @type {number}
      * @memberof AppInfo
+     * @deprecated
      */
     auth_fallback_method_ttl: number;
+    /**
+     * 
+     * @type {AuthMethods}
+     * @memberof AppInfo
+     */
+    auth_methods: AuthMethods;
     /**
      * 
      * @type {string}
@@ -297,6 +311,7 @@ export function instanceOfAppInfo(value: object): boolean {
     isInstance = isInstance && "application_login_uri" in value;
     isInstance = isInstance && "auth_fallback_method" in value;
     isInstance = isInstance && "auth_fallback_method_ttl" in value;
+    isInstance = isInstance && "auth_methods" in value;
     isInstance = isInstance && "auth_origin" in value;
     isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "default_language" in value;
@@ -345,6 +360,7 @@ export function AppInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
         'application_login_uri': json['application_login_uri'],
         'auth_fallback_method': json['auth_fallback_method'],
         'auth_fallback_method_ttl': json['auth_fallback_method_ttl'],
+        'auth_methods': AuthMethodsFromJSON(json['auth_methods']),
         'auth_origin': json['auth_origin'],
         'created_at': (new Date(json['created_at'])),
         'default_language': json['default_language'],
@@ -395,6 +411,7 @@ export function AppInfoToJSON(value?: AppInfo | null): any {
         'application_login_uri': value.application_login_uri,
         'auth_fallback_method': value.auth_fallback_method,
         'auth_fallback_method_ttl': value.auth_fallback_method_ttl,
+        'auth_methods': AuthMethodsToJSON(value.auth_methods),
         'auth_origin': value.auth_origin,
         'created_at': (value.created_at.toISOString()),
         'default_language': value.default_language,

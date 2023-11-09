@@ -19,6 +19,12 @@ import {
     UserEventInfoFromJSONTyped,
     UserEventInfoToJSON,
 } from './UserEventInfo';
+import type { UserStatus } from './UserStatus';
+import {
+    UserStatusFromJSON,
+    UserStatusFromJSONTyped,
+    UserStatusToJSON,
+} from './UserStatus';
 import type { WebAuthnDevices } from './WebAuthnDevices';
 import {
     WebAuthnDevicesFromJSON,
@@ -94,10 +100,10 @@ export interface UserInfo {
     recent_events: Array<UserEventInfo>;
     /**
      * 
-     * @type {string}
+     * @type {UserStatus}
      * @memberof UserInfo
      */
-    status: string;
+    status: UserStatus;
     /**
      * 
      * @type {Date}
@@ -127,7 +133,7 @@ export interface UserInfo {
      * @type {Array<WebAuthnType>}
      * @memberof UserInfo
      */
-    webauthn_types?: Array<WebAuthnType>;
+    webauthn_types: Array<WebAuthnType>;
 }
 
 /**
@@ -149,6 +155,7 @@ export function instanceOfUserInfo(value: object): boolean {
     isInstance = isInstance && "user_metadata" in value;
     isInstance = isInstance && "webauthn" in value;
     isInstance = isInstance && "webauthn_devices" in value;
+    isInstance = isInstance && "webauthn_types" in value;
 
     return isInstance;
 }
@@ -172,12 +179,12 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'phone': json['phone'],
         'phone_verified': json['phone_verified'],
         'recent_events': ((json['recent_events'] as Array<any>).map(UserEventInfoFromJSON)),
-        'status': json['status'],
+        'status': UserStatusFromJSON(json['status']),
         'updated_at': (new Date(json['updated_at'])),
         'user_metadata': json['user_metadata'],
         'webauthn': json['webauthn'],
         'webauthn_devices': ((json['webauthn_devices'] as Array<any>).map(WebAuthnDevicesFromJSON)),
-        'webauthn_types': !exists(json, 'webauthn_types') ? undefined : ((json['webauthn_types'] as Array<any>).map(WebAuthnTypeFromJSON)),
+        'webauthn_types': ((json['webauthn_types'] as Array<any>).map(WebAuthnTypeFromJSON)),
     };
 }
 
@@ -199,12 +206,12 @@ export function UserInfoToJSON(value?: UserInfo | null): any {
         'phone': value.phone,
         'phone_verified': value.phone_verified,
         'recent_events': ((value.recent_events as Array<any>).map(UserEventInfoToJSON)),
-        'status': value.status,
+        'status': UserStatusToJSON(value.status),
         'updated_at': (value.updated_at.toISOString()),
         'user_metadata': value.user_metadata,
         'webauthn': value.webauthn,
         'webauthn_devices': ((value.webauthn_devices as Array<any>).map(WebAuthnDevicesToJSON)),
-        'webauthn_types': value.webauthn_types === undefined ? undefined : ((value.webauthn_types as Array<any>).map(WebAuthnTypeToJSON)),
+        'webauthn_types': ((value.webauthn_types as Array<any>).map(WebAuthnTypeToJSON)),
     };
 }
 

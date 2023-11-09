@@ -20,17 +20,17 @@ import { exists, mapValues } from '../runtime';
  */
 export interface CreateUserRequest {
     /**
-     * 
+     * Email of the new user. Either this or `phone` is required; both may be provided.
      * @type {string}
      * @memberof CreateUserRequest
      */
-    email: string;
+    email?: string;
     /**
-     * 
+     * Phone number of the new user. Either this or `email` is required; both may be provided.
      * @type {string}
      * @memberof CreateUserRequest
      */
-    phone: string;
+    phone?: string;
     /**
      * 
      * @type {object}
@@ -44,8 +44,6 @@ export interface CreateUserRequest {
  */
 export function instanceOfCreateUserRequest(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "phone" in value;
 
     return isInstance;
 }
@@ -60,8 +58,8 @@ export function CreateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'email': json['email'],
-        'phone': json['phone'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+        'phone': !exists(json, 'phone') ? undefined : json['phone'],
         'user_metadata': !exists(json, 'user_metadata') ? undefined : json['user_metadata'],
     };
 }
