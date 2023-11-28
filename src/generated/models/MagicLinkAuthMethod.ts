@@ -23,34 +23,34 @@ import {
 /**
  * 
  * @export
- * @interface EmailSmsAuthMethod
+ * @interface MagicLinkAuthMethod
  */
-export interface EmailSmsAuthMethod {
+export interface MagicLinkAuthMethod {
     /**
      * 
      * @type {boolean}
-     * @memberof EmailSmsAuthMethod
+     * @memberof MagicLinkAuthMethod
      */
     enabled: boolean;
     /**
      * Maximum time (IN SECONDS) for the auth to expire.
      * @type {number}
-     * @memberof EmailSmsAuthMethod
+     * @memberof MagicLinkAuthMethod
      */
     ttl: number;
     /**
      * 
      * @type {TtlDisplayUnit}
-     * @memberof EmailSmsAuthMethod
+     * @memberof MagicLinkAuthMethod
      * @deprecated
      */
     ttl_display_unit: TtlDisplayUnit;
 }
 
 /**
- * Check if a given object implements the EmailSmsAuthMethod interface.
+ * Check if a given object implements the MagicLinkAuthMethod interface.
  */
-export function instanceOfEmailSmsAuthMethod(value: object): boolean {
+export function instanceOfMagicLinkAuthMethod(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "enabled" in value;
     isInstance = isInstance && "ttl" in value;
@@ -59,11 +59,11 @@ export function instanceOfEmailSmsAuthMethod(value: object): boolean {
     return isInstance;
 }
 
-export function EmailSmsAuthMethodFromJSON(json: any): EmailSmsAuthMethod {
-    return EmailSmsAuthMethodFromJSONTyped(json, false);
+export function MagicLinkAuthMethodFromJSON(json: any): MagicLinkAuthMethod {
+    return MagicLinkAuthMethodFromJSONTyped(json, false);
 }
 
-export function EmailSmsAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): EmailSmsAuthMethod {
+export function MagicLinkAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): MagicLinkAuthMethod {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -75,7 +75,7 @@ export function EmailSmsAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function EmailSmsAuthMethodToJSON(value?: EmailSmsAuthMethod | null): any {
+export function MagicLinkAuthMethodToJSON(value?: MagicLinkAuthMethod | null): any {
     if (value === undefined) {
         return undefined;
     }
