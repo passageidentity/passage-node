@@ -23,56 +23,59 @@ import {
 /**
  * 
  * @export
- * @interface UpdateEmailSmsAuthMethod
+ * @interface OtpAuthMethod
  */
-export interface UpdateEmailSmsAuthMethod {
+export interface OtpAuthMethod {
     /**
      * 
      * @type {boolean}
-     * @memberof UpdateEmailSmsAuthMethod
+     * @memberof OtpAuthMethod
      */
-    enabled?: boolean;
+    enabled: boolean;
     /**
      * Maximum time (IN SECONDS) for the auth to expire.
      * @type {number}
-     * @memberof UpdateEmailSmsAuthMethod
+     * @memberof OtpAuthMethod
      */
-    ttl?: number;
+    ttl: number;
     /**
      * 
      * @type {TtlDisplayUnit}
-     * @memberof UpdateEmailSmsAuthMethod
+     * @memberof OtpAuthMethod
      * @deprecated
      */
-    ttl_display_unit?: TtlDisplayUnit;
+    ttl_display_unit: TtlDisplayUnit;
 }
 
 /**
- * Check if a given object implements the UpdateEmailSmsAuthMethod interface.
+ * Check if a given object implements the OtpAuthMethod interface.
  */
-export function instanceOfUpdateEmailSmsAuthMethod(value: object): boolean {
+export function instanceOfOtpAuthMethod(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "enabled" in value;
+    isInstance = isInstance && "ttl" in value;
+    isInstance = isInstance && "ttl_display_unit" in value;
 
     return isInstance;
 }
 
-export function UpdateEmailSmsAuthMethodFromJSON(json: any): UpdateEmailSmsAuthMethod {
-    return UpdateEmailSmsAuthMethodFromJSONTyped(json, false);
+export function OtpAuthMethodFromJSON(json: any): OtpAuthMethod {
+    return OtpAuthMethodFromJSONTyped(json, false);
 }
 
-export function UpdateEmailSmsAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateEmailSmsAuthMethod {
+export function OtpAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): OtpAuthMethod {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
-        'ttl': !exists(json, 'ttl') ? undefined : json['ttl'],
-        'ttl_display_unit': !exists(json, 'ttl_display_unit') ? undefined : TtlDisplayUnitFromJSON(json['ttl_display_unit']),
+        'enabled': json['enabled'],
+        'ttl': json['ttl'],
+        'ttl_display_unit': TtlDisplayUnitFromJSON(json['ttl_display_unit']),
     };
 }
 
-export function UpdateEmailSmsAuthMethodToJSON(value?: UpdateEmailSmsAuthMethod | null): any {
+export function OtpAuthMethodToJSON(value?: OtpAuthMethod | null): any {
     if (value === undefined) {
         return undefined;
     }

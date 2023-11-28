@@ -16,41 +16,42 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UpdatePasskeyAuthMethod
+ * @interface PasskeysAuthMethod
  */
-export interface UpdatePasskeyAuthMethod {
+export interface PasskeysAuthMethod {
     /**
      * 
      * @type {boolean}
-     * @memberof UpdatePasskeyAuthMethod
+     * @memberof PasskeysAuthMethod
      */
-    enabled?: boolean;
+    enabled: boolean;
 }
 
 /**
- * Check if a given object implements the UpdatePasskeyAuthMethod interface.
+ * Check if a given object implements the PasskeysAuthMethod interface.
  */
-export function instanceOfUpdatePasskeyAuthMethod(value: object): boolean {
+export function instanceOfPasskeysAuthMethod(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "enabled" in value;
 
     return isInstance;
 }
 
-export function UpdatePasskeyAuthMethodFromJSON(json: any): UpdatePasskeyAuthMethod {
-    return UpdatePasskeyAuthMethodFromJSONTyped(json, false);
+export function PasskeysAuthMethodFromJSON(json: any): PasskeysAuthMethod {
+    return PasskeysAuthMethodFromJSONTyped(json, false);
 }
 
-export function UpdatePasskeyAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdatePasskeyAuthMethod {
+export function PasskeysAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): PasskeysAuthMethod {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
+        'enabled': json['enabled'],
     };
 }
 
-export function UpdatePasskeyAuthMethodToJSON(value?: UpdatePasskeyAuthMethod | null): any {
+export function PasskeysAuthMethodToJSON(value?: PasskeysAuthMethod | null): any {
     if (value === undefined) {
         return undefined;
     }
