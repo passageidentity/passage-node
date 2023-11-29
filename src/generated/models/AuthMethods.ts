@@ -13,18 +13,24 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { EmailSmsAuthMethod } from './EmailSmsAuthMethod';
+import type { MagicLinkAuthMethod } from './MagicLinkAuthMethod';
 import {
-    EmailSmsAuthMethodFromJSON,
-    EmailSmsAuthMethodFromJSONTyped,
-    EmailSmsAuthMethodToJSON,
-} from './EmailSmsAuthMethod';
-import type { PasskeyAuthMethod } from './PasskeyAuthMethod';
+    MagicLinkAuthMethodFromJSON,
+    MagicLinkAuthMethodFromJSONTyped,
+    MagicLinkAuthMethodToJSON,
+} from './MagicLinkAuthMethod';
+import type { OtpAuthMethod } from './OtpAuthMethod';
 import {
-    PasskeyAuthMethodFromJSON,
-    PasskeyAuthMethodFromJSONTyped,
-    PasskeyAuthMethodToJSON,
-} from './PasskeyAuthMethod';
+    OtpAuthMethodFromJSON,
+    OtpAuthMethodFromJSONTyped,
+    OtpAuthMethodToJSON,
+} from './OtpAuthMethod';
+import type { PasskeysAuthMethod } from './PasskeysAuthMethod';
+import {
+    PasskeysAuthMethodFromJSON,
+    PasskeysAuthMethodFromJSONTyped,
+    PasskeysAuthMethodToJSON,
+} from './PasskeysAuthMethod';
 
 /**
  * Denotes what methods this app is allowed to use for authentication with configurations
@@ -34,22 +40,22 @@ import {
 export interface AuthMethods {
     /**
      * 
-     * @type {PasskeyAuthMethod}
+     * @type {PasskeysAuthMethod}
      * @memberof AuthMethods
      */
-    passkey: PasskeyAuthMethod;
+    passkeys: PasskeysAuthMethod;
     /**
      * 
-     * @type {EmailSmsAuthMethod}
+     * @type {OtpAuthMethod}
      * @memberof AuthMethods
      */
-    otp: EmailSmsAuthMethod;
+    otp: OtpAuthMethod;
     /**
      * 
-     * @type {EmailSmsAuthMethod}
+     * @type {MagicLinkAuthMethod}
      * @memberof AuthMethods
      */
-    magic_link: EmailSmsAuthMethod;
+    magic_link: MagicLinkAuthMethod;
 }
 
 /**
@@ -57,7 +63,7 @@ export interface AuthMethods {
  */
 export function instanceOfAuthMethods(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "passkey" in value;
+    isInstance = isInstance && "passkeys" in value;
     isInstance = isInstance && "otp" in value;
     isInstance = isInstance && "magic_link" in value;
 
@@ -74,9 +80,9 @@ export function AuthMethodsFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'passkey': PasskeyAuthMethodFromJSON(json['passkey']),
-        'otp': EmailSmsAuthMethodFromJSON(json['otp']),
-        'magic_link': EmailSmsAuthMethodFromJSON(json['magic_link']),
+        'passkeys': PasskeysAuthMethodFromJSON(json['passkeys']),
+        'otp': OtpAuthMethodFromJSON(json['otp']),
+        'magic_link': MagicLinkAuthMethodFromJSON(json['magic_link']),
     };
 }
 
@@ -89,9 +95,9 @@ export function AuthMethodsToJSON(value?: AuthMethods | null): any {
     }
     return {
         
-        'passkey': PasskeyAuthMethodToJSON(value.passkey),
-        'otp': EmailSmsAuthMethodToJSON(value.otp),
-        'magic_link': EmailSmsAuthMethodToJSON(value.magic_link),
+        'passkeys': PasskeysAuthMethodToJSON(value.passkeys),
+        'otp': OtpAuthMethodToJSON(value.otp),
+        'magic_link': MagicLinkAuthMethodToJSON(value.magic_link),
     };
 }
 
