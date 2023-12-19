@@ -13,6 +13,8 @@ models/CreateMagicLinkRequest.ts
 models/CreateUserRequest.ts
 models/ElementCustomization.ts
 models/FontFamily.ts
+models/GithubSocialConnection.ts
+models/GoogleSocialConnection.ts
 models/LayoutConfig.ts
 models/Layouts.ts
 models/ListDevicesResponse.ts
@@ -38,6 +40,7 @@ models/UserInfo.ts
 models/UserMetadataField.ts
 models/UserMetadataFieldType.ts
 models/UserResponse.ts
+models/UserSocialConnections.ts
 models/UserStatus.ts
 models/WebAuthnDevices.ts
 models/WebAuthnIcons.ts

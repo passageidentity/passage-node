@@ -19,6 +19,12 @@ import {
     UserEventInfoFromJSONTyped,
     UserEventInfoToJSON,
 } from './UserEventInfo';
+import type { UserSocialConnections } from './UserSocialConnections';
+import {
+    UserSocialConnectionsFromJSON,
+    UserSocialConnectionsFromJSONTyped,
+    UserSocialConnectionsToJSON,
+} from './UserSocialConnections';
 import type { UserStatus } from './UserStatus';
 import {
     UserStatusFromJSON,
@@ -100,6 +106,12 @@ export interface UserInfo {
     recent_events: Array<UserEventInfo>;
     /**
      * 
+     * @type {UserSocialConnections}
+     * @memberof UserInfo
+     */
+    social_connections: UserSocialConnections;
+    /**
+     * 
      * @type {UserStatus}
      * @memberof UserInfo
      */
@@ -150,6 +162,7 @@ export function instanceOfUserInfo(value: object): boolean {
     isInstance = isInstance && "phone" in value;
     isInstance = isInstance && "phone_verified" in value;
     isInstance = isInstance && "recent_events" in value;
+    isInstance = isInstance && "social_connections" in value;
     isInstance = isInstance && "status" in value;
     isInstance = isInstance && "updated_at" in value;
     isInstance = isInstance && "user_metadata" in value;
@@ -179,6 +192,7 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'phone': json['phone'],
         'phone_verified': json['phone_verified'],
         'recent_events': ((json['recent_events'] as Array<any>).map(UserEventInfoFromJSON)),
+        'social_connections': UserSocialConnectionsFromJSON(json['social_connections']),
         'status': UserStatusFromJSON(json['status']),
         'updated_at': (new Date(json['updated_at'])),
         'user_metadata': json['user_metadata'],
@@ -206,6 +220,7 @@ export function UserInfoToJSON(value?: UserInfo | null): any {
         'phone': value.phone,
         'phone_verified': value.phone_verified,
         'recent_events': ((value.recent_events as Array<any>).map(UserEventInfoToJSON)),
+        'social_connections': UserSocialConnectionsToJSON(value.social_connections),
         'status': UserStatusToJSON(value.status),
         'updated_at': (value.updated_at.toISOString()),
         'user_metadata': value.user_metadata,
