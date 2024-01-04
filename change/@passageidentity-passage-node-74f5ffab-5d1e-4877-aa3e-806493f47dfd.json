@@ -1,7 +1,0 @@
-{
-    "type": "minor",
-    "comment": "add AuthMethods field to App",
-    "packageName": "@passageidentity/passage-node",
-    "email": "bert.ramirez@agilebits.com",
-    "dependentChangeType": "patch"
-}

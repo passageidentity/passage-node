@@ -2,6 +2,47 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Thu, 04 Jan 2024 20:09:48 GMT",
+            "version": "2.7.0",
+            "tag": "@passageidentity/passage-node_v2.7.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "bert.ramirez@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5bd7d54560f8cf1f66c1f7a24fbe511d99fd940c",
+                        "comment": "add AuthMethods field to App"
+                    },
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5bd7d54560f8cf1f66c1f7a24fbe511d99fd940c",
+                        "comment": "Add social login support"
+                    },
+                    {
+                        "author": "bert.ramirez@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5bd7d54560f8cf1f66c1f7a24fbe511d99fd940c",
+                        "comment": "add dark mode settings to AppInfo"
+                    },
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5bd7d54560f8cf1f66c1f7a24fbe511d99fd940c",
+                        "comment": "SDK updates - Create AuthMethods "
+                    }
+                ],
+                "patch": [
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "5bd7d54560f8cf1f66c1f7a24fbe511d99fd940c",
+                        "comment": "Bump @babel/traverse from 7.22.11 to 7.23.5"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Mon, 02 Oct 2023 20:13:35 GMT",
             "version": "2.6.0",
             "tag": "@passageidentity/passage-node_v2.6.0",

@@ -1,8 +1,23 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Mon, 02 Oct 2023 20:13:35 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jan 2024 20:09:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.7.0
+
+Thu, 04 Jan 2024 20:09:48 GMT
+
+### Minor changes
+
+-   add AuthMethods field to App (bert.ramirez@agilebits.com)
+-   Add social login support (vanessa.burroughs@passage.id)
+-   add dark mode settings to AppInfo (bert.ramirez@agilebits.com)
+-   SDK updates - Create AuthMethods (vanessa.burroughs@passage.id)
+
+### Patches
+
+-   Bump @babel/traverse from 7.22.11 to 7.23.5 (vanessa.burroughs@passage.id)
 
 ## 2.6.0
 
