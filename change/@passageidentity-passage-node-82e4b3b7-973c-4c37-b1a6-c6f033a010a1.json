@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "Bump @babel/traverse from 7.22.11 to 7.23.5",
+    "packageName": "@passageidentity/passage-node",
+    "email": "vanessa.burroughs@passage.id",
+    "dependentChangeType": "patch"
+}
