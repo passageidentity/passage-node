@@ -6,6 +6,7 @@ import User from './User';
 import { AppInfo, AppsApi, CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from '../generated';
 import apiConfiguration from '../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
+import { getHeaderFromRequest } from '../utils/getHeader';
 
 /**
  * Passage Class
@@ -41,10 +42,10 @@ export default class Passage {
      * strategy is given, authenticate the request via cookie (default
      * authentication strategy).
      *
-     * @param {Request} req Express request
+     * @param {IncomingMessage | Request} req Node http request or fetch request
      * @return {string} UserID of the Passage user
      */
-    async authenticateRequest(req: IncomingMessage): Promise<string> {
+    async authenticateRequest(req: IncomingMessage | Request): Promise<string> {
         if (this.authStrategy == 'HEADER') {
             return this.authenticateRequestWithHeader(req);
         } else {
@@ -71,16 +72,16 @@ export default class Passage {
     /**
      * Authenticate a request via the http header.
      *
-     * @param {Request} req Express request
+     * @param {IncomingMessage | Request} req Node http request or fetch request
      * @return {string} User ID for Passage User
      */
-    async authenticateRequestWithHeader(req: IncomingMessage): Promise<string> {
-        const authorization = req.headers.authorization;
+    async authenticateRequestWithHeader(req: IncomingMessage | Request): Promise<string> {
+        const authorization = getHeaderFromRequest(req, 'authorization');
 
-        if (!authorization) {
+        if (!authorization || typeof authorization !== 'string') {
             throw new PassageError('Header authorization not found. You must catch this error.');
         } else {
-            const authToken = authorization.split(' ')[1];
+            const authToken = (authorization as string).split(' ')[1];
             const userID = await this.validAuthToken(authToken);
             if (userID) {
                 return userID;
@@ -93,12 +94,12 @@ export default class Passage {
     /**
      * Authenticate request via cookie.
      *
-     * @param {Request} req Express request
+     * @param {IncomingMessage | Request} req Node http request or fetch request
      * @return {string} UserID for Passage User
      */
-    async authenticateRequestWithCookie(req: IncomingMessage): Promise<string> {
-        const cookiesStr = req.headers.cookie;
-        if (!cookiesStr) {
+    async authenticateRequestWithCookie(req: IncomingMessage | Request): Promise<string> {
+        const cookiesStr = getHeaderFromRequest(req, 'cookie');
+        if (!cookiesStr || typeof cookiesStr !== 'string') {
             throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
         }
 
