@@ -1,4 +1,3 @@
-import { Request } from 'express-serve-static-core';
 import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
 import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
@@ -6,6 +5,7 @@ import { PassageError } from './PassageError';
 import User from './User';
 import { AppInfo, AppsApi, CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from '../generated';
 import apiConfiguration from '../utils/apiConfiguration';
+import { IncomingMessage } from 'http';
 
 /**
  * Passage Class
@@ -44,7 +44,7 @@ export default class Passage {
      * @param {Request} req Express request
      * @return {string} UserID of the Passage user
      */
-    async authenticateRequest(req: Request): Promise<string> {
+    async authenticateRequest(req: IncomingMessage): Promise<string> {
         if (this.authStrategy == 'HEADER') {
             return this.authenticateRequestWithHeader(req);
         } else {
@@ -74,8 +74,8 @@ export default class Passage {
      * @param {Request} req Express request
      * @return {string} User ID for Passage User
      */
-    async authenticateRequestWithHeader(req: Request): Promise<string> {
-        const { authorization } = req.headers;
+    async authenticateRequestWithHeader(req: IncomingMessage): Promise<string> {
+        const authorization = req.headers.authorization;
 
         if (!authorization) {
             throw new PassageError('Header authorization not found. You must catch this error.');
@@ -96,8 +96,8 @@ export default class Passage {
      * @param {Request} req Express request
      * @return {string} UserID for Passage User
      */
-    async authenticateRequestWithCookie(req: Request): Promise<string> {
-        const cookiesStr = req.headers?.cookie;
+    async authenticateRequestWithCookie(req: IncomingMessage): Promise<string> {
+        const cookiesStr = req.headers.cookie;
         if (!cookiesStr) {
             throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
         }
