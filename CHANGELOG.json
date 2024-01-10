@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Wed, 10 Jan 2024 18:05:01 GMT",
+            "version": "2.8.0",
+            "tag": "@passageidentity/passage-node_v2.8.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "kevin.flanagan@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "1e295b434c72f1615a744f865b7975404ed8cd60",
+                        "comment": "use built-in node http IncomingMessage type for requests"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Thu, 04 Jan 2024 20:09:48 GMT",
             "version": "2.7.0",
             "tag": "@passageidentity/passage-node_v2.7.0",

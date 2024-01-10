@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Thu, 04 Jan 2024 20:09:48 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Jan 2024 18:05:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.8.0
+
+Wed, 10 Jan 2024 18:05:01 GMT
+
+### Minor changes
+
+-   use built-in node http IncomingMessage type for requests (kevin.flanagan@passage.id)
 
 ## 2.7.0
 
