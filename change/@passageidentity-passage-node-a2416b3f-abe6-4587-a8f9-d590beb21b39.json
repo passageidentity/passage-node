@@ -1,0 +1,7 @@
+{
+    "type": "minor",
+    "comment": "use built-in node http IncomingMessage type for requests",
+    "packageName": "@passageidentity/passage-node",
+    "email": "kevin.flanagan@passage.id",
+    "dependentChangeType": "patch"
+}

@@ -14,7 +14,7 @@ npm i @passageidentity/passage-node
 
 ## Authenticating a Request
 
-To authenticate an HTTP request in an Express application, you can use the Passage SDK to check a request for a valid authentication token.
+To authenticate an HTTP request, you can use the Passage SDK to check a request for a valid authentication token. `authenticateRequest` can handle requests in the format of `IncomingMessage`, as used by common Node frameworks like Express or with the Next.js page router, and it can also handle requests formatted as a fetch `Request`, as used by tools like the Next.js app router or Deno.
 You need to provide Passage with your App ID in order to verify the JWTs.
 
 ```javascript
