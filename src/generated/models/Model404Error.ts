@@ -50,11 +50,12 @@ export const Model404ErrorCodeEnum = {
     FunctionSecretKeyNotFound: 'function_secret_key_not_found',
     FunctionVersionNotFound: 'function_version_not_found',
     MetadataFieldNotFound: 'metadata_field_not_found',
+    Oauth2AppNotFound: 'oauth2_app_not_found',
     OrganizationMemberNotFound: 'organization_member_not_found',
     SmsProviderNotFound: 'sms_provider_not_found',
     SmsTemplateNotFound: 'sms_template_not_found',
-    UserNotFound: 'user_not_found',
-    Oauth2AppNotFound: 'oauth2_app_not_found'
+    SocialConnectionNotFound: 'social_connection_not_found',
+    UserNotFound: 'user_not_found'
 } as const;
 export type Model404ErrorCodeEnum = typeof Model404ErrorCodeEnum[keyof typeof Model404ErrorCodeEnum];
 
