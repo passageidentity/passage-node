@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Thu, 18 Jan 2024 20:24:23 GMT",
+            "version": "2.9.0",
+            "tag": "@passageidentity/passage-node_v2.9.0",
+            "comments": {
+                "minor": [
+                    {
+                        "author": "vanessa.burroughs@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "89129099e12f180b709f07c60af04725f25a878b",
+                        "comment": "Added SocialConnectionNotFound 404 Error"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Wed, 10 Jan 2024 18:05:01 GMT",
             "version": "2.8.0",
             "tag": "@passageidentity/passage-node_v2.8.0",

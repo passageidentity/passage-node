@@ -1,7 +1,0 @@
-{
-    "type": "minor",
-    "comment": "Added SocialConnectionNotFound 404 Error",
-    "packageName": "@passageidentity/passage-node",
-    "email": "vanessa.burroughs@passage.id",
-    "dependentChangeType": "patch"
-}

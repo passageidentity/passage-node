@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 10 Jan 2024 18:05:01 GMT and should not be manually modified.
+This log was last generated on Thu, 18 Jan 2024 20:24:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.9.0
+
+Thu, 18 Jan 2024 20:24:23 GMT
+
+### Minor changes
+
+-   Added SocialConnectionNotFound 404 Error (vanessa.burroughs@passage.id)
 
 ## 2.8.0
 
