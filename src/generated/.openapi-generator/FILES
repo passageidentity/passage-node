@@ -8,13 +8,14 @@ apis/index.ts
 index.ts
 models/AppInfo.ts
 models/AppResponse.ts
+models/AppleUserSocialConnection.ts
 models/AuthMethods.ts
 models/CreateMagicLinkRequest.ts
 models/CreateUserRequest.ts
 models/ElementCustomization.ts
 models/FontFamily.ts
-models/GithubSocialConnection.ts
-models/GoogleSocialConnection.ts
+models/GithubUserSocialConnection.ts
+models/GoogleUserSocialConnection.ts
 models/LayoutConfig.ts
 models/Layouts.ts
 models/ListDevicesResponse.ts
@@ -35,7 +36,7 @@ models/UpdateMagicLinkAuthMethod.ts
 models/UpdateOtpAuthMethod.ts
 models/UpdatePasskeysAuthMethod.ts
 models/UpdateUserRequest.ts
-models/UserEventInfo.ts
+models/UserEventInfo1.ts
 models/UserInfo.ts
 models/UserMetadataField.ts
 models/UserMetadataFieldType.ts

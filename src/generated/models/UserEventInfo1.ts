@@ -16,45 +16,45 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UserEventInfo
+ * @interface UserEventInfo1
  */
-export interface UserEventInfo {
+export interface UserEventInfo1 {
     /**
      * 
      * @type {Date}
-     * @memberof UserEventInfo
+     * @memberof UserEventInfo1
      */
     created_at: Date;
     /**
      * 
      * @type {string}
-     * @memberof UserEventInfo
+     * @memberof UserEventInfo1
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof UserEventInfo
+     * @memberof UserEventInfo1
      */
     ip_addr: string;
     /**
      * 
      * @type {string}
-     * @memberof UserEventInfo
+     * @memberof UserEventInfo1
      */
     type: string;
     /**
      * 
      * @type {string}
-     * @memberof UserEventInfo
+     * @memberof UserEventInfo1
      */
     user_agent: string;
 }
 
 /**
- * Check if a given object implements the UserEventInfo interface.
+ * Check if a given object implements the UserEventInfo1 interface.
  */
-export function instanceOfUserEventInfo(value: object): boolean {
+export function instanceOfUserEventInfo1(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "id" in value;
@@ -65,11 +65,11 @@ export function instanceOfUserEventInfo(value: object): boolean {
     return isInstance;
 }
 
-export function UserEventInfoFromJSON(json: any): UserEventInfo {
-    return UserEventInfoFromJSONTyped(json, false);
+export function UserEventInfo1FromJSON(json: any): UserEventInfo1 {
+    return UserEventInfo1FromJSONTyped(json, false);
 }
 
-export function UserEventInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserEventInfo {
+export function UserEventInfo1FromJSONTyped(json: any, ignoreDiscriminator: boolean): UserEventInfo1 {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -83,7 +83,7 @@ export function UserEventInfoFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function UserEventInfoToJSON(value?: UserEventInfo | null): any {
+export function UserEventInfo1ToJSON(value?: UserEventInfo1 | null): any {
     if (value === undefined) {
         return undefined;
     }
