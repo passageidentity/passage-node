@@ -16,39 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface GoogleSocialConnection
+ * @interface AppleUserSocialConnection
  */
-export interface GoogleSocialConnection {
+export interface AppleUserSocialConnection {
     /**
      * The external ID of the Social Connection.
      * @type {string}
-     * @memberof GoogleSocialConnection
+     * @memberof AppleUserSocialConnection
      */
     provider_id: string;
     /**
      * 
      * @type {Date}
-     * @memberof GoogleSocialConnection
+     * @memberof AppleUserSocialConnection
      */
     created_at: Date;
     /**
      * 
      * @type {Date}
-     * @memberof GoogleSocialConnection
+     * @memberof AppleUserSocialConnection
      */
     last_login_at: Date;
     /**
      * The email of connected social user.
      * @type {string}
-     * @memberof GoogleSocialConnection
+     * @memberof AppleUserSocialConnection
      */
     provider_identifier: string;
 }
 
 /**
- * Check if a given object implements the GoogleSocialConnection interface.
+ * Check if a given object implements the AppleUserSocialConnection interface.
  */
-export function instanceOfGoogleSocialConnection(value: object): boolean {
+export function instanceOfAppleUserSocialConnection(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "provider_id" in value;
     isInstance = isInstance && "created_at" in value;
@@ -58,11 +58,11 @@ export function instanceOfGoogleSocialConnection(value: object): boolean {
     return isInstance;
 }
 
-export function GoogleSocialConnectionFromJSON(json: any): GoogleSocialConnection {
-    return GoogleSocialConnectionFromJSONTyped(json, false);
+export function AppleUserSocialConnectionFromJSON(json: any): AppleUserSocialConnection {
+    return AppleUserSocialConnectionFromJSONTyped(json, false);
 }
 
-export function GoogleSocialConnectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): GoogleSocialConnection {
+export function AppleUserSocialConnectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): AppleUserSocialConnection {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -75,7 +75,7 @@ export function GoogleSocialConnectionFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function GoogleSocialConnectionToJSON(value?: GoogleSocialConnection | null): any {
+export function AppleUserSocialConnectionToJSON(value?: AppleUserSocialConnection | null): any {
     if (value === undefined) {
         return undefined;
     }
