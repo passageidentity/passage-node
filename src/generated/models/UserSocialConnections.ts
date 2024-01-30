@@ -13,18 +13,24 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { GithubSocialConnection } from './GithubSocialConnection';
+import type { AppleUserSocialConnection } from './AppleUserSocialConnection';
 import {
-    GithubSocialConnectionFromJSON,
-    GithubSocialConnectionFromJSONTyped,
-    GithubSocialConnectionToJSON,
-} from './GithubSocialConnection';
-import type { GoogleSocialConnection } from './GoogleSocialConnection';
+    AppleUserSocialConnectionFromJSON,
+    AppleUserSocialConnectionFromJSONTyped,
+    AppleUserSocialConnectionToJSON,
+} from './AppleUserSocialConnection';
+import type { GithubUserSocialConnection } from './GithubUserSocialConnection';
 import {
-    GoogleSocialConnectionFromJSON,
-    GoogleSocialConnectionFromJSONTyped,
-    GoogleSocialConnectionToJSON,
-} from './GoogleSocialConnection';
+    GithubUserSocialConnectionFromJSON,
+    GithubUserSocialConnectionFromJSONTyped,
+    GithubUserSocialConnectionToJSON,
+} from './GithubUserSocialConnection';
+import type { GoogleUserSocialConnection } from './GoogleUserSocialConnection';
+import {
+    GoogleUserSocialConnectionFromJSON,
+    GoogleUserSocialConnectionFromJSONTyped,
+    GoogleUserSocialConnectionToJSON,
+} from './GoogleUserSocialConnection';
 
 /**
  * 
@@ -34,16 +40,22 @@ import {
 export interface UserSocialConnections {
     /**
      * 
-     * @type {GoogleSocialConnection}
+     * @type {AppleUserSocialConnection}
      * @memberof UserSocialConnections
      */
-    google?: GoogleSocialConnection;
+    apple?: AppleUserSocialConnection;
     /**
      * 
-     * @type {GithubSocialConnection}
+     * @type {GithubUserSocialConnection}
      * @memberof UserSocialConnections
      */
-    github?: GithubSocialConnection;
+    github?: GithubUserSocialConnection;
+    /**
+     * 
+     * @type {GoogleUserSocialConnection}
+     * @memberof UserSocialConnections
+     */
+    google?: GoogleUserSocialConnection;
 }
 
 /**
@@ -65,8 +77,9 @@ export function UserSocialConnectionsFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'google': !exists(json, 'google') ? undefined : GoogleSocialConnectionFromJSON(json['google']),
-        'github': !exists(json, 'github') ? undefined : GithubSocialConnectionFromJSON(json['github']),
+        'apple': !exists(json, 'apple') ? undefined : AppleUserSocialConnectionFromJSON(json['apple']),
+        'github': !exists(json, 'github') ? undefined : GithubUserSocialConnectionFromJSON(json['github']),
+        'google': !exists(json, 'google') ? undefined : GoogleUserSocialConnectionFromJSON(json['google']),
     };
 }
 
@@ -79,8 +92,9 @@ export function UserSocialConnectionsToJSON(value?: UserSocialConnections | null
     }
     return {
         
-        'google': GoogleSocialConnectionToJSON(value.google),
-        'github': GithubSocialConnectionToJSON(value.github),
+        'apple': AppleUserSocialConnectionToJSON(value.apple),
+        'github': GithubUserSocialConnectionToJSON(value.github),
+        'google': GoogleUserSocialConnectionToJSON(value.google),
     };
 }
 

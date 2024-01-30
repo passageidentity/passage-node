@@ -13,12 +13,12 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { UserEventInfo } from './UserEventInfo';
+import type { UserRecentEvent } from './UserRecentEvent';
 import {
-    UserEventInfoFromJSON,
-    UserEventInfoFromJSONTyped,
-    UserEventInfoToJSON,
-} from './UserEventInfo';
+    UserRecentEventFromJSON,
+    UserRecentEventFromJSONTyped,
+    UserRecentEventToJSON,
+} from './UserRecentEvent';
 import type { UserSocialConnections } from './UserSocialConnections';
 import {
     UserSocialConnectionsFromJSON,
@@ -100,10 +100,10 @@ export interface UserInfo {
     phone_verified: boolean;
     /**
      * 
-     * @type {Array<UserEventInfo>}
+     * @type {Array<UserRecentEvent>}
      * @memberof UserInfo
      */
-    recent_events: Array<UserEventInfo>;
+    recent_events: Array<UserRecentEvent>;
     /**
      * 
      * @type {UserSocialConnections}
@@ -191,7 +191,7 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'login_count': json['login_count'],
         'phone': json['phone'],
         'phone_verified': json['phone_verified'],
-        'recent_events': ((json['recent_events'] as Array<any>).map(UserEventInfoFromJSON)),
+        'recent_events': ((json['recent_events'] as Array<any>).map(UserRecentEventFromJSON)),
         'social_connections': UserSocialConnectionsFromJSON(json['social_connections']),
         'status': UserStatusFromJSON(json['status']),
         'updated_at': (new Date(json['updated_at'])),
@@ -219,7 +219,7 @@ export function UserInfoToJSON(value?: UserInfo | null): any {
         'login_count': value.login_count,
         'phone': value.phone,
         'phone_verified': value.phone_verified,
-        'recent_events': ((value.recent_events as Array<any>).map(UserEventInfoToJSON)),
+        'recent_events': ((value.recent_events as Array<any>).map(UserRecentEventToJSON)),
         'social_connections': UserSocialConnectionsToJSON(value.social_connections),
         'status': UserStatusToJSON(value.status),
         'updated_at': (value.updated_at.toISOString()),
