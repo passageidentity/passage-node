@@ -16,39 +16,39 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface GithubSocialConnection
+ * @interface GithubUserSocialConnection
  */
-export interface GithubSocialConnection {
+export interface GithubUserSocialConnection {
     /**
      * The external ID of the Social Connection.
      * @type {string}
-     * @memberof GithubSocialConnection
+     * @memberof GithubUserSocialConnection
      */
     provider_id: string;
     /**
      * 
      * @type {Date}
-     * @memberof GithubSocialConnection
+     * @memberof GithubUserSocialConnection
      */
     created_at: Date;
     /**
      * 
      * @type {Date}
-     * @memberof GithubSocialConnection
+     * @memberof GithubUserSocialConnection
      */
     last_login_at: Date;
     /**
      * The email of connected social user.
      * @type {string}
-     * @memberof GithubSocialConnection
+     * @memberof GithubUserSocialConnection
      */
     provider_identifier: string;
 }
 
 /**
- * Check if a given object implements the GithubSocialConnection interface.
+ * Check if a given object implements the GithubUserSocialConnection interface.
  */
-export function instanceOfGithubSocialConnection(value: object): boolean {
+export function instanceOfGithubUserSocialConnection(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "provider_id" in value;
     isInstance = isInstance && "created_at" in value;
@@ -58,11 +58,11 @@ export function instanceOfGithubSocialConnection(value: object): boolean {
     return isInstance;
 }
 
-export function GithubSocialConnectionFromJSON(json: any): GithubSocialConnection {
-    return GithubSocialConnectionFromJSONTyped(json, false);
+export function GithubUserSocialConnectionFromJSON(json: any): GithubUserSocialConnection {
+    return GithubUserSocialConnectionFromJSONTyped(json, false);
 }
 
-export function GithubSocialConnectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): GithubSocialConnection {
+export function GithubUserSocialConnectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): GithubUserSocialConnection {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -75,7 +75,7 @@ export function GithubSocialConnectionFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function GithubSocialConnectionToJSON(value?: GithubSocialConnection | null): any {
+export function GithubUserSocialConnectionToJSON(value?: GithubUserSocialConnection | null): any {
     if (value === undefined) {
         return undefined;
     }
