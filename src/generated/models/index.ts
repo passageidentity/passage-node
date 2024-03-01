@@ -30,6 +30,7 @@ export * from './UpdateMagicLinkAuthMethod';
 export * from './UpdateOtpAuthMethod';
 export * from './UpdatePasskeysAuthMethod';
 export * from './UpdateUserRequest';
+export * from './UserEventStatus';
 export * from './UserInfo';
 export * from './UserMetadataField';
 export * from './UserMetadataFieldType';
