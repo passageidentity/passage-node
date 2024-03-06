@@ -294,7 +294,8 @@ export interface AppInfo {
  */
 export const AppInfoTypeEnum = {
     Complete: 'complete',
-    Flex: 'flex'
+    Flex: 'flex',
+    FlexV2: 'flex_v2'
 } as const;
 export type AppInfoTypeEnum = typeof AppInfoTypeEnum[keyof typeof AppInfoTypeEnum];
 
