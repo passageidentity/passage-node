@@ -18,7 +18,10 @@ models/GithubUserSocialConnection.ts
 models/GoogleUserSocialConnection.ts
 models/LayoutConfig.ts
 models/Layouts.ts
+models/Link.ts
 models/ListDevicesResponse.ts
+models/ListPaginatedUsersItem.ts
+models/ListPaginatedUsersResponse.ts
 models/MagicLink.ts
 models/MagicLinkAuthMethod.ts
 models/MagicLinkChannel.ts
@@ -26,9 +29,11 @@ models/MagicLinkResponse.ts
 models/MagicLinkType.ts
 models/Model400Error.ts
 models/Model401Error.ts
+models/Model403Error.ts
 models/Model404Error.ts
 models/Model500Error.ts
 models/OtpAuthMethod.ts
+models/PaginatedLinks.ts
 models/PasskeysAuthMethod.ts
 models/Technologies.ts
 models/TtlDisplayUnit.ts
@@ -36,6 +41,7 @@ models/UpdateMagicLinkAuthMethod.ts
 models/UpdateOtpAuthMethod.ts
 models/UpdatePasskeysAuthMethod.ts
 models/UpdateUserRequest.ts
+models/UserEventStatus.ts
 models/UserInfo.ts
 models/UserMetadataField.ts
 models/UserMetadataFieldType.ts
