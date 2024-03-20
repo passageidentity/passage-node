@@ -101,6 +101,34 @@ app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
 });
 ```
 
+## Retrieve User Info By Identifier
+
+To retrieve information about a user, you can use the `passage.user.getUserByIdentifier()` function. You will need to use a Passage API key, which can be created in the Passage Console under your Application Settings. This API key grants your web server access to the Passage management APIs to get and update information about users. This API key must be protected and stored in an appropriate secure storage location. It should never be hard-coded in the repository.
+
+```javascript
+import Passage from '@passageidentity/passage-node';
+import express from 'express';
+
+const app = express();
+const port = 3000;
+
+let passageConfig = {
+    appID: 'YOUR_APP_ID',
+    apiKey: 'YOUR_API_KEY',
+};
+let passage = new Passage(passageConfig);
+
+// example authenticated route
+app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
+    // get user identifier from middleware
+    let userEmail = res.userEmail;
+
+    // get user info
+    let passageUser = await passage.user.getUserByIdentifier(userEmail);
+    console.log(passageUser.id);
+});
+```
+
 ## Activate/Deactivate User
 
 You can also activate or deactivate a user using the Passage SDK. These actions require an API Key and deactivating a user will prevent them from logging into your application with Passage.
