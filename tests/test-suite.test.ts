@@ -94,7 +94,7 @@ describe('Passage API Requests', () => {
             const user = await passage.user.get(createdUserWithEmail.id);
             expect(user).toHaveProperty('id', createdUserWithEmail.id);
 
-            expect(userByIdentifier).toBe(user);
+            expect(userByIdentifier).toEqual(user);
         });
         test('activateUser', async () => {
             const activatedUser = await passage.user.activate(userID);
