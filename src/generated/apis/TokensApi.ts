@@ -16,12 +16,15 @@
 import * as runtime from '../runtime';
 import type {
   Model401Error,
+  Model403Error,
   Model404Error,
   Model500Error,
 } from '../models/index';
 import {
     Model401ErrorFromJSON,
     Model401ErrorToJSON,
+    Model403ErrorFromJSON,
+    Model403ErrorToJSON,
     Model404ErrorFromJSON,
     Model404ErrorToJSON,
     Model500ErrorFromJSON,
