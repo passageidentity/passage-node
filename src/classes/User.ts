@@ -70,6 +70,34 @@ export default class User {
         }
     }
 
+        /**
+     * Get a user's object using their user Identifier.
+     *
+     * @param {string} userIdentifier The Passage user email or phone number
+     * @return {Promise<UserInfo>} Passage User object
+     */
+        async getByIdentifier(userIdentifier: string): Promise<UserInfo> {
+            this._apiKeyCheck();
+    
+            try {
+                const response = await this.#client.listPaginatedUsers({
+                    appId: this.#appID,
+                    limit: 1,
+                    identifier: userIdentifier,
+                });
+    
+                var users = response.users;
+                if (!users.length) {
+                    throw new PassageError('Could not find user with that identifier.');
+                }
+
+                return this.get(users[0].id)
+
+            } catch (err) {
+                throw new PassageError('Could not fetch user by Identifier.', err as ResponseError);
+            }
+        }
+
     /**
      * Deactivate a user using their user ID.
      *
