@@ -1,6 +1,6 @@
 {
   "type": "minor",
-  "comment": "get user by identifier",
+  "comment": "Added getUserByIdentifier, Flex v2 and nonce errors,",
   "packageName": "@passageidentity/passage-node",
   "email": "tamara.deshong@agilebits.com",
   "dependentChangeType": "patch"

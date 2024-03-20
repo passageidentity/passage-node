@@ -76,7 +76,7 @@ export default class User {
      * @param {string} userIdentifier The Passage user email or phone number
      * @return {Promise<UserInfo>} Passage User object
      */
-    async getByIdentifier(userIdentifier: string): Promise<UserInfo> {
+    async getUserByIdentifier(userIdentifier: string): Promise<UserInfo> {
         this._apiKeyCheck();
     
         try {
