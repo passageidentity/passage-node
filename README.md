@@ -112,7 +112,7 @@ import express from 'express';
 const app = express();
 const port = 3000;
 
-let passageConfig = {
+const passageConfig = {
     appID: 'YOUR_APP_ID',
     apiKey: 'YOUR_API_KEY',
 };

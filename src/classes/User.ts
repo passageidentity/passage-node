@@ -71,7 +71,7 @@ export default class User {
     }
 
     /**
-     * Get a user's object using their user Identifier.
+     * Get a user's object using their user identifier.
      *
      * @param {string} userIdentifier The Passage user email or phone number
      * @return {Promise<UserInfo>} Passage User object
@@ -94,7 +94,7 @@ export default class User {
             return this.get(users[0].id);
 
         } catch (err) {
-            throw new PassageError('Could not fetch user by Identifier.', err as ResponseError);
+            throw new PassageError('Could not fetch user by identifier.', err as ResponseError);
         }
     }
 
