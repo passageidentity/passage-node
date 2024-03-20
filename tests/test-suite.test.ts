@@ -4,6 +4,7 @@ import Passage from '../src/index';
 import { PassageError } from '../src/classes/PassageError';
 import app from '../testServer';
 import { CreateMagicLinkRequest, CreateUserRequest } from '../src/generated';
+import { faker } from '@faker-js/faker';
 
 require('dotenv').config();
 
@@ -81,7 +82,8 @@ describe('Passage API Requests', () => {
             expect(user).toHaveProperty('id', userID);
         });
         test('getUserByIdentifier', async () => {
-            const randomEmail = `${Math.random().toString(36).substr(2, 20)}@gmail.com`;
+            const randomEmail = faker.internet.email();
+            // const randomEmail = `${Math.random().toString(36).substr(2, 20)}@gmail.com`;
 
             const createdUserWithEmail = await passage.user.create({
                 email: randomEmail,
