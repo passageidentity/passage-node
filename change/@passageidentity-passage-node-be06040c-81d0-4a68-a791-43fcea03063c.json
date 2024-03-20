@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "get user by identifier",
+  "packageName": "@passageidentity/passage-node",
+  "email": "tamara.deshong@agilebits.com",
+  "dependentChangeType": "patch"
+}
