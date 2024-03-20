@@ -16,19 +16,19 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Model401Error
+ * @interface Model403Error
  */
-export interface Model401Error {
+export interface Model403Error {
     /**
      * 
      * @type {string}
-     * @memberof Model401Error
+     * @memberof Model403Error
      */
-    code: Model401ErrorCodeEnum;
+    code: Model403ErrorCodeEnum;
     /**
      * 
      * @type {string}
-     * @memberof Model401Error
+     * @memberof Model403Error
      */
     error: string;
 }
@@ -37,17 +37,21 @@ export interface Model401Error {
 /**
  * @export
  */
-export const Model401ErrorCodeEnum = {
-    AccessToken: 'invalid_access_token',
-    Nonce: 'invalid_nonce'
+export const Model403ErrorCodeEnum = {
+    CannotCreateOrganizationBillingPortalSession: 'cannot_create_organization_billing_portal_session',
+    CannotCreateTransaction: 'cannot_create_transaction',
+    CannotDeleteAdmin: 'cannot_delete_admin',
+    CannotDeleteOrganizationMember: 'cannot_delete_organization_member',
+    CannotSelfUpdateOrganizationMember: 'cannot_self_update_organization_member',
+    OperationNotAllowed: 'operation_not_allowed'
 } as const;
-export type Model401ErrorCodeEnum = typeof Model401ErrorCodeEnum[keyof typeof Model401ErrorCodeEnum];
+export type Model403ErrorCodeEnum = typeof Model403ErrorCodeEnum[keyof typeof Model403ErrorCodeEnum];
 
 
 /**
- * Check if a given object implements the Model401Error interface.
+ * Check if a given object implements the Model403Error interface.
  */
-export function instanceOfModel401Error(value: object): boolean {
+export function instanceOfModel403Error(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "code" in value;
     isInstance = isInstance && "error" in value;
@@ -55,11 +59,11 @@ export function instanceOfModel401Error(value: object): boolean {
     return isInstance;
 }
 
-export function Model401ErrorFromJSON(json: any): Model401Error {
-    return Model401ErrorFromJSONTyped(json, false);
+export function Model403ErrorFromJSON(json: any): Model403Error {
+    return Model403ErrorFromJSONTyped(json, false);
 }
 
-export function Model401ErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): Model401Error {
+export function Model403ErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): Model403Error {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -70,7 +74,7 @@ export function Model401ErrorFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function Model401ErrorToJSON(value?: Model401Error | null): any {
+export function Model403ErrorToJSON(value?: Model403Error | null): any {
     if (value === undefined) {
         return undefined;
     }

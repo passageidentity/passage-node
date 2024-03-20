@@ -16,41 +16,42 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UpdatePasskeysAuthMethod
+ * @interface Link
  */
-export interface UpdatePasskeysAuthMethod {
+export interface Link {
     /**
      * 
-     * @type {boolean}
-     * @memberof UpdatePasskeysAuthMethod
+     * @type {string}
+     * @memberof Link
      */
-    enabled?: boolean;
+    href: string;
 }
 
 /**
- * Check if a given object implements the UpdatePasskeysAuthMethod interface.
+ * Check if a given object implements the Link interface.
  */
-export function instanceOfUpdatePasskeysAuthMethod(value: object): boolean {
+export function instanceOfLink(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "href" in value;
 
     return isInstance;
 }
 
-export function UpdatePasskeysAuthMethodFromJSON(json: any): UpdatePasskeysAuthMethod {
-    return UpdatePasskeysAuthMethodFromJSONTyped(json, false);
+export function LinkFromJSON(json: any): Link {
+    return LinkFromJSONTyped(json, false);
 }
 
-export function UpdatePasskeysAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdatePasskeysAuthMethod {
+export function LinkFromJSONTyped(json: any, ignoreDiscriminator: boolean): Link {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
+        'href': json['href'],
     };
 }
 
-export function UpdatePasskeysAuthMethodToJSON(value?: UpdatePasskeysAuthMethod | null): any {
+export function LinkToJSON(value?: Link | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -59,7 +60,7 @@ export function UpdatePasskeysAuthMethodToJSON(value?: UpdatePasskeysAuthMethod 
     }
     return {
         
-        'enabled': value.enabled,
+        'href': value.href,
     };
 }
 
