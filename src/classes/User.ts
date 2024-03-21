@@ -83,7 +83,7 @@ export default class User {
             const response = await this.#client.listPaginatedUsers({
                 appId: this.#appID,
                 limit: 1,
-                identifier: identifier,
+                identifier: identifier.toLowerCase(),
             });
 
             const users = response.users;
