@@ -16,6 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   CreateUserRequest,
+  ListPaginatedUsersResponse,
   Model400Error,
   Model401Error,
   Model404Error,
@@ -26,6 +27,8 @@ import type {
 import {
     CreateUserRequestFromJSON,
     CreateUserRequestToJSON,
+    ListPaginatedUsersResponseFromJSON,
+    ListPaginatedUsersResponseToJSON,
     Model400ErrorFromJSON,
     Model400ErrorToJSON,
     Model401ErrorFromJSON,
@@ -63,6 +66,21 @@ export interface DeleteUserRequest {
 export interface GetUserRequest {
     appId: string;
     userId: string;
+}
+
+export interface ListPaginatedUsersRequest {
+    appId: string;
+    page?: number;
+    limit?: number;
+    createdBefore?: number;
+    orderBy?: string;
+    identifier?: string;
+    id?: string;
+    loginCount?: number;
+    status?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    lastLoginAt?: string;
 }
 
 export interface UpdateUserOperationRequest {
@@ -295,6 +313,90 @@ export class UsersApi extends runtime.BaseAPI {
      */
     async getUser(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserResponse> {
         const response = await this.getUserRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * List users for an app.
+     * List Users
+     */
+    async listPaginatedUsersRaw(requestParameters: ListPaginatedUsersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListPaginatedUsersResponse>> {
+        if (requestParameters.appId === null || requestParameters.appId === undefined) {
+            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling listPaginatedUsers.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.limit !== undefined) {
+            queryParameters['limit'] = requestParameters.limit;
+        }
+
+        if (requestParameters.createdBefore !== undefined) {
+            queryParameters['created_before'] = requestParameters.createdBefore;
+        }
+
+        if (requestParameters.orderBy !== undefined) {
+            queryParameters['order_by'] = requestParameters.orderBy;
+        }
+
+        if (requestParameters.identifier !== undefined) {
+            queryParameters['identifier'] = requestParameters.identifier;
+        }
+
+        if (requestParameters.id !== undefined) {
+            queryParameters['id'] = requestParameters.id;
+        }
+
+        if (requestParameters.loginCount !== undefined) {
+            queryParameters['login_count'] = requestParameters.loginCount;
+        }
+
+        if (requestParameters.status !== undefined) {
+            queryParameters['status'] = requestParameters.status;
+        }
+
+        if (requestParameters.createdAt !== undefined) {
+            queryParameters['created_at'] = requestParameters.createdAt;
+        }
+
+        if (requestParameters.updatedAt !== undefined) {
+            queryParameters['updated_at'] = requestParameters.updatedAt;
+        }
+
+        if (requestParameters.lastLoginAt !== undefined) {
+            queryParameters['last_login_at'] = requestParameters.lastLoginAt;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("bearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/apps/{app_id}/users`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ListPaginatedUsersResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * List users for an app.
+     * List Users
+     */
+    async listPaginatedUsers(requestParameters: ListPaginatedUsersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListPaginatedUsersResponse> {
+        const response = await this.listPaginatedUsersRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -19,6 +19,7 @@ import type {
   MagicLinkResponse,
   Model400Error,
   Model401Error,
+  Model403Error,
   Model404Error,
   Model500Error,
 } from '../models/index';
@@ -31,6 +32,8 @@ import {
     Model400ErrorToJSON,
     Model401ErrorFromJSON,
     Model401ErrorToJSON,
+    Model403ErrorFromJSON,
+    Model403ErrorToJSON,
     Model404ErrorFromJSON,
     Model404ErrorToJSON,
     Model500ErrorFromJSON,
