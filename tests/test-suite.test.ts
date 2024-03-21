@@ -86,7 +86,7 @@ describe('Passage API Requests', () => {
             const createdUserWithEmail = await passage.user.create({
                 email: randomEmail,
             } as CreateUserRequest);
-            expect(createdUserWithEmail).toHaveProperty('email', randomEmail);
+            expect(createdUserWithEmail).toHaveProperty('email', randomEmail.toLowerCase);
 
             const userByIdentifier = await passage.user.getUserByIdentifier(randomEmail);
             expect(userByIdentifier).toHaveProperty('id', createdUserWithEmail.id);
