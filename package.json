@@ -12,7 +12,7 @@
         "babel-jest": "^27.2.0",
         "beachball": "^2.37.0",
         "dotenv": "^10.0.0",
-        "eslint": "^8.5.0",
+        "eslint": "^8.57.0",
         "eslint-config-google": "^0.14.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",
@@ -59,6 +59,7 @@
     "license": "MIT",
     "description": "",
     "dependencies": {
+        "@faker-js/faker": "^8.4.1",
         "jose": "^4.14.4",
         "node-fetch": "^2.6.12"
     },
