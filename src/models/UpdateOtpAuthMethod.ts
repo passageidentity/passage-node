@@ -24,6 +24,7 @@ import {
  * 
  * @export
  * @interface UpdateOtpAuthMethod
+ * @deprecated this interface will be removed in version 3.0
  */
 export interface UpdateOtpAuthMethod {
     /**
