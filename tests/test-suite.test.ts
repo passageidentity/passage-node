@@ -96,6 +96,21 @@ describe('Passage API Requests', () => {
 
             expect(userByIdentifier).toEqual(user);
         });
+        test('getUserByIdentifierPhone', async () => {
+            const phone = '+15005550018';
+            const createdUserWithEmail = await passage.user.create({
+                phone: phone,
+            } as CreateUserRequest);
+            expect(createdUserWithEmail).toHaveProperty('phone', phone);
+
+            const userByIdentifier = await passage.user.getUserByIdentifier(phone);
+            expect(userByIdentifier).toHaveProperty('id', createdUserWithEmail.id);
+
+            const user = await passage.user.get(createdUserWithEmail.id);
+            expect(user).toHaveProperty('id', createdUserWithEmail.id);
+
+            expect(userByIdentifier).toEqual(user);
+        });
         test('InvalidGetUserByIdentifier', async () => {
             const randomEmail = faker.internet.email();
             expect(async () => await passage.user.getUserByIdentifier(randomEmail)).rejects.toThrow(PassageError);
