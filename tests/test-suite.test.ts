@@ -4,6 +4,7 @@ import Passage from '../src/index';
 import { PassageError } from '../src/classes/PassageError';
 import app from '../testServer';
 import { CreateMagicLinkRequest, CreateUserRequest } from '../src/generated';
+import { faker } from '@faker-js/faker';
 
 require('dotenv').config();
 
@@ -79,6 +80,40 @@ describe('Passage API Requests', () => {
         test('getUser', async () => {
             const user = await passage.user.get(userID);
             expect(user).toHaveProperty('id', userID);
+        });
+        test('getUserByIdentifier', async () => {
+            const randomEmail = faker.internet.email();
+            const createdUserWithEmail = await passage.user.create({
+                email: randomEmail,
+            } as CreateUserRequest);
+            expect(createdUserWithEmail).toHaveProperty('email', randomEmail.toLowerCase());
+
+            const userByIdentifier = await passage.user.getUserByIdentifier(randomEmail);
+            expect(userByIdentifier).toHaveProperty('id', createdUserWithEmail.id);
+
+            const user = await passage.user.get(createdUserWithEmail.id);
+            expect(user).toHaveProperty('id', createdUserWithEmail.id);
+
+            expect(userByIdentifier).toEqual(user);
+        });
+        test('getUserByIdentifierPhone', async () => {
+            const phone = '+15005550018';
+            const createdUserWithEmail = await passage.user.create({
+                phone: phone,
+            } as CreateUserRequest);
+            expect(createdUserWithEmail).toHaveProperty('phone', phone);
+
+            const userByIdentifier = await passage.user.getUserByIdentifier(phone);
+            expect(userByIdentifier).toHaveProperty('id', createdUserWithEmail.id);
+
+            const user = await passage.user.get(createdUserWithEmail.id);
+            expect(user).toHaveProperty('id', createdUserWithEmail.id);
+
+            expect(userByIdentifier).toEqual(user);
+        });
+        test('InvalidGetUserByIdentifier', async () => {
+            const randomEmail = faker.internet.email();
+            expect(async () => await passage.user.getUserByIdentifier(randomEmail)).rejects.toThrow(PassageError);
         });
         test('activateUser', async () => {
             const activatedUser = await passage.user.activate(userID);

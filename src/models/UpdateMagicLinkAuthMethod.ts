@@ -12,18 +12,19 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { TtlDisplayUnit } from './TtlDisplayUnit';
+import { exists, mapValues } from '../generated/runtime';
+import type { TtlDisplayUnit } from '../generated/models/TtlDisplayUnit';
 import {
     TtlDisplayUnitFromJSON,
     TtlDisplayUnitFromJSONTyped,
     TtlDisplayUnitToJSON,
-} from './TtlDisplayUnit';
+} from '../generated/models/TtlDisplayUnit';
 
 /**
  * 
  * @export
  * @interface UpdateMagicLinkAuthMethod
+ * @deprecated this interface will be removed in version 3.0
  */
 export interface UpdateMagicLinkAuthMethod {
     /**
@@ -65,7 +66,7 @@ export function UpdateMagicLinkAuthMethodFromJSONTyped(json: any, ignoreDiscrimi
         return json;
     }
     return {
-        
+
         'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
         'ttl': !exists(json, 'ttl') ? undefined : json['ttl'],
         'ttl_display_unit': !exists(json, 'ttl_display_unit') ? undefined : TtlDisplayUnitFromJSON(json['ttl_display_unit']),
@@ -80,10 +81,9 @@ export function UpdateMagicLinkAuthMethodToJSON(value?: UpdateMagicLinkAuthMetho
         return null;
     }
     return {
-        
+
         'enabled': value.enabled,
         'ttl': value.ttl,
         'ttl_display_unit': TtlDisplayUnitToJSON(value.ttl_display_unit),
     };
 }
-

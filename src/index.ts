@@ -5,6 +5,7 @@ export * from './types/MagicLink';
 export * from './types/PassageConfig';
 export * from './types/User';
 export * from './generated/models';
+export * from './models';
 export {
     AppInfo as AppObject,
     CreateUserRequest as CreateUserPayload,
@@ -17,7 +18,6 @@ export {
     Layouts,
     LayoutConfig,
     ResponseError,
-    UserEventInfo,
     UserMetadataFieldType,
     UserMetadataField,
     WebAuthnDevices,
