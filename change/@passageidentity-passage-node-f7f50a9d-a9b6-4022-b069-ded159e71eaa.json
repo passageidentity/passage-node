@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added new method to get user by identifier, getUserByIdentifier",
-  "packageName": "@passageidentity/passage-node",
-  "email": "tamara.deshong@agilebits.com",
-  "dependentChangeType": "patch"
-}

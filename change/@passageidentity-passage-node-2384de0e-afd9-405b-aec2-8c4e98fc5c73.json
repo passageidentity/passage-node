@@ -1,7 +1,0 @@
-{
-    "type": "none",
-    "comment": "ci: removes unnecessary gha",
-    "packageName": "@passageidentity/passage-node",
-    "email": "chris.tran@agilebits.com",
-    "dependentChangeType": "none"
-}

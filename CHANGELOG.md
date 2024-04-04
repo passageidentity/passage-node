@@ -1,8 +1,17 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Thu, 18 Jan 2024 20:24:23 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Apr 2024 19:11:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.10.0
+
+Thu, 04 Apr 2024 19:11:38 GMT
+
+### Minor changes
+
+-   SDK updates (133175154+danilo-kaltner@users.noreply.github.com)
+-   Added new method to get user by identifier, getUserByIdentifier (tamara.deshong@agilebits.com)
 
 ## 2.9.0
 

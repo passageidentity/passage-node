@@ -2,6 +2,35 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Thu, 04 Apr 2024 19:11:38 GMT",
+            "version": "2.10.0",
+            "tag": "@passageidentity/passage-node_v2.10.0",
+            "comments": {
+                "none": [
+                    {
+                        "author": "chris.tran@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "fdbfa73e004487b7ca6d7a5af5670670e4efb6c4",
+                        "comment": "ci: removes unnecessary gha"
+                    }
+                ],
+                "minor": [
+                    {
+                        "author": "133175154+danilo-kaltner@users.noreply.github.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "fdbfa73e004487b7ca6d7a5af5670670e4efb6c4",
+                        "comment": "SDK updates"
+                    },
+                    {
+                        "author": "tamara.deshong@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "fdbfa73e004487b7ca6d7a5af5670670e4efb6c4",
+                        "comment": "Added new method to get user by identifier, getUserByIdentifier"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Thu, 18 Jan 2024 20:24:23 GMT",
             "version": "2.9.0",
             "tag": "@passageidentity/passage-node_v2.9.0",
