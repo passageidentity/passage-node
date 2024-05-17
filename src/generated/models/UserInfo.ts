@@ -69,6 +69,12 @@ export interface UserInfo {
      */
     email_verified: boolean;
     /**
+     * The external ID of the user. Only set if the user was created in a Flex app.
+     * @type {string}
+     * @memberof UserInfo
+     */
+    external_id: string;
+    /**
      * 
      * @type {string}
      * @memberof UserInfo
@@ -156,6 +162,7 @@ export function instanceOfUserInfo(value: object): boolean {
     isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "email" in value;
     isInstance = isInstance && "email_verified" in value;
+    isInstance = isInstance && "external_id" in value;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "last_login_at" in value;
     isInstance = isInstance && "login_count" in value;
@@ -186,6 +193,7 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'created_at': (new Date(json['created_at'])),
         'email': json['email'],
         'email_verified': json['email_verified'],
+        'external_id': json['external_id'],
         'id': json['id'],
         'last_login_at': (new Date(json['last_login_at'])),
         'login_count': json['login_count'],
@@ -214,6 +222,7 @@ export function UserInfoToJSON(value?: UserInfo | null): any {
         'created_at': (value.created_at.toISOString()),
         'email': value.email,
         'email_verified': value.email_verified,
+        'external_id': value.external_id,
         'id': value.id,
         'last_login_at': (value.last_login_at.toISOString()),
         'login_count': value.login_count,
