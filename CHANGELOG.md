@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Thu, 04 Apr 2024 19:11:38 GMT and should not be manually modified.
+This log was last generated on Tue, 21 May 2024 15:39:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.10.1
+
+Tue, 21 May 2024 15:39:51 GMT
+
+### Patches
+
+-   fix: removes modules.exports to correctly uses the esm export syntax (chris.tran@agilebits.com)
 
 ## 2.10.0
 

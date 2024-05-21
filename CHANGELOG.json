@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Tue, 21 May 2024 15:39:51 GMT",
+            "version": "2.10.1",
+            "tag": "@passageidentity/passage-node_v2.10.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "chris.tran@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "ee518906bab8bf3055b7c2bccf796a35e3163ffd",
+                        "comment": "fix: removes modules.exports to correctly uses the esm export syntax"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Thu, 04 Apr 2024 19:11:38 GMT",
             "version": "2.10.0",
             "tag": "@passageidentity/passage-node_v2.10.0",
