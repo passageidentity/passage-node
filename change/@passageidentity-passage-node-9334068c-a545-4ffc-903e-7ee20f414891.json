@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "fix: removes modules.exports to correctly uses the esm export syntax",
+    "packageName": "@passageidentity/passage-node",
+    "email": "chris.tran@agilebits.com",
+    "dependentChangeType": "patch"
+}
