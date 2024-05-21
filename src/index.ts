@@ -23,6 +23,4 @@ export {
     WebAuthnDevices,
 } from './generated';
 
-module.exports = Passage;
-
 export default Passage;
