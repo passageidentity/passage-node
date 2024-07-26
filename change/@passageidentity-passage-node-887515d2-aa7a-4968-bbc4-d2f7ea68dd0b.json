@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "--- updated-dependencies: - dependency-name: express   dependency-type: direct:development ...",
+    "packageName": "@passageidentity/passage-node",
+    "email": "chris.tran@agilebits.com",
+    "dependentChangeType": "patch"
+}
