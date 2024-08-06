@@ -51,7 +51,7 @@ export interface CreateMagicLinkRequest {
      */
     language?: string;
     /**
-     * 
+     * must be a relative url
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
