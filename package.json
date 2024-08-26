@@ -63,6 +63,7 @@
         "jose": "^4.14.4",
         "node-fetch": "^2.6.12"
     },
+    "private": false,
     "publishConfig": {
         "access": "public"
     }
