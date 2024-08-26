@@ -1,0 +1,7 @@
+{
+    "type": "none",
+    "comment": "ci: fixes npm publish issues by explicitly setting public access in beachball",
+    "packageName": "@passageidentity/passage-node",
+    "email": "chris.tran@agilebits.com",
+    "dependentChangeType": "none"
+}
