@@ -31,6 +31,7 @@ export * from './OtpAuthMethod';
 export * from './PaginatedLinks';
 export * from './PasskeysAuthMethod';
 export * from './Technologies';
+export * from './ThemeType';
 export * from './TtlDisplayUnit';
 export * from './UpdateUserRequest';
 export * from './UserEventStatus';
