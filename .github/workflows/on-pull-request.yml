@@ -30,5 +30,8 @@ jobs:
               run: |
                   npm run beachball-check
 
+            - name: Build
+              run: npm run set-version && npm run build
+
             - name: Unit Test
               run: npm run test
