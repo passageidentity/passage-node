@@ -1,4 +1,4 @@
-import Passage from './classes/Passage';
+import { Passage } from './classes/Passage';
 export * from './types/AuthStrategy';
 export * from './types/JWKS';
 export * from './types/MagicLink';

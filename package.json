@@ -30,6 +30,13 @@
     "name": "@passageidentity/passage-node",
     "main": "./lib/cjs/index.js",
     "module": "./lib/esm/index.js",
+    "exports": {
+        ".": {
+            "require": "./lib/cjs/index.cjs",
+            "import": "./lib/esm/index.js",
+            "types": "./lib/esm/index.d.ts"
+        }
+    },
     "files": [
         "lib/",
         "CHANGELOG.md"
