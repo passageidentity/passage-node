@@ -30,13 +30,14 @@
     },
     "name": "@passageidentity/passage-node",
     "main": "./dist/index.js",
+    "type": "commonjs",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
+            "types": "./dist/index.d.ts",
             "require": "./dist/index.js",
-            "import": "./dist/index.mjs",
-            "types": "./dist/index.d.ts"
+            "import": "./dist/index.mjs"
         }
     },
     "files": [
