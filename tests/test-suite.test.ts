@@ -23,7 +23,6 @@ describe('Passage Initialization', () => {
         apiKey: process.env.API_KEY,
     };
     const passage = new Passage(config);
-    console.log(process.env.APP_ID);
 
     // note that the current token is only valid until Nov.8 2022
     test('authenticateRequestWithCookie', async () => {
