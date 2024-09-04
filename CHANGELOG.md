@@ -1,8 +1,23 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Tue, 21 May 2024 15:39:51 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Sep 2024 16:42:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.11.0
+
+Wed, 04 Sep 2024 16:42:22 GMT
+
+### Minor changes
+
+-   New build that should work for a wider set of tools and frameworks (kevin.flanagan@passage.id)
+
+### Patches
+
+-   Bump ws from 7.5.9 to 7.5.10 (chris.tran@agilebits.com)
+-   Bump jose from 4.14.4 to 4.15.5 (chris.tran@agilebits.com)
+-   --- updated-dependencies: - dependency-name: express dependency-type: direct:development ... (chris.tran@agilebits.com)
+-   Bump braces from 3.0.2 to 3.0.3 (chris.tran@agilebits.com)
 
 ## 2.10.1
 

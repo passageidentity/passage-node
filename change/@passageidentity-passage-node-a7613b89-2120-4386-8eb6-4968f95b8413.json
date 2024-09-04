@@ -1,7 +1,0 @@
-{
-    "type": "minor",
-    "comment": "New build that should work for a wider set of tools and frameworks",
-    "packageName": "@passageidentity/passage-node",
-    "email": "kevin.flanagan@passage.id",
-    "dependentChangeType": "patch"
-}

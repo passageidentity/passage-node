@@ -2,6 +2,55 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Wed, 04 Sep 2024 16:42:22 GMT",
+            "version": "2.11.0",
+            "tag": "@passageidentity/passage-node_v2.11.0",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "chris.tran@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "d5c95277f1bd9cc41dc82f98e6209d3d9974f827",
+                        "comment": "Bump ws from 7.5.9 to 7.5.10"
+                    },
+                    {
+                        "author": "chris.tran@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "d5c95277f1bd9cc41dc82f98e6209d3d9974f827",
+                        "comment": "Bump jose from 4.14.4 to 4.15.5"
+                    },
+                    {
+                        "author": "chris.tran@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "d5c95277f1bd9cc41dc82f98e6209d3d9974f827",
+                        "comment": "--- updated-dependencies: - dependency-name: express   dependency-type: direct:development ..."
+                    },
+                    {
+                        "author": "chris.tran@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "d5c95277f1bd9cc41dc82f98e6209d3d9974f827",
+                        "comment": "Bump braces from 3.0.2 to 3.0.3"
+                    }
+                ],
+                "none": [
+                    {
+                        "author": "chris.tran@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "d5c95277f1bd9cc41dc82f98e6209d3d9974f827",
+                        "comment": "ci: fixes npm publish issues by explicitly setting public access in beachball"
+                    }
+                ],
+                "minor": [
+                    {
+                        "author": "kevin.flanagan@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "d5c95277f1bd9cc41dc82f98e6209d3d9974f827",
+                        "comment": "New build that should work for a wider set of tools and frameworks"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Tue, 21 May 2024 15:39:51 GMT",
             "version": "2.10.1",
             "tag": "@passageidentity/passage-node_v2.10.1",

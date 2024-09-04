@@ -1,7 +1,0 @@
-{
-    "type": "patch",
-    "comment": "Bump braces from 3.0.2 to 3.0.3",
-    "packageName": "@passageidentity/passage-node",
-    "email": "chris.tran@agilebits.com",
-    "dependentChangeType": "patch"
-}

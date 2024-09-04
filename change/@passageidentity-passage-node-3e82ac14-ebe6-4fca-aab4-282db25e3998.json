@@ -1,7 +1,0 @@
-{
-    "type": "patch",
-    "comment": "Bump ws from 7.5.9 to 7.5.10",
-    "packageName": "@passageidentity/passage-node",
-    "email": "chris.tran@agilebits.com",
-    "dependentChangeType": "patch"
-}
