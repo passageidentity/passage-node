@@ -11,7 +11,7 @@ import { getHeaderFromRequest } from '../utils/getHeader';
 /**
  * Passage Class
  */
-export default class Passage {
+export class Passage {
     appID: string;
     #apiKey: string | undefined;
     authStrategy: AuthStrategy;

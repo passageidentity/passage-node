@@ -1,4 +1,4 @@
-import Passage from './classes/Passage';
+export { Passage } from './classes/Passage';
 export * from './types/AuthStrategy';
 export * from './types/JWKS';
 export * from './types/MagicLink';
@@ -22,5 +22,5 @@ export {
     UserMetadataField,
     WebAuthnDevices,
 } from './generated';
-
+import { Passage } from './classes/Passage';
 export default Passage;
