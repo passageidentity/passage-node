@@ -18,7 +18,7 @@ To authenticate an HTTP request, you can use the Passage SDK to check a request 
 You need to provide Passage with your App ID in order to verify the JWTs.
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 import express from 'express';
 
 const app = express();
@@ -62,7 +62,7 @@ app.listen(port, () => {
 To retrieve information about an app, you should use the `passage.getApp()` function.
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 
 let passageConfig = {
     appID: 'YOUR_APP_ID',
@@ -78,7 +78,7 @@ let passageApp = await passage.getApp();
 To retrieve information about a user, you should use the `passage.user.get()` function. You will need to use a Passage API key, which can be created in the Passage Console under your Application Settings. This API key grants your web server access to the Passage management APIs to get and update information about users. This API key must be protected and stored in an appropriate secure storage location. It should never be hard-coded in the repository.
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 import express from 'express';
 
 const app = express();
@@ -106,7 +106,7 @@ app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
 To retrieve information about a user, you could also use the `passage.user.getUserByIdentifier()` function. You will need to use a Passage API key, which can be created in the Passage Console under your Application Settings. This API key grants your web server access to the Passage management APIs to get and update information about users. This API key must be protected and stored in an appropriate secure storage location. It should never be hard-coded in the repository.
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 import express from 'express';
 
 const app = express();
@@ -134,7 +134,7 @@ app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
 You can also activate or deactivate a user using the Passage SDK. These actions require an API Key and deactivating a user will prevent them from logging into your application with Passage.
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 import express from 'express';
 
 const app = express();
@@ -162,7 +162,7 @@ app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
 With the Passage SDK, you can update a User's attributes. These actions require an API Key and deactivating a user will prevent them from logging into your application with Passage.
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 import express from 'express';
 
 const app = express();
@@ -198,7 +198,7 @@ app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
 To delete a Passage user, you will need to provide the `userID`, and corresponding app credentials.
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 import express from 'express';
 
 const app = express();
@@ -226,7 +226,7 @@ app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
 You can also create a Passage user by providing an `email` or `phone` (phone number must be a valid E164 phone number).
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 
 let passageConfig = {
     appID: 'YOUR_APP_ID',
@@ -254,7 +254,7 @@ console.log(newPassageUser2); // [userObject]
 You can also create a Passage magic link by providing a MagicLinkRequest type
 
 ```javascript
-import Passage from '@passageidentity/passage-node';
+import { Passage } from '@passageidentity/passage-node';
 
 let passageConfig = {
     appID: 'YOUR_APP_ID',
