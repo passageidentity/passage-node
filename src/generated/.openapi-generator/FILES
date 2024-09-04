@@ -37,6 +37,7 @@ models/OtpAuthMethod.ts
 models/PaginatedLinks.ts
 models/PasskeysAuthMethod.ts
 models/Technologies.ts
+models/ThemeType.ts
 models/TtlDisplayUnit.ts
 models/UpdateUserRequest.ts
 models/UserEventStatus.ts
