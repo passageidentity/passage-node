@@ -55,7 +55,8 @@ export const Model404ErrorCodeEnum = {
     SmsProviderNotFound: 'sms_provider_not_found',
     SmsTemplateNotFound: 'sms_template_not_found',
     SocialConnectionNotFound: 'social_connection_not_found',
-    UserNotFound: 'user_not_found'
+    UserNotFound: 'user_not_found',
+    NativeClientNotFound: 'native_client_not_found'
 } as const;
 export type Model404ErrorCodeEnum = typeof Model404ErrorCodeEnum[keyof typeof Model404ErrorCodeEnum];
 
