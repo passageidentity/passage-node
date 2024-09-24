@@ -13,6 +13,18 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { SocialConnectionType } from './SocialConnectionType';
+import {
+    SocialConnectionTypeFromJSON,
+    SocialConnectionTypeFromJSONTyped,
+    SocialConnectionTypeToJSON,
+} from './SocialConnectionType';
+import type { UserEventAction } from './UserEventAction';
+import {
+    UserEventActionFromJSON,
+    UserEventActionFromJSONTyped,
+    UserEventActionToJSON,
+} from './UserEventAction';
 import type { UserEventStatus } from './UserEventStatus';
 import {
     UserEventStatusFromJSON,
@@ -68,6 +80,18 @@ export interface UserRecentEvent {
      * @memberof UserRecentEvent
      */
     user_agent: string;
+    /**
+     * 
+     * @type {UserEventAction}
+     * @memberof UserRecentEvent
+     */
+    action: UserEventAction;
+    /**
+     * 
+     * @type {SocialConnectionType}
+     * @memberof UserRecentEvent
+     */
+    social_login_type: SocialConnectionType | null;
 }
 
 /**
@@ -82,6 +106,8 @@ export function instanceOfUserRecentEvent(value: object): boolean {
     isInstance = isInstance && "status" in value;
     isInstance = isInstance && "type" in value;
     isInstance = isInstance && "user_agent" in value;
+    isInstance = isInstance && "action" in value;
+    isInstance = isInstance && "social_login_type" in value;
 
     return isInstance;
 }
@@ -103,6 +129,8 @@ export function UserRecentEventFromJSONTyped(json: any, ignoreDiscriminator: boo
         'status': UserEventStatusFromJSON(json['status']),
         'type': json['type'],
         'user_agent': json['user_agent'],
+        'action': UserEventActionFromJSON(json['action']),
+        'social_login_type': SocialConnectionTypeFromJSON(json['social_login_type']),
     };
 }
 
@@ -122,6 +150,8 @@ export function UserRecentEventToJSON(value?: UserRecentEvent | null): any {
         'status': UserEventStatusToJSON(value.status),
         'type': value.type,
         'user_agent': value.user_agent,
+        'action': UserEventActionToJSON(value.action),
+        'social_login_type': SocialConnectionTypeToJSON(value.social_login_type),
     };
 }
 
