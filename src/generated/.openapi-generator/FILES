@@ -36,9 +36,12 @@ models/Nonce.ts
 models/OtpAuthMethod.ts
 models/PaginatedLinks.ts
 models/PasskeysAuthMethod.ts
+models/SocialConnectionType.ts
 models/Technologies.ts
+models/ThemeType.ts
 models/TtlDisplayUnit.ts
 models/UpdateUserRequest.ts
+models/UserEventAction.ts
 models/UserEventStatus.ts
 models/UserInfo.ts
 models/UserMetadataField.ts
