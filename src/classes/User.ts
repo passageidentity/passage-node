@@ -66,7 +66,11 @@ export default class User {
 
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not fetch user.', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not fetch user');
+            }
+
+            throw err;
         }
     }
 
@@ -92,9 +96,12 @@ export default class User {
             }
 
             return this.get(users[0].id);
-
         } catch (err) {
-            throw new PassageError('Could not fetch user by identifier.', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not fetch user by identifier');
+            }
+
+            throw err;
         }
     }
 
@@ -115,7 +122,11 @@ export default class User {
 
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not deactivate user.', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not deactivate user');
+            }
+
+            throw err;
         }
     }
 
@@ -138,7 +149,11 @@ export default class User {
 
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not update user.', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not update user');
+            }
+
+            throw err;
         }
     }
 
@@ -158,7 +173,11 @@ export default class User {
             });
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not activate user', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not activate user');
+            }
+
+            throw err;
         }
     }
 
@@ -179,7 +198,11 @@ export default class User {
 
             return response.user;
         } catch (err) {
-            throw new PassageError('Could not create user', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not create user');
+            }
+
+            throw err;
         }
     }
 
@@ -201,7 +224,11 @@ export default class User {
 
             return true;
         } catch (err) {
-            throw new PassageError('Could not delete user.', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not delete user');
+            }
+
+            throw err;
         }
     }
 
@@ -224,7 +251,11 @@ export default class User {
 
             return response.devices;
         } catch (err) {
-            throw new PassageError("Could not fetch user's devices.", err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, "Could not fetch user's devices:");
+            }
+
+            throw err;
         }
     }
 
@@ -249,7 +280,11 @@ export default class User {
 
             return true;
         } catch (err) {
-            throw new PassageError("Could not delete user's device", err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, "Could not delete user's device:");
+            }
+
+            throw err;
         }
     }
 
@@ -271,7 +306,11 @@ export default class User {
             });
             return true;
         } catch (err) {
-            throw new PassageError("Could not revoke user's refresh tokens.", err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, "Could not revoke user's refresh tokens:");
+            }
+
+            throw err;
         }
     }
 }

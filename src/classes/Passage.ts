@@ -178,7 +178,11 @@ export class Passage {
 
             return response.magic_link;
         } catch (err) {
-            throw new PassageError('Could not create a magic link for this app.', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not create a magic link for this app');
+            }
+
+            throw err;
         }
     }
 
@@ -199,7 +203,11 @@ export class Passage {
 
             return response.app;
         } catch (err) {
-            throw new PassageError('Could not fetch app.', err as ResponseError);
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not fetch app');
+            }
+
+            throw err;
         }
     }
 }
