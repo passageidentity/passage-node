@@ -1,269 +1,81 @@
-<img src="https://storage.googleapis.com/passage-docs/passage-logo-gradient.svg" alt="Passage logo" style="width:250px;"/>
+![passage-node](https://storage.googleapis.com/passage-docs/github-md-assets/passage-node.png)
 
-[![npm version](https://badge.fury.io/js/@passageidentity%2Fpassage-node.svg)](https://badge.fury.io/js/@passageidentity%2Fpassage-node)
+![NPM Version](https://img.shields.io/npm/v/%40passageidentity%2Fpassage-node?link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40passageidentity%2Fpassage-node) ![NPM Type Definitions](https://img.shields.io/npm/types/%40passageidentity%2Fpassage-node) ![GitHub License](https://img.shields.io/github/license/passageidentity/passage-node)
+![Static Badge](https://img.shields.io/badge/Built_by_1Password-grey?logo=1password)
 
-# passage-node
+## About
 
-This Node.js SDK allows for verification of server-side authentication for applications using [Passage](https://passage.id).
+[Passage by 1Password](https://1password.com/product/passage) unlocks the passwordless future with a simpler, more secure passkey authentication experience. Passage handles the complexities of the [WebAuthn API](https://blog.1password.com/what-is-webauthn/), and allows you to implement passkeys with ease.
 
-Install this package using npm.
+Use [Passkey Flex](https://docs.passage.id/flex) to add passkeys to an existing authentication experience.
 
-```
+Use [Passkey Complete](https://docs.passage.id/complete) as a standalone passwordless auth solution.
+
+Use [Passkey Ready](https://docs.passage.id/passkey-ready) to determine if your users are ready for passkeys.
+
+### In passage-node
+
+Use passage-node to implement Passkey Complete into your Node.js backend to authenticate requests and manage Passage users.
+
+| Product                                                                                                                                  | Compatible                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| ![Passkey Flex](https://storage.googleapis.com/passage-docs/github-md-assets/passage-passkey-flex-icon.png) Passkey **Flex**             | ✖️ For Passkey Flex, check out [passage-flex-node](https://github.com/passageidentity/passage-flex-node)  |
+| ![Passkey Complete](https://storage.googleapis.com/passage-docs/github-md-assets/passage-passkey-complete-icon.png) Passkey **Complete** | ✅                                                                                                        |
+| ![Passkey Ready](https://storage.googleapis.com/passage-docs/github-md-assets/passage-passkey-ready-icon.png) Passkey **Ready**          | ✖️ For Passkey Ready, check out [Authentikit](https://www.npmjs.com/package/@passageidentity/authentikit) |
+
+## Getting Started
+
+### Check Prerequisites
+
+<p>
+ You'll need a free Passage account and a Passkey Complete app set up in <a href="https://console.passage.id/">Passage Console</a> to get started. <br />
+ <sub><a href="https://docs.passage.id/home#passage-console">Learn more about Passage Console →</a></sub>
+</p>
+
+### Install
+
+```shell
 npm i @passageidentity/passage-node
 ```
 
-## Authenticating a Request
+### Import
 
-To authenticate an HTTP request, you can use the Passage SDK to check a request for a valid authentication token. `authenticateRequest` can handle requests in the format of `IncomingMessage`, as used by common Node frameworks like Express or with the Next.js page router, and it can also handle requests formatted as a fetch `Request`, as used by tools like the Next.js app router or Deno.
-You need to provide Passage with your App ID in order to verify the JWTs.
-
-```javascript
+```js
 import { Passage } from '@passageidentity/passage-node';
-import express from 'express';
-
-const app = express();
-const port = 3000;
-
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-};
-
-// example of custom middleware
-let passage = new Passage(passageConfig);
-let passageAuthMiddleware = (() => {
-    return async (req, res, next) => {
-        await passage
-            .authenticateRequest(req)
-            .then((userID) => {
-                if (userID) {
-                    res.userID = userID;
-                    return next();
-                } else return res.status(401).send('unauthorized');
-            })
-            .catch(() => {
-                return res.status(401).send('Could not authenticate user!');
-            });
-    };
-})();
-
-// example implementation of custom middleware
-app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-    // authenticated user
-    let userID = res.userID;
-});
-
-app.listen(port, () => {
-    console.log(`Example app running`);
-});
 ```
 
-## Retrieve App Info
+### Initialize
 
-To retrieve information about an app, you should use the `passage.getApp()` function.
-
-```javascript
-import { Passage } from '@passageidentity/passage-node';
-
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-};
-
-let passage = new Passage(passageConfig);
-
-let passageApp = await passage.getApp();
-```
-
-## Retrieve User Info
-
-To retrieve information about a user, you should use the `passage.user.get()` function. You will need to use a Passage API key, which can be created in the Passage Console under your Application Settings. This API key grants your web server access to the Passage management APIs to get and update information about users. This API key must be protected and stored in an appropriate secure storage location. It should never be hard-coded in the repository.
-
-```javascript
-import { Passage } from '@passageidentity/passage-node';
-import express from 'express';
-
-const app = express();
-const port = 3000;
-
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-    apiKey: 'YOUR_API_KEY',
+```js
+// Passage requires an App ID and, optionally, an API Key
+const passageConfig = {
+    appID: process.env.PASSAGE_APP_ID,
+    apiKey: process.env.PASSAGE_API_KEY,
 };
 let passage = new Passage(passageConfig);
-
-// example authenticated route
-app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-    // get passage user ID from middleware
-    let userID = res.userID;
-
-    // get user info
-    let passageUser = await passage.user.get(userID);
-    console.log(passageUser.email);
-});
 ```
 
-## Retrieve User Info By Identifier
+### Go Passwordless
 
-To retrieve information about a user, you could also use the `passage.user.getUserByIdentifier()` function. You will need to use a Passage API key, which can be created in the Passage Console under your Application Settings. This API key grants your web server access to the Passage management APIs to get and update information about users. This API key must be protected and stored in an appropriate secure storage location. It should never be hard-coded in the repository.
+Find all core functions, user management details, and more implementation guidance on our [Passkey Complete Node.js Documentation](https://docs.passage.id/complete/backend-sdks/node) page.
 
-```javascript
-import { Passage } from '@passageidentity/passage-node';
-import express from 'express';
+## Support & Feedback
 
-const app = express();
-const port = 3000;
+We are here to help! Find additional docs, the best ways to get in touch with our team, and more within our [support resources](https://github.com/passageidentity/.github/blob/main/SUPPORT.md).
 
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-    apiKey: 'YOUR_API_KEY',
-};
-let passage = new Passage(passageConfig);
+<br />
 
-// example authenticated route
-app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-    // get passage user identifier from middleware
-    let userIdentifier = res.userIdentifier;
+---
 
-    // get user info
-    let passageUser = await passage.user.getUserByIdentifier(userIdentifier);
-    console.log(passageUser.email);
-});
-```
+<p align="center">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://storage.googleapis.com/passage-docs/github-md-assets/passage-by-1password-dark.png">
+      <source media="(prefers-color-scheme: light)" srcset="https://storage.googleapis.com/passage-docs/github-md-assets/passage-by-1password-light.png">
+      <img alt="Passage by 1Password Logo" src="https://storage.googleapis.com/passage-docs/github-md-assets/passage-by-1password-light.png">
+    </picture>
+</p>
 
-## Activate/Deactivate User
-
-You can also activate or deactivate a user using the Passage SDK. These actions require an API Key and deactivating a user will prevent them from logging into your application with Passage.
-
-```javascript
-import { Passage } from '@passageidentity/passage-node';
-import express from 'express';
-
-const app = express();
-const port = 3000;
-
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-    apiKey: 'YOUR_API_KEY',
-};
-let passage = new Passage(passageConfig);
-
-// example authenticated route
-app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-    // get passage user ID from middleware
-    let userID = res.userID;
-
-    // deactivate user
-    let passageUser = await passage.user.deactivate(userID);
-    console.log(passageUser.activate);
-});
-```
-
-## Update User Attributes
-
-With the Passage SDK, you can update a User's attributes. These actions require an API Key and deactivating a user will prevent them from logging into your application with Passage.
-
-```javascript
-import { Passage } from '@passageidentity/passage-node';
-import express from 'express';
-
-const app = express();
-const port = 3000;
-
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-    apiKey: 'YOUR_API_KEY',
-};
-let passage = new Passage(passageConfig);
-
-// example authenticated route
-app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-    // get passage user ID from middleware
-    let userID = res.userID;
-    let newAttributes = {
-        email: 'newEmail@domain.com',
-        phone: '+15005550006',
-        // note that user_metadata is an optional field and is defined in your Passage App settings.
-        user_metadata: {
-            examplefield: 123,
-        },
-    };
-
-    // update user attributes
-    let passageUser = await passage.user.update(userID, newAttributes);
-    console.log(passageUser);
-});
-```
-
-## Delete A User
-
-To delete a Passage user, you will need to provide the `userID`, and corresponding app credentials.
-
-```javascript
-import { Passage } from '@passageidentity/passage-node';
-import express from 'express';
-
-const app = express();
-const port = 3000;
-
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-    apiKey: 'YOUR_API_KEY',
-};
-let passage = new Passage(passageConfig);
-
-// example authenticated route
-app.get('/authenticatedRoute', passageAuthMiddleware, async (req, res) => {
-    // get passage user ID from middleware
-    let userID = res.userID;
-
-    // deactivate user
-    let deletedPassageUser = await passage.user.delete(userID);
-    console.log(deletedPassageUser); // true
-});
-```
-
-## Create A User
-
-You can also create a Passage user by providing an `email` or `phone` (phone number must be a valid E164 phone number).
-
-```javascript
-import { Passage } from '@passageidentity/passage-node';
-
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-    apiKey: 'YOUR_API_KEY',
-};
-let passage = new Passage(passageConfig);
-
-// note that user_metadata is an optional field and is defined in your Passage App settings.
-let newPassageUser1 = passage.user.create({
-    email: 'newEmail@domain.com',
-    user_metadata: {
-        examplefield: 123,
-    },
-});
-console.log(newPassageUser1); // [userObject]
-
-let newPassageUser2 = passage.user.create({
-    phone: '+15005550006',
-});
-console.log(newPassageUser2); // [userObject]
-```
-
-## Create A Magic Link
-
-You can also create a Passage magic link by providing a MagicLinkRequest type
-
-```javascript
-import { Passage } from '@passageidentity/passage-node';
-
-let passageConfig = {
-    appID: 'YOUR_APP_ID',
-    apiKey: 'YOUR_API_KEY',
-};
-let passage = new Passage(passageConfig);
-
-let magicLink = passage.createMagicLink({
-    email: 'newEmail@domain.com',
-    channel: 'email',
-});
-```
+<p align="center">
+    <sub>Passage is a product by <a href="https://1password.com/product/passage">1Password</a>, the global leader in access management solutions with nearly 150k business customers.</sub><br />
+    <sub>This project is licensed under the MIT license. See the <a href="LICENSE.md">LICENSE</a> file for more info.</sub>
+</p>
