@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "fix: API error messages are now correctly mapped to the PassageError class",
+    "packageName": "@passageidentity/passage-node",
+    "email": "chris.tran@agilebits.com",
+    "dependentChangeType": "patch"
+}
