@@ -1,0 +1,7 @@
+{
+    "type": "none",
+    "comment": "PSG-4897 add vertical spacing",
+    "packageName": "@passageidentity/passage-node",
+    "email": "jennifer.macfarlane@agilebits.com",
+    "dependentChangeType": "none"
+}
