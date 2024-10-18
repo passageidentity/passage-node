@@ -2,6 +2,27 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Fri, 18 Oct 2024 18:43:05 GMT",
+            "version": "2.11.1",
+            "tag": "@passageidentity/passage-node_v2.11.1",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "jennifer.macfarlane@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "322c3342200a546eac114f79ff12ab44a21ab4c4",
+                        "comment": "Update README and LICENSE files"
+                    },
+                    {
+                        "author": "chris.tran@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "322c3342200a546eac114f79ff12ab44a21ab4c4",
+                        "comment": "fix: API error messages are now correctly mapped to the PassageError class"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Wed, 04 Sep 2024 16:42:22 GMT",
             "version": "2.11.0",
             "tag": "@passageidentity/passage-node_v2.11.0",

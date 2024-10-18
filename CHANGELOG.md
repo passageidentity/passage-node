@@ -1,8 +1,17 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Wed, 04 Sep 2024 16:42:22 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Oct 2024 18:43:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.11.1
+
+Fri, 18 Oct 2024 18:43:05 GMT
+
+### Patches
+
+-   Update README and LICENSE files (jennifer.macfarlane@agilebits.com)
+-   fix: API error messages are now correctly mapped to the PassageError class (chris.tran@agilebits.com)
 
 ## 2.11.0
 

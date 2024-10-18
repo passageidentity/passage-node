@@ -1,7 +1,0 @@
-{
-    "type": "patch",
-    "comment": "Update README and LICENSE files",
-    "packageName": "@passageidentity/passage-node",
-    "email": "jennifer.macfarlane@agilebits.com",
-    "dependentChangeType": "patch"
-}
