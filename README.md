@@ -23,6 +23,8 @@ Use passage-node to implement Passkey Complete into your Node.js backend to auth
 | ![Passkey Complete](https://storage.googleapis.com/passage-docs/github-md-assets/passage-passkey-complete-icon.png) Passkey **Complete** | ✅                                                                                                        |
 | ![Passkey Ready](https://storage.googleapis.com/passage-docs/github-md-assets/passage-passkey-ready-icon.png) Passkey **Ready**          | ✖️ For Passkey Ready, check out [Authentikit](https://www.npmjs.com/package/@passageidentity/authentikit) |
 
+<br />
+
 ## Getting Started
 
 ### Check Prerequisites
