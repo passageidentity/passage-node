@@ -1,5 +1,33 @@
 {
     "version": "2.11.0",
+    "author": "Passage by 1Password",
+    "license": "MIT",
+    "description": "Passkey Complete for Node.js - Integrate into your Node.js API or service to enable a completely passwordless standalone auth solution with Passage by 1Password",
+    "homepage": "https://docs.passage.id/complete",
+    "bugs": {
+        "url": "https://github.com/passageidentity/.github/blob/main/SUPPORT.md",
+        "email": "support@passage.id"
+    },
+    "keywords": [
+        "nodejs",
+        "javascript",
+        "typescript",
+        "authentication",
+        "passkeys",
+        "passwordless",
+        "webauthn",
+        "passkey-complete",
+        "biometrics",
+        "ciam",
+        "identity",
+        "magic-links",
+        "oauth2",
+        "oidc",
+        "otp",
+        "1password",
+        "passage",
+        "passage-sdk"
+    ],
     "devDependencies": {
         "@faker-js/faker": "^8.4.1",
         "@types/express": "^4.17.21",
@@ -58,30 +86,6 @@
         "beachball-check": "beachball check",
         "build": "tsc --noEmit & tsup ./src/index.ts --no-config --format esm,cjs --dts-resolve --minify"
     },
-    "keywords": [
-        "nodejs",
-        "javascript",
-        "typescript",
-        "authentication",
-        "passkeys",
-        "passwordless",
-        "webauthn",
-        "passkey-complete",
-        "biometrics",
-        "ciam",
-        "identity",
-        "magic-links",
-        "oauth2",
-        "oidc",
-        "otp",
-        "1password",
-        "passage",
-        "passage-sdk"
-    ],
-    "author": "Passage Identity",
-    "license": "MIT",
-    "description": "Passkey Complete for Node.js - Integrate into your Node.js API or service to enable a completely passwordless standalone auth solution with Passage by 1Password",
-    "homepage": "https://docs.passage.id/complete",
     "dependencies": {
         "jose": "^4.14.4",
         "node-fetch": "^2.6.12"
