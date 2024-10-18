@@ -77,5 +77,5 @@ We are here to help! Find additional docs, the best ways to get in touch with ou
 
 <p align="center">
     <sub>Passage is a product by <a href="https://1password.com/product/passage">1Password</a>, the global leader in access management solutions with nearly 150k business customers.</sub><br />
-    <sub>This project is licensed under the MIT license. See the <a href="LICENSE.md">LICENSE</a> file for more info.</sub>
+    <sub>This project is licensed under the MIT license. See the <a href="LICENSE">LICENSE</a> file for more info.</sub>
 </p>
