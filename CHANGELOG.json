@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Fri, 18 Oct 2024 20:12:58 GMT",
+            "version": "2.11.1",
+            "tag": "@passageidentity/passage-node_v2.11.1",
+            "comments": {
+                "none": [
+                    {
+                        "author": "jennifer.macfarlane@agilebits.com",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "a33ada608008a65729ab1463bdd63ae1d0ef42e1",
+                        "comment": "PSG-4897 add vertical spacing"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Fri, 18 Oct 2024 18:43:05 GMT",
             "version": "2.11.1",
             "tag": "@passageidentity/passage-node_v2.11.1",
