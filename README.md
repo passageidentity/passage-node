@@ -15,7 +15,7 @@ Use [Passkey Ready](https://docs.passage.id/passkey-ready) to determine if your 
 
 ### In passage-node
 
-Use passage-node to implement Passkey Complete into your Node.js backend to authenticate requests and manage Passage users.
+Use passage-node to implement Passkey Complete into your Node.js backend to authenticate requests and manage users.
 
 | Product                                                                                                                                  | Compatible                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
