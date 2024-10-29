@@ -37,6 +37,12 @@ import {
     TechnologiesFromJSONTyped,
     TechnologiesToJSON,
 } from './Technologies';
+import type { ThemeType } from './ThemeType';
+import {
+    ThemeTypeFromJSON,
+    ThemeTypeFromJSONTyped,
+    ThemeTypeToJSON,
+} from './ThemeType';
 import type { UserMetadataField } from './UserMetadataField';
 import {
     UserMetadataFieldFromJSON,
@@ -107,6 +113,13 @@ export interface AppInfo {
      */
     auth_origin: string;
     /**
+     * Deprecated Property. Please use `hosted_theme` to set hosted page theming instead.
+     * @type {boolean}
+     * @memberof AppInfo
+     * @deprecated
+     */
+    auto_theme_enabled: boolean;
+    /**
      * 
      * @type {Date}
      * @memberof AppInfo
@@ -155,7 +168,7 @@ export interface AppInfo {
      */
     name: string;
     /**
-     * whether or not the app's login page hosted by passage
+     * whether or not the app's login page is hosted by Passage
      * @type {boolean}
      * @memberof AppInfo
      */
@@ -166,6 +179,12 @@ export interface AppInfo {
      * @memberof AppInfo
      */
     hosted_subdomain: string;
+    /**
+     * 
+     * @type {ThemeType}
+     * @memberof AppInfo
+     */
+    hosted_theme: ThemeType;
     /**
      * 
      * @type {number}
@@ -313,6 +332,7 @@ export function instanceOfAppInfo(value: object): boolean {
     isInstance = isInstance && "auth_fallback_method_ttl" in value;
     isInstance = isInstance && "auth_methods" in value;
     isInstance = isInstance && "auth_origin" in value;
+    isInstance = isInstance && "auto_theme_enabled" in value;
     isInstance = isInstance && "created_at" in value;
     isInstance = isInstance && "default_language" in value;
     isInstance = isInstance && "id" in value;
@@ -321,6 +341,7 @@ export function instanceOfAppInfo(value: object): boolean {
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "hosted" in value;
     isInstance = isInstance && "hosted_subdomain" in value;
+    isInstance = isInstance && "hosted_theme" in value;
     isInstance = isInstance && "passage_branding" in value;
     isInstance = isInstance && "profile_management" in value;
     isInstance = isInstance && "public_signup" in value;
@@ -362,6 +383,7 @@ export function AppInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
         'auth_fallback_method_ttl': json['auth_fallback_method_ttl'],
         'auth_methods': AuthMethodsFromJSON(json['auth_methods']),
         'auth_origin': json['auth_origin'],
+        'auto_theme_enabled': json['auto_theme_enabled'],
         'created_at': (new Date(json['created_at'])),
         'default_language': json['default_language'],
         'id': json['id'],
@@ -372,6 +394,7 @@ export function AppInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
         'name': json['name'],
         'hosted': json['hosted'],
         'hosted_subdomain': json['hosted_subdomain'],
+        'hosted_theme': ThemeTypeFromJSON(json['hosted_theme']),
         'id_token_lifetime': !exists(json, 'id_token_lifetime') ? undefined : json['id_token_lifetime'],
         'passage_branding': json['passage_branding'],
         'profile_management': json['profile_management'],
@@ -413,6 +436,7 @@ export function AppInfoToJSON(value?: AppInfo | null): any {
         'auth_fallback_method_ttl': value.auth_fallback_method_ttl,
         'auth_methods': AuthMethodsToJSON(value.auth_methods),
         'auth_origin': value.auth_origin,
+        'auto_theme_enabled': value.auto_theme_enabled,
         'created_at': (value.created_at.toISOString()),
         'default_language': value.default_language,
         'id': value.id,
@@ -423,6 +447,7 @@ export function AppInfoToJSON(value?: AppInfo | null): any {
         'name': value.name,
         'hosted': value.hosted,
         'hosted_subdomain': value.hosted_subdomain,
+        'hosted_theme': ThemeTypeToJSON(value.hosted_theme),
         'id_token_lifetime': value.id_token_lifetime,
         'passage_branding': value.passage_branding,
         'profile_management': value.profile_management,
