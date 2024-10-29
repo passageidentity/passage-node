@@ -1,3 +1,4 @@
+import { FetchAPI } from '../generated';
 import { AuthStrategy } from './AuthStrategy';
 
 export type PassageConfig = {
@@ -5,4 +6,5 @@ export type PassageConfig = {
     apiKey?: string;
     authStrategy?: AuthStrategy;
     failureRedirect?: string;
+    fetchApi?: FetchAPI;
 };

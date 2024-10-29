@@ -1,0 +1,7 @@
+{
+    "type": "patch",
+    "comment": "support external fetch api",
+    "packageName": "@passageidentity/passage-node",
+    "email": "kevin.flanagan@passage.id",
+    "dependentChangeType": "patch"
+}

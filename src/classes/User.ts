@@ -34,6 +34,7 @@ export default class User {
 
         this.#configuration = apiConfiguration({
             accessToken: this.#apiKey,
+            fetchApi: config.fetchApi,
         });
 
         this.#client = new UsersApi(this.#configuration);
