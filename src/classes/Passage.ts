@@ -182,10 +182,7 @@ export class Passage {
      */
     async createMagicLink(magicLinkReq: CreateMagicLinkRequest): Promise<MagicLink> {
         try {
-            const configuration = apiConfiguration({
-                accessToken: this.#apiKey,
-            });
-            const client = new MagicLinksApi(configuration);
+            const client = new MagicLinksApi(this._apiConfiguration);
             const response = await client.createMagicLink({
                 appId: this.appID,
                 createMagicLinkRequest: magicLinkReq,
