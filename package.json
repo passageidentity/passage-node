@@ -72,9 +72,10 @@
         "CHANGELOG.md"
     ],
     "scripts": {
-        "lint": "eslint 'src/**/*.ts?(x)' --fix",
-        "lint:ci": "eslint 'src/**/*.ts?(x)'",
-        "format": "pretty-quick --staged",
+        "lint": "eslint 'src/**/*.ts' --fix",
+        "lint:ci": "eslint 'src/**/*.ts'",
+        "format": "prettier --write 'src/**/*.ts'",
+        "format:ci": "prettier 'src/**/*.ts'",
         "prepare": "husky install",
         "dev": "ts-node-dev --respawn testServer.ts",
         "test": "jest",
