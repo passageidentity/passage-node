@@ -3,7 +3,15 @@ import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
 import User from './User';
-import { AppInfo, AppsApi, CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from '../generated';
+import {
+    AppInfo,
+    AppsApi,
+    Configuration,
+    CreateMagicLinkRequest,
+    MagicLink,
+    MagicLinksApi,
+    ResponseError,
+} from '../generated';
 import apiConfiguration from '../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../utils/getHeader';
@@ -17,6 +25,8 @@ export class Passage {
     authStrategy: AuthStrategy;
     user: User;
     jwks: ReturnType<typeof createRemoteJWKSet>;
+
+    private _apiConfiguration: Configuration;
 
     /**
      * Initialize a new Passage instance.
@@ -34,6 +44,11 @@ export class Passage {
 
         this.jwks = createRemoteJWKSet(new URL(`https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`), {
             cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
+        });
+
+        this._apiConfiguration = apiConfiguration({
+            accessToken: this.#apiKey,
+            fetchApi: config.fetchApi,
         });
     }
 
@@ -193,10 +208,7 @@ export class Passage {
      */
     async getApp(): Promise<AppInfo> {
         try {
-            const configuration = apiConfiguration({
-                accessToken: this.#apiKey,
-            });
-            const client = new AppsApi(configuration);
+            const client = new AppsApi(this._apiConfiguration);
             const response = await client.getApp({
                 appId: this.appID,
             });
