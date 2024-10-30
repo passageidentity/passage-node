@@ -17,5 +17,6 @@
         "indent": ["error", 4],
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/explicit-function-return-type": "error"
-    }
+    },
+    "ignores": ["src/generated"]
 }
