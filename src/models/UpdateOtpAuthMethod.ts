@@ -21,14 +21,14 @@ import {
 } from '../generated/models/TtlDisplayUnit';
 
 /**
- * 
+ *
  * @export
  * @interface UpdateOtpAuthMethod
  * @deprecated this interface will be removed in version 3.0
  */
 export interface UpdateOtpAuthMethod {
     /**
-     * 
+     *
      * @type {boolean}
      * @memberof UpdateOtpAuthMethod
      */
@@ -40,7 +40,7 @@ export interface UpdateOtpAuthMethod {
      */
     ttl?: number;
     /**
-     * 
+     *
      * @type {TtlDisplayUnit}
      * @memberof UpdateOtpAuthMethod
      * @deprecated
@@ -62,14 +62,15 @@ export function UpdateOtpAuthMethodFromJSON(json: any): UpdateOtpAuthMethod {
 }
 
 export function UpdateOtpAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateOtpAuthMethod {
-    if ((json === undefined) || (json === null)) {
+    if (json === undefined || json === null) {
         return json;
     }
     return {
-
-        'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
-        'ttl': !exists(json, 'ttl') ? undefined : json['ttl'],
-        'ttl_display_unit': !exists(json, 'ttl_display_unit') ? undefined : TtlDisplayUnitFromJSON(json['ttl_display_unit']),
+        enabled: !exists(json, 'enabled') ? undefined : json['enabled'],
+        ttl: !exists(json, 'ttl') ? undefined : json['ttl'],
+        ttl_display_unit: !exists(json, 'ttl_display_unit')
+            ? undefined
+            : TtlDisplayUnitFromJSON(json['ttl_display_unit']),
     };
 }
 
@@ -81,9 +82,8 @@ export function UpdateOtpAuthMethodToJSON(value?: UpdateOtpAuthMethod | null): a
         return null;
     }
     return {
-
-        'enabled': value.enabled,
-        'ttl': value.ttl,
-        'ttl_display_unit': TtlDisplayUnitToJSON(value.ttl_display_unit),
+        enabled: value.enabled,
+        ttl: value.ttl,
+        ttl_display_unit: TtlDisplayUnitToJSON(value.ttl_display_unit),
     };
 }
