@@ -73,7 +73,7 @@
         "lint": "eslint '{src,tests}/**/*.ts' --fix",
         "lint:ci": "eslint '{src,tests}/**/*.ts'",
         "format": "prettier --write '{src,tests}/**/*.ts'",
-        "format:ci": "prettier '{src,tests}/**/*.ts'",
+        "format:ci": "prettier --check '{src,tests}/**/*.ts'",
         "dev": "ts-node-dev --respawn testServer.ts",
         "test": "jest",
         "test:watch": "jest --watch",
