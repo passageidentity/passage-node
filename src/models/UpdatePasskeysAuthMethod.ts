@@ -14,14 +14,14 @@
 
 import { exists, mapValues } from '../generated/runtime';
 /**
- * 
+ *
  * @export
  * @interface UpdatePasskeysAuthMethod
  * @deprecated this interface will be removed in version 3.0
  */
 export interface UpdatePasskeysAuthMethod {
     /**
-     * 
+     *
      * @type {boolean}
      * @memberof UpdatePasskeysAuthMethod
      */
@@ -41,13 +41,15 @@ export function UpdatePasskeysAuthMethodFromJSON(json: any): UpdatePasskeysAuthM
     return UpdatePasskeysAuthMethodFromJSONTyped(json, false);
 }
 
-export function UpdatePasskeysAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdatePasskeysAuthMethod {
-    if ((json === undefined) || (json === null)) {
+export function UpdatePasskeysAuthMethodFromJSONTyped(
+    json: any,
+    ignoreDiscriminator: boolean,
+): UpdatePasskeysAuthMethod {
+    if (json === undefined || json === null) {
         return json;
     }
     return {
-        
-        'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
+        enabled: !exists(json, 'enabled') ? undefined : json['enabled'],
     };
 }
 
@@ -59,7 +61,6 @@ export function UpdatePasskeysAuthMethodToJSON(value?: UpdatePasskeysAuthMethod 
         return null;
     }
     return {
-        
-        'enabled': value.enabled,
+        enabled: value.enabled,
     };
 }

@@ -21,14 +21,14 @@ import {
 } from '../generated/models/TtlDisplayUnit';
 
 /**
- * 
+ *
  * @export
  * @interface UpdateMagicLinkAuthMethod
  * @deprecated this interface will be removed in version 3.0
  */
 export interface UpdateMagicLinkAuthMethod {
     /**
-     * 
+     *
      * @type {boolean}
      * @memberof UpdateMagicLinkAuthMethod
      */
@@ -40,7 +40,7 @@ export interface UpdateMagicLinkAuthMethod {
      */
     ttl?: number;
     /**
-     * 
+     *
      * @type {TtlDisplayUnit}
      * @memberof UpdateMagicLinkAuthMethod
      * @deprecated
@@ -61,15 +61,19 @@ export function UpdateMagicLinkAuthMethodFromJSON(json: any): UpdateMagicLinkAut
     return UpdateMagicLinkAuthMethodFromJSONTyped(json, false);
 }
 
-export function UpdateMagicLinkAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateMagicLinkAuthMethod {
-    if ((json === undefined) || (json === null)) {
+export function UpdateMagicLinkAuthMethodFromJSONTyped(
+    json: any,
+    ignoreDiscriminator: boolean,
+): UpdateMagicLinkAuthMethod {
+    if (json === undefined || json === null) {
         return json;
     }
     return {
-
-        'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
-        'ttl': !exists(json, 'ttl') ? undefined : json['ttl'],
-        'ttl_display_unit': !exists(json, 'ttl_display_unit') ? undefined : TtlDisplayUnitFromJSON(json['ttl_display_unit']),
+        enabled: !exists(json, 'enabled') ? undefined : json['enabled'],
+        ttl: !exists(json, 'ttl') ? undefined : json['ttl'],
+        ttl_display_unit: !exists(json, 'ttl_display_unit')
+            ? undefined
+            : TtlDisplayUnitFromJSON(json['ttl_display_unit']),
     };
 }
 
@@ -81,9 +85,8 @@ export function UpdateMagicLinkAuthMethodToJSON(value?: UpdateMagicLinkAuthMetho
         return null;
     }
     return {
-
-        'enabled': value.enabled,
-        'ttl': value.ttl,
-        'ttl_display_unit': TtlDisplayUnitToJSON(value.ttl_display_unit),
+        enabled: value.enabled,
+        ttl: value.ttl,
+        ttl_display_unit: TtlDisplayUnitToJSON(value.ttl_display_unit),
     };
 }
