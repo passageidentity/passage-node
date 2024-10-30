@@ -1,37 +1,41 @@
-name: Run Tests on PR
+name: Lint, Format, and Test
 
 on:
-    pull_request:
-    workflow_dispatch:
+  workflow_call:
+  workflow_dispatch:
+  pull_request:
 
 env:
-    API_KEY: ${{ secrets.API_KEY }}
-    APP_ID: ${{ secrets.APP_ID }}
-    APP_TOKEN: ${{ secrets.APP_TOKEN }}
-    EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
-    PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+  API_KEY: ${{ secrets.API_KEY }}
+  APP_ID: ${{ secrets.APP_ID }}
+  APP_TOKEN: ${{ secrets.APP_TOKEN }}
+  EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
 
 jobs:
-    publish:
-        name: Run Tests on PR
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-
-            - name: Install Dependencies
-              run: npm i
-
-            - name: ESLint Check
-              run: npm run lint:ci
-
-            - name: Beachball Check
-              run: |
-                  npm run beachball-check
-
-            - name: Build
-              run: npm run set-version && npm run build
-
-            - name: Unit Test
-              run: npm run test
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm i
+      - name: Lint
+        run: npm run lint:ci
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm i
+      - name: Format
+        run: npm run format:ci
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm i
+      - name: Test
+        run: npm run test

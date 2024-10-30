@@ -3,4 +3,4 @@ node_modules/
 coverage/
 .DS_STORE
 lib/
-generated/
+src/generated/
