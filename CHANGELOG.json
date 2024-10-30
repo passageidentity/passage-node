@@ -2,6 +2,21 @@
     "name": "@passageidentity/passage-node",
     "entries": [
         {
+            "date": "Wed, 30 Oct 2024 17:11:25 GMT",
+            "version": "2.11.2",
+            "tag": "@passageidentity/passage-node_v2.11.2",
+            "comments": {
+                "patch": [
+                    {
+                        "author": "kevin.flanagan@passage.id",
+                        "package": "@passageidentity/passage-node",
+                        "commit": "aef7387891e022bfc89ac5704b661e668881310e",
+                        "comment": "support external fetch api"
+                    }
+                ]
+            }
+        },
+        {
             "date": "Fri, 18 Oct 2024 20:12:58 GMT",
             "version": "2.11.1",
             "tag": "@passageidentity/passage-node_v2.11.1",

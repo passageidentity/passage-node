@@ -1,8 +1,16 @@
 # Change Log - @passageidentity/passage-node
 
-This log was last generated on Fri, 18 Oct 2024 18:43:05 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Oct 2024 17:11:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.11.2
+
+Wed, 30 Oct 2024 17:11:25 GMT
+
+### Patches
+
+-   support external fetch api (kevin.flanagan@passage.id)
 
 ## 2.11.1
 
