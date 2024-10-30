@@ -70,10 +70,10 @@
         "CHANGELOG.md"
     ],
     "scripts": {
-        "lint": "eslint 'src/**/*.ts' --fix",
-        "lint:ci": "eslint 'src/**/*.ts'",
-        "format": "prettier --write 'src/**/*.ts'",
-        "format:ci": "prettier 'src/**/*.ts'",
+        "lint": "eslint '{src,tests}/**/*.ts' --fix",
+        "lint:ci": "eslint '{src,tests}/**/*.ts'",
+        "format": "prettier --write '{src,tests}/**/*.ts'",
+        "format:ci": "prettier '{src,tests}/**/*.ts'",
         "dev": "ts-node-dev --respawn testServer.ts",
         "test": "jest",
         "test:watch": "jest --watch",
