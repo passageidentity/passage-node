@@ -1,4 +1,3 @@
-import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
 import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
@@ -15,16 +14,18 @@ import {
 import apiConfiguration from '../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../utils/getHeader';
+import { PassageInstanceConfig } from './PassageBase';
+import { Auth } from './Auth';
 
 /**
  * Passage Class
  */
 export class Passage {
-    appID: string;
+    private appID: string;
     #apiKey: string | undefined;
-    authStrategy: AuthStrategy;
-    user: User;
-    jwks: ReturnType<typeof createRemoteJWKSet>;
+    private authStrategy: AuthStrategy;
+    public user: User;
+    public auth: Auth;
 
     private _apiConfiguration: Configuration;
 
@@ -38,18 +39,21 @@ export class Passage {
         }
         this.appID = config.appID;
         this.#apiKey = config?.apiKey;
-        this.user = new User(config);
 
         this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
-
-        this.jwks = createRemoteJWKSet(new URL(`https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`), {
-            cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
-        });
 
         this._apiConfiguration = apiConfiguration({
             accessToken: this.#apiKey,
             fetchApi: config.fetchApi,
         });
+
+        const instanceConfig: PassageInstanceConfig = {
+            appId: config.appID,
+            apiConfiguration: this._apiConfiguration,
+        }
+
+        this.user = new User(config);
+        this.auth = new Auth(instanceConfig);
     }
 
     /**
@@ -154,24 +158,7 @@ export class Passage {
      * @return {string} sub claim if the jwt can be verified, or Error
      */
     async validAuthToken(token: string): Promise<string | undefined> {
-        try {
-            const { kid } = decodeProtectedHeader(token);
-            if (!kid) {
-                throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
-            }
-
-            const {
-                payload: { sub: userID },
-            } = await jwtVerify(token, this.jwks);
-            if (userID) return userID.toString();
-
-            throw new PassageError('Could not verify token identity. You must catch this error.');
-        } catch (e) {
-            if (e instanceof Error)
-                throw new PassageError(`Could not verify token: ${e.toString()}. You must catch this error.`);
-
-            throw new PassageError(`Could not verify token. You must catch this error.`);
-        }
+        return this.auth.validateJwt(token);
     }
 
     /**
