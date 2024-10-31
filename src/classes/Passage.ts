@@ -168,21 +168,7 @@ export class Passage {
      * @return {Promise<MagicLink>} Passage MagicLink object
      */
     async createMagicLink(magicLinkReq: CreateMagicLinkRequest): Promise<MagicLink> {
-        try {
-            const client = new MagicLinksApi(this._apiConfiguration);
-            const response = await client.createMagicLink({
-                appId: this.appID,
-                createMagicLinkRequest: magicLinkReq,
-            });
-
-            return response.magic_link;
-        } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not create a magic link for this app');
-            }
-
-            throw err;
-        }
+        return this.auth.createMagicLink(magicLinkReq);
     }
 
     /**
