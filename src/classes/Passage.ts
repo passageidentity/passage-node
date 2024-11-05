@@ -32,9 +32,12 @@ export class Passage {
      * Initialize a new Passage instance.
      * @param {PassageConfig} config The default config for Passage initialization
      */
-    constructor(config?: PassageConfig) {
-        if (!config?.appID) {
-            throw new PassageError('A Passage appID is required. Please include {appID: YOUR_APP_ID}.');
+    constructor(config: PassageConfig) {
+        if (!config.appID) {
+            throw new PassageError('A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
+        }
+        if (!config.apiKey) {
+            throw new PassageError('A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
         }
         this._apiConfiguration = apiConfiguration({
             accessToken: this.#apiKey,
@@ -57,6 +60,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Use Passage.auth.validateJwt instead.
      * Authenticate request with a cookie, or header. If no authentication
      * strategy is given, authenticate the request via cookie (default
      * authentication strategy).
@@ -73,6 +77,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Set your API key in the constructor of the Passage object. Do not change API key at runtime.
      * Set API key for this Passage instance
      * @param {string} _apiKey
      */
@@ -81,6 +86,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Getting your API key will be removed in the next major release.
      * Get API key for this Passage instance
      * @return {string | undefined} Passage API Key
      */
@@ -89,6 +95,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Use Passage.auth.validateJwt instead.
      * Authenticate a request via the http header.
      *
      * @param {IncomingMessage | Request} req Node http request or fetch request
@@ -111,6 +118,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Use Passage.auth.validateJwt instead.
      * Authenticate request via cookie.
      *
      * @param {IncomingMessage | Request} req Node http request or fetch request
@@ -151,6 +159,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Use Passage.auth.validateJwt instead.
      * Determine if the provided token is valid when compared with its
      * respective public key.
      *
@@ -162,6 +171,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Use Passage.auth.createMagicLink instead.
      * Create a Magic Link for your app.
      *
      * @param {MagicLinkRequest} magicLinkReq options for creating a MagicLink.
@@ -172,6 +182,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Passage.auth.validateJwt will validated the JWT audience automatically.
      * Get App Info about an app
      *
      * @return {Promise<AppInfo>} Passage App object
