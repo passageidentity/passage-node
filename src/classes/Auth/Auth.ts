@@ -52,10 +52,9 @@ export class Auth extends PassageBase {
             }
             return userId;
         } catch (e) {
-            if (e instanceof Error) 
-                {
-                    throw new PassageError(`Could not verify token: ${e.toString()}.`);
-                }
+            if (e instanceof Error) {
+                throw new PassageError(`Could not verify token: ${e.toString()}.`);
+            }
 
             throw new PassageError(`Could not verify token.`);
         }
