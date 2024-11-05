@@ -74,7 +74,7 @@ export class Passage {
     }
 
     /**
-     * @deprecated Set your API key in the constructor of the Passage object. Do not change API key at runtime.
+     * @deprecated Set the API key in the constructor of the Passage object. Do not change API key at runtime.
      * Set API key for this Passage instance
      * @param {string} _apiKey
      */
@@ -83,7 +83,7 @@ export class Passage {
     }
 
     /**
-     * @deprecated Getting your API key will be removed in the next major release.
+     * @deprecated Getting the API key will be removed in the next major release.
      * Get API key for this Passage instance
      * @return {string | undefined} Passage API Key
      */
@@ -179,7 +179,7 @@ export class Passage {
     }
 
     /**
-     * @deprecated Passage.auth.validateJwt will validated the JWT audience automatically.
+     * @deprecated Passage.auth.validateJwt will validate the JWT audience automatically.
      * Get App Info about an app
      *
      * @return {Promise<AppInfo>} Passage App object

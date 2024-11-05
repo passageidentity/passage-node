@@ -83,7 +83,7 @@ export class User extends PassageBase {
     /**
      * Activate a user using their user ID.
      *
-     * @param {string} userId The passage user ID
+     * @param {string} userId The Passage user ID
      * @return {Promise<PassageUser>} Passage User object
      */
     public async activate(userId: string): Promise<PassageUser> {
@@ -127,7 +127,7 @@ export class User extends PassageBase {
     /**
      * Update a user.
      *
-     * @param {string} userId The passage user ID
+     * @param {string} userId The Passage user ID
      * @param {UpdateUserRequest} options The user attributes to be updated
      * @return {Promise<PassageUser>} Pasasge User Object
      */
@@ -175,9 +175,9 @@ export class User extends PassageBase {
     /**
      * Delete a user using their user ID.
      *
-     * @param {string} userId The userID used to delete the corresponding user.
+     * @param {string} userId The Passage user ID used to delete the corresponding user.
      * Either an E164 phone number or email address.
-     * @return {boolean} True if user was deleted, false if not
+     * @return {Promise<boolean>}
      */
     public async delete(userId: string): Promise<boolean> {
         try {
