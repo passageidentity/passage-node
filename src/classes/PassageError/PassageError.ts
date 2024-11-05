@@ -1,4 +1,4 @@
-import { ResponseError } from '../generated';
+import { ResponseError } from '../../generated';
 
 /**
  * Passage Class
