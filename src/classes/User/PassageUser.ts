@@ -11,10 +11,18 @@ import {
 import { PassageError } from '../PassageError';
 import { PassageUser } from './types';
 
+
+/**
+ * User class for handling operations to get and update user information.
+ */
 export class User extends PassageBase {
     private usersApi;
     private userDevicesApi;
 
+    /**
+     * User class constructor.
+     * @param {PassageInstanceConfig} config config properties for Passage instance
+     */
     constructor(protected config: PassageInstanceConfig) {
         super(config);
         this.usersApi = new UsersApi(this.config.apiConfiguration);

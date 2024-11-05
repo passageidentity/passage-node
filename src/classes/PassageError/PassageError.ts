@@ -14,7 +14,8 @@ export class PassageError extends Error {
 
     /**
      * Initialize a new PassageError instance.
-     * @param {string} message friendly message
+     * @param {string} message friendly error message
+     * @param {string} errorCode error code from Passage Backend
      * @param {ResponseError} err error from http request
      */
     constructor(message: string, errorCode?: string, err?: ResponseError) {

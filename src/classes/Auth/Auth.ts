@@ -10,9 +10,16 @@ import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import { PassageError } from '../PassageError';
 import { CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from '../../generated';
 
+/**
+ * Auth class that provides methods for validating JWTs and creating Magic Links.
+ */
 export class Auth extends PassageBase {
     private jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
 
+    /**
+     * Auth class constructor.
+     * @param {PassageInstanceConfig} config config properties for Passage instance
+     */
     constructor(protected config: PassageInstanceConfig) {
         super(config);
         this.jwks = createRemoteJWKSet(
