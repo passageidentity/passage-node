@@ -37,7 +37,7 @@ export class Passage {
             );
         }
         this._apiConfiguration = apiConfiguration({
-            accessToken: this.#apiKey,
+            accessToken: config.apiKey,
             fetchApi: config.fetchApi,
         });
 
@@ -51,7 +51,7 @@ export class Passage {
 
         // To be removed on next major release
         this.appID = config.appID;
-        this.#apiKey = config?.apiKey;
+        this.#apiKey = config.apiKey;
 
         this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
     }

@@ -14,6 +14,9 @@ describe('PassageError', () => {
         const responseError = {
             message: 'some error message',
             name: 'ResponseError',
+            response: {
+                status: 500,
+            },
         } as ResponseError;
 
         const msg = 'Could not find valid cookie for authentication. You must catch this error';
@@ -33,6 +36,7 @@ describe('PassageError', () => {
                     code: 'some code',
                     error: 'some error',
                 }),
+                status: 500,
             },
         } as ResponseError;
 
