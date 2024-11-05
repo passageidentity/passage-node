@@ -6,23 +6,26 @@ import { ResponseError } from '../../generated';
 export class PassageError extends Error {
     override name: 'PassageError' = 'PassageError';
     readonly statusCode: number | undefined;
-    readonly error: string | undefined;
+    readonly errorCode: string | undefined;
     readonly message: string;
+
+    /** @deprecated use errorCode instead */
+    readonly error: string | undefined;
 
     /**
      * Initialize a new PassageError instance.
      * @param {string} message friendly message
      * @param {ResponseError} err error from http request
      */
-    constructor(message: string, err?: ResponseError) {
+    constructor(message: string, errorCode?: string, err?: ResponseError) {
         super();
 
+        this.message = message;
+        this.errorCode = errorCode;
+
         if (err) {
-            this.message = message;
-            this.statusCode = 500;
+            this.statusCode = err.response.status;
             this.error = err.message;
-        } else {
-            this.message = message;
         }
     }
 
@@ -34,6 +37,6 @@ export class PassageError extends Error {
      */
     public static async fromResponseError(err: ResponseError, message?: string): Promise<PassageError> {
         const response: { code: string; error: string } = await err.response.json();
-        return new PassageError(`${message}: ${response.error}`, err);
+        return new PassageError(`${message}: ${response.error}`, response.code, err);
     }
 }

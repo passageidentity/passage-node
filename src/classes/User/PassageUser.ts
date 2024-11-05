@@ -1,8 +1,9 @@
 import { PassageBase, PassageInstanceConfig } from "../PassageBase";
-import { CreateUserRequest, ResponseError, TokensApi, UpdateUserRequest, UserDevicesApi, UserInfo, UsersApi, WebAuthnDevices } from "../../generated";
+import { CreateUserRequest, ResponseError, TokensApi, UpdateUserRequest, UserDevicesApi, UsersApi, WebAuthnDevices } from "../../generated";
 import { PassageError } from "../PassageError";
+import { PassageUser } from "./types";
 
-export class PassageUser extends PassageBase {
+export class User extends PassageBase {
     private usersApi;
     private userDevicesApi;
 
@@ -16,9 +17,9 @@ export class PassageUser extends PassageBase {
      * Get a user's object using their user ID.
      *
      * @param {string} userId The Passage user ID
-     * @return {Promise<UserInfo>} Passage User object
+     * @return {Promise<PassageUser>} Passage User object
      */
-    public async get(userId: string): Promise<UserInfo> {
+    public async get(userId: string): Promise<PassageUser> {
         try {
             const response = await this.usersApi.getUser({
                 userId,
@@ -39,9 +40,9 @@ export class PassageUser extends PassageBase {
      * Get a user's object using their user identifier.
      *
      * @param {string} identifier The Passage user email or phone number
-     * @return {Promise<UserInfo>} Passage User object
+     * @return {Promise<PassageUser>} Passage User object
      */
-    public async getByIdentifier(identifier: string): Promise<UserInfo> {    
+    public async getByIdentifier(identifier: string): Promise<PassageUser> {    
         try {
             const response = await this.usersApi.listPaginatedUsers({
                 appId: this.config.appId,
@@ -68,9 +69,9 @@ export class PassageUser extends PassageBase {
      * Activate a user using their user ID.
      *
      * @param {string} userId The passage user ID
-     * @return {Promise<UserInfo>} Passage User object
+     * @return {Promise<PassageUser>} Passage User object
      */
-    public async activate(userId: string): Promise<UserInfo> {
+    public async activate(userId: string): Promise<PassageUser> {
         try {
             const response = await this.usersApi.activateUser({
                 userId,
@@ -89,9 +90,9 @@ export class PassageUser extends PassageBase {
      * Deactivate a user using their user ID.
      *
      * @param {string} userId The Passage user ID
-     * @return {Promise<UserInfo>} Passage User object
+     * @return {Promise<PassageUser>} Passage User object
      */
-    public async deactivate(userId: string): Promise<UserInfo> {    
+    public async deactivate(userId: string): Promise<PassageUser> {    
         try {
             const response = await this.usersApi.deactivateUser({
                 userId,
@@ -113,9 +114,9 @@ export class PassageUser extends PassageBase {
      *
      * @param {string} userId The passage user ID
      * @param {UpdateUserRequest} options The user attributes to be updated
-     * @return {Promise<UserInfo>} Pasasge User Object
+     * @return {Promise<PassageUser>} Pasasge User Object
      */
-    public async update(userId: string, options: UpdateUserRequest): Promise<UserInfo> {
+    public async update(userId: string, options: UpdateUserRequest): Promise<PassageUser> {
         try {
             const response = await this.usersApi.updateUser({
                 userId,
@@ -137,9 +138,9 @@ export class PassageUser extends PassageBase {
      * Create a user.
      *
      * @param {CreateUserRequest} args Arguments for creating a user
-     * @return {Promise<UserInfo>} Passage User object
+     * @return {Promise<PassageUser>} Passage User object
      */
-    public async create(args: CreateUserRequest): Promise<UserInfo> {    
+    public async create(args: CreateUserRequest): Promise<PassageUser> {    
         try {
             const response = await this.usersApi.createUser({
                 appId: this.config.appId,
@@ -266,9 +267,9 @@ export class PassageUser extends PassageBase {
      * Get a user's object using their user identifier.
      *
      * @param {string} identifier The Passage user email or phone number
-     * @return {Promise<UserInfo>} Passage User object
+     * @return {Promise<PassageUser>} Passage User object
      */
-    public async getUserByIdentifier(identifier: string): Promise<UserInfo> {
+    public async getUserByIdentifier(identifier: string): Promise<PassageUser> {
         return this.getByIdentifier(identifier);
     }
 }

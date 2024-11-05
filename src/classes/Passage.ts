@@ -14,7 +14,7 @@ import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../utils/getHeader';
 import { PassageInstanceConfig } from './PassageBase';
 import { Auth } from './Auth';
-import { PassageUser } from './PassageUser';
+import { User } from './User';
 
 /**
  * Passage Class
@@ -23,7 +23,7 @@ export class Passage {
     private appID: string;
     #apiKey: string | undefined;
     private authStrategy: AuthStrategy;
-    public user: PassageUser;
+    public user: User;
     public auth: Auth;
 
     private _apiConfiguration: Configuration;
@@ -49,7 +49,7 @@ export class Passage {
             apiConfiguration: this._apiConfiguration,
         }
 
-        this.user = new PassageUser(instanceConfig);
+        this.user = new User(instanceConfig);
         this.auth = new Auth(instanceConfig);
 
         // To be removed on next major release
