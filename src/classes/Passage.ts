@@ -1,14 +1,12 @@
 import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
-import User from './User';
 import {
     AppInfo,
     AppsApi,
     Configuration,
     CreateMagicLinkRequest,
     MagicLink,
-    MagicLinksApi,
     ResponseError,
 } from '../generated';
 import apiConfiguration from '../utils/apiConfiguration';
@@ -16,6 +14,7 @@ import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../utils/getHeader';
 import { PassageInstanceConfig } from './PassageBase';
 import { Auth } from './Auth';
+import { PassageUser } from './PassageUser';
 
 /**
  * Passage Class
@@ -24,7 +23,7 @@ export class Passage {
     private appID: string;
     #apiKey: string | undefined;
     private authStrategy: AuthStrategy;
-    public user: User;
+    public user: PassageUser;
     public auth: Auth;
 
     private _apiConfiguration: Configuration;
@@ -37,11 +36,6 @@ export class Passage {
         if (!config?.appID) {
             throw new PassageError('A Passage appID is required. Please include {appID: YOUR_APP_ID}.');
         }
-        this.appID = config.appID;
-        this.#apiKey = config?.apiKey;
-
-        this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
-
         this._apiConfiguration = apiConfiguration({
             accessToken: this.#apiKey,
             fetchApi: config.fetchApi,
@@ -52,8 +46,14 @@ export class Passage {
             apiConfiguration: this._apiConfiguration,
         }
 
-        this.user = new User(config);
+        this.user = new PassageUser(instanceConfig);
         this.auth = new Auth(instanceConfig);
+
+        // To be removed on next major release
+        this.appID = config.appID;
+        this.#apiKey = config?.apiKey;
+
+        this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
     }
 
     /**
