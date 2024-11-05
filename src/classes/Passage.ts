@@ -13,7 +13,7 @@ import { User } from './User';
  * Passage Class
  */
 export class Passage {
-    private appID: string;
+    private appId: string;
     #apiKey: string | undefined;
     private authStrategy: AuthStrategy;
     public user: User;
@@ -50,7 +50,7 @@ export class Passage {
         this.auth = new Auth(instanceConfig);
 
         // To be removed on next major release
-        this.appID = config.appID;
+        this.appId = config.appID;
         this.#apiKey = config.apiKey;
 
         this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
@@ -188,7 +188,7 @@ export class Passage {
         try {
             const client = new AppsApi(this._apiConfiguration);
             const response = await client.getApp({
-                appId: this.appID,
+                appId: this.appId,
             });
 
             return response.app;

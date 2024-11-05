@@ -1,2 +1,2 @@
-export * from './PassageUser';
+export * from './User';
 export * from './types';
