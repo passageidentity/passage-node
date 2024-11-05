@@ -17,7 +17,7 @@ describe('PassageError', () => {
         } as ResponseError;
 
         const msg = 'Could not find valid cookie for authentication. You must catch this error';
-        const err = new PassageError(msg,'', responseError);
+        const err = new PassageError(msg, '', responseError);
 
         expect(err.message).toEqual(msg);
 

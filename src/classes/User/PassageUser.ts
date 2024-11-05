@@ -11,7 +11,6 @@ import {
 import { PassageError } from '../PassageError';
 import { PassageUser } from './types';
 
-
 /**
  * User class for handling operations to get and update user information.
  */
