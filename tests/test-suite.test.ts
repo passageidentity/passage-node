@@ -20,7 +20,7 @@ const appToken = process.env.APP_TOKEN ?? '';
 describe('Passage Initialization', () => {
     const config = {
         appID: process.env.APP_ID ?? '',
-        apiKey: process.env.API_KE ?? '',
+        apiKey: process.env.API_KEY ?? '',
     };
     const passage = new Passage(config);
 
