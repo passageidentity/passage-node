@@ -1,16 +1,26 @@
-import { createRemoteJWKSet, decodeProtectedHeader, FlattenedJWSInput, JWSHeaderParameters, jwtVerify, KeyLike } from "jose";
-import { PassageBase, PassageInstanceConfig } from "../PassageBase";
-import { PassageError } from "../PassageError";
-import { CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from "../../generated";
+import {
+    createRemoteJWKSet,
+    decodeProtectedHeader,
+    FlattenedJWSInput,
+    JWSHeaderParameters,
+    jwtVerify,
+    KeyLike,
+} from 'jose';
+import { PassageBase, PassageInstanceConfig } from '../PassageBase';
+import { PassageError } from '../PassageError';
+import { CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from '../../generated';
 
 export class Auth extends PassageBase {
     private jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
 
     constructor(protected config: PassageInstanceConfig) {
         super(config);
-        this.jwks = createRemoteJWKSet(new URL(`https://auth.passage.id/v1/apps/${this.config.appId}/.well-known/jwks.json`), {
-            cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
-        });
+        this.jwks = createRemoteJWKSet(
+            new URL(`https://auth.passage.id/v1/apps/${this.config.appId}/.well-known/jwks.json`),
+            {
+                cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
+            },
+        );
     }
 
     /**
@@ -30,13 +40,12 @@ export class Auth extends PassageBase {
                 payload: { sub: userId },
             } = await jwtVerify(jwt, this.jwks);
 
-            if (!userId){
+            if (!userId) {
                 throw new PassageError('Could not validate auth token.');
             }
             return userId;
         } catch (e) {
-            if (e instanceof Error)
-                throw new PassageError(`Could not verify token: ${e.toString()}.`);
+            if (e instanceof Error) throw new PassageError(`Could not verify token: ${e.toString()}.`);
 
             throw new PassageError(`Could not verify token.`);
         }

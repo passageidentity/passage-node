@@ -1,14 +1,7 @@
 import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
-import {
-    AppInfo,
-    AppsApi,
-    Configuration,
-    CreateMagicLinkRequest,
-    MagicLink,
-    ResponseError,
-} from '../generated';
+import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, ResponseError } from '../generated';
 import apiConfiguration from '../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../utils/getHeader';
@@ -34,10 +27,14 @@ export class Passage {
      */
     constructor(config: PassageConfig) {
         if (!config.appID) {
-            throw new PassageError('A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
+            throw new PassageError(
+                'A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
+            );
         }
         if (!config.apiKey) {
-            throw new PassageError('A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
+            throw new PassageError(
+                'A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
+            );
         }
         this._apiConfiguration = apiConfiguration({
             accessToken: this.#apiKey,
@@ -47,7 +44,7 @@ export class Passage {
         const instanceConfig: PassageInstanceConfig = {
             appId: config.appID,
             apiConfiguration: this._apiConfiguration,
-        }
+        };
 
         this.user = new User(instanceConfig);
         this.auth = new Auth(instanceConfig);

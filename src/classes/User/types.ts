@@ -1,3 +1,3 @@
-import { UserInfo } from "../../generated";
+import { UserInfo } from '../../generated';
 
 export type PassageUser = UserInfo;

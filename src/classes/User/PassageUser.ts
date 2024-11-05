@@ -1,7 +1,15 @@
-import { PassageBase, PassageInstanceConfig } from "../PassageBase";
-import { CreateUserRequest, ResponseError, TokensApi, UpdateUserRequest, UserDevicesApi, UsersApi, WebAuthnDevices } from "../../generated";
-import { PassageError } from "../PassageError";
-import { PassageUser } from "./types";
+import { PassageBase, PassageInstanceConfig } from '../PassageBase';
+import {
+    CreateUserRequest,
+    ResponseError,
+    TokensApi,
+    UpdateUserRequest,
+    UserDevicesApi,
+    UsersApi,
+    WebAuthnDevices,
+} from '../../generated';
+import { PassageError } from '../PassageError';
+import { PassageUser } from './types';
 
 export class User extends PassageBase {
     private usersApi;
@@ -42,7 +50,7 @@ export class User extends PassageBase {
      * @param {string} identifier The Passage user email or phone number
      * @return {Promise<PassageUser>} Passage User object
      */
-    public async getByIdentifier(identifier: string): Promise<PassageUser> {    
+    public async getByIdentifier(identifier: string): Promise<PassageUser> {
         try {
             const response = await this.usersApi.listPaginatedUsers({
                 appId: this.config.appId,
@@ -92,7 +100,7 @@ export class User extends PassageBase {
      * @param {string} userId The Passage user ID
      * @return {Promise<PassageUser>} Passage User object
      */
-    public async deactivate(userId: string): Promise<PassageUser> {    
+    public async deactivate(userId: string): Promise<PassageUser> {
         try {
             const response = await this.usersApi.deactivateUser({
                 userId,
@@ -140,7 +148,7 @@ export class User extends PassageBase {
      * @param {CreateUserRequest} args Arguments for creating a user
      * @return {Promise<PassageUser>} Passage User object
      */
-    public async create(args: CreateUserRequest): Promise<PassageUser> {    
+    public async create(args: CreateUserRequest): Promise<PassageUser> {
         try {
             const response = await this.usersApi.createUser({
                 appId: this.config.appId,
@@ -164,7 +172,7 @@ export class User extends PassageBase {
      * Either an E164 phone number or email address.
      * @return {boolean} True if user was deleted, false if not
      */
-    public async delete(userId: string): Promise<boolean> {    
+    public async delete(userId: string): Promise<boolean> {
         try {
             await this.usersApi.deleteUser({
                 userId,
@@ -186,8 +194,8 @@ export class User extends PassageBase {
      * @param {string} userId The Passage user ID
      * @return {Promise<WebAuthnDevices[]>} List of devices
      */
-    public async listDevices(userId: string): Promise<WebAuthnDevices[]> {    
-        try {    
+    public async listDevices(userId: string): Promise<WebAuthnDevices[]> {
+        try {
             const response = await this.userDevicesApi.listUserDevices({
                 userId,
                 appId: this.config.appId,
@@ -211,7 +219,7 @@ export class User extends PassageBase {
      * @return {Promise<boolean>}
      */
     public async revokeDevice(userId: string, deviceId: string): Promise<boolean> {
-        try {    
+        try {
             await this.userDevicesApi.deleteUserDevices({
                 userId,
                 deviceId,

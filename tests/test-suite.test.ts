@@ -55,7 +55,7 @@ describe('Passage Initialization', () => {
 
 describe('Passage API Requests', () => {
     const passage = new Passage({
-        appID: process.env.APP_ID ??'',
+        appID: process.env.APP_ID ?? '',
         apiKey: process.env.API_KEY ?? '',
     });
 
