@@ -14,13 +14,13 @@ enum Status {
     PENDING = 'pending',
 }
 
-const userID = process.env.EXAMPLE_USER_ID ? process.env.EXAMPLE_USER_ID : '';
-const appToken = process.env.APP_TOKEN ? process.env.APP_TOKEN : '';
+const userID = process.env.EXAMPLE_USER_ID ?? '';
+const appToken = process.env.APP_TOKEN ?? '';
 
 describe('Passage Initialization', () => {
     const config = {
-        appID: process.env.APP_ID ? process.env.APP_ID : '',
-        apiKey: process.env.API_KEY,
+        appID: process.env.APP_ID ?? '',
+        apiKey: process.env.API_KEY ?? '',
     };
     const passage = new Passage(config);
 
@@ -55,8 +55,8 @@ describe('Passage Initialization', () => {
 
 describe('Passage API Requests', () => {
     const passage = new Passage({
-        appID: process.env.APP_ID ? process.env.APP_ID : '',
-        apiKey: process.env.API_KEY,
+        appID: process.env.APP_ID ?? '',
+        apiKey: process.env.API_KEY ?? '',
     });
 
     describe('Passage', () => {

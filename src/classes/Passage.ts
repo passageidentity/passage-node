@@ -1,30 +1,23 @@
-import { decodeProtectedHeader, jwtVerify, createRemoteJWKSet } from 'jose';
 import { AuthStrategy } from '../types/AuthStrategy';
 import { PassageConfig } from '../types/PassageConfig';
 import { PassageError } from './PassageError';
-import User from './User';
-import {
-    AppInfo,
-    AppsApi,
-    Configuration,
-    CreateMagicLinkRequest,
-    MagicLink,
-    MagicLinksApi,
-    ResponseError,
-} from '../generated';
+import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, ResponseError } from '../generated';
 import apiConfiguration from '../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../utils/getHeader';
+import { PassageInstanceConfig } from './PassageBase';
+import { Auth } from './Auth';
+import { User } from './User';
 
 /**
  * Passage Class
  */
 export class Passage {
-    appID: string;
+    private appId: string;
     #apiKey: string | undefined;
-    authStrategy: AuthStrategy;
-    user: User;
-    jwks: ReturnType<typeof createRemoteJWKSet>;
+    private authStrategy: AuthStrategy;
+    public user: User;
+    public auth: Auth;
 
     private _apiConfiguration: Configuration;
 
@@ -32,27 +25,39 @@ export class Passage {
      * Initialize a new Passage instance.
      * @param {PassageConfig} config The default config for Passage initialization
      */
-    constructor(config?: PassageConfig) {
-        if (!config?.appID) {
-            throw new PassageError('A Passage appID is required. Please include {appID: YOUR_APP_ID}.');
+    constructor(config: PassageConfig) {
+        if (!config.appID) {
+            throw new PassageError(
+                'A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
+            );
         }
-        this.appID = config.appID;
-        this.#apiKey = config?.apiKey;
-        this.user = new User(config);
-
-        this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
-
-        this.jwks = createRemoteJWKSet(new URL(`https://auth.passage.id/v1/apps/${this.appID}/.well-known/jwks.json`), {
-            cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
-        });
-
+        if (!config.apiKey) {
+            throw new PassageError(
+                'A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
+            );
+        }
         this._apiConfiguration = apiConfiguration({
-            accessToken: this.#apiKey,
+            accessToken: config.apiKey,
             fetchApi: config.fetchApi,
         });
+
+        const instanceConfig: PassageInstanceConfig = {
+            appId: config.appID,
+            apiConfiguration: this._apiConfiguration,
+        };
+
+        this.user = new User(instanceConfig);
+        this.auth = new Auth(instanceConfig);
+
+        // To be removed on next major release
+        this.appId = config.appID;
+        this.#apiKey = config.apiKey;
+
+        this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
     }
 
     /**
+     * @deprecated Use Passage.auth.validateJwt instead.
      * Authenticate request with a cookie, or header. If no authentication
      * strategy is given, authenticate the request via cookie (default
      * authentication strategy).
@@ -69,6 +74,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Set the API key in the constructor of the Passage object. Do not change API key at runtime.
      * Set API key for this Passage instance
      * @param {string} _apiKey
      */
@@ -77,6 +83,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Getting the API key will be removed in the next major release.
      * Get API key for this Passage instance
      * @return {string | undefined} Passage API Key
      */
@@ -85,6 +92,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Use Passage.auth.validateJwt instead.
      * Authenticate a request via the http header.
      *
      * @param {IncomingMessage | Request} req Node http request or fetch request
@@ -107,6 +115,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Use Passage.auth.validateJwt instead.
      * Authenticate request via cookie.
      *
      * @param {IncomingMessage | Request} req Node http request or fetch request
@@ -147,6 +156,7 @@ export class Passage {
     }
 
     /**
+     * @deprecated Use Passage.auth.validateJwt instead.
      * Determine if the provided token is valid when compared with its
      * respective public key.
      *
@@ -154,51 +164,22 @@ export class Passage {
      * @return {string} sub claim if the jwt can be verified, or Error
      */
     async validAuthToken(token: string): Promise<string | undefined> {
-        try {
-            const { kid } = decodeProtectedHeader(token);
-            if (!kid) {
-                throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
-            }
-
-            const {
-                payload: { sub: userID },
-            } = await jwtVerify(token, this.jwks);
-            if (userID) return userID.toString();
-
-            throw new PassageError('Could not verify token identity. You must catch this error.');
-        } catch (e) {
-            if (e instanceof Error)
-                throw new PassageError(`Could not verify token: ${e.toString()}. You must catch this error.`);
-
-            throw new PassageError(`Could not verify token. You must catch this error.`);
-        }
+        return this.auth.validateJwt(token);
     }
 
     /**
+     * @deprecated Use Passage.auth.createMagicLink instead.
      * Create a Magic Link for your app.
      *
      * @param {MagicLinkRequest} magicLinkReq options for creating a MagicLink.
      * @return {Promise<MagicLink>} Passage MagicLink object
      */
     async createMagicLink(magicLinkReq: CreateMagicLinkRequest): Promise<MagicLink> {
-        try {
-            const client = new MagicLinksApi(this._apiConfiguration);
-            const response = await client.createMagicLink({
-                appId: this.appID,
-                createMagicLinkRequest: magicLinkReq,
-            });
-
-            return response.magic_link;
-        } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not create a magic link for this app');
-            }
-
-            throw err;
-        }
+        return this.auth.createMagicLink(magicLinkReq);
     }
 
     /**
+     * @deprecated Passage.auth.validateJwt will validate the JWT audience automatically.
      * Get App Info about an app
      *
      * @return {Promise<AppInfo>} Passage App object
@@ -207,7 +188,7 @@ export class Passage {
         try {
             const client = new AppsApi(this._apiConfiguration);
             const response = await client.getApp({
-                appId: this.appID,
+                appId: this.appId,
             });
 
             return response.app;
