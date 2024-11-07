@@ -10,7 +10,9 @@ describe('Passage Class Constructor', () => {
         };
 
         expect(() => new Passage(config)).toThrow(PassageError);
-        expect(() => new Passage(config)).toThrow('A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
+        expect(() => new Passage(config)).toThrow(
+            'A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
+        );
     });
 
     it('should throw an error if apiKey is not provided', () => {
@@ -20,7 +22,9 @@ describe('Passage Class Constructor', () => {
         };
 
         expect(() => new Passage(config)).toThrow(PassageError);
-        expect(() => new Passage(config)).toThrow('A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
+        expect(() => new Passage(config)).toThrow(
+            'A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
+        );
     });
 
     it('should initialize Passage instance correctly with valid config', () => {

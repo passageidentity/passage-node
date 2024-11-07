@@ -20,9 +20,9 @@ describe('PassageError', () => {
         const responseError: ResponseError = {
             response: {
                 status: 404,
-                json: async () => ({ code: 'NOT_FOUND', error: 'Resource not found' })
+                json: async () => ({ code: 'NOT_FOUND', error: 'Resource not found' }),
             },
-            message: 'Resource not found'
+            message: 'Resource not found',
         } as ResponseError;
         const passageError = new PassageError(message, errorCode, responseError);
 
@@ -39,9 +39,9 @@ describe('PassageError', () => {
         const responseError: ResponseError = {
             response: {
                 status: 500,
-                json: async () => ({ code: 'INTERNAL_SERVER_ERROR', error: 'Internal server error' })
+                json: async () => ({ code: 'INTERNAL_SERVER_ERROR', error: 'Internal server error' }),
             },
-            message: 'Internal server error'
+            message: 'Internal server error',
         } as ResponseError;
         const passageError = await PassageError.fromResponseError(responseError, message);
 

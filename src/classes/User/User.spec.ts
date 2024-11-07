@@ -8,7 +8,7 @@ import apiConfiguration from '../../utils/apiConfiguration';
 jest.mock('../../generated/apis');
 
 const mockConfig: PassageInstanceConfig = {
-    apiConfiguration: apiConfiguration({accessToken: 'mock_api_key'}),
+    apiConfiguration: apiConfiguration({ accessToken: 'mock_api_key' }),
     appId: 'test-app-id',
 };
 
@@ -28,7 +28,9 @@ describe('User class', () => {
 
     it('should get a user by identifier', async () => {
         const mockUser: PassageUser = { id: 'user-id' } as PassageUser;
-        usersApiMock.listPaginatedUsers.mockResolvedValue({ users: [mockUser] } as unknown as ListPaginatedUsersResponse);
+        usersApiMock.listPaginatedUsers.mockResolvedValue({
+            users: [mockUser],
+        } as unknown as ListPaginatedUsersResponse);
         usersApiMock.getUser.mockResolvedValue({ user: mockUser });
 
         const result = await user.getByIdentifier('email@example.com');
@@ -45,17 +47,22 @@ describe('User class', () => {
             new ResponseError(
                 {
                     status: 404,
-                    json: async () => ({ code: 'NOT_FOUND', error: 'Resource not found' })
+                    json: async () => ({ code: 'NOT_FOUND', error: 'Resource not found' }),
                 } as Response,
-                'Error')
+                'Error',
+            ),
         );
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(PassageError);
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow('Could not fetch user by identifier: Resource not found');
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(
+            'Could not fetch user by identifier: Resource not found',
+        );
     });
 
     it('should throw an error if get user by identifier returns an empty array', async () => {
         usersApiMock.listPaginatedUsers.mockResolvedValue({ users: [] } as unknown as ListPaginatedUsersResponse);
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(PassageError);
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow('Could not find user with that identifier.');
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(
+            'Could not find user with that identifier.',
+        );
     });
 });
