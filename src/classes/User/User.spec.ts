@@ -1,6 +1,6 @@
 import { User } from './User';
 import { PassageInstanceConfig } from '../PassageBase';
-import { UsersApi, UserDevicesApi, TokensApi, ResponseError, ListPaginatedUsersResponse } from '../../generated';
+import { UsersApi, UserDevicesApi, ResponseError, ListPaginatedUsersResponse } from '../../generated';
 import { PassageUser } from './types';
 import { PassageError } from '../PassageError';
 import apiConfiguration from '../../utils/apiConfiguration';
@@ -22,8 +22,8 @@ describe('User class', () => {
         userDevicesApiMock = new UserDevicesApi(mockConfig.apiConfiguration) as jest.Mocked<UserDevicesApi>;
 
         user = new User(mockConfig);
-        (user as any).usersApi = usersApiMock;
-        (user as any).userDevicesApi = userDevicesApiMock;
+        user['usersApi'] = usersApiMock;
+        user['userDevicesApi'] = userDevicesApiMock;
     });
 
     it('should get a user by identifier', async () => {
