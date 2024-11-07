@@ -13,6 +13,7 @@ export class PassageError extends Error {
     readonly error: string | undefined;
 
     /**
+     * @deprecated This should only be constructed by the Passage SDK. Use this type just for type checking.
      * Initialize a new PassageError instance.
      * @param {string} message friendly error message
      * @param {string} errorCode error code from Passage Backend
