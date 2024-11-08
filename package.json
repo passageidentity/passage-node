@@ -67,7 +67,7 @@
         "build": "tsc --noEmit & tsup ./src/index.ts --no-config --format esm,cjs --dts-resolve --minify"
     },
     "dependencies": {
-        "jose": "^4.14.4",
+        "jose": "^5.9.6",
         "node-fetch": "^2.6.12"
     },
     "devDependencies": {
