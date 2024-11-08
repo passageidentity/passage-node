@@ -68,7 +68,7 @@
     },
     "dependencies": {
         "jose": "^5.9.6",
-        "node-fetch": "^2.6.12"
+        "node-fetch": "^2.7.0"
     },
     "devDependencies": {
         "@faker-js/faker": "^8.4.1",
