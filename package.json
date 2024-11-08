@@ -81,7 +81,7 @@
         "@typescript-eslint/parser": "^8.13.0",
         "babel-jest": "^29.7.0",
         "beachball": "^2.37.0",
-        "dotenv": "^10.0.0",
+        "dotenv": "^16.4.5",
         "eslint": "^8.57.0",
         "eslint-config-google": "^0.14.0",
         "eslint-config-prettier": "^9.1.0",
