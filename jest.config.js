@@ -1,10 +1,9 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+// jest.config.js
+const { createDefaultPreset } = require('ts-jest')
+
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-    preset: 'ts-jest',
-    testEnvironment: 'node',
-    globals: {
-        'ts-jest': {
-            isolatedModules: true,
-        },
-    },
-};
+  transform: {
+    ...createDefaultPreset().transform,
+  },
+}
