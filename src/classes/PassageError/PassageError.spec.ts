@@ -12,6 +12,7 @@ describe('PassageError', () => {
         expect(passageError.message).toBe(message);
         expect(passageError.errorCode).toBe(errorCode);
         expect(passageError.statusCode).toBeUndefined();
+        expect(passageError.error).toBeUndefined();
     });
 
     it('should create an instance with ResponseError properties', () => {
