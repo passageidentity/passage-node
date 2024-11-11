@@ -1,13 +1,13 @@
-import { AuthStrategy } from '../types/AuthStrategy';
-import { PassageConfig } from '../types/PassageConfig';
-import { PassageError } from './PassageError';
-import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, ResponseError } from '../generated';
-import apiConfiguration from '../utils/apiConfiguration';
+import { AuthStrategy } from '../../types/AuthStrategy';
+import { PassageConfig } from '../../types/PassageConfig';
+import { PassageError } from '../PassageError';
+import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, ResponseError } from '../../generated';
+import apiConfiguration from '../../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
-import { getHeaderFromRequest } from '../utils/getHeader';
-import { PassageInstanceConfig } from './PassageBase';
-import { Auth } from './Auth';
-import { User } from './User';
+import { getHeaderFromRequest } from '../../utils/getHeader';
+import { PassageInstanceConfig } from '../PassageBase';
+import { Auth } from '../Auth';
+import { User } from '../User';
 
 /**
  * Passage Class

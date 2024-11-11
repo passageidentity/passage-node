@@ -1,4 +1,4 @@
-export { Passage } from './classes/Passage';
+export { Passage } from './classes/Passage/Passage';
 export * from './types/AuthStrategy';
 export * from './types/JWKS';
 export * from './types/MagicLink';
