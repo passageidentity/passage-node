@@ -1,0 +1,16 @@
+{
+    "name": "Node.js & TypeScript",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+    "features": {
+        "ghcr.io/itsmechlark/features/act:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "arahata.linter-actionlint"
+            ]
+        }
+    },
+    "postCreateCommand": "npm install"
+}

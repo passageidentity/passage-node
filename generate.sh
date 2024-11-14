@@ -1,5 +1,5 @@
-# #!/bin/bash
-# set -e
+#!/bin/bash
+set -e
 
 if [ -z "$1" ]; then
   echo "Required generator file is missing."
@@ -9,10 +9,9 @@ fi
 file="$1"
 
 rm -rf ./src/generated
-npm install @openapitools/openapi-generator-cli -g
 
-openapi-generator-cli generate \
-  -i "$file" \
+docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:latest generate \
+  -i "/local/$file" \
   -g typescript-fetch \
-  -o ./src/generated \
+  -o /local/src/generated \
   --additional-properties=modelPropertyNaming=original
