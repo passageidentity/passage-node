@@ -52,7 +52,7 @@ export class Auth extends PassageBase {
             }
             if (Array.isArray(aud)) {
                 if (!aud.includes(this.config.appId)) {
-                    throw new PassageError('Incorrect app ID claim in token.');
+                    throw new Error('Incorrect app ID claim in token.');
                 }
             }
             return userId;
