@@ -14,7 +14,7 @@ import { CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from 
  * Auth class that provides methods for validating JWTs and creating Magic Links.
  */
 export class Auth extends PassageBase {
-    private jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
+    private readonly jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
 
     /**
      * Auth class constructor.

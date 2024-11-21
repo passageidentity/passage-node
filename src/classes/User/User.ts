@@ -15,8 +15,8 @@ import { PassageUser } from './types';
  * User class for handling operations to get and update user information.
  */
 export class User extends PassageBase {
-    private usersApi;
-    private userDevicesApi;
+    private readonly usersApi: UsersApi;
+    private readonly userDevicesApi: UserDevicesApi;
 
     /**
      * User class constructor.
