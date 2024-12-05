@@ -9,7 +9,7 @@ import {
     WebAuthnDevices,
 } from '../../generated';
 import { PassageError } from '../PassageError';
-import { PassageUser } from './types';
+import { CreateUserArgs, PassageUser } from './types';
 
 /**
  * User class for handling operations to get and update user information.
@@ -152,10 +152,10 @@ export class User extends PassageBase {
     /**
      * Create a user.
      *
-     * @param {CreateUserRequest} args Arguments for creating a user
+     * @param {CreateUserArgs} args Arguments for creating a user
      * @return {Promise<PassageUser>} Passage User object
      */
-    public async create(args: CreateUserRequest): Promise<PassageUser> {
+    public async create(args: CreateUserArgs): Promise<PassageUser> {
         try {
             const response = await this.usersApi.createUser({
                 appId: this.config.appId,

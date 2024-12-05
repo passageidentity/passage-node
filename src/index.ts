@@ -7,14 +7,12 @@ export * from './types/User';
 export * from './generated/models';
 export * from './models';
 export {
-    AppInfo as AppObject,
-    CreateUserRequest as CreateUserPayload,
-    CreateMagicLinkRequest as MagicLinkRequestProps,
-    MagicLinkType as MagicLinkEnum,
+    AppInfo,
+    CreateMagicLinkRequest,
     MagicLinkType,
-    MagicLink as MagicLinkObject,
-    UpdateUserRequest as UpdateUserPayload,
-    UserInfo as UserObject,
+    MagicLink,
+    UpdateUserRequest,
+    UserInfo,
     Layouts,
     LayoutConfig,
     ResponseError,
