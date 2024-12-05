@@ -41,7 +41,7 @@ export class Auth extends PassageBase {
         try {
             const { kid } = decodeProtectedHeader(jwt);
             if (!kid) {
-                throw new PassageError('Could not find valid cookie for authentication.');
+                throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
             }
 
             const {
@@ -49,20 +49,20 @@ export class Auth extends PassageBase {
             } = await jwtVerify(jwt, this.jwks);
 
             if (!userId) {
-                throw new PassageError('Could not validate auth token.');
+                throw new PassageError('Could not validate auth token. You must catch this error.');
             }
             if (Array.isArray(aud)) {
                 if (!aud.includes(this.config.appId)) {
-                    throw new Error('Incorrect app ID claim in token.');
+                    throw new Error('Incorrect app ID claim in token. You must catch this error.');
                 }
             }
             return userId;
         } catch (e) {
             if (e instanceof Error) {
-                throw new PassageError(`Could not verify token: ${e.toString()}.`);
+                throw new PassageError(`Could not verify token: ${e.toString()}. You must catch this error.`);
             }
 
-            throw new PassageError(`Could not verify token.`);
+            throw new PassageError(`Could not verify token. You must catch this error.`);
         }
     }
 
