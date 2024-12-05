@@ -6,20 +6,6 @@ export * from './types/PassageConfig';
 export * from './types/User';
 export * from './generated/models';
 export * from './models';
-export {
-    AppInfo,
-    CreateMagicLinkRequest,
-    MagicLinkType,
-    MagicLink,
-    UpdateUserRequest,
-    UserInfo,
-    Layouts,
-    LayoutConfig,
-    ResponseError,
-    UserMetadataFieldType,
-    UserMetadataField,
-    WebAuthnDevices,
-} from './generated';
 export * from './classes/Auth';
 export * from './classes/User';
 export * from './classes/PassageError';

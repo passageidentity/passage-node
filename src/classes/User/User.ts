@@ -1,15 +1,13 @@
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import {
-    CreateUserRequest,
     ResponseError,
     TokensApi,
-    UpdateUserRequest,
     UserDevicesApi,
     UsersApi,
     WebAuthnDevices,
 } from '../../generated';
 import { PassageError } from '../PassageError';
-import { CreateUserArgs, PassageUser } from './types';
+import { CreateUserArgs, PassageUser, UpdateUserArgs } from './types';
 
 /**
  * User class for handling operations to get and update user information.
@@ -131,7 +129,7 @@ export class User extends PassageBase {
      * @param {UpdateUserRequest} options The user attributes to be updated
      * @return {Promise<PassageUser>} Pasasge User Object
      */
-    public async update(userId: string, options: UpdateUserRequest): Promise<PassageUser> {
+    public async update(userId: string, options: UpdateUserArgs): Promise<PassageUser> {
         try {
             const response = await this.usersApi.updateUser({
                 userId,
