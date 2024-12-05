@@ -13,13 +13,13 @@ import { User } from '../User';
  * Passage Class
  */
 export class Passage {
-    private appId: string;
+    private readonly appId: string;
     private _apiKey: string | undefined;
-    private authStrategy: AuthStrategy;
-    public user: User;
-    public auth: Auth;
+    private readonly authStrategy: AuthStrategy;
+    public readonly user: User;
+    public readonly auth: Auth;
 
-    private _apiConfiguration: Configuration;
+    private readonly _apiConfiguration: Configuration;
 
     /**
      * Initialize a new Passage instance.
