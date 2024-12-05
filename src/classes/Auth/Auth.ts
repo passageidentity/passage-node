@@ -8,7 +8,7 @@ import {
 } from 'jose';
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import { PassageError } from '../PassageError';
-import {  MagicLink, MagicLinksApi } from '../../generated';
+import { MagicLink, MagicLinksApi } from '../../generated';
 import { CreateMagicLinkArgs } from './types';
 
 /**

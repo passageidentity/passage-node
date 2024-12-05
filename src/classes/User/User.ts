@@ -1,10 +1,5 @@
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
-import {
-    TokensApi,
-    UserDevicesApi,
-    UsersApi,
-    WebAuthnDevices,
-} from '../../generated';
+import { TokensApi, UserDevicesApi, UsersApi, WebAuthnDevices } from '../../generated';
 import { PassageError } from '../PassageError';
 import { CreateUserArgs, PassageUser, UpdateUserArgs } from './types';
 
@@ -179,7 +174,7 @@ export class User extends PassageBase {
 
             return response.devices;
         } catch (err) {
-            throw await this.parseError(err, "Could not fetch user's devices:");            
+            throw await this.parseError(err, "Could not fetch user's devices:");
         }
     }
 
