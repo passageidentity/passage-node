@@ -8,7 +8,7 @@ import {
 } from 'jose';
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import { PassageError } from '../PassageError';
-import {  MagicLink, MagicLinksApi, ResponseError } from '../../generated';
+import {  MagicLink, MagicLinksApi } from '../../generated';
 import { CreateMagicLinkArgs } from './types';
 
 /**
@@ -82,11 +82,7 @@ export class Auth extends PassageBase {
 
             return response.magic_link;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not create a magic link for this app');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not create a magic link for this app');
         }
     }
 }

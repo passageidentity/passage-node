@@ -1,6 +1,5 @@
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import {
-    ResponseError,
     TokensApi,
     UserDevicesApi,
     UsersApi,
@@ -41,11 +40,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not fetch user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not fetch user');
         }
     }
 
@@ -70,11 +65,7 @@ export class User extends PassageBase {
 
             return this.get(users[0].id);
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not fetch user by identifier');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not fetch user by identifier');
         }
     }
 
@@ -92,10 +83,7 @@ export class User extends PassageBase {
             });
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not activate user');
-            }
-            throw err;
+            throw await this.parseError(err, 'Could not activate user');
         }
     }
 
@@ -114,11 +102,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not deactivate user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not deactivate user');
         }
     }
 
@@ -139,11 +123,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not update user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not update user');
         }
     }
 
@@ -162,11 +142,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not create user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not create user');
         }
     }
 
@@ -184,11 +160,7 @@ export class User extends PassageBase {
             });
             return true;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not delete user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not delete user');
         }
     }
 
@@ -207,11 +179,7 @@ export class User extends PassageBase {
 
             return response.devices;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, "Could not fetch user's devices:");
-            }
-
-            throw err;
+            throw await this.parseError(err, "Could not fetch user's devices:");            
         }
     }
 
@@ -232,11 +200,7 @@ export class User extends PassageBase {
 
             return true;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, "Could not delete user's device:");
-            }
-
-            throw err;
+            throw await this.parseError(err, "Could not delete user's device:");
         }
     }
 
@@ -256,10 +220,7 @@ export class User extends PassageBase {
             });
             return true;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, "Could not revoke user's refresh tokens:");
-            }
-            throw err;
+            throw await this.parseError(err, "Could not revoke user's refresh tokens:");
         }
     }
 
