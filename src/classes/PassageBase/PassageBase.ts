@@ -8,5 +8,5 @@ export class PassageBase {
      * PassageBase class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    constructor(protected config: PassageInstanceConfig) {}
+    public constructor(protected config: PassageInstanceConfig) {}
 }

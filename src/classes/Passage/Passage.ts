@@ -14,7 +14,7 @@ import { User } from '../User';
  */
 export class Passage {
     private appId: string;
-    #apiKey: string | undefined;
+    private _apiKey: string | undefined;
     private authStrategy: AuthStrategy;
     public user: User;
     public auth: Auth;
@@ -25,7 +25,7 @@ export class Passage {
      * Initialize a new Passage instance.
      * @param {PassageConfig} config The default config for Passage initialization
      */
-    constructor(config: PassageConfig) {
+    public constructor(config: PassageConfig) {
         if (!config.appID) {
             throw new PassageError(
                 'A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
@@ -51,7 +51,7 @@ export class Passage {
 
         // To be removed on next major release
         this.appId = config.appID;
-        this.#apiKey = config.apiKey;
+        this._apiKey = config.apiKey;
 
         this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
     }
@@ -79,7 +79,7 @@ export class Passage {
      * @param {string} _apiKey
      */
     set apiKey(_apiKey) {
-        this.#apiKey = _apiKey;
+        this._apiKey = _apiKey;
     }
 
     /**
@@ -88,7 +88,7 @@ export class Passage {
      * @return {string | undefined} Passage API Key
      */
     get apiKey(): string | undefined {
-        return this.#apiKey;
+        return this._apiKey;
     }
 
     /**
