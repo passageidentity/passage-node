@@ -1,5 +1,10 @@
+import { CreateMagicLinkRequest } from '../../generated';
+
+export type CreateMagicLinkArgs = CreateMagicLinkRequest;
+
 export {
-    CreateMagicLinkRequest,
     MagicLinkType,
     MagicLink,
 } from '../../generated';
+
+export { CreateMagicLinkRequest };

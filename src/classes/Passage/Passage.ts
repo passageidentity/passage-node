@@ -1,12 +1,12 @@
 import { AuthStrategy } from '../../types/AuthStrategy';
 import { PassageConfig } from '../../types/PassageConfig';
 import { PassageError } from '../PassageError';
-import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, ResponseError } from '../../generated';
+import { AppInfo, AppsApi, Configuration, MagicLink, ResponseError } from '../../generated';
 import apiConfiguration from '../../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../../utils/getHeader';
 import { PassageInstanceConfig } from '../PassageBase';
-import { Auth } from '../Auth';
+import { Auth, CreateMagicLinkArgs } from '../Auth';
 import { User } from '../User';
 
 /**
@@ -171,11 +171,11 @@ export class Passage {
      * @deprecated Use Passage.auth.createMagicLink instead.
      * Create a Magic Link for your app.
      *
-     * @param {MagicLinkRequest} magicLinkReq options for creating a MagicLink.
+     * @param {CreateMagicLinkArgs} args options for creating a MagicLink.
      * @return {Promise<MagicLink>} Passage MagicLink object
      */
-    async createMagicLink(magicLinkReq: CreateMagicLinkRequest): Promise<MagicLink> {
-        return this.auth.createMagicLink(magicLinkReq);
+    async createMagicLink(args: CreateMagicLinkArgs): Promise<MagicLink> {
+        return this.auth.createMagicLink(args);
     }
 
     /**
