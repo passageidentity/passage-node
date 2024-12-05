@@ -1,31 +1,31 @@
 import { AuthStrategy } from '../../types/AuthStrategy';
 import { PassageConfig } from '../../types/PassageConfig';
 import { PassageError } from '../PassageError';
-import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, ResponseError } from '../../generated';
+import { AppInfo, AppsApi, Configuration, MagicLink, ResponseError } from '../../generated';
 import apiConfiguration from '../../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../../utils/getHeader';
 import { PassageInstanceConfig } from '../PassageBase';
-import { Auth } from '../Auth';
+import { Auth, CreateMagicLinkArgs } from '../Auth';
 import { User } from '../User';
 
 /**
  * Passage Class
  */
 export class Passage {
-    private appId: string;
-    #apiKey: string | undefined;
-    private authStrategy: AuthStrategy;
-    public user: User;
-    public auth: Auth;
+    private readonly appId: string;
+    private _apiKey: string | undefined;
+    private readonly authStrategy: AuthStrategy;
+    public readonly user: User;
+    public readonly auth: Auth;
 
-    private _apiConfiguration: Configuration;
+    private readonly _apiConfiguration: Configuration;
 
     /**
      * Initialize a new Passage instance.
      * @param {PassageConfig} config The default config for Passage initialization
      */
-    constructor(config: PassageConfig) {
+    public constructor(config: PassageConfig) {
         if (!config.appID) {
             throw new PassageError(
                 'A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
@@ -51,7 +51,7 @@ export class Passage {
 
         // To be removed on next major release
         this.appId = config.appID;
-        this.#apiKey = config.apiKey;
+        this._apiKey = config.apiKey;
 
         this.authStrategy = config?.authStrategy ? config.authStrategy : 'COOKIE';
     }
@@ -79,7 +79,7 @@ export class Passage {
      * @param {string} _apiKey
      */
     set apiKey(_apiKey) {
-        this.#apiKey = _apiKey;
+        this._apiKey = _apiKey;
     }
 
     /**
@@ -88,7 +88,7 @@ export class Passage {
      * @return {string | undefined} Passage API Key
      */
     get apiKey(): string | undefined {
-        return this.#apiKey;
+        return this._apiKey;
     }
 
     /**
@@ -171,11 +171,11 @@ export class Passage {
      * @deprecated Use Passage.auth.createMagicLink instead.
      * Create a Magic Link for your app.
      *
-     * @param {MagicLinkRequest} magicLinkReq options for creating a MagicLink.
+     * @param {CreateMagicLinkArgs} args options for creating a MagicLink.
      * @return {Promise<MagicLink>} Passage MagicLink object
      */
-    async createMagicLink(magicLinkReq: CreateMagicLinkRequest): Promise<MagicLink> {
-        return this.auth.createMagicLink(magicLinkReq);
+    async createMagicLink(args: CreateMagicLinkArgs): Promise<MagicLink> {
+        return this.auth.createMagicLink(args);
     }
 
     /**

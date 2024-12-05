@@ -1,15 +1,7 @@
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
-import {
-    CreateUserRequest,
-    ResponseError,
-    TokensApi,
-    UpdateUserRequest,
-    UserDevicesApi,
-    UsersApi,
-    WebAuthnDevices,
-} from '../../generated';
+import { TokensApi, UserDevicesApi, UsersApi, WebAuthnDevices } from '../../generated';
 import { PassageError } from '../PassageError';
-import { PassageUser } from './types';
+import { CreateUserArgs, PassageUser, UpdateUserArgs } from './types';
 
 /**
  * User class for handling operations to get and update user information.
@@ -22,7 +14,7 @@ export class User extends PassageBase {
      * User class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    constructor(protected config: PassageInstanceConfig) {
+    public constructor(protected config: PassageInstanceConfig) {
         super(config);
         this.usersApi = new UsersApi(this.config.apiConfiguration);
         this.userDevicesApi = new UserDevicesApi(this.config.apiConfiguration);
@@ -43,11 +35,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not fetch user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not fetch user');
         }
     }
 
@@ -72,11 +60,7 @@ export class User extends PassageBase {
 
             return this.get(users[0].id);
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not fetch user by identifier');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not fetch user by identifier');
         }
     }
 
@@ -94,10 +78,7 @@ export class User extends PassageBase {
             });
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not activate user');
-            }
-            throw err;
+            throw await this.parseError(err, 'Could not activate user');
         }
     }
 
@@ -116,11 +97,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not deactivate user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not deactivate user');
         }
     }
 
@@ -129,9 +106,9 @@ export class User extends PassageBase {
      *
      * @param {string} userId The Passage user ID
      * @param {UpdateUserRequest} options The user attributes to be updated
-     * @return {Promise<PassageUser>} Pasasge User Object
+     * @return {Promise<PassageUser>} Passage User object
      */
-    public async update(userId: string, options: UpdateUserRequest): Promise<PassageUser> {
+    public async update(userId: string, options: UpdateUserArgs): Promise<PassageUser> {
         try {
             const response = await this.usersApi.updateUser({
                 userId,
@@ -141,21 +118,17 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not update user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not update user');
         }
     }
 
     /**
      * Create a user.
      *
-     * @param {CreateUserRequest} args Arguments for creating a user
+     * @param {CreateUserArgs} args Arguments for creating a user
      * @return {Promise<PassageUser>} Passage User object
      */
-    public async create(args: CreateUserRequest): Promise<PassageUser> {
+    public async create(args: CreateUserArgs): Promise<PassageUser> {
         try {
             const response = await this.usersApi.createUser({
                 appId: this.config.appId,
@@ -164,11 +137,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not create user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not create user');
         }
     }
 
@@ -176,7 +145,6 @@ export class User extends PassageBase {
      * Delete a user using their user ID.
      *
      * @param {string} userId The Passage user ID used to delete the corresponding user.
-     * Either an E164 phone number or email address.
      * @return {Promise<boolean>}
      */
     public async delete(userId: string): Promise<boolean> {
@@ -187,11 +155,7 @@ export class User extends PassageBase {
             });
             return true;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not delete user');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not delete user');
         }
     }
 
@@ -210,11 +174,7 @@ export class User extends PassageBase {
 
             return response.devices;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, "Could not fetch user's devices:");
-            }
-
-            throw err;
+            throw await this.parseError(err, "Could not fetch user's devices:");
         }
     }
 
@@ -235,11 +195,7 @@ export class User extends PassageBase {
 
             return true;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, "Could not delete user's device:");
-            }
-
-            throw err;
+            throw await this.parseError(err, "Could not delete user's device:");
         }
     }
 
@@ -259,10 +215,7 @@ export class User extends PassageBase {
             });
             return true;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, "Could not revoke user's refresh tokens:");
-            }
-            throw err;
+            throw await this.parseError(err, "Could not revoke user's refresh tokens:");
         }
     }
 
