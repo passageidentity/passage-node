@@ -8,19 +8,20 @@ import {
 } from 'jose';
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import { PassageError } from '../PassageError';
-import { CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from '../../generated';
+import { MagicLink, MagicLinksApi } from '../../generated';
+import { CreateMagicLinkArgs } from './types';
 
 /**
  * Auth class that provides methods for validating JWTs and creating Magic Links.
  */
 export class Auth extends PassageBase {
-    private jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
+    private readonly jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
 
     /**
      * Auth class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    constructor(protected config: PassageInstanceConfig) {
+    public constructor(protected config: PassageInstanceConfig) {
         super(config);
         this.jwks = createRemoteJWKSet(
             new URL(`https://auth.passage.id/v1/apps/${this.config.appId}/.well-known/jwks.json`),
@@ -40,7 +41,7 @@ export class Auth extends PassageBase {
         try {
             const { kid } = decodeProtectedHeader(jwt);
             if (!kid) {
-                throw new PassageError('Could not find valid cookie for authentication.');
+                throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
             }
 
             const {
@@ -48,44 +49,40 @@ export class Auth extends PassageBase {
             } = await jwtVerify(jwt, this.jwks);
 
             if (!userId) {
-                throw new PassageError('Could not validate auth token.');
+                throw new PassageError('Could not validate auth token. You must catch this error.');
             }
             if (Array.isArray(aud)) {
                 if (!aud.includes(this.config.appId)) {
-                    throw new Error('Incorrect app ID claim in token.');
+                    throw new Error('Incorrect app ID claim in token. You must catch this error.');
                 }
             }
             return userId;
         } catch (e) {
             if (e instanceof Error) {
-                throw new PassageError(`Could not verify token: ${e.toString()}.`);
+                throw new PassageError(`Could not verify token: ${e.toString()}. You must catch this error.`);
             }
 
-            throw new PassageError(`Could not verify token.`);
+            throw new PassageError(`Could not verify token. You must catch this error.`);
         }
     }
 
     /**
      * Create a Magic Link for your app.
      *
-     * @param {MagicLinkRequest} magicLinkReq options for creating a MagicLink.
+     * @param {CreateMagicLinkArgs} args options for creating a MagicLink.
      * @return {Promise<MagicLink>} Passage MagicLink object
      */
-    public async createMagicLink(magicLinkReq: CreateMagicLinkRequest): Promise<MagicLink> {
+    public async createMagicLink(args: CreateMagicLinkArgs): Promise<MagicLink> {
         try {
             const magicLinksApi = new MagicLinksApi(this.config.apiConfiguration);
             const response = await magicLinksApi.createMagicLink({
                 appId: this.config.appId,
-                createMagicLinkRequest: magicLinkReq,
+                createMagicLinkRequest: args,
             });
 
             return response.magic_link;
         } catch (err) {
-            if (err instanceof ResponseError) {
-                throw await PassageError.fromResponseError(err, 'Could not create a magic link for this app');
-            }
-
-            throw err;
+            throw await this.parseError(err, 'Could not create a magic link for this app');
         }
     }
 }
