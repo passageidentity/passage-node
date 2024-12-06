@@ -62,7 +62,7 @@ describe('User class', () => {
         usersApiMock.listPaginatedUsers.mockResolvedValue({ users: [] } as unknown as ListPaginatedUsersResponse);
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(PassageError);
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(
-            'Could not find user with that identifier.',
+            'User not found.',
         );
     });
 });
