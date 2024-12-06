@@ -25,6 +25,17 @@ export const UserStatus = {
 export type UserStatus = typeof UserStatus[keyof typeof UserStatus];
 
 
+export function instanceOfUserStatus(value: any): boolean {
+    for (const key in UserStatus) {
+        if (Object.prototype.hasOwnProperty.call(UserStatus, key)) {
+            if (UserStatus[key as keyof typeof UserStatus] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function UserStatusFromJSON(json: any): UserStatus {
     return UserStatusFromJSONTyped(json, false);
 }
@@ -35,5 +46,9 @@ export function UserStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean)
 
 export function UserStatusToJSON(value?: UserStatus | null): any {
     return value as any;
+}
+
+export function UserStatusToJSONTyped(value: any, ignoreDiscriminator: boolean): UserStatus {
+    return value as UserStatus;
 }
 

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -48,14 +48,12 @@ export interface GoogleUserSocialConnection {
 /**
  * Check if a given object implements the GoogleUserSocialConnection interface.
  */
-export function instanceOfGoogleUserSocialConnection(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "provider_id" in value;
-    isInstance = isInstance && "created_at" in value;
-    isInstance = isInstance && "last_login_at" in value;
-    isInstance = isInstance && "provider_identifier" in value;
-
-    return isInstance;
+export function instanceOfGoogleUserSocialConnection(value: object): value is GoogleUserSocialConnection {
+    if (!('provider_id' in value) || value['provider_id'] === undefined) return false;
+    if (!('created_at' in value) || value['created_at'] === undefined) return false;
+    if (!('last_login_at' in value) || value['last_login_at'] === undefined) return false;
+    if (!('provider_identifier' in value) || value['provider_identifier'] === undefined) return false;
+    return true;
 }
 
 export function GoogleUserSocialConnectionFromJSON(json: any): GoogleUserSocialConnection {
@@ -63,7 +61,7 @@ export function GoogleUserSocialConnectionFromJSON(json: any): GoogleUserSocialC
 }
 
 export function GoogleUserSocialConnectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): GoogleUserSocialConnection {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -75,19 +73,21 @@ export function GoogleUserSocialConnectionFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function GoogleUserSocialConnectionToJSON(value?: GoogleUserSocialConnection | null): any {
-    if (value === undefined) {
-        return undefined;
+export function GoogleUserSocialConnectionToJSON(json: any): GoogleUserSocialConnection {
+    return GoogleUserSocialConnectionToJSONTyped(json, false);
+}
+
+export function GoogleUserSocialConnectionToJSONTyped(value?: GoogleUserSocialConnection | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'provider_id': value.provider_id,
-        'created_at': (value.created_at.toISOString()),
-        'last_login_at': (value.last_login_at.toISOString()),
-        'provider_identifier': value.provider_identifier,
+        'provider_id': value['provider_id'],
+        'created_at': ((value['created_at']).toISOString()),
+        'last_login_at': ((value['last_login_at']).toISOString()),
+        'provider_identifier': value['provider_identifier'],
     };
 }
 

@@ -19,6 +19,7 @@
  * * `m` - minutes
  * * `h` - hours
  * * `d` - days
+ * 
  * @export
  */
 export const TtlDisplayUnit = {
@@ -30,6 +31,17 @@ export const TtlDisplayUnit = {
 export type TtlDisplayUnit = typeof TtlDisplayUnit[keyof typeof TtlDisplayUnit];
 
 
+export function instanceOfTtlDisplayUnit(value: any): boolean {
+    for (const key in TtlDisplayUnit) {
+        if (Object.prototype.hasOwnProperty.call(TtlDisplayUnit, key)) {
+            if (TtlDisplayUnit[key as keyof typeof TtlDisplayUnit] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function TtlDisplayUnitFromJSON(json: any): TtlDisplayUnit {
     return TtlDisplayUnitFromJSONTyped(json, false);
 }
@@ -40,5 +52,9 @@ export function TtlDisplayUnitFromJSONTyped(json: any, ignoreDiscriminator: bool
 
 export function TtlDisplayUnitToJSON(value?: TtlDisplayUnit | null): any {
     return value as any;
+}
+
+export function TtlDisplayUnitToJSONTyped(value: any, ignoreDiscriminator: boolean): TtlDisplayUnit {
+    return value as TtlDisplayUnit;
 }
 

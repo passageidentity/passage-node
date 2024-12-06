@@ -12,24 +12,27 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { AppleUserSocialConnection } from './AppleUserSocialConnection';
-import {
-    AppleUserSocialConnectionFromJSON,
-    AppleUserSocialConnectionFromJSONTyped,
-    AppleUserSocialConnectionToJSON,
-} from './AppleUserSocialConnection';
+import { mapValues } from '../runtime';
 import type { GithubUserSocialConnection } from './GithubUserSocialConnection';
 import {
     GithubUserSocialConnectionFromJSON,
     GithubUserSocialConnectionFromJSONTyped,
     GithubUserSocialConnectionToJSON,
+    GithubUserSocialConnectionToJSONTyped,
 } from './GithubUserSocialConnection';
+import type { AppleUserSocialConnection } from './AppleUserSocialConnection';
+import {
+    AppleUserSocialConnectionFromJSON,
+    AppleUserSocialConnectionFromJSONTyped,
+    AppleUserSocialConnectionToJSON,
+    AppleUserSocialConnectionToJSONTyped,
+} from './AppleUserSocialConnection';
 import type { GoogleUserSocialConnection } from './GoogleUserSocialConnection';
 import {
     GoogleUserSocialConnectionFromJSON,
     GoogleUserSocialConnectionFromJSONTyped,
     GoogleUserSocialConnectionToJSON,
+    GoogleUserSocialConnectionToJSONTyped,
 } from './GoogleUserSocialConnection';
 
 /**
@@ -61,10 +64,8 @@ export interface UserSocialConnections {
 /**
  * Check if a given object implements the UserSocialConnections interface.
  */
-export function instanceOfUserSocialConnections(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfUserSocialConnections(value: object): value is UserSocialConnections {
+    return true;
 }
 
 export function UserSocialConnectionsFromJSON(json: any): UserSocialConnections {
@@ -72,29 +73,31 @@ export function UserSocialConnectionsFromJSON(json: any): UserSocialConnections 
 }
 
 export function UserSocialConnectionsFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserSocialConnections {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'apple': !exists(json, 'apple') ? undefined : AppleUserSocialConnectionFromJSON(json['apple']),
-        'github': !exists(json, 'github') ? undefined : GithubUserSocialConnectionFromJSON(json['github']),
-        'google': !exists(json, 'google') ? undefined : GoogleUserSocialConnectionFromJSON(json['google']),
+        'apple': json['apple'] == null ? undefined : AppleUserSocialConnectionFromJSON(json['apple']),
+        'github': json['github'] == null ? undefined : GithubUserSocialConnectionFromJSON(json['github']),
+        'google': json['google'] == null ? undefined : GoogleUserSocialConnectionFromJSON(json['google']),
     };
 }
 
-export function UserSocialConnectionsToJSON(value?: UserSocialConnections | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserSocialConnectionsToJSON(json: any): UserSocialConnections {
+    return UserSocialConnectionsToJSONTyped(json, false);
+}
+
+export function UserSocialConnectionsToJSONTyped(value?: UserSocialConnections | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'apple': AppleUserSocialConnectionToJSON(value.apple),
-        'github': GithubUserSocialConnectionToJSON(value.github),
-        'google': GoogleUserSocialConnectionToJSON(value.google),
+        'apple': AppleUserSocialConnectionToJSON(value['apple']),
+        'github': GithubUserSocialConnectionToJSON(value['github']),
+        'google': GoogleUserSocialConnectionToJSON(value['google']),
     };
 }
 

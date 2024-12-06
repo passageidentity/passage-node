@@ -25,6 +25,17 @@ export const WebAuthnType = {
 export type WebAuthnType = typeof WebAuthnType[keyof typeof WebAuthnType];
 
 
+export function instanceOfWebAuthnType(value: any): boolean {
+    for (const key in WebAuthnType) {
+        if (Object.prototype.hasOwnProperty.call(WebAuthnType, key)) {
+            if (WebAuthnType[key as keyof typeof WebAuthnType] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function WebAuthnTypeFromJSON(json: any): WebAuthnType {
     return WebAuthnTypeFromJSONTyped(json, false);
 }
@@ -35,5 +46,9 @@ export function WebAuthnTypeFromJSONTyped(json: any, ignoreDiscriminator: boolea
 
 export function WebAuthnTypeToJSON(value?: WebAuthnType | null): any {
     return value as any;
+}
+
+export function WebAuthnTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): WebAuthnType {
+    return value as WebAuthnType;
 }
 

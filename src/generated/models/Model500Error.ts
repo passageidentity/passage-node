@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -46,12 +46,10 @@ export type Model500ErrorCodeEnum = typeof Model500ErrorCodeEnum[keyof typeof Mo
 /**
  * Check if a given object implements the Model500Error interface.
  */
-export function instanceOfModel500Error(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "code" in value;
-    isInstance = isInstance && "error" in value;
-
-    return isInstance;
+export function instanceOfModel500Error(value: object): value is Model500Error {
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('error' in value) || value['error'] === undefined) return false;
+    return true;
 }
 
 export function Model500ErrorFromJSON(json: any): Model500Error {
@@ -59,7 +57,7 @@ export function Model500ErrorFromJSON(json: any): Model500Error {
 }
 
 export function Model500ErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): Model500Error {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -69,17 +67,19 @@ export function Model500ErrorFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function Model500ErrorToJSON(value?: Model500Error | null): any {
-    if (value === undefined) {
-        return undefined;
+export function Model500ErrorToJSON(json: any): Model500Error {
+    return Model500ErrorToJSONTyped(json, false);
+}
+
+export function Model500ErrorToJSONTyped(value?: Model500Error | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'code': value.code,
-        'error': value.error,
+        'code': value['code'],
+        'error': value['error'],
     };
 }
 

@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -54,15 +54,13 @@ export interface LayoutConfig {
 /**
  * Check if a given object implements the LayoutConfig interface.
  */
-export function instanceOfLayoutConfig(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "h" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "w" in value;
-    isInstance = isInstance && "x" in value;
-    isInstance = isInstance && "y" in value;
-
-    return isInstance;
+export function instanceOfLayoutConfig(value: object): value is LayoutConfig {
+    if (!('h' in value) || value['h'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('w' in value) || value['w'] === undefined) return false;
+    if (!('x' in value) || value['x'] === undefined) return false;
+    if (!('y' in value) || value['y'] === undefined) return false;
+    return true;
 }
 
 export function LayoutConfigFromJSON(json: any): LayoutConfig {
@@ -70,7 +68,7 @@ export function LayoutConfigFromJSON(json: any): LayoutConfig {
 }
 
 export function LayoutConfigFromJSONTyped(json: any, ignoreDiscriminator: boolean): LayoutConfig {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -83,20 +81,22 @@ export function LayoutConfigFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function LayoutConfigToJSON(value?: LayoutConfig | null): any {
-    if (value === undefined) {
-        return undefined;
+export function LayoutConfigToJSON(json: any): LayoutConfig {
+    return LayoutConfigToJSONTyped(json, false);
+}
+
+export function LayoutConfigToJSONTyped(value?: LayoutConfig | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'h': value.h,
-        'id': value.id,
-        'w': value.w,
-        'x': value.x,
-        'y': value.y,
+        'h': value['h'],
+        'id': value['id'],
+        'w': value['w'],
+        'x': value['x'],
+        'y': value['y'],
     };
 }
 

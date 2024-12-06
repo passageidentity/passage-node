@@ -55,12 +55,18 @@ export class MagicLinksApi extends runtime.BaseAPI {
      * Create Embeddable Magic Link
      */
     async createMagicLinkRaw(requestParameters: CreateMagicLinkOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MagicLinkResponse>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling createMagicLink.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling createMagicLink().'
+            );
         }
 
-        if (requestParameters.createMagicLinkRequest === null || requestParameters.createMagicLinkRequest === undefined) {
-            throw new runtime.RequiredError('createMagicLinkRequest','Required parameter requestParameters.createMagicLinkRequest was null or undefined when calling createMagicLink.');
+        if (requestParameters['createMagicLinkRequest'] == null) {
+            throw new runtime.RequiredError(
+                'createMagicLinkRequest',
+                'Required parameter "createMagicLinkRequest" was null or undefined when calling createMagicLink().'
+            );
         }
 
         const queryParameters: any = {};
@@ -78,11 +84,11 @@ export class MagicLinksApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/magic-links`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))),
+            path: `/apps/{app_id}/magic-links`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateMagicLinkRequestToJSON(requestParameters.createMagicLinkRequest),
+            body: CreateMagicLinkRequestToJSON(requestParameters['createMagicLinkRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MagicLinkResponseFromJSON(jsonValue));

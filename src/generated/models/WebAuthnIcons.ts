@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * Contains the light and dark SVG icons that represent the brand of those devices
  * Values can be null or base64 encoded SVG. Example of SVG output: 
@@ -38,12 +38,10 @@ export interface WebAuthnIcons {
 /**
  * Check if a given object implements the WebAuthnIcons interface.
  */
-export function instanceOfWebAuthnIcons(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "light" in value;
-    isInstance = isInstance && "dark" in value;
-
-    return isInstance;
+export function instanceOfWebAuthnIcons(value: object): value is WebAuthnIcons {
+    if (!('light' in value) || value['light'] === undefined) return false;
+    if (!('dark' in value) || value['dark'] === undefined) return false;
+    return true;
 }
 
 export function WebAuthnIconsFromJSON(json: any): WebAuthnIcons {
@@ -51,7 +49,7 @@ export function WebAuthnIconsFromJSON(json: any): WebAuthnIcons {
 }
 
 export function WebAuthnIconsFromJSONTyped(json: any, ignoreDiscriminator: boolean): WebAuthnIcons {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -61,17 +59,19 @@ export function WebAuthnIconsFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function WebAuthnIconsToJSON(value?: WebAuthnIcons | null): any {
-    if (value === undefined) {
-        return undefined;
+export function WebAuthnIconsToJSON(json: any): WebAuthnIcons {
+    return WebAuthnIconsToJSONTyped(json, false);
+}
+
+export function WebAuthnIconsToJSONTyped(value?: WebAuthnIcons | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'light': value.light,
-        'dark': value.dark,
+        'light': value['light'],
+        'dark': value['dark'],
     };
 }
 

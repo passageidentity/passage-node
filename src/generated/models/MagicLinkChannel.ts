@@ -24,6 +24,17 @@ export const MagicLinkChannel = {
 export type MagicLinkChannel = typeof MagicLinkChannel[keyof typeof MagicLinkChannel];
 
 
+export function instanceOfMagicLinkChannel(value: any): boolean {
+    for (const key in MagicLinkChannel) {
+        if (Object.prototype.hasOwnProperty.call(MagicLinkChannel, key)) {
+            if (MagicLinkChannel[key as keyof typeof MagicLinkChannel] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function MagicLinkChannelFromJSON(json: any): MagicLinkChannel {
     return MagicLinkChannelFromJSONTyped(json, false);
 }
@@ -34,5 +45,9 @@ export function MagicLinkChannelFromJSONTyped(json: any, ignoreDiscriminator: bo
 
 export function MagicLinkChannelToJSON(value?: MagicLinkChannel | null): any {
     return value as any;
+}
+
+export function MagicLinkChannelToJSONTyped(value: any, ignoreDiscriminator: boolean): MagicLinkChannel {
+    return value as MagicLinkChannel;
 }
 

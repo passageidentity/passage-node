@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * the nonce to exchange for an authentication token
  * @export
@@ -30,11 +30,9 @@ export interface Nonce {
 /**
  * Check if a given object implements the Nonce interface.
  */
-export function instanceOfNonce(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "nonce" in value;
-
-    return isInstance;
+export function instanceOfNonce(value: object): value is Nonce {
+    if (!('nonce' in value) || value['nonce'] === undefined) return false;
+    return true;
 }
 
 export function NonceFromJSON(json: any): Nonce {
@@ -42,7 +40,7 @@ export function NonceFromJSON(json: any): Nonce {
 }
 
 export function NonceFromJSONTyped(json: any, ignoreDiscriminator: boolean): Nonce {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -51,16 +49,18 @@ export function NonceFromJSONTyped(json: any, ignoreDiscriminator: boolean): Non
     };
 }
 
-export function NonceToJSON(value?: Nonce | null): any {
-    if (value === undefined) {
-        return undefined;
+export function NonceToJSON(json: any): Nonce {
+    return NonceToJSONTyped(json, false);
+}
+
+export function NonceToJSONTyped(value?: Nonce | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'nonce': value.nonce,
+        'nonce': value['nonce'],
     };
 }
 

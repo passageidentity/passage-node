@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { FontFamily } from './FontFamily';
 import {
     FontFamilyFromJSON,
     FontFamilyFromJSONTyped,
     FontFamilyToJSON,
+    FontFamilyToJSONTyped,
 } from './FontFamily';
 
 /**
@@ -29,6 +30,7 @@ export interface ElementCustomization {
     /**
      * Container background color in hex.
      * Default is `#ffffff` in light mode & `#383838` in dark mode.
+     * 
      * @type {string}
      * @memberof ElementCustomization
      */
@@ -42,6 +44,7 @@ export interface ElementCustomization {
     /**
      * Input box background color in hex.
      * Default is `#ffffff` in light mode & `#4b4b4b` in dark mode.
+     * 
      * @type {string}
      * @memberof ElementCustomization
      */
@@ -67,6 +70,7 @@ export interface ElementCustomization {
     /**
      * Header text color in hex.
      * Default is `#222222` in light mode & `#f3f3f3` in dark mode.
+     * 
      * @type {string}
      * @memberof ElementCustomization
      */
@@ -74,6 +78,7 @@ export interface ElementCustomization {
     /**
      * Body text color in hex.
      * Default is `#222222` in light mode & `#f3f3f3` in dark mode.
+     * 
      * @type {string}
      * @memberof ElementCustomization
      */
@@ -152,13 +157,13 @@ export interface ElementCustomization {
     passage_secondary_button_border_width?: number;
 }
 
+
+
 /**
  * Check if a given object implements the ElementCustomization interface.
  */
-export function instanceOfElementCustomization(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfElementCustomization(value: object): value is ElementCustomization {
+    return true;
 }
 
 export function ElementCustomizationFromJSON(json: any): ElementCustomization {
@@ -166,63 +171,65 @@ export function ElementCustomizationFromJSON(json: any): ElementCustomization {
 }
 
 export function ElementCustomizationFromJSONTyped(json: any, ignoreDiscriminator: boolean): ElementCustomization {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'passage_container_background_color': !exists(json, 'passage_container_background_color') ? undefined : json['passage_container_background_color'],
-        'passage_container_max_width': !exists(json, 'passage_container_max_width') ? undefined : json['passage_container_max_width'],
-        'passage_input_box_background_color': !exists(json, 'passage_input_box_background_color') ? undefined : json['passage_input_box_background_color'],
-        'passage_input_box_border_radius': !exists(json, 'passage_input_box_border_radius') ? undefined : json['passage_input_box_border_radius'],
-        'passage_header_font_family': !exists(json, 'passage_header_font_family') ? undefined : FontFamilyFromJSON(json['passage_header_font_family']),
-        'passage_body_font_family': !exists(json, 'passage_body_font_family') ? undefined : FontFamilyFromJSON(json['passage_body_font_family']),
-        'passage_header_text_color': !exists(json, 'passage_header_text_color') ? undefined : json['passage_header_text_color'],
-        'passage_body_text_color': !exists(json, 'passage_body_text_color') ? undefined : json['passage_body_text_color'],
-        'passage_primary_button_background_color': !exists(json, 'passage_primary_button_background_color') ? undefined : json['passage_primary_button_background_color'],
-        'passage_primary_button_text_color': !exists(json, 'passage_primary_button_text_color') ? undefined : json['passage_primary_button_text_color'],
-        'passage_primary_button_hover_color': !exists(json, 'passage_primary_button_hover_color') ? undefined : json['passage_primary_button_hover_color'],
-        'passage_primary_button_border_radius': !exists(json, 'passage_primary_button_border_radius') ? undefined : json['passage_primary_button_border_radius'],
-        'passage_primary_button_border_color': !exists(json, 'passage_primary_button_border_color') ? undefined : json['passage_primary_button_border_color'],
-        'passage_primary_button_border_width': !exists(json, 'passage_primary_button_border_width') ? undefined : json['passage_primary_button_border_width'],
-        'passage_secondary_button_background_color': !exists(json, 'passage_secondary_button_background_color') ? undefined : json['passage_secondary_button_background_color'],
-        'passage_secondary_button_text_color': !exists(json, 'passage_secondary_button_text_color') ? undefined : json['passage_secondary_button_text_color'],
-        'passage_secondary_button_hover_color': !exists(json, 'passage_secondary_button_hover_color') ? undefined : json['passage_secondary_button_hover_color'],
-        'passage_secondary_button_border_radius': !exists(json, 'passage_secondary_button_border_radius') ? undefined : json['passage_secondary_button_border_radius'],
-        'passage_secondary_button_border_color': !exists(json, 'passage_secondary_button_border_color') ? undefined : json['passage_secondary_button_border_color'],
-        'passage_secondary_button_border_width': !exists(json, 'passage_secondary_button_border_width') ? undefined : json['passage_secondary_button_border_width'],
+        'passage_container_background_color': json['passage_container_background_color'] == null ? undefined : json['passage_container_background_color'],
+        'passage_container_max_width': json['passage_container_max_width'] == null ? undefined : json['passage_container_max_width'],
+        'passage_input_box_background_color': json['passage_input_box_background_color'] == null ? undefined : json['passage_input_box_background_color'],
+        'passage_input_box_border_radius': json['passage_input_box_border_radius'] == null ? undefined : json['passage_input_box_border_radius'],
+        'passage_header_font_family': json['passage_header_font_family'] == null ? undefined : FontFamilyFromJSON(json['passage_header_font_family']),
+        'passage_body_font_family': json['passage_body_font_family'] == null ? undefined : FontFamilyFromJSON(json['passage_body_font_family']),
+        'passage_header_text_color': json['passage_header_text_color'] == null ? undefined : json['passage_header_text_color'],
+        'passage_body_text_color': json['passage_body_text_color'] == null ? undefined : json['passage_body_text_color'],
+        'passage_primary_button_background_color': json['passage_primary_button_background_color'] == null ? undefined : json['passage_primary_button_background_color'],
+        'passage_primary_button_text_color': json['passage_primary_button_text_color'] == null ? undefined : json['passage_primary_button_text_color'],
+        'passage_primary_button_hover_color': json['passage_primary_button_hover_color'] == null ? undefined : json['passage_primary_button_hover_color'],
+        'passage_primary_button_border_radius': json['passage_primary_button_border_radius'] == null ? undefined : json['passage_primary_button_border_radius'],
+        'passage_primary_button_border_color': json['passage_primary_button_border_color'] == null ? undefined : json['passage_primary_button_border_color'],
+        'passage_primary_button_border_width': json['passage_primary_button_border_width'] == null ? undefined : json['passage_primary_button_border_width'],
+        'passage_secondary_button_background_color': json['passage_secondary_button_background_color'] == null ? undefined : json['passage_secondary_button_background_color'],
+        'passage_secondary_button_text_color': json['passage_secondary_button_text_color'] == null ? undefined : json['passage_secondary_button_text_color'],
+        'passage_secondary_button_hover_color': json['passage_secondary_button_hover_color'] == null ? undefined : json['passage_secondary_button_hover_color'],
+        'passage_secondary_button_border_radius': json['passage_secondary_button_border_radius'] == null ? undefined : json['passage_secondary_button_border_radius'],
+        'passage_secondary_button_border_color': json['passage_secondary_button_border_color'] == null ? undefined : json['passage_secondary_button_border_color'],
+        'passage_secondary_button_border_width': json['passage_secondary_button_border_width'] == null ? undefined : json['passage_secondary_button_border_width'],
     };
 }
 
-export function ElementCustomizationToJSON(value?: ElementCustomization | null): any {
-    if (value === undefined) {
-        return undefined;
+export function ElementCustomizationToJSON(json: any): ElementCustomization {
+    return ElementCustomizationToJSONTyped(json, false);
+}
+
+export function ElementCustomizationToJSONTyped(value?: ElementCustomization | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'passage_container_background_color': value.passage_container_background_color,
-        'passage_container_max_width': value.passage_container_max_width,
-        'passage_input_box_background_color': value.passage_input_box_background_color,
-        'passage_input_box_border_radius': value.passage_input_box_border_radius,
-        'passage_header_font_family': FontFamilyToJSON(value.passage_header_font_family),
-        'passage_body_font_family': FontFamilyToJSON(value.passage_body_font_family),
-        'passage_header_text_color': value.passage_header_text_color,
-        'passage_body_text_color': value.passage_body_text_color,
-        'passage_primary_button_background_color': value.passage_primary_button_background_color,
-        'passage_primary_button_text_color': value.passage_primary_button_text_color,
-        'passage_primary_button_hover_color': value.passage_primary_button_hover_color,
-        'passage_primary_button_border_radius': value.passage_primary_button_border_radius,
-        'passage_primary_button_border_color': value.passage_primary_button_border_color,
-        'passage_primary_button_border_width': value.passage_primary_button_border_width,
-        'passage_secondary_button_background_color': value.passage_secondary_button_background_color,
-        'passage_secondary_button_text_color': value.passage_secondary_button_text_color,
-        'passage_secondary_button_hover_color': value.passage_secondary_button_hover_color,
-        'passage_secondary_button_border_radius': value.passage_secondary_button_border_radius,
-        'passage_secondary_button_border_color': value.passage_secondary_button_border_color,
-        'passage_secondary_button_border_width': value.passage_secondary_button_border_width,
+        'passage_container_background_color': value['passage_container_background_color'],
+        'passage_container_max_width': value['passage_container_max_width'],
+        'passage_input_box_background_color': value['passage_input_box_background_color'],
+        'passage_input_box_border_radius': value['passage_input_box_border_radius'],
+        'passage_header_font_family': FontFamilyToJSON(value['passage_header_font_family']),
+        'passage_body_font_family': FontFamilyToJSON(value['passage_body_font_family']),
+        'passage_header_text_color': value['passage_header_text_color'],
+        'passage_body_text_color': value['passage_body_text_color'],
+        'passage_primary_button_background_color': value['passage_primary_button_background_color'],
+        'passage_primary_button_text_color': value['passage_primary_button_text_color'],
+        'passage_primary_button_hover_color': value['passage_primary_button_hover_color'],
+        'passage_primary_button_border_radius': value['passage_primary_button_border_radius'],
+        'passage_primary_button_border_color': value['passage_primary_button_border_color'],
+        'passage_primary_button_border_width': value['passage_primary_button_border_width'],
+        'passage_secondary_button_background_color': value['passage_secondary_button_background_color'],
+        'passage_secondary_button_text_color': value['passage_secondary_button_text_color'],
+        'passage_secondary_button_hover_color': value['passage_secondary_button_hover_color'],
+        'passage_secondary_button_border_radius': value['passage_secondary_button_border_radius'],
+        'passage_secondary_button_border_color': value['passage_secondary_button_border_color'],
+        'passage_secondary_button_border_width': value['passage_secondary_button_border_width'],
     };
 }
 

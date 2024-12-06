@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { UserInfo } from './UserInfo';
 import {
     UserInfoFromJSON,
     UserInfoFromJSONTyped,
     UserInfoToJSON,
+    UserInfoToJSONTyped,
 } from './UserInfo';
 
 /**
@@ -37,11 +38,9 @@ export interface UserResponse {
 /**
  * Check if a given object implements the UserResponse interface.
  */
-export function instanceOfUserResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "user" in value;
-
-    return isInstance;
+export function instanceOfUserResponse(value: object): value is UserResponse {
+    if (!('user' in value) || value['user'] === undefined) return false;
+    return true;
 }
 
 export function UserResponseFromJSON(json: any): UserResponse {
@@ -49,7 +48,7 @@ export function UserResponseFromJSON(json: any): UserResponse {
 }
 
 export function UserResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +57,18 @@ export function UserResponseFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function UserResponseToJSON(value?: UserResponse | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserResponseToJSON(json: any): UserResponse {
+    return UserResponseToJSONTyped(json, false);
+}
+
+export function UserResponseToJSONTyped(value?: UserResponse | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'user': UserInfoToJSON(value.user),
+        'user': UserInfoToJSON(value['user']),
     };
 }
 

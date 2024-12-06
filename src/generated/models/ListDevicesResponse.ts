@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { WebAuthnDevices } from './WebAuthnDevices';
 import {
     WebAuthnDevicesFromJSON,
     WebAuthnDevicesFromJSONTyped,
     WebAuthnDevicesToJSON,
+    WebAuthnDevicesToJSONTyped,
 } from './WebAuthnDevices';
 
 /**
@@ -37,11 +38,9 @@ export interface ListDevicesResponse {
 /**
  * Check if a given object implements the ListDevicesResponse interface.
  */
-export function instanceOfListDevicesResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "devices" in value;
-
-    return isInstance;
+export function instanceOfListDevicesResponse(value: object): value is ListDevicesResponse {
+    if (!('devices' in value) || value['devices'] === undefined) return false;
+    return true;
 }
 
 export function ListDevicesResponseFromJSON(json: any): ListDevicesResponse {
@@ -49,7 +48,7 @@ export function ListDevicesResponseFromJSON(json: any): ListDevicesResponse {
 }
 
 export function ListDevicesResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ListDevicesResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +57,18 @@ export function ListDevicesResponseFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function ListDevicesResponseToJSON(value?: ListDevicesResponse | null): any {
-    if (value === undefined) {
-        return undefined;
+export function ListDevicesResponseToJSON(json: any): ListDevicesResponse {
+    return ListDevicesResponseToJSONTyped(json, false);
+}
+
+export function ListDevicesResponseToJSONTyped(value?: ListDevicesResponse | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'devices': ((value.devices as Array<any>).map(WebAuthnDevicesToJSON)),
+        'devices': ((value['devices'] as Array<any>).map(WebAuthnDevicesToJSON)),
     };
 }
 

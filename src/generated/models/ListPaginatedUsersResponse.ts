@@ -12,19 +12,21 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { ListPaginatedUsersItem } from './ListPaginatedUsersItem';
-import {
-    ListPaginatedUsersItemFromJSON,
-    ListPaginatedUsersItemFromJSONTyped,
-    ListPaginatedUsersItemToJSON,
-} from './ListPaginatedUsersItem';
+import { mapValues } from '../runtime';
 import type { PaginatedLinks } from './PaginatedLinks';
 import {
     PaginatedLinksFromJSON,
     PaginatedLinksFromJSONTyped,
     PaginatedLinksToJSON,
+    PaginatedLinksToJSONTyped,
 } from './PaginatedLinks';
+import type { ListPaginatedUsersItem } from './ListPaginatedUsersItem';
+import {
+    ListPaginatedUsersItemFromJSON,
+    ListPaginatedUsersItemFromJSONTyped,
+    ListPaginatedUsersItemToJSON,
+    ListPaginatedUsersItemToJSONTyped,
+} from './ListPaginatedUsersItem';
 
 /**
  * 
@@ -73,16 +75,14 @@ export interface ListPaginatedUsersResponse {
 /**
  * Check if a given object implements the ListPaginatedUsersResponse interface.
  */
-export function instanceOfListPaginatedUsersResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "_links" in value;
-    isInstance = isInstance && "created_before" in value;
-    isInstance = isInstance && "limit" in value;
-    isInstance = isInstance && "page" in value;
-    isInstance = isInstance && "total_users" in value;
-    isInstance = isInstance && "users" in value;
-
-    return isInstance;
+export function instanceOfListPaginatedUsersResponse(value: object): value is ListPaginatedUsersResponse {
+    if (!('_links' in value) || value['_links'] === undefined) return false;
+    if (!('created_before' in value) || value['created_before'] === undefined) return false;
+    if (!('limit' in value) || value['limit'] === undefined) return false;
+    if (!('page' in value) || value['page'] === undefined) return false;
+    if (!('total_users' in value) || value['total_users'] === undefined) return false;
+    if (!('users' in value) || value['users'] === undefined) return false;
+    return true;
 }
 
 export function ListPaginatedUsersResponseFromJSON(json: any): ListPaginatedUsersResponse {
@@ -90,7 +90,7 @@ export function ListPaginatedUsersResponseFromJSON(json: any): ListPaginatedUser
 }
 
 export function ListPaginatedUsersResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ListPaginatedUsersResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -104,21 +104,23 @@ export function ListPaginatedUsersResponseFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function ListPaginatedUsersResponseToJSON(value?: ListPaginatedUsersResponse | null): any {
-    if (value === undefined) {
-        return undefined;
+export function ListPaginatedUsersResponseToJSON(json: any): ListPaginatedUsersResponse {
+    return ListPaginatedUsersResponseToJSONTyped(json, false);
+}
+
+export function ListPaginatedUsersResponseToJSONTyped(value?: ListPaginatedUsersResponse | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        '_links': PaginatedLinksToJSON(value._links),
-        'created_before': value.created_before,
-        'limit': value.limit,
-        'page': value.page,
-        'total_users': value.total_users,
-        'users': ((value.users as Array<any>).map(ListPaginatedUsersItemToJSON)),
+        '_links': PaginatedLinksToJSON(value['_links']),
+        'created_before': value['created_before'],
+        'limit': value['limit'],
+        'page': value['page'],
+        'total_users': value['total_users'],
+        'users': ((value['users'] as Array<any>).map(ListPaginatedUsersItemToJSON)),
     };
 }
 

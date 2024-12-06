@@ -24,6 +24,17 @@ export const MagicLinkType = {
 export type MagicLinkType = typeof MagicLinkType[keyof typeof MagicLinkType];
 
 
+export function instanceOfMagicLinkType(value: any): boolean {
+    for (const key in MagicLinkType) {
+        if (Object.prototype.hasOwnProperty.call(MagicLinkType, key)) {
+            if (MagicLinkType[key as keyof typeof MagicLinkType] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function MagicLinkTypeFromJSON(json: any): MagicLinkType {
     return MagicLinkTypeFromJSONTyped(json, false);
 }
@@ -34,5 +45,9 @@ export function MagicLinkTypeFromJSONTyped(json: any, ignoreDiscriminator: boole
 
 export function MagicLinkTypeToJSON(value?: MagicLinkType | null): any {
     return value as any;
+}
+
+export function MagicLinkTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): MagicLinkType {
+    return value as MagicLinkType;
 }
 

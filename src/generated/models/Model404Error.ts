@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -55,7 +55,8 @@ export const Model404ErrorCodeEnum = {
     SmsProviderNotFound: 'sms_provider_not_found',
     SmsTemplateNotFound: 'sms_template_not_found',
     SocialConnectionNotFound: 'social_connection_not_found',
-    UserNotFound: 'user_not_found'
+    UserNotFound: 'user_not_found',
+    NativeClientNotFound: 'native_client_not_found'
 } as const;
 export type Model404ErrorCodeEnum = typeof Model404ErrorCodeEnum[keyof typeof Model404ErrorCodeEnum];
 
@@ -63,12 +64,10 @@ export type Model404ErrorCodeEnum = typeof Model404ErrorCodeEnum[keyof typeof Mo
 /**
  * Check if a given object implements the Model404Error interface.
  */
-export function instanceOfModel404Error(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "code" in value;
-    isInstance = isInstance && "error" in value;
-
-    return isInstance;
+export function instanceOfModel404Error(value: object): value is Model404Error {
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('error' in value) || value['error'] === undefined) return false;
+    return true;
 }
 
 export function Model404ErrorFromJSON(json: any): Model404Error {
@@ -76,7 +75,7 @@ export function Model404ErrorFromJSON(json: any): Model404Error {
 }
 
 export function Model404ErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): Model404Error {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -86,17 +85,19 @@ export function Model404ErrorFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function Model404ErrorToJSON(value?: Model404Error | null): any {
-    if (value === undefined) {
-        return undefined;
+export function Model404ErrorToJSON(json: any): Model404Error {
+    return Model404ErrorToJSONTyped(json, false);
+}
+
+export function Model404ErrorToJSONTyped(value?: Model404Error | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'code': value.code,
-        'error': value.error,
+        'code': value['code'],
+        'error': value['error'],
     };
 }
 

@@ -12,18 +12,20 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { WebAuthnIcons } from './WebAuthnIcons';
 import {
     WebAuthnIconsFromJSON,
     WebAuthnIconsFromJSONTyped,
     WebAuthnIconsToJSON,
+    WebAuthnIconsToJSONTyped,
 } from './WebAuthnIcons';
 import type { WebAuthnType } from './WebAuthnType';
 import {
     WebAuthnTypeFromJSON,
     WebAuthnTypeFromJSONTyped,
     WebAuthnTypeToJSON,
+    WebAuthnTypeToJSONTyped,
 } from './WebAuthnType';
 
 /**
@@ -88,22 +90,22 @@ export interface WebAuthnDevices {
     icons: WebAuthnIcons;
 }
 
+
+
 /**
  * Check if a given object implements the WebAuthnDevices interface.
  */
-export function instanceOfWebAuthnDevices(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "created_at" in value;
-    isInstance = isInstance && "cred_id" in value;
-    isInstance = isInstance && "friendly_name" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "last_login_at" in value;
-    isInstance = isInstance && "type" in value;
-    isInstance = isInstance && "updated_at" in value;
-    isInstance = isInstance && "usage_count" in value;
-    isInstance = isInstance && "icons" in value;
-
-    return isInstance;
+export function instanceOfWebAuthnDevices(value: object): value is WebAuthnDevices {
+    if (!('created_at' in value) || value['created_at'] === undefined) return false;
+    if (!('cred_id' in value) || value['cred_id'] === undefined) return false;
+    if (!('friendly_name' in value) || value['friendly_name'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('last_login_at' in value) || value['last_login_at'] === undefined) return false;
+    if (!('type' in value) || value['type'] === undefined) return false;
+    if (!('updated_at' in value) || value['updated_at'] === undefined) return false;
+    if (!('usage_count' in value) || value['usage_count'] === undefined) return false;
+    if (!('icons' in value) || value['icons'] === undefined) return false;
+    return true;
 }
 
 export function WebAuthnDevicesFromJSON(json: any): WebAuthnDevices {
@@ -111,7 +113,7 @@ export function WebAuthnDevicesFromJSON(json: any): WebAuthnDevices {
 }
 
 export function WebAuthnDevicesFromJSONTyped(json: any, ignoreDiscriminator: boolean): WebAuthnDevices {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -128,24 +130,26 @@ export function WebAuthnDevicesFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function WebAuthnDevicesToJSON(value?: WebAuthnDevices | null): any {
-    if (value === undefined) {
-        return undefined;
+export function WebAuthnDevicesToJSON(json: any): WebAuthnDevices {
+    return WebAuthnDevicesToJSONTyped(json, false);
+}
+
+export function WebAuthnDevicesToJSONTyped(value?: WebAuthnDevices | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'created_at': (value.created_at.toISOString()),
-        'cred_id': value.cred_id,
-        'friendly_name': value.friendly_name,
-        'id': value.id,
-        'last_login_at': (value.last_login_at.toISOString()),
-        'type': WebAuthnTypeToJSON(value.type),
-        'updated_at': (value.updated_at.toISOString()),
-        'usage_count': value.usage_count,
-        'icons': WebAuthnIconsToJSON(value.icons),
+        'created_at': ((value['created_at']).toISOString()),
+        'cred_id': value['cred_id'],
+        'friendly_name': value['friendly_name'],
+        'id': value['id'],
+        'last_login_at': ((value['last_login_at']).toISOString()),
+        'type': WebAuthnTypeToJSON(value['type']),
+        'updated_at': ((value['updated_at']).toISOString()),
+        'usage_count': value['usage_count'],
+        'icons': WebAuthnIconsToJSON(value['icons']),
     };
 }
 

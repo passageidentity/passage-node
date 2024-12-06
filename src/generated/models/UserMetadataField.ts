@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { UserMetadataFieldType } from './UserMetadataFieldType';
 import {
     UserMetadataFieldTypeFromJSON,
     UserMetadataFieldTypeFromJSONTyped,
     UserMetadataFieldTypeToJSON,
+    UserMetadataFieldTypeToJSONTyped,
 } from './UserMetadataFieldType';
 
 /**
@@ -64,19 +65,19 @@ export interface UserMetadataField {
     type: UserMetadataFieldType;
 }
 
+
+
 /**
  * Check if a given object implements the UserMetadataField interface.
  */
-export function instanceOfUserMetadataField(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "field_name" in value;
-    isInstance = isInstance && "friendly_name" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "profile" in value;
-    isInstance = isInstance && "registration" in value;
-    isInstance = isInstance && "type" in value;
-
-    return isInstance;
+export function instanceOfUserMetadataField(value: object): value is UserMetadataField {
+    if (!('field_name' in value) || value['field_name'] === undefined) return false;
+    if (!('friendly_name' in value) || value['friendly_name'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('profile' in value) || value['profile'] === undefined) return false;
+    if (!('registration' in value) || value['registration'] === undefined) return false;
+    if (!('type' in value) || value['type'] === undefined) return false;
+    return true;
 }
 
 export function UserMetadataFieldFromJSON(json: any): UserMetadataField {
@@ -84,7 +85,7 @@ export function UserMetadataFieldFromJSON(json: any): UserMetadataField {
 }
 
 export function UserMetadataFieldFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserMetadataField {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -98,21 +99,23 @@ export function UserMetadataFieldFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function UserMetadataFieldToJSON(value?: UserMetadataField | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserMetadataFieldToJSON(json: any): UserMetadataField {
+    return UserMetadataFieldToJSONTyped(json, false);
+}
+
+export function UserMetadataFieldToJSONTyped(value?: UserMetadataField | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'field_name': value.field_name,
-        'friendly_name': value.friendly_name,
-        'id': value.id,
-        'profile': value.profile,
-        'registration': value.registration,
-        'type': UserMetadataFieldTypeToJSON(value.type),
+        'field_name': value['field_name'],
+        'friendly_name': value['friendly_name'],
+        'id': value['id'],
+        'profile': value['profile'],
+        'registration': value['registration'],
+        'type': UserMetadataFieldTypeToJSON(value['type']),
     };
 }
 

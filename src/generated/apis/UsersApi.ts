@@ -99,12 +99,18 @@ export class UsersApi extends runtime.BaseAPI {
      * Activate User
      */
     async activateUserRaw(requestParameters: ActivateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserResponse>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling activateUser.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling activateUser().'
+            );
         }
 
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling activateUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling activateUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -120,7 +126,7 @@ export class UsersApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/users/{user_id}/activate`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/apps/{app_id}/users/{user_id}/activate`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -143,12 +149,18 @@ export class UsersApi extends runtime.BaseAPI {
      * Create User
      */
     async createUserRaw(requestParameters: CreateUserOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserResponse>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling createUser.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling createUser().'
+            );
         }
 
-        if (requestParameters.createUserRequest === null || requestParameters.createUserRequest === undefined) {
-            throw new runtime.RequiredError('createUserRequest','Required parameter requestParameters.createUserRequest was null or undefined when calling createUser.');
+        if (requestParameters['createUserRequest'] == null) {
+            throw new runtime.RequiredError(
+                'createUserRequest',
+                'Required parameter "createUserRequest" was null or undefined when calling createUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -166,11 +178,11 @@ export class UsersApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/users`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))),
+            path: `/apps/{app_id}/users`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateUserRequestToJSON(requestParameters.createUserRequest),
+            body: CreateUserRequestToJSON(requestParameters['createUserRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserResponseFromJSON(jsonValue));
@@ -190,12 +202,18 @@ export class UsersApi extends runtime.BaseAPI {
      * Deactivate User
      */
     async deactivateUserRaw(requestParameters: DeactivateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserResponse>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling deactivateUser.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling deactivateUser().'
+            );
         }
 
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling deactivateUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling deactivateUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -211,7 +229,7 @@ export class UsersApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/users/{user_id}/deactivate`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/apps/{app_id}/users/{user_id}/deactivate`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
@@ -234,12 +252,18 @@ export class UsersApi extends runtime.BaseAPI {
      * Delete User
      */
     async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling deleteUser.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling deleteUser().'
+            );
         }
 
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling deleteUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling deleteUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -255,7 +279,7 @@ export class UsersApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/users/{user_id}`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/apps/{app_id}/users/{user_id}`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -277,12 +301,18 @@ export class UsersApi extends runtime.BaseAPI {
      * Get User
      */
     async getUserRaw(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserResponse>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling getUser.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling getUser().'
+            );
         }
 
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling getUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling getUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -298,7 +328,7 @@ export class UsersApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/users/{user_id}`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/apps/{app_id}/users/{user_id}`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -321,54 +351,57 @@ export class UsersApi extends runtime.BaseAPI {
      * List Users
      */
     async listPaginatedUsersRaw(requestParameters: ListPaginatedUsersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListPaginatedUsersResponse>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling listPaginatedUsers.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling listPaginatedUsers().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.page !== undefined) {
-            queryParameters['page'] = requestParameters.page;
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
         }
 
-        if (requestParameters.limit !== undefined) {
-            queryParameters['limit'] = requestParameters.limit;
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
         }
 
-        if (requestParameters.createdBefore !== undefined) {
-            queryParameters['created_before'] = requestParameters.createdBefore;
+        if (requestParameters['createdBefore'] != null) {
+            queryParameters['created_before'] = requestParameters['createdBefore'];
         }
 
-        if (requestParameters.orderBy !== undefined) {
-            queryParameters['order_by'] = requestParameters.orderBy;
+        if (requestParameters['orderBy'] != null) {
+            queryParameters['order_by'] = requestParameters['orderBy'];
         }
 
-        if (requestParameters.identifier !== undefined) {
-            queryParameters['identifier'] = requestParameters.identifier;
+        if (requestParameters['identifier'] != null) {
+            queryParameters['identifier'] = requestParameters['identifier'];
         }
 
-        if (requestParameters.id !== undefined) {
-            queryParameters['id'] = requestParameters.id;
+        if (requestParameters['id'] != null) {
+            queryParameters['id'] = requestParameters['id'];
         }
 
-        if (requestParameters.loginCount !== undefined) {
-            queryParameters['login_count'] = requestParameters.loginCount;
+        if (requestParameters['loginCount'] != null) {
+            queryParameters['login_count'] = requestParameters['loginCount'];
         }
 
-        if (requestParameters.status !== undefined) {
-            queryParameters['status'] = requestParameters.status;
+        if (requestParameters['status'] != null) {
+            queryParameters['status'] = requestParameters['status'];
         }
 
-        if (requestParameters.createdAt !== undefined) {
-            queryParameters['created_at'] = requestParameters.createdAt;
+        if (requestParameters['createdAt'] != null) {
+            queryParameters['created_at'] = requestParameters['createdAt'];
         }
 
-        if (requestParameters.updatedAt !== undefined) {
-            queryParameters['updated_at'] = requestParameters.updatedAt;
+        if (requestParameters['updatedAt'] != null) {
+            queryParameters['updated_at'] = requestParameters['updatedAt'];
         }
 
-        if (requestParameters.lastLoginAt !== undefined) {
-            queryParameters['last_login_at'] = requestParameters.lastLoginAt;
+        if (requestParameters['lastLoginAt'] != null) {
+            queryParameters['last_login_at'] = requestParameters['lastLoginAt'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -382,7 +415,7 @@ export class UsersApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/users`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))),
+            path: `/apps/{app_id}/users`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -405,16 +438,25 @@ export class UsersApi extends runtime.BaseAPI {
      * Update User
      */
     async updateUserRaw(requestParameters: UpdateUserOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserResponse>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling updateUser.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling updateUser().'
+            );
         }
 
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling updateUser.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling updateUser().'
+            );
         }
 
-        if (requestParameters.updateUserRequest === null || requestParameters.updateUserRequest === undefined) {
-            throw new runtime.RequiredError('updateUserRequest','Required parameter requestParameters.updateUserRequest was null or undefined when calling updateUser.');
+        if (requestParameters['updateUserRequest'] == null) {
+            throw new runtime.RequiredError(
+                'updateUserRequest',
+                'Required parameter "updateUserRequest" was null or undefined when calling updateUser().'
+            );
         }
 
         const queryParameters: any = {};
@@ -432,11 +474,11 @@ export class UsersApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/users/{user_id}`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/apps/{app_id}/users/{user_id}`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: UpdateUserRequestToJSON(requestParameters.updateUserRequest),
+            body: UpdateUserRequestToJSON(requestParameters['updateUserRequest']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserResponseFromJSON(jsonValue));

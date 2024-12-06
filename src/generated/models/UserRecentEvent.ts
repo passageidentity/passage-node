@@ -12,12 +12,27 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
+import type { SocialConnectionType } from './SocialConnectionType';
+import {
+    SocialConnectionTypeFromJSON,
+    SocialConnectionTypeFromJSONTyped,
+    SocialConnectionTypeToJSON,
+    SocialConnectionTypeToJSONTyped,
+} from './SocialConnectionType';
+import type { UserEventAction } from './UserEventAction';
+import {
+    UserEventActionFromJSON,
+    UserEventActionFromJSONTyped,
+    UserEventActionToJSON,
+    UserEventActionToJSONTyped,
+} from './UserEventAction';
 import type { UserEventStatus } from './UserEventStatus';
 import {
     UserEventStatusFromJSON,
     UserEventStatusFromJSONTyped,
     UserEventStatusToJSON,
+    UserEventStatusToJSONTyped,
 } from './UserEventStatus';
 
 /**
@@ -63,27 +78,48 @@ export interface UserRecentEvent {
      */
     type: string;
     /**
-     * 
+     * The raw user agent value from the originating device
      * @type {string}
      * @memberof UserRecentEvent
      */
     user_agent: string;
+    /**
+     * A display-friendly version of the user agent
+     * @type {string}
+     * @memberof UserRecentEvent
+     */
+    user_agent_display: string;
+    /**
+     * 
+     * @type {UserEventAction}
+     * @memberof UserRecentEvent
+     */
+    action: UserEventAction;
+    /**
+     * 
+     * @type {SocialConnectionType}
+     * @memberof UserRecentEvent
+     */
+    social_login_type: SocialConnectionType | null;
 }
+
+
 
 /**
  * Check if a given object implements the UserRecentEvent interface.
  */
-export function instanceOfUserRecentEvent(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "created_at" in value;
-    isInstance = isInstance && "completed_at" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "ip_addr" in value;
-    isInstance = isInstance && "status" in value;
-    isInstance = isInstance && "type" in value;
-    isInstance = isInstance && "user_agent" in value;
-
-    return isInstance;
+export function instanceOfUserRecentEvent(value: object): value is UserRecentEvent {
+    if (!('created_at' in value) || value['created_at'] === undefined) return false;
+    if (!('completed_at' in value) || value['completed_at'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('ip_addr' in value) || value['ip_addr'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('type' in value) || value['type'] === undefined) return false;
+    if (!('user_agent' in value) || value['user_agent'] === undefined) return false;
+    if (!('user_agent_display' in value) || value['user_agent_display'] === undefined) return false;
+    if (!('action' in value) || value['action'] === undefined) return false;
+    if (!('social_login_type' in value) || value['social_login_type'] === undefined) return false;
+    return true;
 }
 
 export function UserRecentEventFromJSON(json: any): UserRecentEvent {
@@ -91,37 +127,45 @@ export function UserRecentEventFromJSON(json: any): UserRecentEvent {
 }
 
 export function UserRecentEventFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserRecentEvent {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'created_at': (new Date(json['created_at'])),
-        'completed_at': (json['completed_at'] === null ? null : new Date(json['completed_at'])),
+        'completed_at': (json['completed_at'] == null ? null : new Date(json['completed_at'])),
         'id': json['id'],
         'ip_addr': json['ip_addr'],
         'status': UserEventStatusFromJSON(json['status']),
         'type': json['type'],
         'user_agent': json['user_agent'],
+        'user_agent_display': json['user_agent_display'],
+        'action': UserEventActionFromJSON(json['action']),
+        'social_login_type': SocialConnectionTypeFromJSON(json['social_login_type']),
     };
 }
 
-export function UserRecentEventToJSON(value?: UserRecentEvent | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserRecentEventToJSON(json: any): UserRecentEvent {
+    return UserRecentEventToJSONTyped(json, false);
+}
+
+export function UserRecentEventToJSONTyped(value?: UserRecentEvent | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'created_at': (value.created_at.toISOString()),
-        'completed_at': (value.completed_at === null ? null : value.completed_at.toISOString()),
-        'id': value.id,
-        'ip_addr': value.ip_addr,
-        'status': UserEventStatusToJSON(value.status),
-        'type': value.type,
-        'user_agent': value.user_agent,
+        'created_at': ((value['created_at']).toISOString()),
+        'completed_at': (value['completed_at'] == null ? null : (value['completed_at'] as any).toISOString()),
+        'id': value['id'],
+        'ip_addr': value['ip_addr'],
+        'status': UserEventStatusToJSON(value['status']),
+        'type': value['type'],
+        'user_agent': value['user_agent'],
+        'user_agent_display': value['user_agent_display'],
+        'action': UserEventActionToJSON(value['action']),
+        'social_login_type': SocialConnectionTypeToJSON(value['social_login_type']),
     };
 }
 
