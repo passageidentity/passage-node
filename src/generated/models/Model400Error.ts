@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -47,12 +47,10 @@ export type Model400ErrorCodeEnum = typeof Model400ErrorCodeEnum[keyof typeof Mo
 /**
  * Check if a given object implements the Model400Error interface.
  */
-export function instanceOfModel400Error(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "code" in value;
-    isInstance = isInstance && "error" in value;
-
-    return isInstance;
+export function instanceOfModel400Error(value: object): value is Model400Error {
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('error' in value) || value['error'] === undefined) return false;
+    return true;
 }
 
 export function Model400ErrorFromJSON(json: any): Model400Error {
@@ -60,7 +58,7 @@ export function Model400ErrorFromJSON(json: any): Model400Error {
 }
 
 export function Model400ErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): Model400Error {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -70,17 +68,19 @@ export function Model400ErrorFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function Model400ErrorToJSON(value?: Model400Error | null): any {
-    if (value === undefined) {
-        return undefined;
+export function Model400ErrorToJSON(json: any): Model400Error {
+    return Model400ErrorToJSONTyped(json, false);
+}
+
+export function Model400ErrorToJSONTyped(value?: Model400Error | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'code': value.code,
-        'error': value.error,
+        'code': value['code'],
+        'error': value['error'],
     };
 }
 

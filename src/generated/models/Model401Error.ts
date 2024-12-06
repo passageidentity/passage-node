@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -47,12 +47,10 @@ export type Model401ErrorCodeEnum = typeof Model401ErrorCodeEnum[keyof typeof Mo
 /**
  * Check if a given object implements the Model401Error interface.
  */
-export function instanceOfModel401Error(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "code" in value;
-    isInstance = isInstance && "error" in value;
-
-    return isInstance;
+export function instanceOfModel401Error(value: object): value is Model401Error {
+    if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('error' in value) || value['error'] === undefined) return false;
+    return true;
 }
 
 export function Model401ErrorFromJSON(json: any): Model401Error {
@@ -60,7 +58,7 @@ export function Model401ErrorFromJSON(json: any): Model401Error {
 }
 
 export function Model401ErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): Model401Error {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -70,17 +68,19 @@ export function Model401ErrorFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function Model401ErrorToJSON(value?: Model401Error | null): any {
-    if (value === undefined) {
-        return undefined;
+export function Model401ErrorToJSON(json: any): Model401Error {
+    return Model401ErrorToJSONTyped(json, false);
+}
+
+export function Model401ErrorToJSONTyped(value?: Model401Error | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'code': value.code,
-        'error': value.error,
+        'code': value['code'],
+        'error': value['error'],
     };
 }
 

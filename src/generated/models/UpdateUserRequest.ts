@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -42,10 +42,8 @@ export interface UpdateUserRequest {
 /**
  * Check if a given object implements the UpdateUserRequest interface.
  */
-export function instanceOfUpdateUserRequest(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfUpdateUserRequest(value: object): value is UpdateUserRequest {
+    return true;
 }
 
 export function UpdateUserRequestFromJSON(json: any): UpdateUserRequest {
@@ -53,29 +51,31 @@ export function UpdateUserRequestFromJSON(json: any): UpdateUserRequest {
 }
 
 export function UpdateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateUserRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'phone': !exists(json, 'phone') ? undefined : json['phone'],
-        'user_metadata': !exists(json, 'user_metadata') ? undefined : json['user_metadata'],
+        'email': json['email'] == null ? undefined : json['email'],
+        'phone': json['phone'] == null ? undefined : json['phone'],
+        'user_metadata': json['user_metadata'] == null ? undefined : json['user_metadata'],
     };
 }
 
-export function UpdateUserRequestToJSON(value?: UpdateUserRequest | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UpdateUserRequestToJSON(json: any): UpdateUserRequest {
+    return UpdateUserRequestToJSONTyped(json, false);
+}
+
+export function UpdateUserRequestToJSONTyped(value?: UpdateUserRequest | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
-        'phone': value.phone,
-        'user_metadata': value.user_metadata,
+        'email': value['email'],
+        'phone': value['phone'],
+        'user_metadata': value['user_metadata'],
     };
 }
 

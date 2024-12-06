@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -30,11 +30,9 @@ export interface PasskeysAuthMethod {
 /**
  * Check if a given object implements the PasskeysAuthMethod interface.
  */
-export function instanceOfPasskeysAuthMethod(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "enabled" in value;
-
-    return isInstance;
+export function instanceOfPasskeysAuthMethod(value: object): value is PasskeysAuthMethod {
+    if (!('enabled' in value) || value['enabled'] === undefined) return false;
+    return true;
 }
 
 export function PasskeysAuthMethodFromJSON(json: any): PasskeysAuthMethod {
@@ -42,7 +40,7 @@ export function PasskeysAuthMethodFromJSON(json: any): PasskeysAuthMethod {
 }
 
 export function PasskeysAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): PasskeysAuthMethod {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -51,16 +49,18 @@ export function PasskeysAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function PasskeysAuthMethodToJSON(value?: PasskeysAuthMethod | null): any {
-    if (value === undefined) {
-        return undefined;
+export function PasskeysAuthMethodToJSON(json: any): PasskeysAuthMethod {
+    return PasskeysAuthMethodToJSONTyped(json, false);
+}
+
+export function PasskeysAuthMethodToJSONTyped(value?: PasskeysAuthMethod | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'enabled': value.enabled,
+        'enabled': value['enabled'],
     };
 }
 

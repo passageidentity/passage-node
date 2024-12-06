@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -30,11 +30,9 @@ export interface Link {
 /**
  * Check if a given object implements the Link interface.
  */
-export function instanceOfLink(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "href" in value;
-
-    return isInstance;
+export function instanceOfLink(value: object): value is Link {
+    if (!('href' in value) || value['href'] === undefined) return false;
+    return true;
 }
 
 export function LinkFromJSON(json: any): Link {
@@ -42,7 +40,7 @@ export function LinkFromJSON(json: any): Link {
 }
 
 export function LinkFromJSONTyped(json: any, ignoreDiscriminator: boolean): Link {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -51,16 +49,18 @@ export function LinkFromJSONTyped(json: any, ignoreDiscriminator: boolean): Link
     };
 }
 
-export function LinkToJSON(value?: Link | null): any {
-    if (value === undefined) {
-        return undefined;
+export function LinkToJSON(json: any): Link {
+    return LinkToJSONTyped(json, false);
+}
+
+export function LinkToJSONTyped(value?: Link | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'href': value.href,
+        'href': value['href'],
     };
 }
 

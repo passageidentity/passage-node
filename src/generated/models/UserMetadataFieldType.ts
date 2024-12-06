@@ -28,6 +28,17 @@ export const UserMetadataFieldType = {
 export type UserMetadataFieldType = typeof UserMetadataFieldType[keyof typeof UserMetadataFieldType];
 
 
+export function instanceOfUserMetadataFieldType(value: any): boolean {
+    for (const key in UserMetadataFieldType) {
+        if (Object.prototype.hasOwnProperty.call(UserMetadataFieldType, key)) {
+            if (UserMetadataFieldType[key as keyof typeof UserMetadataFieldType] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function UserMetadataFieldTypeFromJSON(json: any): UserMetadataFieldType {
     return UserMetadataFieldTypeFromJSONTyped(json, false);
 }
@@ -38,5 +49,9 @@ export function UserMetadataFieldTypeFromJSONTyped(json: any, ignoreDiscriminato
 
 export function UserMetadataFieldTypeToJSON(value?: UserMetadataFieldType | null): any {
     return value as any;
+}
+
+export function UserMetadataFieldTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): UserMetadataFieldType {
+    return value as UserMetadataFieldType;
 }
 

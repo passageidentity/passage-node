@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { MagicLink } from './MagicLink';
 import {
     MagicLinkFromJSON,
     MagicLinkFromJSONTyped,
     MagicLinkToJSON,
+    MagicLinkToJSONTyped,
 } from './MagicLink';
 
 /**
@@ -37,11 +38,9 @@ export interface MagicLinkResponse {
 /**
  * Check if a given object implements the MagicLinkResponse interface.
  */
-export function instanceOfMagicLinkResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "magic_link" in value;
-
-    return isInstance;
+export function instanceOfMagicLinkResponse(value: object): value is MagicLinkResponse {
+    if (!('magic_link' in value) || value['magic_link'] === undefined) return false;
+    return true;
 }
 
 export function MagicLinkResponseFromJSON(json: any): MagicLinkResponse {
@@ -49,7 +48,7 @@ export function MagicLinkResponseFromJSON(json: any): MagicLinkResponse {
 }
 
 export function MagicLinkResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): MagicLinkResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +57,18 @@ export function MagicLinkResponseFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function MagicLinkResponseToJSON(value?: MagicLinkResponse | null): any {
-    if (value === undefined) {
-        return undefined;
+export function MagicLinkResponseToJSON(json: any): MagicLinkResponse {
+    return MagicLinkResponseToJSONTyped(json, false);
+}
+
+export function MagicLinkResponseToJSONTyped(value?: MagicLinkResponse | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'magic_link': MagicLinkToJSON(value.magic_link),
+        'magic_link': MagicLinkToJSON(value['magic_link']),
     };
 }
 

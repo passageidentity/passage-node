@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { Link } from './Link';
 import {
     LinkFromJSON,
     LinkFromJSONTyped,
     LinkToJSON,
+    LinkToJSONTyped,
 } from './Link';
 
 /**
@@ -61,15 +62,13 @@ export interface PaginatedLinks {
 /**
  * Check if a given object implements the PaginatedLinks interface.
  */
-export function instanceOfPaginatedLinks(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "first" in value;
-    isInstance = isInstance && "last" in value;
-    isInstance = isInstance && "next" in value;
-    isInstance = isInstance && "previous" in value;
-    isInstance = isInstance && "self" in value;
-
-    return isInstance;
+export function instanceOfPaginatedLinks(value: object): value is PaginatedLinks {
+    if (!('first' in value) || value['first'] === undefined) return false;
+    if (!('last' in value) || value['last'] === undefined) return false;
+    if (!('next' in value) || value['next'] === undefined) return false;
+    if (!('previous' in value) || value['previous'] === undefined) return false;
+    if (!('self' in value) || value['self'] === undefined) return false;
+    return true;
 }
 
 export function PaginatedLinksFromJSON(json: any): PaginatedLinks {
@@ -77,7 +76,7 @@ export function PaginatedLinksFromJSON(json: any): PaginatedLinks {
 }
 
 export function PaginatedLinksFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaginatedLinks {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -90,20 +89,22 @@ export function PaginatedLinksFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function PaginatedLinksToJSON(value?: PaginatedLinks | null): any {
-    if (value === undefined) {
-        return undefined;
+export function PaginatedLinksToJSON(json: any): PaginatedLinks {
+    return PaginatedLinksToJSONTyped(json, false);
+}
+
+export function PaginatedLinksToJSONTyped(value?: PaginatedLinks | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'first': LinkToJSON(value.first),
-        'last': LinkToJSON(value.last),
-        'next': LinkToJSON(value.next),
-        'previous': LinkToJSON(value.previous),
-        'self': LinkToJSON(value.self),
+        'first': LinkToJSON(value['first']),
+        'last': LinkToJSON(value['last']),
+        'next': LinkToJSON(value['next']),
+        'previous': LinkToJSON(value['previous']),
+        'self': LinkToJSON(value['self']),
     };
 }
 

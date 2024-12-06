@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -42,10 +42,8 @@ export interface CreateUserRequest {
 /**
  * Check if a given object implements the CreateUserRequest interface.
  */
-export function instanceOfCreateUserRequest(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfCreateUserRequest(value: object): value is CreateUserRequest {
+    return true;
 }
 
 export function CreateUserRequestFromJSON(json: any): CreateUserRequest {
@@ -53,29 +51,31 @@ export function CreateUserRequestFromJSON(json: any): CreateUserRequest {
 }
 
 export function CreateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateUserRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'phone': !exists(json, 'phone') ? undefined : json['phone'],
-        'user_metadata': !exists(json, 'user_metadata') ? undefined : json['user_metadata'],
+        'email': json['email'] == null ? undefined : json['email'],
+        'phone': json['phone'] == null ? undefined : json['phone'],
+        'user_metadata': json['user_metadata'] == null ? undefined : json['user_metadata'],
     };
 }
 
-export function CreateUserRequestToJSON(value?: CreateUserRequest | null): any {
-    if (value === undefined) {
-        return undefined;
+export function CreateUserRequestToJSON(json: any): CreateUserRequest {
+    return CreateUserRequestToJSONTyped(json, false);
+}
+
+export function CreateUserRequestToJSONTyped(value?: CreateUserRequest | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
-        'phone': value.phone,
-        'user_metadata': value.user_metadata,
+        'email': value['email'],
+        'phone': value['phone'],
+        'user_metadata': value['user_metadata'],
     };
 }
 

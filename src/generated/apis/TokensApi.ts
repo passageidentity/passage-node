@@ -46,12 +46,18 @@ export class TokensApi extends runtime.BaseAPI {
      * Revokes refresh tokens
      */
     async revokeUserRefreshTokensRaw(requestParameters: RevokeUserRefreshTokensRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.appId === null || requestParameters.appId === undefined) {
-            throw new runtime.RequiredError('appId','Required parameter requestParameters.appId was null or undefined when calling revokeUserRefreshTokens.');
+        if (requestParameters['appId'] == null) {
+            throw new runtime.RequiredError(
+                'appId',
+                'Required parameter "appId" was null or undefined when calling revokeUserRefreshTokens().'
+            );
         }
 
-        if (requestParameters.userId === null || requestParameters.userId === undefined) {
-            throw new runtime.RequiredError('userId','Required parameter requestParameters.userId was null or undefined when calling revokeUserRefreshTokens.');
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling revokeUserRefreshTokens().'
+            );
         }
 
         const queryParameters: any = {};
@@ -67,7 +73,7 @@ export class TokensApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/apps/{app_id}/users/{user_id}/tokens`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters.appId))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters.userId))),
+            path: `/apps/{app_id}/users/{user_id}/tokens`.replace(`{${"app_id"}}`, encodeURIComponent(String(requestParameters['appId']))).replace(`{${"user_id"}}`, encodeURIComponent(String(requestParameters['userId']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,

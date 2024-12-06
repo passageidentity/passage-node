@@ -30,6 +30,17 @@ export const Technologies = {
 export type Technologies = typeof Technologies[keyof typeof Technologies];
 
 
+export function instanceOfTechnologies(value: any): boolean {
+    for (const key in Technologies) {
+        if (Object.prototype.hasOwnProperty.call(Technologies, key)) {
+            if (Technologies[key as keyof typeof Technologies] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function TechnologiesFromJSON(json: any): Technologies {
     return TechnologiesFromJSONTyped(json, false);
 }
@@ -40,5 +51,9 @@ export function TechnologiesFromJSONTyped(json: any, ignoreDiscriminator: boolea
 
 export function TechnologiesToJSON(value?: Technologies | null): any {
     return value as any;
+}
+
+export function TechnologiesToJSONTyped(value: any, ignoreDiscriminator: boolean): Technologies {
+    return value as Technologies;
 }
 

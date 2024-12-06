@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { LayoutConfig } from './LayoutConfig';
 import {
     LayoutConfigFromJSON,
     LayoutConfigFromJSONTyped,
     LayoutConfigToJSON,
+    LayoutConfigToJSONTyped,
 } from './LayoutConfig';
 
 /**
@@ -43,12 +44,10 @@ export interface Layouts {
 /**
  * Check if a given object implements the Layouts interface.
  */
-export function instanceOfLayouts(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "profile" in value;
-    isInstance = isInstance && "registration" in value;
-
-    return isInstance;
+export function instanceOfLayouts(value: object): value is Layouts {
+    if (!('profile' in value) || value['profile'] === undefined) return false;
+    if (!('registration' in value) || value['registration'] === undefined) return false;
+    return true;
 }
 
 export function LayoutsFromJSON(json: any): Layouts {
@@ -56,7 +55,7 @@ export function LayoutsFromJSON(json: any): Layouts {
 }
 
 export function LayoutsFromJSONTyped(json: any, ignoreDiscriminator: boolean): Layouts {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -66,17 +65,19 @@ export function LayoutsFromJSONTyped(json: any, ignoreDiscriminator: boolean): L
     };
 }
 
-export function LayoutsToJSON(value?: Layouts | null): any {
-    if (value === undefined) {
-        return undefined;
+export function LayoutsToJSON(json: any): Layouts {
+    return LayoutsToJSONTyped(json, false);
+}
+
+export function LayoutsToJSONTyped(value?: Layouts | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'profile': ((value.profile as Array<any>).map(LayoutConfigToJSON)),
-        'registration': ((value.registration as Array<any>).map(LayoutConfigToJSON)),
+        'profile': ((value['profile'] as Array<any>).map(LayoutConfigToJSON)),
+        'registration': ((value['registration'] as Array<any>).map(LayoutConfigToJSON)),
     };
 }
 

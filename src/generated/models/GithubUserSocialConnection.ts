@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -48,14 +48,12 @@ export interface GithubUserSocialConnection {
 /**
  * Check if a given object implements the GithubUserSocialConnection interface.
  */
-export function instanceOfGithubUserSocialConnection(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "provider_id" in value;
-    isInstance = isInstance && "created_at" in value;
-    isInstance = isInstance && "last_login_at" in value;
-    isInstance = isInstance && "provider_identifier" in value;
-
-    return isInstance;
+export function instanceOfGithubUserSocialConnection(value: object): value is GithubUserSocialConnection {
+    if (!('provider_id' in value) || value['provider_id'] === undefined) return false;
+    if (!('created_at' in value) || value['created_at'] === undefined) return false;
+    if (!('last_login_at' in value) || value['last_login_at'] === undefined) return false;
+    if (!('provider_identifier' in value) || value['provider_identifier'] === undefined) return false;
+    return true;
 }
 
 export function GithubUserSocialConnectionFromJSON(json: any): GithubUserSocialConnection {
@@ -63,7 +61,7 @@ export function GithubUserSocialConnectionFromJSON(json: any): GithubUserSocialC
 }
 
 export function GithubUserSocialConnectionFromJSONTyped(json: any, ignoreDiscriminator: boolean): GithubUserSocialConnection {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -75,19 +73,21 @@ export function GithubUserSocialConnectionFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function GithubUserSocialConnectionToJSON(value?: GithubUserSocialConnection | null): any {
-    if (value === undefined) {
-        return undefined;
+export function GithubUserSocialConnectionToJSON(json: any): GithubUserSocialConnection {
+    return GithubUserSocialConnectionToJSONTyped(json, false);
+}
+
+export function GithubUserSocialConnectionToJSONTyped(value?: GithubUserSocialConnection | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'provider_id': value.provider_id,
-        'created_at': (value.created_at.toISOString()),
-        'last_login_at': (value.last_login_at.toISOString()),
-        'provider_identifier': value.provider_identifier,
+        'provider_id': value['provider_id'],
+        'created_at': ((value['created_at']).toISOString()),
+        'last_login_at': ((value['last_login_at']).toISOString()),
+        'provider_identifier': value['provider_identifier'],
     };
 }
 

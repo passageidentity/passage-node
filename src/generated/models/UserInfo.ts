@@ -12,36 +12,41 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { UserRecentEvent } from './UserRecentEvent';
 import {
     UserRecentEventFromJSON,
     UserRecentEventFromJSONTyped,
     UserRecentEventToJSON,
+    UserRecentEventToJSONTyped,
 } from './UserRecentEvent';
 import type { UserSocialConnections } from './UserSocialConnections';
 import {
     UserSocialConnectionsFromJSON,
     UserSocialConnectionsFromJSONTyped,
     UserSocialConnectionsToJSON,
+    UserSocialConnectionsToJSONTyped,
 } from './UserSocialConnections';
-import type { UserStatus } from './UserStatus';
-import {
-    UserStatusFromJSON,
-    UserStatusFromJSONTyped,
-    UserStatusToJSON,
-} from './UserStatus';
 import type { WebAuthnDevices } from './WebAuthnDevices';
 import {
     WebAuthnDevicesFromJSON,
     WebAuthnDevicesFromJSONTyped,
     WebAuthnDevicesToJSON,
+    WebAuthnDevicesToJSONTyped,
 } from './WebAuthnDevices';
+import type { UserStatus } from './UserStatus';
+import {
+    UserStatusFromJSON,
+    UserStatusFromJSONTyped,
+    UserStatusToJSON,
+    UserStatusToJSONTyped,
+} from './UserStatus';
 import type { WebAuthnType } from './WebAuthnType';
 import {
     WebAuthnTypeFromJSON,
     WebAuthnTypeFromJSONTyped,
     WebAuthnTypeToJSON,
+    WebAuthnTypeToJSONTyped,
 } from './WebAuthnType';
 
 /**
@@ -68,6 +73,12 @@ export interface UserInfo {
      * @memberof UserInfo
      */
     email_verified: boolean;
+    /**
+     * The external ID of the user. Only set if the user was created in a Flex app.
+     * @type {string}
+     * @memberof UserInfo
+     */
+    external_id: string;
     /**
      * 
      * @type {string}
@@ -148,29 +159,30 @@ export interface UserInfo {
     webauthn_types: Array<WebAuthnType>;
 }
 
+
+
 /**
  * Check if a given object implements the UserInfo interface.
  */
-export function instanceOfUserInfo(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "created_at" in value;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "email_verified" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "last_login_at" in value;
-    isInstance = isInstance && "login_count" in value;
-    isInstance = isInstance && "phone" in value;
-    isInstance = isInstance && "phone_verified" in value;
-    isInstance = isInstance && "recent_events" in value;
-    isInstance = isInstance && "social_connections" in value;
-    isInstance = isInstance && "status" in value;
-    isInstance = isInstance && "updated_at" in value;
-    isInstance = isInstance && "user_metadata" in value;
-    isInstance = isInstance && "webauthn" in value;
-    isInstance = isInstance && "webauthn_devices" in value;
-    isInstance = isInstance && "webauthn_types" in value;
-
-    return isInstance;
+export function instanceOfUserInfo(value: object): value is UserInfo {
+    if (!('created_at' in value) || value['created_at'] === undefined) return false;
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('email_verified' in value) || value['email_verified'] === undefined) return false;
+    if (!('external_id' in value) || value['external_id'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('last_login_at' in value) || value['last_login_at'] === undefined) return false;
+    if (!('login_count' in value) || value['login_count'] === undefined) return false;
+    if (!('phone' in value) || value['phone'] === undefined) return false;
+    if (!('phone_verified' in value) || value['phone_verified'] === undefined) return false;
+    if (!('recent_events' in value) || value['recent_events'] === undefined) return false;
+    if (!('social_connections' in value) || value['social_connections'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('updated_at' in value) || value['updated_at'] === undefined) return false;
+    if (!('user_metadata' in value) || value['user_metadata'] === undefined) return false;
+    if (!('webauthn' in value) || value['webauthn'] === undefined) return false;
+    if (!('webauthn_devices' in value) || value['webauthn_devices'] === undefined) return false;
+    if (!('webauthn_types' in value) || value['webauthn_types'] === undefined) return false;
+    return true;
 }
 
 export function UserInfoFromJSON(json: any): UserInfo {
@@ -178,7 +190,7 @@ export function UserInfoFromJSON(json: any): UserInfo {
 }
 
 export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserInfo {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -186,6 +198,7 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'created_at': (new Date(json['created_at'])),
         'email': json['email'],
         'email_verified': json['email_verified'],
+        'external_id': json['external_id'],
         'id': json['id'],
         'last_login_at': (new Date(json['last_login_at'])),
         'login_count': json['login_count'],
@@ -202,31 +215,34 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function UserInfoToJSON(value?: UserInfo | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserInfoToJSON(json: any): UserInfo {
+    return UserInfoToJSONTyped(json, false);
+}
+
+export function UserInfoToJSONTyped(value?: UserInfo | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'created_at': (value.created_at.toISOString()),
-        'email': value.email,
-        'email_verified': value.email_verified,
-        'id': value.id,
-        'last_login_at': (value.last_login_at.toISOString()),
-        'login_count': value.login_count,
-        'phone': value.phone,
-        'phone_verified': value.phone_verified,
-        'recent_events': ((value.recent_events as Array<any>).map(UserRecentEventToJSON)),
-        'social_connections': UserSocialConnectionsToJSON(value.social_connections),
-        'status': UserStatusToJSON(value.status),
-        'updated_at': (value.updated_at.toISOString()),
-        'user_metadata': value.user_metadata,
-        'webauthn': value.webauthn,
-        'webauthn_devices': ((value.webauthn_devices as Array<any>).map(WebAuthnDevicesToJSON)),
-        'webauthn_types': ((value.webauthn_types as Array<any>).map(WebAuthnTypeToJSON)),
+        'created_at': ((value['created_at']).toISOString()),
+        'email': value['email'],
+        'email_verified': value['email_verified'],
+        'external_id': value['external_id'],
+        'id': value['id'],
+        'last_login_at': ((value['last_login_at']).toISOString()),
+        'login_count': value['login_count'],
+        'phone': value['phone'],
+        'phone_verified': value['phone_verified'],
+        'recent_events': ((value['recent_events'] as Array<any>).map(UserRecentEventToJSON)),
+        'social_connections': UserSocialConnectionsToJSON(value['social_connections']),
+        'status': UserStatusToJSON(value['status']),
+        'updated_at': ((value['updated_at']).toISOString()),
+        'user_metadata': value['user_metadata'],
+        'webauthn': value['webauthn'],
+        'webauthn_devices': ((value['webauthn_devices'] as Array<any>).map(WebAuthnDevicesToJSON)),
+        'webauthn_types': ((value['webauthn_types'] as Array<any>).map(WebAuthnTypeToJSON)),
     };
 }
 

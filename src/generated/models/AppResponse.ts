@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { AppInfo } from './AppInfo';
 import {
     AppInfoFromJSON,
     AppInfoFromJSONTyped,
     AppInfoToJSON,
+    AppInfoToJSONTyped,
 } from './AppInfo';
 
 /**
@@ -37,11 +38,9 @@ export interface AppResponse {
 /**
  * Check if a given object implements the AppResponse interface.
  */
-export function instanceOfAppResponse(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "app" in value;
-
-    return isInstance;
+export function instanceOfAppResponse(value: object): value is AppResponse {
+    if (!('app' in value) || value['app'] === undefined) return false;
+    return true;
 }
 
 export function AppResponseFromJSON(json: any): AppResponse {
@@ -49,7 +48,7 @@ export function AppResponseFromJSON(json: any): AppResponse {
 }
 
 export function AppResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): AppResponse {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +57,18 @@ export function AppResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function AppResponseToJSON(value?: AppResponse | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AppResponseToJSON(json: any): AppResponse {
+    return AppResponseToJSONTyped(json, false);
+}
+
+export function AppResponseToJSONTyped(value?: AppResponse | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'app': AppInfoToJSON(value.app),
+        'app': AppInfoToJSON(value['app']),
     };
 }
 

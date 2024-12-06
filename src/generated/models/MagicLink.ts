@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { MagicLinkType } from './MagicLinkType';
 import {
     MagicLinkTypeFromJSON,
     MagicLinkTypeFromJSONTyped,
     MagicLinkTypeToJSON,
+    MagicLinkTypeToJSONTyped,
 } from './MagicLinkType';
 
 /**
@@ -88,23 +89,23 @@ export interface MagicLink {
     user_id: string;
 }
 
+
+
 /**
  * Check if a given object implements the MagicLink interface.
  */
-export function instanceOfMagicLink(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "activated" in value;
-    isInstance = isInstance && "app_id" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "identifier" in value;
-    isInstance = isInstance && "redirect_url" in value;
-    isInstance = isInstance && "secret" in value;
-    isInstance = isInstance && "ttl" in value;
-    isInstance = isInstance && "type" in value;
-    isInstance = isInstance && "url" in value;
-    isInstance = isInstance && "user_id" in value;
-
-    return isInstance;
+export function instanceOfMagicLink(value: object): value is MagicLink {
+    if (!('activated' in value) || value['activated'] === undefined) return false;
+    if (!('app_id' in value) || value['app_id'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('identifier' in value) || value['identifier'] === undefined) return false;
+    if (!('redirect_url' in value) || value['redirect_url'] === undefined) return false;
+    if (!('secret' in value) || value['secret'] === undefined) return false;
+    if (!('ttl' in value) || value['ttl'] === undefined) return false;
+    if (!('type' in value) || value['type'] === undefined) return false;
+    if (!('url' in value) || value['url'] === undefined) return false;
+    if (!('user_id' in value) || value['user_id'] === undefined) return false;
+    return true;
 }
 
 export function MagicLinkFromJSON(json: any): MagicLink {
@@ -112,7 +113,7 @@ export function MagicLinkFromJSON(json: any): MagicLink {
 }
 
 export function MagicLinkFromJSONTyped(json: any, ignoreDiscriminator: boolean): MagicLink {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -130,25 +131,27 @@ export function MagicLinkFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function MagicLinkToJSON(value?: MagicLink | null): any {
-    if (value === undefined) {
-        return undefined;
+export function MagicLinkToJSON(json: any): MagicLink {
+    return MagicLinkToJSONTyped(json, false);
+}
+
+export function MagicLinkToJSONTyped(value?: MagicLink | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'activated': value.activated,
-        'app_id': value.app_id,
-        'id': value.id,
-        'identifier': value.identifier,
-        'redirect_url': value.redirect_url,
-        'secret': value.secret,
-        'ttl': value.ttl,
-        'type': MagicLinkTypeToJSON(value.type),
-        'url': value.url,
-        'user_id': value.user_id,
+        'activated': value['activated'],
+        'app_id': value['app_id'],
+        'id': value['id'],
+        'identifier': value['identifier'],
+        'redirect_url': value['redirect_url'],
+        'secret': value['secret'],
+        'ttl': value['ttl'],
+        'type': MagicLinkTypeToJSON(value['type']),
+        'url': value['url'],
+        'user_id': value['user_id'],
     };
 }
 

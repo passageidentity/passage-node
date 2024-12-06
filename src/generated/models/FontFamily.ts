@@ -42,6 +42,17 @@ export const FontFamily = {
 export type FontFamily = typeof FontFamily[keyof typeof FontFamily];
 
 
+export function instanceOfFontFamily(value: any): boolean {
+    for (const key in FontFamily) {
+        if (Object.prototype.hasOwnProperty.call(FontFamily, key)) {
+            if (FontFamily[key as keyof typeof FontFamily] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function FontFamilyFromJSON(json: any): FontFamily {
     return FontFamilyFromJSONTyped(json, false);
 }
@@ -52,5 +63,9 @@ export function FontFamilyFromJSONTyped(json: any, ignoreDiscriminator: boolean)
 
 export function FontFamilyToJSON(value?: FontFamily | null): any {
     return value as any;
+}
+
+export function FontFamilyToJSONTyped(value: any, ignoreDiscriminator: boolean): FontFamily {
+    return value as FontFamily;
 }
 

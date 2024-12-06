@@ -12,25 +12,28 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { MagicLinkAuthMethod } from './MagicLinkAuthMethod';
 import {
     MagicLinkAuthMethodFromJSON,
     MagicLinkAuthMethodFromJSONTyped,
     MagicLinkAuthMethodToJSON,
+    MagicLinkAuthMethodToJSONTyped,
 } from './MagicLinkAuthMethod';
-import type { OtpAuthMethod } from './OtpAuthMethod';
-import {
-    OtpAuthMethodFromJSON,
-    OtpAuthMethodFromJSONTyped,
-    OtpAuthMethodToJSON,
-} from './OtpAuthMethod';
 import type { PasskeysAuthMethod } from './PasskeysAuthMethod';
 import {
     PasskeysAuthMethodFromJSON,
     PasskeysAuthMethodFromJSONTyped,
     PasskeysAuthMethodToJSON,
+    PasskeysAuthMethodToJSONTyped,
 } from './PasskeysAuthMethod';
+import type { OtpAuthMethod } from './OtpAuthMethod';
+import {
+    OtpAuthMethodFromJSON,
+    OtpAuthMethodFromJSONTyped,
+    OtpAuthMethodToJSON,
+    OtpAuthMethodToJSONTyped,
+} from './OtpAuthMethod';
 
 /**
  * Denotes what methods this app is allowed to use for authentication with configurations
@@ -61,13 +64,11 @@ export interface AuthMethods {
 /**
  * Check if a given object implements the AuthMethods interface.
  */
-export function instanceOfAuthMethods(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "passkeys" in value;
-    isInstance = isInstance && "otp" in value;
-    isInstance = isInstance && "magic_link" in value;
-
-    return isInstance;
+export function instanceOfAuthMethods(value: object): value is AuthMethods {
+    if (!('passkeys' in value) || value['passkeys'] === undefined) return false;
+    if (!('otp' in value) || value['otp'] === undefined) return false;
+    if (!('magic_link' in value) || value['magic_link'] === undefined) return false;
+    return true;
 }
 
 export function AuthMethodsFromJSON(json: any): AuthMethods {
@@ -75,7 +76,7 @@ export function AuthMethodsFromJSON(json: any): AuthMethods {
 }
 
 export function AuthMethodsFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthMethods {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -86,18 +87,20 @@ export function AuthMethodsFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function AuthMethodsToJSON(value?: AuthMethods | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AuthMethodsToJSON(json: any): AuthMethods {
+    return AuthMethodsToJSONTyped(json, false);
+}
+
+export function AuthMethodsToJSONTyped(value?: AuthMethods | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'passkeys': PasskeysAuthMethodToJSON(value.passkeys),
-        'otp': OtpAuthMethodToJSON(value.otp),
-        'magic_link': MagicLinkAuthMethodToJSON(value.magic_link),
+        'passkeys': PasskeysAuthMethodToJSON(value['passkeys']),
+        'otp': OtpAuthMethodToJSON(value['otp']),
+        'magic_link': MagicLinkAuthMethodToJSON(value['magic_link']),
     };
 }
 

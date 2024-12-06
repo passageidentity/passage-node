@@ -12,18 +12,20 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { MagicLinkChannel } from './MagicLinkChannel';
 import {
     MagicLinkChannelFromJSON,
     MagicLinkChannelFromJSONTyped,
     MagicLinkChannelToJSON,
+    MagicLinkChannelToJSONTyped,
 } from './MagicLinkChannel';
 import type { MagicLinkType } from './MagicLinkType';
 import {
     MagicLinkTypeFromJSON,
     MagicLinkTypeFromJSONTyped,
     MagicLinkTypeToJSON,
+    MagicLinkTypeToJSONTyped,
 } from './MagicLinkType';
 
 /**
@@ -37,13 +39,13 @@ export interface CreateMagicLinkRequest {
      * @type {MagicLinkChannel}
      * @memberof CreateMagicLinkRequest
      */
-    channel: MagicLinkChannel;
+    channel?: MagicLinkChannel;
     /**
      * 
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    email: string;
+    email?: string;
     /**
      * language of the email to send (optional)
      * @type {string}
@@ -51,35 +53,35 @@ export interface CreateMagicLinkRequest {
      */
     language?: string;
     /**
-     * 
+     * must be a relative url
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    magic_link_path: string;
+    magic_link_path?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    phone: string;
+    phone?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    redirect_url: string;
+    redirect_url?: string;
     /**
      * 
      * @type {boolean}
      * @memberof CreateMagicLinkRequest
      */
-    send: boolean;
+    send?: boolean;
     /**
      * 
      * @type {number}
      * @memberof CreateMagicLinkRequest
      */
-    ttl: number;
+    ttl?: number;
     /**
      * 
      * @type {MagicLinkType}
@@ -91,24 +93,16 @@ export interface CreateMagicLinkRequest {
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    user_id: string;
+    user_id?: string;
 }
+
+
 
 /**
  * Check if a given object implements the CreateMagicLinkRequest interface.
  */
-export function instanceOfCreateMagicLinkRequest(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "channel" in value;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "magic_link_path" in value;
-    isInstance = isInstance && "phone" in value;
-    isInstance = isInstance && "redirect_url" in value;
-    isInstance = isInstance && "send" in value;
-    isInstance = isInstance && "ttl" in value;
-    isInstance = isInstance && "user_id" in value;
-
-    return isInstance;
+export function instanceOfCreateMagicLinkRequest(value: object): value is CreateMagicLinkRequest {
+    return true;
 }
 
 export function CreateMagicLinkRequestFromJSON(json: any): CreateMagicLinkRequest {
@@ -116,43 +110,45 @@ export function CreateMagicLinkRequestFromJSON(json: any): CreateMagicLinkReques
 }
 
 export function CreateMagicLinkRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateMagicLinkRequest {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'channel': MagicLinkChannelFromJSON(json['channel']),
-        'email': json['email'],
-        'language': !exists(json, 'language') ? undefined : json['language'],
-        'magic_link_path': json['magic_link_path'],
-        'phone': json['phone'],
-        'redirect_url': json['redirect_url'],
-        'send': json['send'],
-        'ttl': json['ttl'],
-        'type': !exists(json, 'type') ? undefined : MagicLinkTypeFromJSON(json['type']),
-        'user_id': json['user_id'],
+        'channel': json['channel'] == null ? undefined : MagicLinkChannelFromJSON(json['channel']),
+        'email': json['email'] == null ? undefined : json['email'],
+        'language': json['language'] == null ? undefined : json['language'],
+        'magic_link_path': json['magic_link_path'] == null ? undefined : json['magic_link_path'],
+        'phone': json['phone'] == null ? undefined : json['phone'],
+        'redirect_url': json['redirect_url'] == null ? undefined : json['redirect_url'],
+        'send': json['send'] == null ? undefined : json['send'],
+        'ttl': json['ttl'] == null ? undefined : json['ttl'],
+        'type': json['type'] == null ? undefined : MagicLinkTypeFromJSON(json['type']),
+        'user_id': json['user_id'] == null ? undefined : json['user_id'],
     };
 }
 
-export function CreateMagicLinkRequestToJSON(value?: CreateMagicLinkRequest | null): any {
-    if (value === undefined) {
-        return undefined;
+export function CreateMagicLinkRequestToJSON(json: any): CreateMagicLinkRequest {
+    return CreateMagicLinkRequestToJSONTyped(json, false);
+}
+
+export function CreateMagicLinkRequestToJSONTyped(value?: CreateMagicLinkRequest | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'channel': MagicLinkChannelToJSON(value.channel),
-        'email': value.email,
-        'language': value.language,
-        'magic_link_path': value.magic_link_path,
-        'phone': value.phone,
-        'redirect_url': value.redirect_url,
-        'send': value.send,
-        'ttl': value.ttl,
-        'type': MagicLinkTypeToJSON(value.type),
-        'user_id': value.user_id,
+        'channel': MagicLinkChannelToJSON(value['channel']),
+        'email': value['email'],
+        'language': value['language'],
+        'magic_link_path': value['magic_link_path'],
+        'phone': value['phone'],
+        'redirect_url': value['redirect_url'],
+        'send': value['send'],
+        'ttl': value['ttl'],
+        'type': MagicLinkTypeToJSON(value['type']),
+        'user_id': value['user_id'],
     };
 }
 

@@ -12,12 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { TtlDisplayUnit } from './TtlDisplayUnit';
 import {
     TtlDisplayUnitFromJSON,
     TtlDisplayUnitFromJSONTyped,
     TtlDisplayUnitToJSON,
+    TtlDisplayUnitToJSONTyped,
 } from './TtlDisplayUnit';
 
 /**
@@ -47,16 +48,16 @@ export interface OtpAuthMethod {
     ttl_display_unit: TtlDisplayUnit;
 }
 
+
+
 /**
  * Check if a given object implements the OtpAuthMethod interface.
  */
-export function instanceOfOtpAuthMethod(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "enabled" in value;
-    isInstance = isInstance && "ttl" in value;
-    isInstance = isInstance && "ttl_display_unit" in value;
-
-    return isInstance;
+export function instanceOfOtpAuthMethod(value: object): value is OtpAuthMethod {
+    if (!('enabled' in value) || value['enabled'] === undefined) return false;
+    if (!('ttl' in value) || value['ttl'] === undefined) return false;
+    if (!('ttl_display_unit' in value) || value['ttl_display_unit'] === undefined) return false;
+    return true;
 }
 
 export function OtpAuthMethodFromJSON(json: any): OtpAuthMethod {
@@ -64,7 +65,7 @@ export function OtpAuthMethodFromJSON(json: any): OtpAuthMethod {
 }
 
 export function OtpAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): OtpAuthMethod {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -75,18 +76,20 @@ export function OtpAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function OtpAuthMethodToJSON(value?: OtpAuthMethod | null): any {
-    if (value === undefined) {
-        return undefined;
+export function OtpAuthMethodToJSON(json: any): OtpAuthMethod {
+    return OtpAuthMethodToJSONTyped(json, false);
+}
+
+export function OtpAuthMethodToJSONTyped(value?: OtpAuthMethod | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'enabled': value.enabled,
-        'ttl': value.ttl,
-        'ttl_display_unit': TtlDisplayUnitToJSON(value.ttl_display_unit),
+        'enabled': value['enabled'],
+        'ttl': value['ttl'],
+        'ttl_display_unit': TtlDisplayUnitToJSON(value['ttl_display_unit']),
     };
 }
 
