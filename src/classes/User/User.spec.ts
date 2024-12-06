@@ -61,8 +61,6 @@ describe('User class', () => {
     it('should throw an error if get user by identifier returns an empty array', async () => {
         usersApiMock.listPaginatedUsers.mockResolvedValue({ users: [] } as unknown as ListPaginatedUsersResponse);
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(PassageError);
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(
-            'Could not find user with that identifier.',
-        );
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow('User not found.');
     });
 });
