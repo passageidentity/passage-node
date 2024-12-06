@@ -55,7 +55,7 @@ export class User extends PassageBase {
 
             const users = response.users;
             if (!users.length) {
-                throw new PassageError('Could not find user with that identifier.');
+                throw new PassageError('User not found.');
             }
 
             return this.get(users[0].id);
