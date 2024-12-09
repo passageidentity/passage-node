@@ -5,7 +5,7 @@ export { MagicLinkType, MagicLink, CreateMagicLinkRequest, MagicLinkChannel } fr
 type MagicLinkArgsBase = {
     type: MagicLinkType;
     send: boolean;
-}
+};
 
 type MagicLinkWithEmailArgs = { email: string } & MagicLinkArgsBase;
 type MagicLinkWithPhoneArgs = { phone: string } & MagicLinkArgsBase;
@@ -13,8 +13,8 @@ type MagicLinkWithUserArgs = { userId: string; channel: MagicLinkChannel } & Mag
 
 export type CreateMagicLinkArgs = MagicLinkWithEmailArgs | MagicLinkWithPhoneArgs | MagicLinkWithUserArgs;
 export type MagicLinkOptions = {
-  language?: string;
-  magicLinkPath?: string;
-  redirectUrl?: string;
-  ttl?: number;
+    language?: string;
+    magicLinkPath?: string;
+    redirectUrl?: string;
+    ttl?: number;
 };

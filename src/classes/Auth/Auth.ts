@@ -79,7 +79,13 @@ export class Auth extends PassageBase {
             const { language, magicLinkPath, redirectUrl, ttl } = options || {};
             const response = await magicLinksApi.createMagicLink({
                 appId: this.config.appId,
-                createMagicLinkRequest: {...args, language, magic_link_path: magicLinkPath, redirect_url: redirectUrl, ttl },
+                createMagicLinkRequest: {
+                    ...args,
+                    language,
+                    magic_link_path: magicLinkPath,
+                    redirect_url: redirectUrl,
+                    ttl,
+                },
             });
 
             return response.magic_link;

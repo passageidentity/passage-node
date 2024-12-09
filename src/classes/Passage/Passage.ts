@@ -176,28 +176,26 @@ export class Passage {
      */
     async createMagicLink(args: CreateMagicLinkRequest): Promise<MagicLink> {
         let magicLinkArgs: CreateMagicLinkArgs;
-        if(!args.type) {
+        if (!args.type) {
             throw new Error('Magic link type is required.');
         }
-        if(!args.send) {
+        if (!args.send) {
             throw new Error('Magic link send is required.');
         }
-        if(args.email) {
+        if (args.email) {
             magicLinkArgs = {
                 email: args.email,
                 type: args.type,
                 send: args.send,
             };
-        }
-        else if(args.phone) {
+        } else if (args.phone) {
             magicLinkArgs = {
                 phone: args.phone,
                 type: args.type,
                 send: args.send ?? false,
             };
-        }
-        else if(args.user_id) {
-            if(!args.channel) {
+        } else if (args.user_id) {
+            if (!args.channel) {
                 throw new Error('Magic link channel is required when sending by user id.');
             }
             magicLinkArgs = {
@@ -206,8 +204,7 @@ export class Passage {
                 type: args.type,
                 send: args.send,
             };
-        }
-        else {
+        } else {
             throw new Error('Either an email, phone number, or user id is required.');
         }
         const options: MagicLinkOptions = {
