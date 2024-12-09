@@ -1,12 +1,12 @@
 import { AuthStrategy } from '../../types/AuthStrategy';
 import { PassageConfig } from '../../types/PassageConfig';
 import { PassageError } from '../PassageError';
-import { AppInfo, AppsApi, Configuration, MagicLink, ResponseError } from '../../generated';
+import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, ResponseError } from '../../generated';
 import apiConfiguration from '../../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../../utils/getHeader';
 import { PassageInstanceConfig } from '../PassageBase';
-import { Auth, CreateMagicLinkArgs } from '../Auth';
+import { Auth, CreateMagicLinkArgs, MagicLinkOptions } from '../Auth';
 import { User } from '../User';
 
 /**
@@ -171,11 +171,52 @@ export class Passage {
      * @deprecated Use Passage.auth.createMagicLink instead.
      * Create a Magic Link for your app.
      *
-     * @param {CreateMagicLinkArgs} args options for creating a MagicLink.
+     * @param {CreateMagicLinkRequest} args options for creating a MagicLink.
      * @return {Promise<MagicLink>} Passage MagicLink object
      */
-    async createMagicLink(args: CreateMagicLinkArgs): Promise<MagicLink> {
-        return this.auth.createMagicLink(args);
+    async createMagicLink(args: CreateMagicLinkRequest): Promise<MagicLink> {
+        let magicLinkArgs: CreateMagicLinkArgs;
+        if(!args.type) {
+            throw new Error('Magic link type is required.');
+        }
+        if(!args.send) {
+            throw new Error('Magic link send is required.');
+        }
+        if(args.email) {
+            magicLinkArgs = {
+                email: args.email,
+                type: args.type,
+                send: args.send,
+            };
+        }
+        else if(args.phone) {
+            magicLinkArgs = {
+                phone: args.phone,
+                type: args.type,
+                send: args.send ?? false,
+            };
+        }
+        else if(args.user_id) {
+            if(!args.channel) {
+                throw new Error('Magic link channel is required when sending by user id.');
+            }
+            magicLinkArgs = {
+                userId: args.user_id,
+                channel: args.channel,
+                type: args.type,
+                send: args.send,
+            };
+        }
+        else {
+            throw new Error('Either an email, phone number, or user id is required.');
+        }
+        const options: MagicLinkOptions = {
+            language: args.language,
+            magicLinkPath: args.magic_link_path,
+            redirectUrl: args.redirect_url,
+            ttl: args.ttl,
+        };
+        return this.auth.createMagicLink(magicLinkArgs, options);
     }
 
     /**

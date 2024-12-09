@@ -1,7 +1,20 @@
-import { CreateMagicLinkRequest } from '../../generated';
+import { MagicLinkChannel, MagicLinkType } from '../../generated';
 
-export type CreateMagicLinkArgs = CreateMagicLinkRequest;
+export { MagicLinkType, MagicLink, CreateMagicLinkRequest, MagicLinkChannel } from '../../generated';
 
-export { MagicLinkType, MagicLink } from '../../generated';
+type MagicLinkArgsBase = {
+    type: MagicLinkType;
+    send: boolean;
+}
 
-export { CreateMagicLinkRequest };
+type MagicLinkWithEmailArgs = { email: string } & MagicLinkArgsBase;
+type MagicLinkWithPhoneArgs = { phone: string } & MagicLinkArgsBase;
+type MagicLinkWithUserArgs = { userId: string; channel: MagicLinkChannel } & MagicLinkArgsBase;
+
+export type CreateMagicLinkArgs = MagicLinkWithEmailArgs | MagicLinkWithPhoneArgs | MagicLinkWithUserArgs;
+export type MagicLinkOptions = {
+  language?: string;
+  magicLinkPath?: string;
+  redirectUrl?: string;
+  ttl?: number;
+};

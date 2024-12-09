@@ -9,7 +9,7 @@ import {
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import { PassageError } from '../PassageError';
 import { MagicLink, MagicLinksApi } from '../../generated';
-import { CreateMagicLinkArgs } from './types';
+import { CreateMagicLinkArgs, MagicLinkOptions } from './types';
 
 /**
  * Auth class that provides methods for validating JWTs and creating Magic Links.
@@ -70,14 +70,16 @@ export class Auth extends PassageBase {
      * Create a Magic Link for your app.
      *
      * @param {CreateMagicLinkArgs} args options for creating a MagicLink.
+     * @param {MagicLinkOptions} options options for creating a MagicLink.
      * @return {Promise<MagicLink>} Passage MagicLink object
      */
-    public async createMagicLink(args: CreateMagicLinkArgs): Promise<MagicLink> {
+    public async createMagicLink(args: CreateMagicLinkArgs, options?: MagicLinkOptions): Promise<MagicLink> {
         try {
             const magicLinksApi = new MagicLinksApi(this.config.apiConfiguration);
+            const { language, magicLinkPath, redirectUrl, ttl } = options || {};
             const response = await magicLinksApi.createMagicLink({
                 appId: this.config.appId,
-                createMagicLinkRequest: args,
+                createMagicLinkRequest: {...args, language, magic_link_path: magicLinkPath, redirect_url: redirectUrl, ttl },
             });
 
             return response.magic_link;
