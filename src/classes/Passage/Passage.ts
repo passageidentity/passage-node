@@ -1,12 +1,12 @@
 import { AuthStrategy } from '../../types/AuthStrategy';
 import { PassageConfig } from '../../types/PassageConfig';
 import { PassageError } from '../PassageError';
-import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, MagicLinkChannel, MagicLinkType, ResponseError } from '../../generated';
+import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, MagicLinksApi, ResponseError } from '../../generated';
 import apiConfiguration from '../../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../../utils/getHeader';
 import { PassageInstanceConfig } from '../PassageBase';
-import { Auth, CreateMagicLinkArgs, MagicLinkOptions } from '../Auth';
+import { Auth } from '../Auth';
 import { User } from '../User';
 
 /**
@@ -175,41 +175,20 @@ export class Passage {
      * @return {Promise<MagicLink>} Passage MagicLink object
      */
     async createMagicLink(args: CreateMagicLinkRequest): Promise<MagicLink> {
-        let magicLinkArgs: CreateMagicLinkArgs;
-        if (args.email) {
-            magicLinkArgs = {
-                email: args.email,
-                type: args.type ?? MagicLinkType.Login,
-                send: args.send ?? false,
-            };
-        } else if (args.phone) {
-            magicLinkArgs = {
-                phone: args.phone,
-                type: args.type ?? MagicLinkType.Login,
-                send: args.send ?? false,
-            };
-        } else if (args.user_id) {
-            magicLinkArgs = {
-                userId: args.user_id,
-                channel: args.channel ?? MagicLinkChannel.Email,
-                type: args.type ?? MagicLinkType.Login,
-                send: args.send ?? false,
-            };
-        } else {
-            magicLinkArgs = {
-                email: '',
-                phone: '',
-                send: false,
-                type: MagicLinkType.Login,
-            };
+        try {
+            const magicLinksApi = new MagicLinksApi(this._apiConfiguration);
+            const response = await magicLinksApi.createMagicLink({
+                appId: this.appId,
+                createMagicLinkRequest: args,
+            });
+
+            return response.magic_link;
+        } catch (err) {
+            if (err instanceof ResponseError) {
+                throw await PassageError.fromResponseError(err, 'Could not create a magic link for this app');
+            }
+            throw err;
         }
-        const options: MagicLinkOptions = {
-            language: args.language,
-            magicLinkPath: args.magic_link_path,
-            redirectUrl: args.redirect_url,
-            ttl: args.ttl,
-        };
-        return this.auth.createMagicLink(magicLinkArgs, options);
     }
 
     /**
