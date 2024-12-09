@@ -27,6 +27,10 @@ export class User extends PassageBase {
      * @return {Promise<PassageUser>} Passage User object
      */
     public async get(userId: string): Promise<PassageUser> {
+        if (!userId) {
+            throw new Error('userId is required.');
+        }
+
         try {
             const response = await this.usersApi.getUser({
                 userId,
@@ -46,6 +50,10 @@ export class User extends PassageBase {
      * @return {Promise<PassageUser>} Passage User object
      */
     public async getByIdentifier(identifier: string): Promise<PassageUser> {
+        if (!identifier) {
+            throw new Error('identifier is required.');
+        }
+
         try {
             const response = await this.usersApi.listPaginatedUsers({
                 appId: this.config.appId,
@@ -71,6 +79,10 @@ export class User extends PassageBase {
      * @return {Promise<PassageUser>} Passage User object
      */
     public async activate(userId: string): Promise<PassageUser> {
+        if (!userId) {
+            throw new Error('userId is required.');
+        }
+
         try {
             const response = await this.usersApi.activateUser({
                 userId,
@@ -89,6 +101,10 @@ export class User extends PassageBase {
      * @return {Promise<PassageUser>} Passage User object
      */
     public async deactivate(userId: string): Promise<PassageUser> {
+        if (!userId) {
+            throw new Error('userId is required.');
+        }
+
         try {
             const response = await this.usersApi.deactivateUser({
                 userId,
@@ -109,6 +125,10 @@ export class User extends PassageBase {
      * @return {Promise<PassageUser>} Passage User object
      */
     public async update(userId: string, options: UpdateUserArgs): Promise<PassageUser> {
+        if (!userId) {
+            throw new Error('userId is required.');
+        }
+
         try {
             const response = await this.usersApi.updateUser({
                 userId,
@@ -129,6 +149,10 @@ export class User extends PassageBase {
      * @return {Promise<PassageUser>} Passage User object
      */
     public async create(args: CreateUserArgs): Promise<PassageUser> {
+        if (!args.email && !args.phone) {
+            throw new Error('At least one of args.email or args.phone is required.');
+        }
+
         try {
             const response = await this.usersApi.createUser({
                 appId: this.config.appId,
@@ -148,6 +172,10 @@ export class User extends PassageBase {
      * @return {Promise<boolean>}
      */
     public async delete(userId: string): Promise<boolean> {
+        if (!userId) {
+            throw new Error('userId is required.');
+        }
+
         try {
             await this.usersApi.deleteUser({
                 userId,
@@ -166,6 +194,10 @@ export class User extends PassageBase {
      * @return {Promise<WebAuthnDevices[]>} List of devices
      */
     public async listDevices(userId: string): Promise<WebAuthnDevices[]> {
+        if (!userId) {
+            throw new Error('userId is required.');
+        }
+
         try {
             const response = await this.userDevicesApi.listUserDevices({
                 userId,
@@ -186,6 +218,14 @@ export class User extends PassageBase {
      * @return {Promise<boolean>}
      */
     public async revokeDevice(userId: string, deviceId: string): Promise<boolean> {
+        if (!userId) {
+            throw new Error('userId is required.');
+        }
+
+        if (!deviceId) {
+            throw new Error('deviceId is required.');
+        }
+
         try {
             await this.userDevicesApi.deleteUserDevices({
                 userId,
@@ -206,6 +246,10 @@ export class User extends PassageBase {
      * @return {Promise<boolean>}
      */
     public async revokeRefreshTokens(userId: string): Promise<boolean> {
+        if (!userId) {
+            throw new Error('userId is required.');
+        }
+
         try {
             const client = new TokensApi(this.config.apiConfiguration);
 

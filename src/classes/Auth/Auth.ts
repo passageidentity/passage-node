@@ -38,6 +38,10 @@ export class Auth extends PassageBase {
      * @return {string} User ID of the Passage user
      */
     public async validateJwt(jwt: string): Promise<string> {
+        if (!jwt) {
+            throw new Error('jwt is required.');
+        }
+
         try {
             const { kid } = decodeProtectedHeader(jwt);
             if (!kid) {
