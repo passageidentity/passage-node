@@ -76,7 +76,7 @@ export class Auth extends PassageBase {
     public async createMagicLink(args: CreateMagicLinkArgs, options?: MagicLinkOptions): Promise<MagicLink> {
         try {
             const magicLinksApi = new MagicLinksApi(this.config.apiConfiguration);
-            const { language, magicLinkPath, redirectUrl, ttl } = options || {};
+            const { language, magicLinkPath, redirectUrl, ttl } = options ?? {};
             const response = await magicLinksApi.createMagicLink({
                 appId: this.config.appId,
                 createMagicLinkRequest: {
