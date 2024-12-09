@@ -31,7 +31,7 @@ jobs:
         run: npm run build
       - name: Publish to NPM
         if: ${{ steps.release.outputs.release_created }}
-        run: npm publish --dry-run
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
       # https://github.com/googleapis/release-please-action?tab=readme-ov-file#creating-majorminor-tags
