@@ -1,7 +1,7 @@
 import { AuthStrategy } from '../../types/AuthStrategy';
 import { PassageConfig } from '../../types/PassageConfig';
 import { PassageError } from '../PassageError';
-import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, ResponseError } from '../../generated';
+import { AppInfo, AppsApi, Configuration, CreateMagicLinkRequest, MagicLink, MagicLinkChannel, MagicLinkType, ResponseError } from '../../generated';
 import apiConfiguration from '../../utils/apiConfiguration';
 import { IncomingMessage } from 'http';
 import { getHeaderFromRequest } from '../../utils/getHeader';
@@ -176,36 +176,32 @@ export class Passage {
      */
     async createMagicLink(args: CreateMagicLinkRequest): Promise<MagicLink> {
         let magicLinkArgs: CreateMagicLinkArgs;
-        if (!args.type) {
-            throw new Error('Magic link type is required.');
-        }
-        if (args.send === undefined) {
-            throw new Error('Send field is required.');
-        }
         if (args.email) {
             magicLinkArgs = {
                 email: args.email,
-                type: args.type,
-                send: args.send,
+                type: args.type ?? MagicLinkType.Login,
+                send: args.send ?? false,
             };
         } else if (args.phone) {
             magicLinkArgs = {
                 phone: args.phone,
-                type: args.type,
+                type: args.type ?? MagicLinkType.Login,
                 send: args.send ?? false,
             };
         } else if (args.user_id) {
-            if (!args.channel) {
-                throw new Error('Magic link channel is required when sending by user id.');
-            }
             magicLinkArgs = {
                 userId: args.user_id,
-                channel: args.channel,
-                type: args.type,
-                send: args.send,
+                channel: args.channel ?? MagicLinkChannel.Email,
+                type: args.type ?? MagicLinkType.Login,
+                send: args.send ?? false,
             };
         } else {
-            throw new Error('Either an email, phone number, or user id is required.');
+            magicLinkArgs = {
+                email: '',
+                phone: '',
+                send: false,
+                type: MagicLinkType.Login,
+            };
         }
         const options: MagicLinkOptions = {
             language: args.language,
