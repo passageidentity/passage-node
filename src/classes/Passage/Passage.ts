@@ -179,8 +179,8 @@ export class Passage {
         if (!args.type) {
             throw new Error('Magic link type is required.');
         }
-        if (!args.send) {
-            throw new Error('Magic link send is required.');
+        if (args.send === undefined) {
+            throw new Error('Send field is required.');
         }
         if (args.email) {
             magicLinkArgs = {
