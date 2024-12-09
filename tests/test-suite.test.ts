@@ -3,7 +3,7 @@ import request from 'supertest';
 import Passage from '../src/index';
 import { PassageError } from '../src/classes/PassageError';
 import app from '../testServer';
-import { CreateMagicLinkRequest, CreateUserRequest } from '../src/generated';
+import { CreateMagicLinkRequest, CreateUserRequest, MagicLinkType } from '../src/generated';
 import { faker } from '@faker-js/faker';
 
 require('dotenv').config();
@@ -63,7 +63,8 @@ describe('Passage API Requests', () => {
         test('createMagicLink', async () => {
             const magicLink = await passage.createMagicLink({
                 email: 'chris@passage.id',
-                channel: 'email',
+                type: MagicLinkType.Login,
+                send: false,
                 ttl: 12,
             } as CreateMagicLinkRequest);
             expect(magicLink).toHaveProperty('identifier', 'chris@passage.id');
