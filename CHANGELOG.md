@@ -4,6 +4,22 @@ This log was last generated on Wed, 30 Oct 2024 17:11:25 GMT and should not be m
 
 <!-- Start content -->
 
+## [2.12.0](https://github.com/passageidentity/passage-node/compare/passage-node-v2.11.2...passage-node-v2.12.0) (2024-12-09)
+
+
+### Features
+
+* Add Audience Validation ([#180](https://github.com/passageidentity/passage-node/issues/180)) ([8d6c7ab](https://github.com/passageidentity/passage-node/commit/8d6c7abd70c0e5283478e89f9c28903c515fda8b))
+* **codegen:** create magic link request fields are now optional ([#191](https://github.com/passageidentity/passage-node/issues/191)) ([d36dfdf](https://github.com/passageidentity/passage-node/commit/d36dfdf8897fc264ef274da99d1060440c4c2dda))
+* Reorg SDK with new Class Organization ([#174](https://github.com/passageidentity/passage-node/issues/174)) ([2dfcc8a](https://github.com/passageidentity/passage-node/commit/2dfcc8ab1cff4cdff46f79e476f492fd8486f8b4))
+* Updated CreateMagicLinkArgs parameter ([#194](https://github.com/passageidentity/passage-node/issues/194)) ([ce2e404](https://github.com/passageidentity/passage-node/commit/ce2e40479741dd02830fec2f36ba3bf83fc41a1b))
+
+
+### Bug Fixes
+
+* Address Node Feedback ([#190](https://github.com/passageidentity/passage-node/issues/190)) ([0cd94ec](https://github.com/passageidentity/passage-node/commit/0cd94ec0e097af9a8d9a4a2ed7b4fbd5fdac1ccf))
+* Use consistent user not found error ([#192](https://github.com/passageidentity/passage-node/issues/192)) ([af438d4](https://github.com/passageidentity/passage-node/commit/af438d41f10b7e216c989b159eab5d948f15a322))
+
 ## 2.11.2
 
 Wed, 30 Oct 2024 17:11:25 GMT
