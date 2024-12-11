@@ -8,7 +8,7 @@ import {
 } from 'jose';
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import { PassageError } from '../PassageError';
-import { MagicLink, MagicLinksApi } from '../../generated';
+import { MagicLink, MagicLinkChannel, MagicLinksApi } from '../../generated';
 import { CreateMagicLinkArgs, MagicLinkOptions } from './types';
 
 /**
@@ -16,7 +16,7 @@ import { CreateMagicLinkArgs, MagicLinkOptions } from './types';
  */
 export class Auth extends PassageBase {
     private readonly jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
-
+    private readonly magicLinksApi: MagicLinksApi;
     /**
      * Auth class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
@@ -29,6 +29,8 @@ export class Auth extends PassageBase {
                 cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
             },
         );
+
+        this.magicLinksApi = new MagicLinksApi(this.config.apiConfiguration);
     }
 
     /**
@@ -79,9 +81,18 @@ export class Auth extends PassageBase {
      */
     public async createMagicLink(args: CreateMagicLinkArgs, options?: MagicLinkOptions): Promise<MagicLink> {
         try {
-            const magicLinksApi = new MagicLinksApi(this.config.apiConfiguration);
             const { language, magicLinkPath, redirectUrl, ttl } = options ?? {};
-            const response = await magicLinksApi.createMagicLink({
+
+            let channel: MagicLinkChannel;
+            if ('userId' in args) {
+                channel = args.channel;
+            } else if ('email' in args) {
+                channel = MagicLinkChannel.Email;
+            } else {
+                channel = MagicLinkChannel.Phone;
+            }
+
+            const response = await this.magicLinksApi.createMagicLink({
                 appId: this.config.appId,
                 createMagicLinkRequest: {
                     ...args,
@@ -89,6 +100,7 @@ export class Auth extends PassageBase {
                     magic_link_path: magicLinkPath,
                     redirect_url: redirectUrl,
                     ttl,
+                    channel,
                 },
             });
 
