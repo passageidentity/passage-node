@@ -56,14 +56,7 @@
         "lint:ci": "eslint '{src,tests}/**/*.ts'",
         "format": "prettier --write '{src,tests}/**/*.ts'",
         "format:ci": "prettier --check '{src,tests}/**/*.ts'",
-        "dev": "ts-node-dev --respawn testServer.ts",
         "test": "jest",
-        "test:watch": "jest --watch",
-        "change": "beachball change",
-        "publish": "beachball publish -y",
-        "set-version": "echo '{\"version\":\"'$npm_package_name' '$npm_package_version'\"}' > ./src/utils/config.json",
-        "beachball-bump": "beachball bump",
-        "beachball-check": "beachball check",
         "build": "tsc --noEmit & tsup ./src/index.ts --no-config --format esm,cjs --dts-resolve --minify"
     },
     "dependencies": {
@@ -80,18 +73,14 @@
         "@typescript-eslint/eslint-plugin": "^8.13.0",
         "@typescript-eslint/parser": "^8.13.0",
         "babel-jest": "^29.7.0",
-        "beachball": "^2.37.0",
         "dotenv": "^16.4.5",
         "eslint": "^8.57.0",
         "eslint-config-google": "^0.14.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.1",
-        "express": "^4.21.1",
         "jest": "^29.7.0",
         "prettier": "^3.3.3",
-        "supertest": "^7.0.0",
         "ts-jest": "^29.2.5",
-        "ts-node-dev": "^2.0.0",
         "tsup": "^8.2.4",
         "typescript": "^5.6.3"
     }
