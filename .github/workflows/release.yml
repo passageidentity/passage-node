@@ -29,14 +29,14 @@ jobs:
       - name: Build
         if: ${{ steps.release.outputs.release_created }}
         run: npm run build
-      - name: Publish to NPM
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_ACCESS_TOKEN }}
+        id: publish
         if: ${{ steps.release.outputs.release_created }}
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
       # https://github.com/googleapis/release-please-action?tab=readme-ov-file#creating-majorminor-tags
       - name: Tag versions
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created && steps.publish.outputs.type }}
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
