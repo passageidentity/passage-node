@@ -4,6 +4,22 @@ This log was last generated on Wed, 30 Oct 2024 17:11:25 GMT and should not be m
 
 <!-- Start content -->
 
+## [2.12.0](https://github.com/passageidentity/passage-node/compare/v2.12.0...v2.12.0) (2024-12-12)
+
+
+### Features
+
+* Add Audience Validation ([#180](https://github.com/passageidentity/passage-node/issues/180)) ([8d6c7ab](https://github.com/passageidentity/passage-node/commit/8d6c7abd70c0e5283478e89f9c28903c515fda8b))
+* add new Passage.auth.createMagicLinks method signature with stronger type hinting ([ce2e404](https://github.com/passageidentity/passage-node/commit/ce2e40479741dd02830fec2f36ba3bf83fc41a1b))
+* add parameter guards ([#195](https://github.com/passageidentity/passage-node/issues/195)) ([1499e7a](https://github.com/passageidentity/passage-node/commit/1499e7ab2c09c827bb1ff684500f402f65818918))
+* **codegen:** create magic link request fields are now optional ([#191](https://github.com/passageidentity/passage-node/issues/191)) ([d36dfdf](https://github.com/passageidentity/passage-node/commit/d36dfdf8897fc264ef274da99d1060440c4c2dda))
+* Reorg SDK with new Class Organization ([#174](https://github.com/passageidentity/passage-node/issues/174)) ([2dfcc8a](https://github.com/passageidentity/passage-node/commit/2dfcc8ab1cff4cdff46f79e476f492fd8486f8b4))
+
+
+### Miscellaneous Chores
+
+* Release as v2.12.0 ([#204](https://github.com/passageidentity/passage-node/issues/204)) ([44c65f4](https://github.com/passageidentity/passage-node/commit/44c65f43b6f22d2a78e4be794cbb1b1b9e129818))
+
 ## [2.12.0](https://github.com/passageidentity/passage-node/compare/passage-node-v2.11.2...passage-node-v2.12.0) (2024-12-12)
 
 
