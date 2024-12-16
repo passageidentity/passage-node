@@ -4,6 +4,13 @@ This log was last generated on Wed, 30 Oct 2024 17:11:25 GMT and should not be m
 
 <!-- Start content -->
 
+## [2.12.1](https://github.com/passageidentity/passage-node/compare/v2.12.0...v2.12.1) (2024-12-16)
+
+
+### Bug Fixes
+
+* createMagicLink now correctly transforms the "userId" parameter ([#205](https://github.com/passageidentity/passage-node/issues/205)) ([a07c50f](https://github.com/passageidentity/passage-node/commit/a07c50f1a840ef26d2c7843b8ed7691dc8b56d30))
+
 ## [2.12.0](https://github.com/passageidentity/passage-node/compare/v2.12.0...v2.12.0) (2024-12-12)
 
 
