@@ -1,6 +1,6 @@
 {
     "name": "@passageidentity/passage-node",
-    "version": "2.12.0",
+    "version": "2.12.1",
     "author": "Passage by 1Password",
     "license": "MIT",
     "description": "Passkey Complete for Node.js - Integrate into your Node.js API or service to enable a completely passwordless standalone auth solution with Passage by 1Password",
