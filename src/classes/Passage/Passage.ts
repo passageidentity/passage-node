@@ -190,7 +190,7 @@ export class Passage {
                 createMagicLinkRequest: args,
             });
 
-            return response.magic_link;
+            return response.magicLink;
         } catch (err) {
             if (err instanceof ResponseError) {
                 throw await PassageError.fromResponseError(err, 'Could not create a magic link for this app');
