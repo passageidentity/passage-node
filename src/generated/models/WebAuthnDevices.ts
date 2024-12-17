@@ -39,19 +39,19 @@ export interface WebAuthnDevices {
      * @type {Date}
      * @memberof WebAuthnDevices
      */
-    created_at: Date;
+    createdAt: Date;
     /**
      * The CredID for this webAuthn device
      * @type {string}
      * @memberof WebAuthnDevices
      */
-    cred_id: string;
+    credId: string;
     /**
      * The friendly name for the webAuthn device used to authenticate
      * @type {string}
      * @memberof WebAuthnDevices
      */
-    friendly_name: string;
+    friendlyName: string;
     /**
      * The ID of the webAuthn device used for authentication
      * @type {string}
@@ -63,7 +63,7 @@ export interface WebAuthnDevices {
      * @type {Date}
      * @memberof WebAuthnDevices
      */
-    last_login_at: Date;
+    lastLoginAt: Date;
     /**
      * 
      * @type {WebAuthnType}
@@ -75,13 +75,13 @@ export interface WebAuthnDevices {
      * @type {Date}
      * @memberof WebAuthnDevices
      */
-    updated_at: Date;
+    updatedAt: Date;
     /**
      * How many times this webAuthn device has been used to authenticate the user
      * @type {number}
      * @memberof WebAuthnDevices
      */
-    usage_count: number;
+    usageCount: number;
     /**
      * 
      * @type {WebAuthnIcons}
@@ -96,14 +96,14 @@ export interface WebAuthnDevices {
  * Check if a given object implements the WebAuthnDevices interface.
  */
 export function instanceOfWebAuthnDevices(value: object): value is WebAuthnDevices {
-    if (!('created_at' in value) || value['created_at'] === undefined) return false;
-    if (!('cred_id' in value) || value['cred_id'] === undefined) return false;
-    if (!('friendly_name' in value) || value['friendly_name'] === undefined) return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
+    if (!('credId' in value) || value['credId'] === undefined) return false;
+    if (!('friendlyName' in value) || value['friendlyName'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('last_login_at' in value) || value['last_login_at'] === undefined) return false;
+    if (!('lastLoginAt' in value) || value['lastLoginAt'] === undefined) return false;
     if (!('type' in value) || value['type'] === undefined) return false;
-    if (!('updated_at' in value) || value['updated_at'] === undefined) return false;
-    if (!('usage_count' in value) || value['usage_count'] === undefined) return false;
+    if (!('updatedAt' in value) || value['updatedAt'] === undefined) return false;
+    if (!('usageCount' in value) || value['usageCount'] === undefined) return false;
     if (!('icons' in value) || value['icons'] === undefined) return false;
     return true;
 }
@@ -118,14 +118,14 @@ export function WebAuthnDevicesFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'created_at': (new Date(json['created_at'])),
-        'cred_id': json['cred_id'],
-        'friendly_name': json['friendly_name'],
+        'createdAt': (new Date(json['created_at'])),
+        'credId': json['cred_id'],
+        'friendlyName': json['friendly_name'],
         'id': json['id'],
-        'last_login_at': (new Date(json['last_login_at'])),
+        'lastLoginAt': (new Date(json['last_login_at'])),
         'type': WebAuthnTypeFromJSON(json['type']),
-        'updated_at': (new Date(json['updated_at'])),
-        'usage_count': json['usage_count'],
+        'updatedAt': (new Date(json['updated_at'])),
+        'usageCount': json['usage_count'],
         'icons': WebAuthnIconsFromJSON(json['icons']),
     };
 }
@@ -141,14 +141,14 @@ export function WebAuthnDevicesToJSONTyped(value?: WebAuthnDevices | null, ignor
 
     return {
         
-        'created_at': ((value['created_at']).toISOString()),
-        'cred_id': value['cred_id'],
-        'friendly_name': value['friendly_name'],
+        'created_at': ((value['createdAt']).toISOString()),
+        'cred_id': value['credId'],
+        'friendly_name': value['friendlyName'],
         'id': value['id'],
-        'last_login_at': ((value['last_login_at']).toISOString()),
+        'last_login_at': ((value['lastLoginAt']).toISOString()),
         'type': WebAuthnTypeToJSON(value['type']),
-        'updated_at': ((value['updated_at']).toISOString()),
-        'usage_count': value['usage_count'],
+        'updated_at': ((value['updatedAt']).toISOString()),
+        'usage_count': value['usageCount'],
         'icons': WebAuthnIconsToJSON(value['icons']),
     };
 }
