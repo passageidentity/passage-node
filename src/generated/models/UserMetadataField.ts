@@ -32,13 +32,13 @@ export interface UserMetadataField {
      * @type {string}
      * @memberof UserMetadataField
      */
-    field_name: string;
+    fieldName: string;
     /**
      * 
      * @type {string}
      * @memberof UserMetadataField
      */
-    friendly_name: string;
+    friendlyName: string;
     /**
      * 
      * @type {string}
@@ -71,8 +71,8 @@ export interface UserMetadataField {
  * Check if a given object implements the UserMetadataField interface.
  */
 export function instanceOfUserMetadataField(value: object): value is UserMetadataField {
-    if (!('field_name' in value) || value['field_name'] === undefined) return false;
-    if (!('friendly_name' in value) || value['friendly_name'] === undefined) return false;
+    if (!('fieldName' in value) || value['fieldName'] === undefined) return false;
+    if (!('friendlyName' in value) || value['friendlyName'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('profile' in value) || value['profile'] === undefined) return false;
     if (!('registration' in value) || value['registration'] === undefined) return false;
@@ -90,8 +90,8 @@ export function UserMetadataFieldFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'field_name': json['field_name'],
-        'friendly_name': json['friendly_name'],
+        'fieldName': json['field_name'],
+        'friendlyName': json['friendly_name'],
         'id': json['id'],
         'profile': json['profile'],
         'registration': json['registration'],
@@ -110,8 +110,8 @@ export function UserMetadataFieldToJSONTyped(value?: UserMetadataField | null, i
 
     return {
         
-        'field_name': value['field_name'],
-        'friendly_name': value['friendly_name'],
+        'field_name': value['fieldName'],
+        'friendly_name': value['friendlyName'],
         'id': value['id'],
         'profile': value['profile'],
         'registration': value['registration'],

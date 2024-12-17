@@ -45,7 +45,7 @@ export interface OtpAuthMethod {
      * @memberof OtpAuthMethod
      * @deprecated
      */
-    ttl_display_unit: TtlDisplayUnit;
+    ttlDisplayUnit: TtlDisplayUnit;
 }
 
 
@@ -56,7 +56,7 @@ export interface OtpAuthMethod {
 export function instanceOfOtpAuthMethod(value: object): value is OtpAuthMethod {
     if (!('enabled' in value) || value['enabled'] === undefined) return false;
     if (!('ttl' in value) || value['ttl'] === undefined) return false;
-    if (!('ttl_display_unit' in value) || value['ttl_display_unit'] === undefined) return false;
+    if (!('ttlDisplayUnit' in value) || value['ttlDisplayUnit'] === undefined) return false;
     return true;
 }
 
@@ -72,7 +72,7 @@ export function OtpAuthMethodFromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'enabled': json['enabled'],
         'ttl': json['ttl'],
-        'ttl_display_unit': TtlDisplayUnitFromJSON(json['ttl_display_unit']),
+        'ttlDisplayUnit': TtlDisplayUnitFromJSON(json['ttl_display_unit']),
     };
 }
 
@@ -89,7 +89,7 @@ export function OtpAuthMethodToJSONTyped(value?: OtpAuthMethod | null, ignoreDis
         
         'enabled': value['enabled'],
         'ttl': value['ttl'],
-        'ttl_display_unit': TtlDisplayUnitToJSON(value['ttl_display_unit']),
+        'ttl_display_unit': TtlDisplayUnitToJSON(value['ttlDisplayUnit']),
     };
 }
 
