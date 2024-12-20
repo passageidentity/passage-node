@@ -172,9 +172,9 @@ export class User extends PassageBase {
      * Delete a user using their user ID.
      *
      * @param {string} userId The Passage user ID used to delete the corresponding user.
-     * @return {Promise<boolean>}
+     * @return {Promise<void>}
      */
-    public async delete(userId: string): Promise<boolean> {
+    public async delete(userId: string): Promise<void> {
         if (!userId) {
             throw new Error('userId is required.');
         }
@@ -184,7 +184,6 @@ export class User extends PassageBase {
                 userId,
                 appId: this.config.appId,
             });
-            return true;
         } catch (err) {
             throw await this.parseError(err);
         }
@@ -218,9 +217,9 @@ export class User extends PassageBase {
      *
      * @param {string} userId The Passage user ID
      * @param {string} deviceId The Passage user's device ID
-     * @return {Promise<boolean>}
+     * @return {Promise<void>}
      */
-    public async revokeDevice(userId: string, deviceId: string): Promise<boolean> {
+    public async revokeDevice(userId: string, deviceId: string): Promise<void> {
         if (!userId) {
             throw new Error('userId is required.');
         }
@@ -235,8 +234,6 @@ export class User extends PassageBase {
                 deviceId,
                 appId: this.config.appId,
             });
-
-            return true;
         } catch (err) {
             throw await this.parseError(err);
         }
@@ -246,9 +243,9 @@ export class User extends PassageBase {
      * Revokes all of a user's Refresh Tokens using their User ID.
      *
      * @param {string} userId The Passage user ID
-     * @return {Promise<boolean>}
+     * @return {Promise<void>}
      */
-    public async revokeRefreshTokens(userId: string): Promise<boolean> {
+    public async revokeRefreshTokens(userId: string): Promise<void> {
         if (!userId) {
             throw new Error('userId is required.');
         }
@@ -258,7 +255,6 @@ export class User extends PassageBase {
                 userId,
                 appId: this.config.appId,
             });
-            return true;
         } catch (err) {
             throw await this.parseError(err);
         }
