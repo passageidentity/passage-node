@@ -17,11 +17,12 @@ import { CreateMagicLinkArgs, MagicLinkOptions } from './types';
 export class Auth extends PassageBase {
     private readonly jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
     private readonly magicLinksApi: MagicLinksApi;
+
     /**
      * Auth class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    public constructor(protected config: PassageInstanceConfig) {
+    public constructor(protected readonly config: PassageInstanceConfig) {
         super(config);
         this.jwks = createRemoteJWKSet(
             new URL(`https://auth.passage.id/v1/apps/${this.config.appId}/.well-known/jwks.json`),
