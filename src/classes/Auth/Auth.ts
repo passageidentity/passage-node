@@ -50,17 +50,11 @@ export class Auth extends PassageBase {
         }
 
         const {
-            payload: { sub: userId, aud },
-        } = await jwtVerify(jwt, this.jwks);
+            payload: { sub: userId },
+        } = await jwtVerify(jwt, this.jwks, { audience: [this.config.appId] });
 
         if (!userId) {
-            throw new Error('Could not validate auth token. You must catch this error.');
-        }
-
-        if (Array.isArray(aud)) {
-            if (!aud.includes(this.config.appId)) {
-                throw new Error('Incorrect app ID claim in token. You must catch this error.');
-            }
+            throw new Error('sub missing in jwt claims.');
         }
 
         return userId;
