@@ -4,37 +4,29 @@ import { ResponseError } from '../../generated';
  * Passage Class
  */
 export class PassageError extends Error {
-    override name: 'PassageError' = 'PassageError';
-    readonly statusCode: number | undefined;
-    readonly errorCode: string | undefined;
-    readonly message: string;
-
-    /** @deprecated use errorCode instead */
-    readonly error: string | undefined;
+    public override name: 'PassageError' = 'PassageError';
+    public readonly statusCode: number | undefined;
+    public readonly errorCode: string | undefined;
+    public readonly message: string;
 
     /**
-     * @deprecated This should only be constructed by the Passage SDK. Use this type just for type checking.
-     * Initialize a new PassageError instance.
-     * @param {string} message friendly error message
-     * @param {string} errorCode error code from Passage Backend
-     * @param {ResponseError} err error from http request
+     * Private constructor to be used by the async fromResponseError method.
+     * @param {string} message error message
+     * @param {string} errorCode  error code
+     * @param {ResponseError} err ResponseError
      */
-    constructor(message: string, errorCode?: string, err?: ResponseError) {
+    private constructor(message: string, errorCode: string, err: ResponseError) {
         super();
 
         this.message = message;
         this.errorCode = errorCode;
-
-        if (err) {
-            this.statusCode = err.response.status;
-            this.error = err.message;
-        }
+        this.statusCode = err.response.status;
     }
 
     /**
      * Maps a ResponseError to a PassageError.
      * @param {error} err ResponseError
-     * @param {string} message ResponseError
+     * @param {string} message Optional message to prefix the error message
      * @return {PassageError} PassageError
      */
     public static async fromResponseError(err: ResponseError, message?: string): Promise<PassageError> {
