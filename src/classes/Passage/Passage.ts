@@ -1,8 +1,9 @@
-import { PassageConfig } from '../../types/PassageConfig';
-import apiConfiguration from '../../utils/apiConfiguration';
 import { PassageInstanceConfig } from '../PassageBase';
 import { Auth } from '../Auth';
 import { User } from '../User';
+import { PassageConfig } from './types';
+import { Configuration, ConfigurationParameters, FetchAPI } from '../../generated';
+import { PassageError } from '../PassageError';
 
 /**
  * Passage Class
@@ -17,19 +18,17 @@ export class Passage {
      */
     public constructor(config: PassageConfig) {
         if (!config.appID) {
-            throw new Error(
-                'A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
-            );
+            throw new PassageError('A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
         }
         if (!config.apiKey) {
-            throw new Error(
+            throw new PassageError(
                 'A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
             );
         }
 
         const instanceConfig: PassageInstanceConfig = {
             appId: config.appID,
-            apiConfiguration: apiConfiguration({
+            apiConfiguration: this.configureApi({
                 accessToken: config.apiKey,
                 fetchApi: config.fetchApi,
             }),
@@ -37,5 +36,21 @@ export class Passage {
 
         this.user = new User(instanceConfig);
         this.auth = new Auth(instanceConfig);
+    }
+
+    private configureApi(config?: ConfigurationParameters): Configuration {
+        const fetchApi = config?.fetchApi ?? (fetch as unknown as FetchAPI);
+        const configuration = new Configuration({
+            accessToken: config?.accessToken,
+            fetchApi,
+            headers: {
+                ...config?.headers,
+                'Authorization': `Bearer ${config?.accessToken}`,
+                'Passage-Version': process.env.npm_package_version || '',
+            },
+            middleware: [],
+        });
+
+        return configuration;
     }
 }

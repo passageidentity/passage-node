@@ -1,14 +1,13 @@
 import { User } from './User';
 import { PassageInstanceConfig } from '../PassageBase';
-import { UsersApi, UserDevicesApi, ResponseError, ListPaginatedUsersResponse } from '../../generated';
+import { UsersApi, UserDevicesApi, ResponseError, ListPaginatedUsersResponse, Configuration } from '../../generated';
 import { PassageUser } from './types';
 import { PassageError } from '../PassageError';
-import apiConfiguration from '../../utils/apiConfiguration';
 
 jest.mock('../../generated/apis');
 
 const mockConfig: PassageInstanceConfig = {
-    apiConfiguration: apiConfiguration({ accessToken: 'mock_api_key' }),
+    apiConfiguration: new Configuration({ accessToken: 'mock_api_key' }),
     appId: 'test-app-id',
 };
 

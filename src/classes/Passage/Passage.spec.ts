@@ -1,6 +1,6 @@
 import { Passage } from './Passage';
-import { PassageConfig } from '../../types/PassageConfig';
 import { PassageError } from '../PassageError';
+import { PassageConfig } from './types';
 
 describe('Passage Class Constructor', () => {
     it('should throw an error if appID is not provided', () => {
