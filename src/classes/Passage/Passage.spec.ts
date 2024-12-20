@@ -53,6 +53,7 @@ describe('Passage Class Constructor', () => {
         expect(passage).toBeInstanceOf(Passage);
         expect(passage.user).toBeDefined();
         expect(passage.auth).toBeDefined();
-        expect(passage['_apiConfiguration'].fetchApi).toBe(mockFetchApi);
+        expect(passage.user['config'].apiConfiguration.fetchApi).toBe(mockFetchApi);
+        expect(passage.auth['config'].apiConfiguration.fetchApi).toBe(mockFetchApi);
     });
 });
