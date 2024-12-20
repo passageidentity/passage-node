@@ -6,17 +6,19 @@ import { CreateUserArgs, PassageUser, UpdateUserArgs } from './types';
  * User class for handling operations to get and update user information.
  */
 export class User extends PassageBase {
-    private usersApi;
-    private userDevicesApi;
+    private readonly usersApi: UsersApi;
+    private readonly userDevicesApi: UserDevicesApi;
+    private readonly tokensApi: TokensApi;
 
     /**
      * User class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    public constructor(protected config: PassageInstanceConfig) {
+    public constructor(protected readonly config: PassageInstanceConfig) {
         super(config);
         this.usersApi = new UsersApi(this.config.apiConfiguration);
         this.userDevicesApi = new UserDevicesApi(this.config.apiConfiguration);
+        this.tokensApi = new TokensApi(this.config.apiConfiguration);
     }
 
     /**
@@ -250,9 +252,7 @@ export class User extends PassageBase {
         }
 
         try {
-            const client = new TokensApi(this.config.apiConfiguration);
-
-            await client.revokeUserRefreshTokens({
+            await this.tokensApi.revokeUserRefreshTokens({
                 userId,
                 appId: this.config.appId,
             });
