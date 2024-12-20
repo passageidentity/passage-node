@@ -46,7 +46,7 @@ export class Auth extends PassageBase {
 
         const { kid } = decodeProtectedHeader(jwt);
         if (!kid) {
-            throw new Error('Could not find valid cookie for authentication. You must catch this error.');
+            throw new Error('kid missing in jwt header.');
         }
 
         const {
@@ -100,7 +100,7 @@ export class Auth extends PassageBase {
 
             return response.magicLink;
         } catch (err) {
-            throw await this.parseError(err, 'Could not create a magic link for this app');
+            throw await this.parseError(err);
         }
     }
 }
