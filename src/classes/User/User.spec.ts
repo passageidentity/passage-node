@@ -51,9 +51,7 @@ describe('User class', () => {
         usersApiMock.listPaginatedUsers.mockRejectedValue(responseError);
 
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(passageError);
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(
-            'Bad gateway',
-        );
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow('Bad gateway');
     });
 
     it('should throw an error if get user by identifier returns an empty array', async () => {
