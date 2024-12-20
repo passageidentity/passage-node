@@ -1,5 +1,5 @@
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
-import { TokensApi, UserDevicesApi, UsersApi, WebAuthnDevices } from '../../generated';
+import { ResponseError, TokensApi, UserDevicesApi, UsersApi, WebAuthnDevices } from '../../generated';
 import { CreateUserArgs, PassageUser, UpdateUserArgs } from './types';
 
 /**
@@ -40,7 +40,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not fetch user');
+            throw await this.parseError(err);
         }
     }
 
@@ -64,12 +64,14 @@ export class User extends PassageBase {
 
             const users = response.users;
             if (!users.length) {
-                throw new Error('User not found.');
+                throw new ResponseError(
+                    new Response('{"code":"user_not_found","error":"User not found."}', { status: 404 }),
+                );
             }
 
             return this.get(users[0].id);
         } catch (err) {
-            throw await this.parseError(err, 'Could not fetch user by identifier');
+            throw await this.parseError(err);
         }
     }
 
@@ -91,7 +93,7 @@ export class User extends PassageBase {
             });
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not activate user');
+            throw await this.parseError(err);
         }
     }
 
@@ -114,7 +116,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not deactivate user');
+            throw await this.parseError(err);
         }
     }
 
@@ -139,7 +141,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not update user');
+            throw await this.parseError(err);
         }
     }
 
@@ -162,7 +164,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not create user');
+            throw await this.parseError(err);
         }
     }
 
@@ -184,7 +186,7 @@ export class User extends PassageBase {
             });
             return true;
         } catch (err) {
-            throw await this.parseError(err, 'Could not delete user');
+            throw await this.parseError(err);
         }
     }
 
@@ -207,7 +209,7 @@ export class User extends PassageBase {
 
             return response.devices;
         } catch (err) {
-            throw await this.parseError(err, "Could not fetch user's devices:");
+            throw await this.parseError(err);
         }
     }
 
@@ -236,7 +238,7 @@ export class User extends PassageBase {
 
             return true;
         } catch (err) {
-            throw await this.parseError(err, "Could not delete user's device:");
+            throw await this.parseError(err);
         }
     }
 
@@ -258,7 +260,7 @@ export class User extends PassageBase {
             });
             return true;
         } catch (err) {
-            throw await this.parseError(err, "Could not revoke user's refresh tokens:");
+            throw await this.parseError(err);
         }
     }
 }
