@@ -262,26 +262,4 @@ export class User extends PassageBase {
             throw await this.parseError(err, "Could not revoke user's refresh tokens:");
         }
     }
-
-    /**
-     * @deprecated Use revokeRefreshTokens instead
-     * Revokes all of a user's Refresh Tokens using their User ID.
-     *
-     * @param {string} userId The Passage user ID
-     * @return {Promise<boolean>}
-     */
-    public async signOut(userId: string): Promise<boolean> {
-        return this.revokeRefreshTokens(userId);
-    }
-
-    /**
-     * @deprecated Use getByIdentifier instead
-     * Get a user's object using their user identifier.
-     *
-     * @param {string} identifier The Passage user email or phone number
-     * @return {Promise<PassageUser>} Passage User object
-     */
-    public async getUserByIdentifier(identifier: string): Promise<PassageUser> {
-        return this.getByIdentifier(identifier);
-    }
 }
