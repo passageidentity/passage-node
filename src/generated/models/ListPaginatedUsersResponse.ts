@@ -39,13 +39,13 @@ export interface ListPaginatedUsersResponse {
      * @type {PaginatedLinks}
      * @memberof ListPaginatedUsersResponse
      */
-    _links: PaginatedLinks;
+    links: PaginatedLinks;
     /**
      * time anchor (Unix timestamp) --> all users returned created before this timestamp
      * @type {number}
      * @memberof ListPaginatedUsersResponse
      */
-    created_before: number;
+    createdBefore: number;
     /**
      * 
      * @type {number}
@@ -63,7 +63,7 @@ export interface ListPaginatedUsersResponse {
      * @type {number}
      * @memberof ListPaginatedUsersResponse
      */
-    total_users: number;
+    totalUsers: number;
     /**
      * 
      * @type {Array<ListPaginatedUsersItem>}
@@ -76,11 +76,11 @@ export interface ListPaginatedUsersResponse {
  * Check if a given object implements the ListPaginatedUsersResponse interface.
  */
 export function instanceOfListPaginatedUsersResponse(value: object): value is ListPaginatedUsersResponse {
-    if (!('_links' in value) || value['_links'] === undefined) return false;
-    if (!('created_before' in value) || value['created_before'] === undefined) return false;
+    if (!('links' in value) || value['links'] === undefined) return false;
+    if (!('createdBefore' in value) || value['createdBefore'] === undefined) return false;
     if (!('limit' in value) || value['limit'] === undefined) return false;
     if (!('page' in value) || value['page'] === undefined) return false;
-    if (!('total_users' in value) || value['total_users'] === undefined) return false;
+    if (!('totalUsers' in value) || value['totalUsers'] === undefined) return false;
     if (!('users' in value) || value['users'] === undefined) return false;
     return true;
 }
@@ -95,11 +95,11 @@ export function ListPaginatedUsersResponseFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        '_links': PaginatedLinksFromJSON(json['_links']),
-        'created_before': json['created_before'],
+        'links': PaginatedLinksFromJSON(json['_links']),
+        'createdBefore': json['created_before'],
         'limit': json['limit'],
         'page': json['page'],
-        'total_users': json['total_users'],
+        'totalUsers': json['total_users'],
         'users': ((json['users'] as Array<any>).map(ListPaginatedUsersItemFromJSON)),
     };
 }
@@ -115,11 +115,11 @@ export function ListPaginatedUsersResponseToJSONTyped(value?: ListPaginatedUsers
 
     return {
         
-        '_links': PaginatedLinksToJSON(value['_links']),
-        'created_before': value['created_before'],
+        '_links': PaginatedLinksToJSON(value['links']),
+        'created_before': value['createdBefore'],
         'limit': value['limit'],
         'page': value['page'],
-        'total_users': value['total_users'],
+        'total_users': value['totalUsers'],
         'users': ((value['users'] as Array<any>).map(ListPaginatedUsersItemToJSON)),
     };
 }

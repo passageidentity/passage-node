@@ -36,7 +36,7 @@ export interface UpdateUserRequest {
      * @type {object}
      * @memberof UpdateUserRequest
      */
-    user_metadata?: object;
+    userMetadata?: object;
 }
 
 /**
@@ -58,7 +58,7 @@ export function UpdateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'email': json['email'] == null ? undefined : json['email'],
         'phone': json['phone'] == null ? undefined : json['phone'],
-        'user_metadata': json['user_metadata'] == null ? undefined : json['user_metadata'],
+        'userMetadata': json['user_metadata'] == null ? undefined : json['user_metadata'],
     };
 }
 
@@ -75,7 +75,7 @@ export function UpdateUserRequestToJSONTyped(value?: UpdateUserRequest | null, i
         
         'email': value['email'],
         'phone': value['phone'],
-        'user_metadata': value['user_metadata'],
+        'user_metadata': value['userMetadata'],
     };
 }
 
