@@ -1,6 +1,5 @@
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
 import { TokensApi, UserDevicesApi, UsersApi, WebAuthnDevices } from '../../generated';
-import { PassageError } from '../PassageError';
 import { CreateUserArgs, PassageUser, UpdateUserArgs } from './types';
 
 /**
@@ -63,7 +62,7 @@ export class User extends PassageBase {
 
             const users = response.users;
             if (!users.length) {
-                throw new PassageError('User not found.');
+                throw new Error('User not found.');
             }
 
             return this.get(users[0].id);

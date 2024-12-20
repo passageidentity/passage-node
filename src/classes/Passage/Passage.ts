@@ -3,7 +3,6 @@ import { Auth } from '../Auth';
 import { User } from '../User';
 import { PassageConfig } from './types';
 import { Configuration, ConfigurationParameters, FetchAPI } from '../../generated';
-import { PassageError } from '../PassageError';
 
 /**
  * Passage Class
@@ -18,10 +17,10 @@ export class Passage {
      */
     public constructor(config: PassageConfig) {
         if (!config.appID) {
-            throw new PassageError('A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
+            throw new Error('A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
         }
         if (!config.apiKey) {
-            throw new PassageError(
+            throw new Error(
                 'A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
             );
         }
@@ -38,6 +37,11 @@ export class Passage {
         this.auth = new Auth(instanceConfig);
     }
 
+    /**
+     * Configure the API with the provided configuration parameters.
+     * @param {ConfigurationParameters} config The configuration parameters
+     * @return {Configuration} The configured API
+     */
     private configureApi(config?: ConfigurationParameters): Configuration {
         const fetchApi = config?.fetchApi ?? (fetch as unknown as FetchAPI);
         const configuration = new Configuration({

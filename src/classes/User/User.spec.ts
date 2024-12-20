@@ -2,7 +2,6 @@ import { User } from './User';
 import { PassageInstanceConfig } from '../PassageBase';
 import { UsersApi, UserDevicesApi, ResponseError, ListPaginatedUsersResponse, Configuration } from '../../generated';
 import { PassageUser } from './types';
-import { PassageError } from '../PassageError';
 
 jest.mock('../../generated/apis');
 
@@ -51,7 +50,7 @@ describe('User class', () => {
                 'Error',
             ),
         );
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(PassageError);
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(Error);
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(
             'Could not fetch user by identifier: Resource not found',
         );
@@ -59,7 +58,7 @@ describe('User class', () => {
 
     it('should throw an error if get user by identifier returns an empty array', async () => {
         usersApiMock.listPaginatedUsers.mockResolvedValue({ users: [] } as unknown as ListPaginatedUsersResponse);
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(PassageError);
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(Error);
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow('User not found.');
     });
 });
