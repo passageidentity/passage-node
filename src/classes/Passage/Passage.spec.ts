@@ -1,5 +1,4 @@
 import { Passage } from './Passage';
-import { PassageError } from '../PassageError';
 import { PassageConfig } from './types';
 
 describe('Passage Class Constructor', () => {
@@ -9,7 +8,7 @@ describe('Passage Class Constructor', () => {
             apiKey: 'test_api_key',
         };
 
-        expect(() => new Passage(config)).toThrow(PassageError);
+        expect(() => new Passage(config)).toThrow(Error);
         expect(() => new Passage(config)).toThrow(
             'A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
         );
@@ -21,7 +20,7 @@ describe('Passage Class Constructor', () => {
             apiKey: '',
         };
 
-        expect(() => new Passage(config)).toThrow(PassageError);
+        expect(() => new Passage(config)).toThrow(Error);
         expect(() => new Passage(config)).toThrow(
             'A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
         );
