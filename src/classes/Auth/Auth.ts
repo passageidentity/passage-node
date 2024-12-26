@@ -83,10 +83,8 @@ export class Auth extends PassageBase {
         try {
             const { language, magicLinkPath, redirectUrl, ttl } = options ?? {};
 
-            let userId: string | undefined = undefined;
             let channel: MagicLinkChannel;
             if ('userId' in args) {
-                userId = args.userId;
                 channel = args.channel;
             } else if ('email' in args) {
                 channel = MagicLinkChannel.Email;
@@ -98,17 +96,15 @@ export class Auth extends PassageBase {
                 appId: this.config.appId,
                 createMagicLinkRequest: {
                     ...args,
-                    // eslint-disable-next-line camelcase
-                    user_id: userId,
                     channel,
                     language,
-                    magic_link_path: magicLinkPath,
-                    redirect_url: redirectUrl,
+                    magicLinkPath,
+                    redirectUrl,
                     ttl,
                 },
             });
 
-            return response.magic_link;
+            return response.magicLink;
         } catch (err) {
             throw await this.parseError(err, 'Could not create a magic link for this app');
         }

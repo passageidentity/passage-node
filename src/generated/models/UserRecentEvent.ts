@@ -46,13 +46,13 @@ export interface UserRecentEvent {
      * @type {Date}
      * @memberof UserRecentEvent
      */
-    created_at: Date;
+    createdAt: Date;
     /**
      * 
      * @type {Date}
      * @memberof UserRecentEvent
      */
-    completed_at: Date | null;
+    completedAt: Date | null;
     /**
      * 
      * @type {string}
@@ -64,7 +64,7 @@ export interface UserRecentEvent {
      * @type {string}
      * @memberof UserRecentEvent
      */
-    ip_addr: string;
+    ipAddr: string;
     /**
      * 
      * @type {UserEventStatus}
@@ -82,13 +82,13 @@ export interface UserRecentEvent {
      * @type {string}
      * @memberof UserRecentEvent
      */
-    user_agent: string;
+    userAgent: string;
     /**
      * A display-friendly version of the user agent
      * @type {string}
      * @memberof UserRecentEvent
      */
-    user_agent_display: string;
+    userAgentDisplay: string;
     /**
      * 
      * @type {UserEventAction}
@@ -100,7 +100,7 @@ export interface UserRecentEvent {
      * @type {SocialConnectionType}
      * @memberof UserRecentEvent
      */
-    social_login_type: SocialConnectionType | null;
+    socialLoginType: SocialConnectionType | null;
 }
 
 
@@ -109,16 +109,16 @@ export interface UserRecentEvent {
  * Check if a given object implements the UserRecentEvent interface.
  */
 export function instanceOfUserRecentEvent(value: object): value is UserRecentEvent {
-    if (!('created_at' in value) || value['created_at'] === undefined) return false;
-    if (!('completed_at' in value) || value['completed_at'] === undefined) return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
+    if (!('completedAt' in value) || value['completedAt'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('ip_addr' in value) || value['ip_addr'] === undefined) return false;
+    if (!('ipAddr' in value) || value['ipAddr'] === undefined) return false;
     if (!('status' in value) || value['status'] === undefined) return false;
     if (!('type' in value) || value['type'] === undefined) return false;
-    if (!('user_agent' in value) || value['user_agent'] === undefined) return false;
-    if (!('user_agent_display' in value) || value['user_agent_display'] === undefined) return false;
+    if (!('userAgent' in value) || value['userAgent'] === undefined) return false;
+    if (!('userAgentDisplay' in value) || value['userAgentDisplay'] === undefined) return false;
     if (!('action' in value) || value['action'] === undefined) return false;
-    if (!('social_login_type' in value) || value['social_login_type'] === undefined) return false;
+    if (!('socialLoginType' in value) || value['socialLoginType'] === undefined) return false;
     return true;
 }
 
@@ -132,16 +132,16 @@ export function UserRecentEventFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'created_at': (new Date(json['created_at'])),
-        'completed_at': (json['completed_at'] == null ? null : new Date(json['completed_at'])),
+        'createdAt': (new Date(json['created_at'])),
+        'completedAt': (json['completed_at'] == null ? null : new Date(json['completed_at'])),
         'id': json['id'],
-        'ip_addr': json['ip_addr'],
+        'ipAddr': json['ip_addr'],
         'status': UserEventStatusFromJSON(json['status']),
         'type': json['type'],
-        'user_agent': json['user_agent'],
-        'user_agent_display': json['user_agent_display'],
+        'userAgent': json['user_agent'],
+        'userAgentDisplay': json['user_agent_display'],
         'action': UserEventActionFromJSON(json['action']),
-        'social_login_type': SocialConnectionTypeFromJSON(json['social_login_type']),
+        'socialLoginType': SocialConnectionTypeFromJSON(json['social_login_type']),
     };
 }
 
@@ -156,16 +156,16 @@ export function UserRecentEventToJSONTyped(value?: UserRecentEvent | null, ignor
 
     return {
         
-        'created_at': ((value['created_at']).toISOString()),
-        'completed_at': (value['completed_at'] == null ? null : (value['completed_at'] as any).toISOString()),
+        'created_at': ((value['createdAt']).toISOString()),
+        'completed_at': (value['completedAt'] == null ? null : (value['completedAt'] as any).toISOString()),
         'id': value['id'],
-        'ip_addr': value['ip_addr'],
+        'ip_addr': value['ipAddr'],
         'status': UserEventStatusToJSON(value['status']),
         'type': value['type'],
-        'user_agent': value['user_agent'],
-        'user_agent_display': value['user_agent_display'],
+        'user_agent': value['userAgent'],
+        'user_agent_display': value['userAgentDisplay'],
         'action': UserEventActionToJSON(value['action']),
-        'social_login_type': SocialConnectionTypeToJSON(value['social_login_type']),
+        'social_login_type': SocialConnectionTypeToJSON(value['socialLoginType']),
     };
 }
 

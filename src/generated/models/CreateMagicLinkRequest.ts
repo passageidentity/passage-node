@@ -57,7 +57,7 @@ export interface CreateMagicLinkRequest {
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    magic_link_path?: string;
+    magicLinkPath?: string;
     /**
      * 
      * @type {string}
@@ -69,7 +69,7 @@ export interface CreateMagicLinkRequest {
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    redirect_url?: string;
+    redirectUrl?: string;
     /**
      * 
      * @type {boolean}
@@ -93,7 +93,7 @@ export interface CreateMagicLinkRequest {
      * @type {string}
      * @memberof CreateMagicLinkRequest
      */
-    user_id?: string;
+    userId?: string;
 }
 
 
@@ -118,13 +118,13 @@ export function CreateMagicLinkRequestFromJSONTyped(json: any, ignoreDiscriminat
         'channel': json['channel'] == null ? undefined : MagicLinkChannelFromJSON(json['channel']),
         'email': json['email'] == null ? undefined : json['email'],
         'language': json['language'] == null ? undefined : json['language'],
-        'magic_link_path': json['magic_link_path'] == null ? undefined : json['magic_link_path'],
+        'magicLinkPath': json['magic_link_path'] == null ? undefined : json['magic_link_path'],
         'phone': json['phone'] == null ? undefined : json['phone'],
-        'redirect_url': json['redirect_url'] == null ? undefined : json['redirect_url'],
+        'redirectUrl': json['redirect_url'] == null ? undefined : json['redirect_url'],
         'send': json['send'] == null ? undefined : json['send'],
         'ttl': json['ttl'] == null ? undefined : json['ttl'],
         'type': json['type'] == null ? undefined : MagicLinkTypeFromJSON(json['type']),
-        'user_id': json['user_id'] == null ? undefined : json['user_id'],
+        'userId': json['user_id'] == null ? undefined : json['user_id'],
     };
 }
 
@@ -142,13 +142,13 @@ export function CreateMagicLinkRequestToJSONTyped(value?: CreateMagicLinkRequest
         'channel': MagicLinkChannelToJSON(value['channel']),
         'email': value['email'],
         'language': value['language'],
-        'magic_link_path': value['magic_link_path'],
+        'magic_link_path': value['magicLinkPath'],
         'phone': value['phone'],
-        'redirect_url': value['redirect_url'],
+        'redirect_url': value['redirectUrl'],
         'send': value['send'],
         'ttl': value['ttl'],
         'type': MagicLinkTypeToJSON(value['type']),
-        'user_id': value['user_id'],
+        'user_id': value['userId'],
     };
 }
 

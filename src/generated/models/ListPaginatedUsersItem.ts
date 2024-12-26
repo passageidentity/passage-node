@@ -32,7 +32,7 @@ export interface ListPaginatedUsersItem {
      * @type {Date}
      * @memberof ListPaginatedUsersItem
      */
-    created_at: Date;
+    createdAt: Date;
     /**
      * 
      * @type {string}
@@ -44,13 +44,13 @@ export interface ListPaginatedUsersItem {
      * @type {boolean}
      * @memberof ListPaginatedUsersItem
      */
-    email_verified: boolean;
+    emailVerified: boolean;
     /**
      * The external ID of the user. Only set if the user was created in a Flex app.
      * @type {string}
      * @memberof ListPaginatedUsersItem
      */
-    external_id: string;
+    externalId: string;
     /**
      * 
      * @type {string}
@@ -62,13 +62,13 @@ export interface ListPaginatedUsersItem {
      * @type {Date}
      * @memberof ListPaginatedUsersItem
      */
-    last_login_at: Date;
+    lastLoginAt: Date;
     /**
      * 
      * @type {number}
      * @memberof ListPaginatedUsersItem
      */
-    login_count: number;
+    loginCount: number;
     /**
      * 
      * @type {string}
@@ -80,7 +80,7 @@ export interface ListPaginatedUsersItem {
      * @type {boolean}
      * @memberof ListPaginatedUsersItem
      */
-    phone_verified: boolean;
+    phoneVerified: boolean;
     /**
      * 
      * @type {UserStatus}
@@ -92,13 +92,13 @@ export interface ListPaginatedUsersItem {
      * @type {Date}
      * @memberof ListPaginatedUsersItem
      */
-    updated_at: Date;
+    updatedAt: Date;
     /**
      * 
      * @type {object}
      * @memberof ListPaginatedUsersItem
      */
-    user_metadata: object | null;
+    userMetadata: object | null;
 }
 
 
@@ -107,18 +107,18 @@ export interface ListPaginatedUsersItem {
  * Check if a given object implements the ListPaginatedUsersItem interface.
  */
 export function instanceOfListPaginatedUsersItem(value: object): value is ListPaginatedUsersItem {
-    if (!('created_at' in value) || value['created_at'] === undefined) return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
     if (!('email' in value) || value['email'] === undefined) return false;
-    if (!('email_verified' in value) || value['email_verified'] === undefined) return false;
-    if (!('external_id' in value) || value['external_id'] === undefined) return false;
+    if (!('emailVerified' in value) || value['emailVerified'] === undefined) return false;
+    if (!('externalId' in value) || value['externalId'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('last_login_at' in value) || value['last_login_at'] === undefined) return false;
-    if (!('login_count' in value) || value['login_count'] === undefined) return false;
+    if (!('lastLoginAt' in value) || value['lastLoginAt'] === undefined) return false;
+    if (!('loginCount' in value) || value['loginCount'] === undefined) return false;
     if (!('phone' in value) || value['phone'] === undefined) return false;
-    if (!('phone_verified' in value) || value['phone_verified'] === undefined) return false;
+    if (!('phoneVerified' in value) || value['phoneVerified'] === undefined) return false;
     if (!('status' in value) || value['status'] === undefined) return false;
-    if (!('updated_at' in value) || value['updated_at'] === undefined) return false;
-    if (!('user_metadata' in value) || value['user_metadata'] === undefined) return false;
+    if (!('updatedAt' in value) || value['updatedAt'] === undefined) return false;
+    if (!('userMetadata' in value) || value['userMetadata'] === undefined) return false;
     return true;
 }
 
@@ -132,18 +132,18 @@ export function ListPaginatedUsersItemFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'created_at': (new Date(json['created_at'])),
+        'createdAt': (new Date(json['created_at'])),
         'email': json['email'],
-        'email_verified': json['email_verified'],
-        'external_id': json['external_id'],
+        'emailVerified': json['email_verified'],
+        'externalId': json['external_id'],
         'id': json['id'],
-        'last_login_at': (new Date(json['last_login_at'])),
-        'login_count': json['login_count'],
+        'lastLoginAt': (new Date(json['last_login_at'])),
+        'loginCount': json['login_count'],
         'phone': json['phone'],
-        'phone_verified': json['phone_verified'],
+        'phoneVerified': json['phone_verified'],
         'status': UserStatusFromJSON(json['status']),
-        'updated_at': (new Date(json['updated_at'])),
-        'user_metadata': json['user_metadata'],
+        'updatedAt': (new Date(json['updated_at'])),
+        'userMetadata': json['user_metadata'],
     };
 }
 
@@ -158,18 +158,18 @@ export function ListPaginatedUsersItemToJSONTyped(value?: ListPaginatedUsersItem
 
     return {
         
-        'created_at': ((value['created_at']).toISOString()),
+        'created_at': ((value['createdAt']).toISOString()),
         'email': value['email'],
-        'email_verified': value['email_verified'],
-        'external_id': value['external_id'],
+        'email_verified': value['emailVerified'],
+        'external_id': value['externalId'],
         'id': value['id'],
-        'last_login_at': ((value['last_login_at']).toISOString()),
-        'login_count': value['login_count'],
+        'last_login_at': ((value['lastLoginAt']).toISOString()),
+        'login_count': value['loginCount'],
         'phone': value['phone'],
-        'phone_verified': value['phone_verified'],
+        'phone_verified': value['phoneVerified'],
         'status': UserStatusToJSON(value['status']),
-        'updated_at': ((value['updated_at']).toISOString()),
-        'user_metadata': value['user_metadata'],
+        'updated_at': ((value['updatedAt']).toISOString()),
+        'user_metadata': value['userMetadata'],
     };
 }
 

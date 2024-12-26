@@ -58,7 +58,7 @@ export interface AuthMethods {
      * @type {MagicLinkAuthMethod}
      * @memberof AuthMethods
      */
-    magic_link: MagicLinkAuthMethod;
+    magicLink: MagicLinkAuthMethod;
 }
 
 /**
@@ -67,7 +67,7 @@ export interface AuthMethods {
 export function instanceOfAuthMethods(value: object): value is AuthMethods {
     if (!('passkeys' in value) || value['passkeys'] === undefined) return false;
     if (!('otp' in value) || value['otp'] === undefined) return false;
-    if (!('magic_link' in value) || value['magic_link'] === undefined) return false;
+    if (!('magicLink' in value) || value['magicLink'] === undefined) return false;
     return true;
 }
 
@@ -83,7 +83,7 @@ export function AuthMethodsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'passkeys': PasskeysAuthMethodFromJSON(json['passkeys']),
         'otp': OtpAuthMethodFromJSON(json['otp']),
-        'magic_link': MagicLinkAuthMethodFromJSON(json['magic_link']),
+        'magicLink': MagicLinkAuthMethodFromJSON(json['magic_link']),
     };
 }
 
@@ -100,7 +100,7 @@ export function AuthMethodsToJSONTyped(value?: AuthMethods | null, ignoreDiscrim
         
         'passkeys': PasskeysAuthMethodToJSON(value['passkeys']),
         'otp': OtpAuthMethodToJSON(value['otp']),
-        'magic_link': MagicLinkAuthMethodToJSON(value['magic_link']),
+        'magic_link': MagicLinkAuthMethodToJSON(value['magicLink']),
     };
 }
 
