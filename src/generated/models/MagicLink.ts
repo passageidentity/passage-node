@@ -38,7 +38,7 @@ export interface MagicLink {
      * @type {string}
      * @memberof MagicLink
      */
-    app_id: string;
+    appId: string;
     /**
      * 
      * @type {string}
@@ -56,7 +56,7 @@ export interface MagicLink {
      * @type {string}
      * @memberof MagicLink
      */
-    redirect_url: string;
+    redirectUrl: string;
     /**
      * 
      * @type {string}
@@ -86,7 +86,7 @@ export interface MagicLink {
      * @type {string}
      * @memberof MagicLink
      */
-    user_id: string;
+    userId: string;
 }
 
 
@@ -96,15 +96,15 @@ export interface MagicLink {
  */
 export function instanceOfMagicLink(value: object): value is MagicLink {
     if (!('activated' in value) || value['activated'] === undefined) return false;
-    if (!('app_id' in value) || value['app_id'] === undefined) return false;
+    if (!('appId' in value) || value['appId'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('identifier' in value) || value['identifier'] === undefined) return false;
-    if (!('redirect_url' in value) || value['redirect_url'] === undefined) return false;
+    if (!('redirectUrl' in value) || value['redirectUrl'] === undefined) return false;
     if (!('secret' in value) || value['secret'] === undefined) return false;
     if (!('ttl' in value) || value['ttl'] === undefined) return false;
     if (!('type' in value) || value['type'] === undefined) return false;
     if (!('url' in value) || value['url'] === undefined) return false;
-    if (!('user_id' in value) || value['user_id'] === undefined) return false;
+    if (!('userId' in value) || value['userId'] === undefined) return false;
     return true;
 }
 
@@ -119,15 +119,15 @@ export function MagicLinkFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'activated': json['activated'],
-        'app_id': json['app_id'],
+        'appId': json['app_id'],
         'id': json['id'],
         'identifier': json['identifier'],
-        'redirect_url': json['redirect_url'],
+        'redirectUrl': json['redirect_url'],
         'secret': json['secret'],
         'ttl': json['ttl'],
         'type': MagicLinkTypeFromJSON(json['type']),
         'url': json['url'],
-        'user_id': json['user_id'],
+        'userId': json['user_id'],
     };
 }
 
@@ -143,15 +143,15 @@ export function MagicLinkToJSONTyped(value?: MagicLink | null, ignoreDiscriminat
     return {
         
         'activated': value['activated'],
-        'app_id': value['app_id'],
+        'app_id': value['appId'],
         'id': value['id'],
         'identifier': value['identifier'],
-        'redirect_url': value['redirect_url'],
+        'redirect_url': value['redirectUrl'],
         'secret': value['secret'],
         'ttl': value['ttl'],
         'type': MagicLinkTypeToJSON(value['type']),
         'url': value['url'],
-        'user_id': value['user_id'],
+        'user_id': value['userId'],
     };
 }
 

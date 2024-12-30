@@ -24,35 +24,35 @@ export interface GithubUserSocialConnection {
      * @type {string}
      * @memberof GithubUserSocialConnection
      */
-    provider_id: string;
+    providerId: string;
     /**
      * 
      * @type {Date}
      * @memberof GithubUserSocialConnection
      */
-    created_at: Date;
+    createdAt: Date;
     /**
      * 
      * @type {Date}
      * @memberof GithubUserSocialConnection
      */
-    last_login_at: Date;
+    lastLoginAt: Date;
     /**
      * The email of connected social user.
      * @type {string}
      * @memberof GithubUserSocialConnection
      */
-    provider_identifier: string;
+    providerIdentifier: string;
 }
 
 /**
  * Check if a given object implements the GithubUserSocialConnection interface.
  */
 export function instanceOfGithubUserSocialConnection(value: object): value is GithubUserSocialConnection {
-    if (!('provider_id' in value) || value['provider_id'] === undefined) return false;
-    if (!('created_at' in value) || value['created_at'] === undefined) return false;
-    if (!('last_login_at' in value) || value['last_login_at'] === undefined) return false;
-    if (!('provider_identifier' in value) || value['provider_identifier'] === undefined) return false;
+    if (!('providerId' in value) || value['providerId'] === undefined) return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
+    if (!('lastLoginAt' in value) || value['lastLoginAt'] === undefined) return false;
+    if (!('providerIdentifier' in value) || value['providerIdentifier'] === undefined) return false;
     return true;
 }
 
@@ -66,10 +66,10 @@ export function GithubUserSocialConnectionFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
-        'provider_id': json['provider_id'],
-        'created_at': (new Date(json['created_at'])),
-        'last_login_at': (new Date(json['last_login_at'])),
-        'provider_identifier': json['provider_identifier'],
+        'providerId': json['provider_id'],
+        'createdAt': (new Date(json['created_at'])),
+        'lastLoginAt': (new Date(json['last_login_at'])),
+        'providerIdentifier': json['provider_identifier'],
     };
 }
 
@@ -84,10 +84,10 @@ export function GithubUserSocialConnectionToJSONTyped(value?: GithubUserSocialCo
 
     return {
         
-        'provider_id': value['provider_id'],
-        'created_at': ((value['created_at']).toISOString()),
-        'last_login_at': ((value['last_login_at']).toISOString()),
-        'provider_identifier': value['provider_identifier'],
+        'provider_id': value['providerId'],
+        'created_at': ((value['createdAt']).toISOString()),
+        'last_login_at': ((value['lastLoginAt']).toISOString()),
+        'provider_identifier': value['providerIdentifier'],
     };
 }
 

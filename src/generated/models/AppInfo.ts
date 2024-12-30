@@ -67,76 +67,76 @@ export interface AppInfo {
      * @type {Array<string>}
      * @memberof AppInfo
      */
-    additional_auth_origins: Array<string>;
+    additionalAuthOrigins: Array<string>;
     /**
      * The valid URLs where users can be redirected after authentication.
      * @type {Array<string>}
      * @memberof AppInfo
      */
-    allowed_callback_urls: Array<string>;
+    allowedCallbackUrls: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    allowed_identifier: string;
+    allowedIdentifier: string;
     /**
      * The valid URLs where users can be redirected after logging out.
      * @type {Array<string>}
      * @memberof AppInfo
      */
-    allowed_logout_urls: Array<string>;
+    allowedLogoutUrls: Array<string>;
     /**
      * A route within your application that redirects to the Authorization URL endpoint.
      * @type {string}
      * @memberof AppInfo
      */
-    application_login_uri: string;
+    applicationLoginUri: string;
     /**
      * Deprecated Property. Please refer to `auth_methods` to view settings for individual authentication methods.
      * @type {string}
      * @memberof AppInfo
      * @deprecated
      */
-    auth_fallback_method: string;
+    authFallbackMethod: string;
     /**
      * Deprecated Property. Please refer to `auth_methods` to view settings for individual authentication methods.
      * @type {number}
      * @memberof AppInfo
      * @deprecated
      */
-    auth_fallback_method_ttl: number;
+    authFallbackMethodTtl: number;
     /**
      * 
      * @type {AuthMethods}
      * @memberof AppInfo
      */
-    auth_methods: AuthMethods;
+    authMethods: AuthMethods;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    auth_origin: string;
+    authOrigin: string;
     /**
      * Deprecated Property. Please use `hosted_theme` to set hosted page theming instead.
      * @type {boolean}
      * @memberof AppInfo
      * @deprecated
      */
-    auto_theme_enabled: boolean;
+    autoThemeEnabled: boolean;
     /**
      * 
      * @type {Date}
      * @memberof AppInfo
      */
-    created_at: Date;
+    createdAt: Date;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    default_language: string;
+    defaultLanguage: string;
     /**
      * 
      * @type {string}
@@ -154,19 +154,19 @@ export interface AppInfo {
      * @type {string}
      * @memberof AppInfo
      */
-    login_url: string;
+    loginUrl: string;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    light_logo_url?: string;
+    lightLogoUrl?: string;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    dark_logo_url?: string;
+    darkLogoUrl?: string;
     /**
      * 
      * @type {string}
@@ -184,79 +184,79 @@ export interface AppInfo {
      * @type {string}
      * @memberof AppInfo
      */
-    hosted_subdomain: string;
+    hostedSubdomain: string;
     /**
      * 
      * @type {ThemeType}
      * @memberof AppInfo
      */
-    hosted_theme: ThemeType;
+    hostedTheme: ThemeType;
     /**
      * 
      * @type {number}
      * @memberof AppInfo
      */
-    id_token_lifetime?: number;
+    idTokenLifetime?: number;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    passage_branding: boolean;
+    passageBranding: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    profile_management: boolean;
+    profileManagement: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    public_signup: boolean;
+    publicSignup: boolean;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    redirect_url: string;
+    redirectUrl: string;
     /**
      * 
      * @type {number}
      * @memberof AppInfo
      */
-    refresh_absolute_lifetime: number;
+    refreshAbsoluteLifetime: number;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    refresh_enabled: boolean;
+    refreshEnabled: boolean;
     /**
      * 
      * @type {number}
      * @memberof AppInfo
      */
-    refresh_inactivity_lifetime: number;
+    refreshInactivityLifetime: number;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    require_email_verification: boolean;
+    requireEmailVerification: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof AppInfo
      */
-    require_identifier_verification: boolean;
+    requireIdentifierVerification: boolean;
     /**
      * 
      * @type {string}
      * @memberof AppInfo
      */
-    required_identifier: string;
+    requiredIdentifier: string;
     /**
      * 
      * @type {string}
@@ -268,7 +268,7 @@ export interface AppInfo {
      * @type {string}
      * @memberof AppInfo
      */
-    rsa_public_key: string;
+    rsaPublicKey: string;
     /**
      * can only be retrieved by an app admin
      * @type {string}
@@ -280,7 +280,7 @@ export interface AppInfo {
      * @type {number}
      * @memberof AppInfo
      */
-    session_timeout_length: number;
+    sessionTimeoutLength: number;
     /**
      * 
      * @type {string}
@@ -292,7 +292,7 @@ export interface AppInfo {
      * @type {Array<UserMetadataField>}
      * @memberof AppInfo
      */
-    user_metadata_schema: Array<UserMetadataField>;
+    userMetadataSchema: Array<UserMetadataField>;
     /**
      * 
      * @type {Array<Technologies>}
@@ -304,13 +304,13 @@ export interface AppInfo {
      * @type {ElementCustomization}
      * @memberof AppInfo
      */
-    element_customization: ElementCustomization;
+    elementCustomization: ElementCustomization;
     /**
      * 
      * @type {ElementCustomization}
      * @memberof AppInfo
      */
-    element_customization_dark: ElementCustomization;
+    elementCustomizationDark: ElementCustomization;
 }
 
 
@@ -328,43 +328,43 @@ export type AppInfoTypeEnum = typeof AppInfoTypeEnum[keyof typeof AppInfoTypeEnu
  * Check if a given object implements the AppInfo interface.
  */
 export function instanceOfAppInfo(value: object): value is AppInfo {
-    if (!('additional_auth_origins' in value) || value['additional_auth_origins'] === undefined) return false;
-    if (!('allowed_callback_urls' in value) || value['allowed_callback_urls'] === undefined) return false;
-    if (!('allowed_identifier' in value) || value['allowed_identifier'] === undefined) return false;
-    if (!('allowed_logout_urls' in value) || value['allowed_logout_urls'] === undefined) return false;
-    if (!('application_login_uri' in value) || value['application_login_uri'] === undefined) return false;
-    if (!('auth_fallback_method' in value) || value['auth_fallback_method'] === undefined) return false;
-    if (!('auth_fallback_method_ttl' in value) || value['auth_fallback_method_ttl'] === undefined) return false;
-    if (!('auth_methods' in value) || value['auth_methods'] === undefined) return false;
-    if (!('auth_origin' in value) || value['auth_origin'] === undefined) return false;
-    if (!('auto_theme_enabled' in value) || value['auto_theme_enabled'] === undefined) return false;
-    if (!('created_at' in value) || value['created_at'] === undefined) return false;
-    if (!('default_language' in value) || value['default_language'] === undefined) return false;
+    if (!('additionalAuthOrigins' in value) || value['additionalAuthOrigins'] === undefined) return false;
+    if (!('allowedCallbackUrls' in value) || value['allowedCallbackUrls'] === undefined) return false;
+    if (!('allowedIdentifier' in value) || value['allowedIdentifier'] === undefined) return false;
+    if (!('allowedLogoutUrls' in value) || value['allowedLogoutUrls'] === undefined) return false;
+    if (!('applicationLoginUri' in value) || value['applicationLoginUri'] === undefined) return false;
+    if (!('authFallbackMethod' in value) || value['authFallbackMethod'] === undefined) return false;
+    if (!('authFallbackMethodTtl' in value) || value['authFallbackMethodTtl'] === undefined) return false;
+    if (!('authMethods' in value) || value['authMethods'] === undefined) return false;
+    if (!('authOrigin' in value) || value['authOrigin'] === undefined) return false;
+    if (!('autoThemeEnabled' in value) || value['autoThemeEnabled'] === undefined) return false;
+    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
+    if (!('defaultLanguage' in value) || value['defaultLanguage'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('layouts' in value) || value['layouts'] === undefined) return false;
-    if (!('login_url' in value) || value['login_url'] === undefined) return false;
+    if (!('loginUrl' in value) || value['loginUrl'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
     if (!('hosted' in value) || value['hosted'] === undefined) return false;
-    if (!('hosted_subdomain' in value) || value['hosted_subdomain'] === undefined) return false;
-    if (!('hosted_theme' in value) || value['hosted_theme'] === undefined) return false;
-    if (!('passage_branding' in value) || value['passage_branding'] === undefined) return false;
-    if (!('profile_management' in value) || value['profile_management'] === undefined) return false;
-    if (!('public_signup' in value) || value['public_signup'] === undefined) return false;
-    if (!('redirect_url' in value) || value['redirect_url'] === undefined) return false;
-    if (!('refresh_absolute_lifetime' in value) || value['refresh_absolute_lifetime'] === undefined) return false;
-    if (!('refresh_enabled' in value) || value['refresh_enabled'] === undefined) return false;
-    if (!('refresh_inactivity_lifetime' in value) || value['refresh_inactivity_lifetime'] === undefined) return false;
-    if (!('require_email_verification' in value) || value['require_email_verification'] === undefined) return false;
-    if (!('require_identifier_verification' in value) || value['require_identifier_verification'] === undefined) return false;
-    if (!('required_identifier' in value) || value['required_identifier'] === undefined) return false;
+    if (!('hostedSubdomain' in value) || value['hostedSubdomain'] === undefined) return false;
+    if (!('hostedTheme' in value) || value['hostedTheme'] === undefined) return false;
+    if (!('passageBranding' in value) || value['passageBranding'] === undefined) return false;
+    if (!('profileManagement' in value) || value['profileManagement'] === undefined) return false;
+    if (!('publicSignup' in value) || value['publicSignup'] === undefined) return false;
+    if (!('redirectUrl' in value) || value['redirectUrl'] === undefined) return false;
+    if (!('refreshAbsoluteLifetime' in value) || value['refreshAbsoluteLifetime'] === undefined) return false;
+    if (!('refreshEnabled' in value) || value['refreshEnabled'] === undefined) return false;
+    if (!('refreshInactivityLifetime' in value) || value['refreshInactivityLifetime'] === undefined) return false;
+    if (!('requireEmailVerification' in value) || value['requireEmailVerification'] === undefined) return false;
+    if (!('requireIdentifierVerification' in value) || value['requireIdentifierVerification'] === undefined) return false;
+    if (!('requiredIdentifier' in value) || value['requiredIdentifier'] === undefined) return false;
     if (!('role' in value) || value['role'] === undefined) return false;
-    if (!('rsa_public_key' in value) || value['rsa_public_key'] === undefined) return false;
-    if (!('session_timeout_length' in value) || value['session_timeout_length'] === undefined) return false;
+    if (!('rsaPublicKey' in value) || value['rsaPublicKey'] === undefined) return false;
+    if (!('sessionTimeoutLength' in value) || value['sessionTimeoutLength'] === undefined) return false;
     if (!('type' in value) || value['type'] === undefined) return false;
-    if (!('user_metadata_schema' in value) || value['user_metadata_schema'] === undefined) return false;
+    if (!('userMetadataSchema' in value) || value['userMetadataSchema'] === undefined) return false;
     if (!('technologies' in value) || value['technologies'] === undefined) return false;
-    if (!('element_customization' in value) || value['element_customization'] === undefined) return false;
-    if (!('element_customization_dark' in value) || value['element_customization_dark'] === undefined) return false;
+    if (!('elementCustomization' in value) || value['elementCustomization'] === undefined) return false;
+    if (!('elementCustomizationDark' in value) || value['elementCustomizationDark'] === undefined) return false;
     return true;
 }
 
@@ -378,47 +378,47 @@ export function AppInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
     }
     return {
         
-        'additional_auth_origins': json['additional_auth_origins'],
-        'allowed_callback_urls': json['allowed_callback_urls'],
-        'allowed_identifier': json['allowed_identifier'],
-        'allowed_logout_urls': json['allowed_logout_urls'],
-        'application_login_uri': json['application_login_uri'],
-        'auth_fallback_method': json['auth_fallback_method'],
-        'auth_fallback_method_ttl': json['auth_fallback_method_ttl'],
-        'auth_methods': AuthMethodsFromJSON(json['auth_methods']),
-        'auth_origin': json['auth_origin'],
-        'auto_theme_enabled': json['auto_theme_enabled'],
-        'created_at': (new Date(json['created_at'])),
-        'default_language': json['default_language'],
+        'additionalAuthOrigins': json['additional_auth_origins'],
+        'allowedCallbackUrls': json['allowed_callback_urls'],
+        'allowedIdentifier': json['allowed_identifier'],
+        'allowedLogoutUrls': json['allowed_logout_urls'],
+        'applicationLoginUri': json['application_login_uri'],
+        'authFallbackMethod': json['auth_fallback_method'],
+        'authFallbackMethodTtl': json['auth_fallback_method_ttl'],
+        'authMethods': AuthMethodsFromJSON(json['auth_methods']),
+        'authOrigin': json['auth_origin'],
+        'autoThemeEnabled': json['auto_theme_enabled'],
+        'createdAt': (new Date(json['created_at'])),
+        'defaultLanguage': json['default_language'],
         'id': json['id'],
         'layouts': LayoutsFromJSON(json['layouts']),
-        'login_url': json['login_url'],
-        'light_logo_url': json['light_logo_url'] == null ? undefined : json['light_logo_url'],
-        'dark_logo_url': json['dark_logo_url'] == null ? undefined : json['dark_logo_url'],
+        'loginUrl': json['login_url'],
+        'lightLogoUrl': json['light_logo_url'] == null ? undefined : json['light_logo_url'],
+        'darkLogoUrl': json['dark_logo_url'] == null ? undefined : json['dark_logo_url'],
         'name': json['name'],
         'hosted': json['hosted'],
-        'hosted_subdomain': json['hosted_subdomain'],
-        'hosted_theme': ThemeTypeFromJSON(json['hosted_theme']),
-        'id_token_lifetime': json['id_token_lifetime'] == null ? undefined : json['id_token_lifetime'],
-        'passage_branding': json['passage_branding'],
-        'profile_management': json['profile_management'],
-        'public_signup': json['public_signup'],
-        'redirect_url': json['redirect_url'],
-        'refresh_absolute_lifetime': json['refresh_absolute_lifetime'],
-        'refresh_enabled': json['refresh_enabled'],
-        'refresh_inactivity_lifetime': json['refresh_inactivity_lifetime'],
-        'require_email_verification': json['require_email_verification'],
-        'require_identifier_verification': json['require_identifier_verification'],
-        'required_identifier': json['required_identifier'],
+        'hostedSubdomain': json['hosted_subdomain'],
+        'hostedTheme': ThemeTypeFromJSON(json['hosted_theme']),
+        'idTokenLifetime': json['id_token_lifetime'] == null ? undefined : json['id_token_lifetime'],
+        'passageBranding': json['passage_branding'],
+        'profileManagement': json['profile_management'],
+        'publicSignup': json['public_signup'],
+        'redirectUrl': json['redirect_url'],
+        'refreshAbsoluteLifetime': json['refresh_absolute_lifetime'],
+        'refreshEnabled': json['refresh_enabled'],
+        'refreshInactivityLifetime': json['refresh_inactivity_lifetime'],
+        'requireEmailVerification': json['require_email_verification'],
+        'requireIdentifierVerification': json['require_identifier_verification'],
+        'requiredIdentifier': json['required_identifier'],
         'role': json['role'],
-        'rsa_public_key': json['rsa_public_key'],
+        'rsaPublicKey': json['rsa_public_key'],
         'secret': json['secret'] == null ? undefined : json['secret'],
-        'session_timeout_length': json['session_timeout_length'],
+        'sessionTimeoutLength': json['session_timeout_length'],
         'type': json['type'],
-        'user_metadata_schema': ((json['user_metadata_schema'] as Array<any>).map(UserMetadataFieldFromJSON)),
+        'userMetadataSchema': ((json['user_metadata_schema'] as Array<any>).map(UserMetadataFieldFromJSON)),
         'technologies': ((json['technologies'] as Array<any>).map(TechnologiesFromJSON)),
-        'element_customization': ElementCustomizationFromJSON(json['element_customization']),
-        'element_customization_dark': ElementCustomizationFromJSON(json['element_customization_dark']),
+        'elementCustomization': ElementCustomizationFromJSON(json['element_customization']),
+        'elementCustomizationDark': ElementCustomizationFromJSON(json['element_customization_dark']),
     };
 }
 
@@ -433,47 +433,47 @@ export function AppInfoToJSONTyped(value?: AppInfo | null, ignoreDiscriminator: 
 
     return {
         
-        'additional_auth_origins': value['additional_auth_origins'],
-        'allowed_callback_urls': value['allowed_callback_urls'],
-        'allowed_identifier': value['allowed_identifier'],
-        'allowed_logout_urls': value['allowed_logout_urls'],
-        'application_login_uri': value['application_login_uri'],
-        'auth_fallback_method': value['auth_fallback_method'],
-        'auth_fallback_method_ttl': value['auth_fallback_method_ttl'],
-        'auth_methods': AuthMethodsToJSON(value['auth_methods']),
-        'auth_origin': value['auth_origin'],
-        'auto_theme_enabled': value['auto_theme_enabled'],
-        'created_at': ((value['created_at']).toISOString()),
-        'default_language': value['default_language'],
+        'additional_auth_origins': value['additionalAuthOrigins'],
+        'allowed_callback_urls': value['allowedCallbackUrls'],
+        'allowed_identifier': value['allowedIdentifier'],
+        'allowed_logout_urls': value['allowedLogoutUrls'],
+        'application_login_uri': value['applicationLoginUri'],
+        'auth_fallback_method': value['authFallbackMethod'],
+        'auth_fallback_method_ttl': value['authFallbackMethodTtl'],
+        'auth_methods': AuthMethodsToJSON(value['authMethods']),
+        'auth_origin': value['authOrigin'],
+        'auto_theme_enabled': value['autoThemeEnabled'],
+        'created_at': ((value['createdAt']).toISOString()),
+        'default_language': value['defaultLanguage'],
         'id': value['id'],
         'layouts': LayoutsToJSON(value['layouts']),
-        'login_url': value['login_url'],
-        'light_logo_url': value['light_logo_url'],
-        'dark_logo_url': value['dark_logo_url'],
+        'login_url': value['loginUrl'],
+        'light_logo_url': value['lightLogoUrl'],
+        'dark_logo_url': value['darkLogoUrl'],
         'name': value['name'],
         'hosted': value['hosted'],
-        'hosted_subdomain': value['hosted_subdomain'],
-        'hosted_theme': ThemeTypeToJSON(value['hosted_theme']),
-        'id_token_lifetime': value['id_token_lifetime'],
-        'passage_branding': value['passage_branding'],
-        'profile_management': value['profile_management'],
-        'public_signup': value['public_signup'],
-        'redirect_url': value['redirect_url'],
-        'refresh_absolute_lifetime': value['refresh_absolute_lifetime'],
-        'refresh_enabled': value['refresh_enabled'],
-        'refresh_inactivity_lifetime': value['refresh_inactivity_lifetime'],
-        'require_email_verification': value['require_email_verification'],
-        'require_identifier_verification': value['require_identifier_verification'],
-        'required_identifier': value['required_identifier'],
+        'hosted_subdomain': value['hostedSubdomain'],
+        'hosted_theme': ThemeTypeToJSON(value['hostedTheme']),
+        'id_token_lifetime': value['idTokenLifetime'],
+        'passage_branding': value['passageBranding'],
+        'profile_management': value['profileManagement'],
+        'public_signup': value['publicSignup'],
+        'redirect_url': value['redirectUrl'],
+        'refresh_absolute_lifetime': value['refreshAbsoluteLifetime'],
+        'refresh_enabled': value['refreshEnabled'],
+        'refresh_inactivity_lifetime': value['refreshInactivityLifetime'],
+        'require_email_verification': value['requireEmailVerification'],
+        'require_identifier_verification': value['requireIdentifierVerification'],
+        'required_identifier': value['requiredIdentifier'],
         'role': value['role'],
-        'rsa_public_key': value['rsa_public_key'],
+        'rsa_public_key': value['rsaPublicKey'],
         'secret': value['secret'],
-        'session_timeout_length': value['session_timeout_length'],
+        'session_timeout_length': value['sessionTimeoutLength'],
         'type': value['type'],
-        'user_metadata_schema': ((value['user_metadata_schema'] as Array<any>).map(UserMetadataFieldToJSON)),
+        'user_metadata_schema': ((value['userMetadataSchema'] as Array<any>).map(UserMetadataFieldToJSON)),
         'technologies': ((value['technologies'] as Array<any>).map(TechnologiesToJSON)),
-        'element_customization': ElementCustomizationToJSON(value['element_customization']),
-        'element_customization_dark': ElementCustomizationToJSON(value['element_customization_dark']),
+        'element_customization': ElementCustomizationToJSON(value['elementCustomization']),
+        'element_customization_dark': ElementCustomizationToJSON(value['elementCustomizationDark']),
     };
 }
 
