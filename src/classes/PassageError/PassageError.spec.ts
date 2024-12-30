@@ -3,7 +3,6 @@ import { ResponseError } from '../../generated';
 
 describe('PassageError', () => {
     it('should map a ResponseError to a PassageError using fromResponseError', async () => {
-        const message = 'Test error message';
         const responseError: ResponseError = {
             response: {
                 status: 500,
@@ -11,11 +10,11 @@ describe('PassageError', () => {
             },
             message: 'Internal server error',
         } as ResponseError;
-        const passageError = await PassageError.fromResponseError(responseError, message);
+        const passageError = await PassageError.fromResponseError(responseError);
 
         expect(passageError).toBeInstanceOf(PassageError);
         expect(passageError.name).toBe('PassageError');
-        expect(passageError.message).toBe(`${message}: Internal server error`);
+        expect(passageError.message).toBe('Internal server error');
         expect(passageError.errorCode).toBe('INTERNAL_SERVER_ERROR');
         expect(passageError.statusCode).toBe(500);
     });
