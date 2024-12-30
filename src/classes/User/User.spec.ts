@@ -2,6 +2,7 @@ import { User } from './User';
 import { PassageInstanceConfig } from '../PassageBase';
 import { UsersApi, ResponseError, ListPaginatedUsersResponse, Configuration } from '../../generated';
 import { PassageUser } from './types';
+import { PassageError } from '../PassageError';
 
 jest.mock('../../generated/apis');
 
@@ -39,24 +40,33 @@ describe('User class', () => {
     });
 
     it('should throw an error if get user by identifier fails', async () => {
-        usersApiMock.listPaginatedUsers.mockRejectedValue(
+        const responseError = new ResponseError(
+            {
+                status: 502,
+                json: async () => ({ code: 'error_code', error: 'Bad gateway' }),
+            } as Response,
+            'Error',
+        );
+        const passageError = await PassageError.fromResponseError(responseError);
+        usersApiMock.listPaginatedUsers.mockRejectedValue(responseError);
+
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(passageError);
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow('Bad gateway');
+    });
+
+    it('should throw an error if get user by identifier returns an empty array', async () => {
+        const passageError = await PassageError.fromResponseError(
             new ResponseError(
                 {
                     status: 404,
-                    json: async () => ({ code: 'NOT_FOUND', error: 'Resource not found' }),
+                    json: async () => ({ code: 'user_not_found', error: 'User not found.' }),
                 } as Response,
                 'Error',
             ),
         );
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(Error);
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(
-            'Could not fetch user by identifier: Resource not found',
-        );
-    });
 
-    it('should throw an error if get user by identifier returns an empty array', async () => {
         usersApiMock.listPaginatedUsers.mockResolvedValue({ users: [] } as unknown as ListPaginatedUsersResponse);
-        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(Error);
+        await expect(user.getByIdentifier('email@example.com')).rejects.toThrow(passageError);
         await expect(user.getByIdentifier('email@example.com')).rejects.toThrow('User not found.');
     });
 });
