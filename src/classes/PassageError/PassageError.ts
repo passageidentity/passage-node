@@ -29,9 +29,8 @@ export class PassageError extends Error {
      * @param {string} message Optional message to prefix the error message
      * @return {PassageError} PassageError
      */
-    public static async fromResponseError(err: ResponseError, message?: string): Promise<PassageError> {
+    public static async fromResponseError(err: ResponseError): Promise<PassageError> {
         const response: { code: string; error: string } = await err.response.json();
-        const formattedMessage = [message, response.error].filter(Boolean).join(': ');
-        return new PassageError(formattedMessage, response.code, err);
+        return new PassageError(response.error, response.code, err);
     }
 }
