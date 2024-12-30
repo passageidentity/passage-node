@@ -14,7 +14,7 @@ export class User extends PassageBase {
      * User class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    public constructor(protected readonly config: PassageInstanceConfig) {
+    public constructor(config: PassageInstanceConfig) {
         super(config);
         this.usersApi = new UsersApi(this.config.apiConfiguration);
         this.userDevicesApi = new UserDevicesApi(this.config.apiConfiguration);

@@ -21,7 +21,7 @@ export class Auth extends PassageBase {
      * Auth class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    public constructor(protected readonly config: PassageInstanceConfig) {
+    public constructor(config: PassageInstanceConfig) {
         super(config);
         this.jwks = createRemoteJWKSet(
             new URL(`https://auth.passage.id/v1/apps/${this.config.appId}/.well-known/jwks.json`),

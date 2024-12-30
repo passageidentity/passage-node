@@ -9,7 +9,7 @@ export class PassageBase {
      * PassageBase class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    public constructor(protected config: PassageInstanceConfig) {}
+    public constructor(protected readonly config: PassageInstanceConfig) {}
 
     /**
      * Handle errors from PassageFlex API
