@@ -1,5 +1,4 @@
 export { Passage } from './classes/Passage/Passage';
-export * from './generated/models';
 export * from './classes/Auth';
 export * from './classes/User';
 export * from './classes/PassageError';
