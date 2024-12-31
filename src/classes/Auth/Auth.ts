@@ -7,7 +7,6 @@ import {
     KeyLike,
 } from 'jose';
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
-import { PassageError } from '../PassageError';
 import { MagicLink, MagicLinkChannel, MagicLinksApi } from '../../generated';
 import { CreateMagicLinkArgs, MagicLinkOptions } from './types';
 
@@ -17,11 +16,12 @@ import { CreateMagicLinkArgs, MagicLinkOptions } from './types';
 export class Auth extends PassageBase {
     private readonly jwks: (protectedHeader?: JWSHeaderParameters, token?: FlattenedJWSInput) => Promise<KeyLike>;
     private readonly magicLinksApi: MagicLinksApi;
+
     /**
      * Auth class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    public constructor(protected config: PassageInstanceConfig) {
+    public constructor(config: PassageInstanceConfig) {
         super(config);
         this.jwks = createRemoteJWKSet(
             new URL(`https://auth.passage.id/v1/apps/${this.config.appId}/.well-known/jwks.json`),
@@ -44,32 +44,20 @@ export class Auth extends PassageBase {
             throw new Error('jwt is required.');
         }
 
-        try {
-            const { kid } = decodeProtectedHeader(jwt);
-            if (!kid) {
-                throw new PassageError('Could not find valid cookie for authentication. You must catch this error.');
-            }
-
-            const {
-                payload: { sub: userId, aud },
-            } = await jwtVerify(jwt, this.jwks);
-
-            if (!userId) {
-                throw new PassageError('Could not validate auth token. You must catch this error.');
-            }
-            if (Array.isArray(aud)) {
-                if (!aud.includes(this.config.appId)) {
-                    throw new Error('Incorrect app ID claim in token. You must catch this error.');
-                }
-            }
-            return userId;
-        } catch (e) {
-            if (e instanceof Error) {
-                throw new PassageError(`Could not verify token: ${e.toString()}. You must catch this error.`);
-            }
-
-            throw new PassageError(`Could not verify token. You must catch this error.`);
+        const { kid } = decodeProtectedHeader(jwt);
+        if (!kid) {
+            throw new Error('kid missing in jwt header.');
         }
+
+        const {
+            payload: { sub: userId },
+        } = await jwtVerify(jwt, this.jwks, { audience: [this.config.appId] });
+
+        if (!userId) {
+            throw new Error('sub missing in jwt claims.');
+        }
+
+        return userId;
     }
 
     /**
@@ -106,7 +94,7 @@ export class Auth extends PassageBase {
 
             return response.magicLink;
         } catch (err) {
-            throw await this.parseError(err, 'Could not create a magic link for this app');
+            throw await this.parseError(err);
         }
     }
 }

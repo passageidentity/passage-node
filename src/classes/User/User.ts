@@ -1,23 +1,24 @@
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
-import { TokensApi, UserDevicesApi, UsersApi, WebAuthnDevices } from '../../generated';
-import { PassageError } from '../PassageError';
+import { ResponseError, TokensApi, UserDevicesApi, UsersApi, WebAuthnDevices } from '../../generated';
 import { CreateUserArgs, PassageUser, UpdateUserArgs } from './types';
 
 /**
  * User class for handling operations to get and update user information.
  */
 export class User extends PassageBase {
-    private usersApi;
-    private userDevicesApi;
+    private readonly usersApi: UsersApi;
+    private readonly userDevicesApi: UserDevicesApi;
+    private readonly tokensApi: TokensApi;
 
     /**
      * User class constructor.
      * @param {PassageInstanceConfig} config config properties for Passage instance
      */
-    public constructor(protected config: PassageInstanceConfig) {
+    public constructor(config: PassageInstanceConfig) {
         super(config);
         this.usersApi = new UsersApi(this.config.apiConfiguration);
         this.userDevicesApi = new UserDevicesApi(this.config.apiConfiguration);
+        this.tokensApi = new TokensApi(this.config.apiConfiguration);
     }
 
     /**
@@ -39,7 +40,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not fetch user');
+            throw await this.parseError(err);
         }
     }
 
@@ -63,12 +64,14 @@ export class User extends PassageBase {
 
             const users = response.users;
             if (!users.length) {
-                throw new PassageError('User not found.');
+                throw new ResponseError(
+                    new Response('{"code":"user_not_found","error":"User not found."}', { status: 404 }),
+                );
             }
 
             return this.get(users[0].id);
         } catch (err) {
-            throw await this.parseError(err, 'Could not fetch user by identifier');
+            throw await this.parseError(err);
         }
     }
 
@@ -90,7 +93,7 @@ export class User extends PassageBase {
             });
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not activate user');
+            throw await this.parseError(err);
         }
     }
 
@@ -113,7 +116,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not deactivate user');
+            throw await this.parseError(err);
         }
     }
 
@@ -138,7 +141,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not update user');
+            throw await this.parseError(err);
         }
     }
 
@@ -161,7 +164,7 @@ export class User extends PassageBase {
 
             return response.user;
         } catch (err) {
-            throw await this.parseError(err, 'Could not create user');
+            throw await this.parseError(err);
         }
     }
 
@@ -169,9 +172,9 @@ export class User extends PassageBase {
      * Delete a user using their user ID.
      *
      * @param {string} userId The Passage user ID used to delete the corresponding user.
-     * @return {Promise<boolean>}
+     * @return {Promise<void>}
      */
-    public async delete(userId: string): Promise<boolean> {
+    public async delete(userId: string): Promise<void> {
         if (!userId) {
             throw new Error('userId is required.');
         }
@@ -181,9 +184,8 @@ export class User extends PassageBase {
                 userId,
                 appId: this.config.appId,
             });
-            return true;
         } catch (err) {
-            throw await this.parseError(err, 'Could not delete user');
+            throw await this.parseError(err);
         }
     }
 
@@ -206,7 +208,7 @@ export class User extends PassageBase {
 
             return response.devices;
         } catch (err) {
-            throw await this.parseError(err, "Could not fetch user's devices:");
+            throw await this.parseError(err);
         }
     }
 
@@ -215,9 +217,9 @@ export class User extends PassageBase {
      *
      * @param {string} userId The Passage user ID
      * @param {string} deviceId The Passage user's device ID
-     * @return {Promise<boolean>}
+     * @return {Promise<void>}
      */
-    public async revokeDevice(userId: string, deviceId: string): Promise<boolean> {
+    public async revokeDevice(userId: string, deviceId: string): Promise<void> {
         if (!userId) {
             throw new Error('userId is required.');
         }
@@ -232,10 +234,8 @@ export class User extends PassageBase {
                 deviceId,
                 appId: this.config.appId,
             });
-
-            return true;
         } catch (err) {
-            throw await this.parseError(err, "Could not delete user's device:");
+            throw await this.parseError(err);
         }
     }
 
@@ -243,45 +243,20 @@ export class User extends PassageBase {
      * Revokes all of a user's Refresh Tokens using their User ID.
      *
      * @param {string} userId The Passage user ID
-     * @return {Promise<boolean>}
+     * @return {Promise<void>}
      */
-    public async revokeRefreshTokens(userId: string): Promise<boolean> {
+    public async revokeRefreshTokens(userId: string): Promise<void> {
         if (!userId) {
             throw new Error('userId is required.');
         }
 
         try {
-            const client = new TokensApi(this.config.apiConfiguration);
-
-            await client.revokeUserRefreshTokens({
+            await this.tokensApi.revokeUserRefreshTokens({
                 userId,
                 appId: this.config.appId,
             });
-            return true;
         } catch (err) {
-            throw await this.parseError(err, "Could not revoke user's refresh tokens:");
+            throw await this.parseError(err);
         }
-    }
-
-    /**
-     * @deprecated Use revokeRefreshTokens instead
-     * Revokes all of a user's Refresh Tokens using their User ID.
-     *
-     * @param {string} userId The Passage user ID
-     * @return {Promise<boolean>}
-     */
-    public async signOut(userId: string): Promise<boolean> {
-        return this.revokeRefreshTokens(userId);
-    }
-
-    /**
-     * @deprecated Use getByIdentifier instead
-     * Get a user's object using their user identifier.
-     *
-     * @param {string} identifier The Passage user email or phone number
-     * @return {Promise<PassageUser>} Passage User object
-     */
-    public async getUserByIdentifier(identifier: string): Promise<PassageUser> {
-        return this.getByIdentifier(identifier);
     }
 }
