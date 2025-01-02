@@ -1,6 +1,6 @@
 import { MagicLinkChannel, MagicLinkType } from '../../generated';
 
-export { MagicLinkType, MagicLink, CreateMagicLinkRequest, MagicLinkChannel } from '../../generated';
+export { MagicLinkType, MagicLink, MagicLinkChannel } from '../../generated';
 
 type MagicLinkArgsBase = {
     type: MagicLinkType;

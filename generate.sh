@@ -14,4 +14,5 @@ docker run --rm -v "${PWD}:/local" -u $(id -u) openapitools/openapi-generator-cl
   -i "/local/$file" \
   -g typescript-fetch \
   -o /local/src/generated \
-  --additional-properties=modelPropertyNaming=camelCase
+  --additional-properties=modelPropertyNaming=camelCase \
+  --model-name-mappings CreateUserRequest=CreateUserArgs,UpdateUserRequest=UpdateUserArgs,UserInfo=PassageUser

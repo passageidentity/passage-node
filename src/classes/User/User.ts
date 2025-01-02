@@ -1,6 +1,14 @@
 import { PassageBase, PassageInstanceConfig } from '../PassageBase';
-import { ResponseError, TokensApi, UserDevicesApi, UsersApi, WebAuthnDevices } from '../../generated';
-import { CreateUserArgs, PassageUser, UpdateUserArgs } from './types';
+import {
+    CreateUserArgs,
+    PassageUser,
+    ResponseError,
+    TokensApi,
+    UpdateUserArgs,
+    UserDevicesApi,
+    UsersApi,
+    WebAuthnDevices,
+} from '../../generated';
 
 /**
  * User class for handling operations to get and update user information.
@@ -124,7 +132,7 @@ export class User extends PassageBase {
      * Update a user.
      *
      * @param {string} userId The Passage user ID
-     * @param {UpdateUserRequest} options The user attributes to be updated
+     * @param {UpdateUserArgs} options The user attributes to be updated
      * @return {Promise<PassageUser>} Passage User object
      */
     public async update(userId: string, options: UpdateUserArgs): Promise<PassageUser> {
@@ -136,7 +144,7 @@ export class User extends PassageBase {
             const response = await this.usersApi.updateUser({
                 userId,
                 appId: this.config.appId,
-                updateUserRequest: options,
+                updateUserArgs: options,
             });
 
             return response.user;
@@ -159,7 +167,7 @@ export class User extends PassageBase {
         try {
             const response = await this.usersApi.createUser({
                 appId: this.config.appId,
-                createUserRequest: args,
+                createUserArgs: args,
             });
 
             return response.user;

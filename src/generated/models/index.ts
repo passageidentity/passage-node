@@ -2,7 +2,7 @@
 /* eslint-disable */
 export * from './AppleUserSocialConnection';
 export * from './CreateMagicLinkRequest';
-export * from './CreateUserRequest';
+export * from './CreateUserArgs';
 export * from './GithubUserSocialConnection';
 export * from './GoogleUserSocialConnection';
 export * from './Link';
@@ -20,11 +20,11 @@ export * from './Model404Error';
 export * from './Model500Error';
 export * from './Nonce';
 export * from './PaginatedLinks';
+export * from './PassageUser';
 export * from './SocialConnectionType';
-export * from './UpdateUserRequest';
+export * from './UpdateUserArgs';
 export * from './UserEventAction';
 export * from './UserEventStatus';
-export * from './UserInfo';
 export * from './UserRecentEvent';
 export * from './UserResponse';
 export * from './UserSocialConnections';

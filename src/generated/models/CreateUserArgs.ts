@@ -16,41 +16,41 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CreateUserRequest
+ * @interface CreateUserArgs
  */
-export interface CreateUserRequest {
+export interface CreateUserArgs {
     /**
      * Email of the new user. Either this or `phone` is required; both may be provided.
      * @type {string}
-     * @memberof CreateUserRequest
+     * @memberof CreateUserArgs
      */
     email?: string;
     /**
      * Phone number of the new user. Either this or `email` is required; both may be provided.
      * @type {string}
-     * @memberof CreateUserRequest
+     * @memberof CreateUserArgs
      */
     phone?: string;
     /**
      * 
      * @type {object}
-     * @memberof CreateUserRequest
+     * @memberof CreateUserArgs
      */
     userMetadata?: object;
 }
 
 /**
- * Check if a given object implements the CreateUserRequest interface.
+ * Check if a given object implements the CreateUserArgs interface.
  */
-export function instanceOfCreateUserRequest(value: object): value is CreateUserRequest {
+export function instanceOfCreateUserArgs(value: object): value is CreateUserArgs {
     return true;
 }
 
-export function CreateUserRequestFromJSON(json: any): CreateUserRequest {
-    return CreateUserRequestFromJSONTyped(json, false);
+export function CreateUserArgsFromJSON(json: any): CreateUserArgs {
+    return CreateUserArgsFromJSONTyped(json, false);
 }
 
-export function CreateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateUserRequest {
+export function CreateUserArgsFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateUserArgs {
     if (json == null) {
         return json;
     }
@@ -62,11 +62,11 @@ export function CreateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function CreateUserRequestToJSON(json: any): CreateUserRequest {
-    return CreateUserRequestToJSONTyped(json, false);
+export function CreateUserArgsToJSON(json: any): CreateUserArgs {
+    return CreateUserArgsToJSONTyped(json, false);
 }
 
-export function CreateUserRequestToJSONTyped(value?: CreateUserRequest | null, ignoreDiscriminator: boolean = false): any {
+export function CreateUserArgsToJSONTyped(value?: CreateUserArgs | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

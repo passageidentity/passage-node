@@ -1,1 +1,0 @@
-export { ResponseError } from '../../generated';

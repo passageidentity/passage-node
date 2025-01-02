@@ -52,109 +52,109 @@ import {
 /**
  * 
  * @export
- * @interface UserInfo
+ * @interface PassageUser
  */
-export interface UserInfo {
+export interface PassageUser {
     /**
      * 
      * @type {Date}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     createdAt: Date;
     /**
      * 
      * @type {string}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     email: string;
     /**
      * 
      * @type {boolean}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     emailVerified: boolean;
     /**
      * The external ID of the user. Only set if the user was created in a Flex app.
      * @type {string}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     externalId: string;
     /**
      * 
      * @type {string}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     id: string;
     /**
      * 
      * @type {Date}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     lastLoginAt: Date;
     /**
      * 
      * @type {number}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     loginCount: number;
     /**
      * 
      * @type {string}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     phone: string;
     /**
      * 
      * @type {boolean}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     phoneVerified: boolean;
     /**
      * 
      * @type {Array<UserRecentEvent>}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     recentEvents: Array<UserRecentEvent>;
     /**
      * 
      * @type {UserSocialConnections}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     socialConnections: UserSocialConnections;
     /**
      * 
      * @type {UserStatus}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     status: UserStatus;
     /**
      * 
      * @type {Date}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     updatedAt: Date;
     /**
      * 
      * @type {object}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     userMetadata: object | null;
     /**
      * 
      * @type {boolean}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     webauthn: boolean;
     /**
      * 
      * @type {Array<WebAuthnDevices>}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     webauthnDevices: Array<WebAuthnDevices>;
     /**
      * List of credential types that have been used for authentication
      * @type {Array<WebAuthnType>}
-     * @memberof UserInfo
+     * @memberof PassageUser
      */
     webauthnTypes: Array<WebAuthnType>;
 }
@@ -162,9 +162,9 @@ export interface UserInfo {
 
 
 /**
- * Check if a given object implements the UserInfo interface.
+ * Check if a given object implements the PassageUser interface.
  */
-export function instanceOfUserInfo(value: object): value is UserInfo {
+export function instanceOfPassageUser(value: object): value is PassageUser {
     if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
     if (!('email' in value) || value['email'] === undefined) return false;
     if (!('emailVerified' in value) || value['emailVerified'] === undefined) return false;
@@ -185,11 +185,11 @@ export function instanceOfUserInfo(value: object): value is UserInfo {
     return true;
 }
 
-export function UserInfoFromJSON(json: any): UserInfo {
-    return UserInfoFromJSONTyped(json, false);
+export function PassageUserFromJSON(json: any): PassageUser {
+    return PassageUserFromJSONTyped(json, false);
 }
 
-export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserInfo {
+export function PassageUserFromJSONTyped(json: any, ignoreDiscriminator: boolean): PassageUser {
     if (json == null) {
         return json;
     }
@@ -215,11 +215,11 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function UserInfoToJSON(json: any): UserInfo {
-    return UserInfoToJSONTyped(json, false);
+export function PassageUserToJSON(json: any): PassageUser {
+    return PassageUserToJSONTyped(json, false);
 }
 
-export function UserInfoToJSONTyped(value?: UserInfo | null, ignoreDiscriminator: boolean = false): any {
+export function PassageUserToJSONTyped(value?: PassageUser | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
