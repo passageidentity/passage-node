@@ -1,6 +1,5 @@
 import { FetchAPI } from '../../generated';
 
-export { AppInfo, Layouts, LayoutConfig, UserMetadataFieldType, UserMetadataField } from '../../generated';
 export type PassageConfig = {
     /** The App ID for your Passage Application. */
     appID: string;
