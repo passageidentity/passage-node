@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { UserInfo } from './UserInfo';
+import type { PassageUser } from './PassageUser';
 import {
-    UserInfoFromJSON,
-    UserInfoFromJSONTyped,
-    UserInfoToJSON,
-    UserInfoToJSONTyped,
-} from './UserInfo';
+    PassageUserFromJSON,
+    PassageUserFromJSONTyped,
+    PassageUserToJSON,
+    PassageUserToJSONTyped,
+} from './PassageUser';
 
 /**
  * 
@@ -29,10 +29,10 @@ import {
 export interface UserResponse {
     /**
      * 
-     * @type {UserInfo}
+     * @type {PassageUser}
      * @memberof UserResponse
      */
-    user: UserInfo;
+    user: PassageUser;
 }
 
 /**
@@ -53,7 +53,7 @@ export function UserResponseFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
-        'user': UserInfoFromJSON(json['user']),
+        'user': PassageUserFromJSON(json['user']),
     };
 }
 
@@ -68,7 +68,7 @@ export function UserResponseToJSONTyped(value?: UserResponse | null, ignoreDiscr
 
     return {
         
-        'user': UserInfoToJSON(value['user']),
+        'user': PassageUserToJSON(value['user']),
     };
 }
 

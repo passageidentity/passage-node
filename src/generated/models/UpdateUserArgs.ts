@@ -16,41 +16,41 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UpdateUserRequest
+ * @interface UpdateUserArgs
  */
-export interface UpdateUserRequest {
+export interface UpdateUserArgs {
     /**
      * 
      * @type {string}
-     * @memberof UpdateUserRequest
+     * @memberof UpdateUserArgs
      */
     email?: string;
     /**
      * 
      * @type {string}
-     * @memberof UpdateUserRequest
+     * @memberof UpdateUserArgs
      */
     phone?: string;
     /**
      * 
      * @type {object}
-     * @memberof UpdateUserRequest
+     * @memberof UpdateUserArgs
      */
     userMetadata?: object;
 }
 
 /**
- * Check if a given object implements the UpdateUserRequest interface.
+ * Check if a given object implements the UpdateUserArgs interface.
  */
-export function instanceOfUpdateUserRequest(value: object): value is UpdateUserRequest {
+export function instanceOfUpdateUserArgs(value: object): value is UpdateUserArgs {
     return true;
 }
 
-export function UpdateUserRequestFromJSON(json: any): UpdateUserRequest {
-    return UpdateUserRequestFromJSONTyped(json, false);
+export function UpdateUserArgsFromJSON(json: any): UpdateUserArgs {
+    return UpdateUserArgsFromJSONTyped(json, false);
 }
 
-export function UpdateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateUserRequest {
+export function UpdateUserArgsFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateUserArgs {
     if (json == null) {
         return json;
     }
@@ -62,11 +62,11 @@ export function UpdateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function UpdateUserRequestToJSON(json: any): UpdateUserRequest {
-    return UpdateUserRequestToJSONTyped(json, false);
+export function UpdateUserArgsToJSON(json: any): UpdateUserArgs {
+    return UpdateUserArgsToJSONTyped(json, false);
 }
 
-export function UpdateUserRequestToJSONTyped(value?: UpdateUserRequest | null, ignoreDiscriminator: boolean = false): any {
+export function UpdateUserArgsToJSONTyped(value?: UpdateUserArgs | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
