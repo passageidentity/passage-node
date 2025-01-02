@@ -1,4 +1,5 @@
-import { PassageError, ResponseError } from '../PassageError';
+import { ResponseError } from '../../generated';
+import { PassageError } from '../PassageError';
 import { PassageInstanceConfig } from './types';
 
 /**
