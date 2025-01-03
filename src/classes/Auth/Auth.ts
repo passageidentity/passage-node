@@ -94,6 +94,7 @@ export class Auth extends PassageBase {
 
             return response.magicLink;
         } catch (err) {
+            console.log(err);
             throw await this.parseError(err);
         }
     }

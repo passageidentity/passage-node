@@ -235,6 +235,7 @@ export class User extends PassageBase {
                 appId: this.config.appId,
             });
         } catch (err) {
+            console.log(err);
             throw await this.parseError(err);
         }
     }
