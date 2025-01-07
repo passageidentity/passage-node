@@ -1,7 +1,7 @@
 import {
-    UserInfo,
-    CreateUserRequest,
-    UpdateUserRequest,
+    PassageUser,
+    CreateUserArgs,
+    UpdateUserArgs,
     WebAuthnDevices,
     WebAuthnType,
     WebAuthnIcons,
@@ -10,14 +10,10 @@ import {
     UserStatus,
 } from '../../generated';
 
-export type PassageUser = UserInfo;
-export type CreateUserArgs = CreateUserRequest;
-export type CreateUserPayload = CreateUserRequest;
-export type UpdateUserArgs = UpdateUserRequest;
 export {
-    CreateUserRequest,
-    UpdateUserRequest,
-    UserInfo,
+    CreateUserArgs,
+    UpdateUserArgs,
+    PassageUser,
     WebAuthnDevices,
     WebAuthnType,
     WebAuthnIcons,

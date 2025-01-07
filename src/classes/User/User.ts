@@ -136,7 +136,7 @@ export class User extends PassageBase {
             const response = await this.usersApi.updateUser({
                 userId,
                 appId: this.config.appId,
-                updateUserRequest: options,
+                updateUserArgs: options,
             });
 
             return response.user;
@@ -159,7 +159,7 @@ export class User extends PassageBase {
         try {
             const response = await this.usersApi.createUser({
                 appId: this.config.appId,
-                createUserRequest: args,
+                createUserArgs: args,
             });
 
             return response.user;
