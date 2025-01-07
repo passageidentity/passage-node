@@ -7,7 +7,7 @@ apis/index.ts
 index.ts
 models/AppleUserSocialConnection.ts
 models/CreateMagicLinkRequest.ts
-models/CreateUserRequest.ts
+models/CreateUserArgs.ts
 models/GithubUserSocialConnection.ts
 models/GoogleUserSocialConnection.ts
 models/Link.ts
@@ -25,11 +25,11 @@ models/Model404Error.ts
 models/Model500Error.ts
 models/Nonce.ts
 models/PaginatedLinks.ts
+models/PassageUser.ts
 models/SocialConnectionType.ts
-models/UpdateUserRequest.ts
+models/UpdateUserArgs.ts
 models/UserEventAction.ts
 models/UserEventStatus.ts
-models/UserInfo.ts
 models/UserRecentEvent.ts
 models/UserResponse.ts
 models/UserSocialConnections.ts
