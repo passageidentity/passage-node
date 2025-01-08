@@ -16,17 +16,17 @@ export class Passage {
      * @param {PassageConfig} config The default config for Passage initialization
      */
     public constructor(config: PassageConfig) {
-        if (!config.appID) {
-            throw new Error('A Passage appID is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
+        if (!config.appId) {
+            throw new Error('A Passage App ID is required. Please include {appId: YOUR_APP_ID, apiKey: YOUR_API_KEY}.');
         }
         if (!config.apiKey) {
             throw new Error(
-                'A Passage API Key is required. Please include {appID: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
+                'A Passage API Key is required. Please include {appId: YOUR_APP_ID, apiKey: YOUR_API_KEY}.',
             );
         }
 
         const instanceConfig: PassageInstanceConfig = {
-            appId: config.appID,
+            appId: config.appId,
             apiConfiguration: this.configureApi({
                 accessToken: config.apiKey,
                 fetchApi: config.fetchApi,

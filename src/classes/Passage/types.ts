@@ -2,7 +2,7 @@ import { FetchAPI } from '../../generated';
 
 export type PassageConfig = {
     /** The App ID for your Passage Application. */
-    appID: string;
+    appId: string;
     /** The API Key for your Passage Application. */
     apiKey: string;
     /** Optional fetch API to use. Will use node-fetch by default if not provided. */
