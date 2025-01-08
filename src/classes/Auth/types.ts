@@ -1,6 +1,6 @@
-import { MagicLinkChannel, MagicLinkType } from '../../generated';
+import { MagicLinkChannel, MagicLinkLanguage, MagicLinkType } from '../../generated';
 
-export { MagicLinkType, MagicLink, MagicLinkChannel } from '../../generated';
+export { MagicLinkType, MagicLink, MagicLinkChannel, MagicLinkLanguage } from '../../generated';
 
 type MagicLinkArgsBase = {
     type: MagicLinkType;
@@ -13,7 +13,7 @@ type MagicLinkWithUserArgs = { userId: string; channel: MagicLinkChannel } & Mag
 
 export type CreateMagicLinkArgs = MagicLinkWithEmailArgs | MagicLinkWithPhoneArgs | MagicLinkWithUserArgs;
 export type MagicLinkOptions = {
-    language?: string;
+    language?: MagicLinkLanguage;
     magicLinkPath?: string;
     redirectUrl?: string;
     ttl?: number;
