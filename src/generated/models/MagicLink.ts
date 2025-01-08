@@ -64,7 +64,7 @@ export interface MagicLink {
      */
     secret: string;
     /**
-     * 
+     * time to live in minutes
      * @type {number}
      * @memberof MagicLink
      */

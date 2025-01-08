@@ -20,6 +20,13 @@ import {
     MagicLinkChannelToJSON,
     MagicLinkChannelToJSONTyped,
 } from './MagicLinkChannel';
+import type { MagicLinkLanguage } from './MagicLinkLanguage';
+import {
+    MagicLinkLanguageFromJSON,
+    MagicLinkLanguageFromJSONTyped,
+    MagicLinkLanguageToJSON,
+    MagicLinkLanguageToJSONTyped,
+} from './MagicLinkLanguage';
 import type { MagicLinkType } from './MagicLinkType';
 import {
     MagicLinkTypeFromJSON,
@@ -47,11 +54,11 @@ export interface CreateMagicLinkRequest {
      */
     email?: string;
     /**
-     * language of the email to send (optional)
-     * @type {string}
+     * 
+     * @type {MagicLinkLanguage}
      * @memberof CreateMagicLinkRequest
      */
-    language?: string;
+    language?: MagicLinkLanguage;
     /**
      * must be a relative url
      * @type {string}
@@ -77,7 +84,7 @@ export interface CreateMagicLinkRequest {
      */
     send?: boolean;
     /**
-     * 
+     * time to live in minutes
      * @type {number}
      * @memberof CreateMagicLinkRequest
      */
@@ -117,7 +124,7 @@ export function CreateMagicLinkRequestFromJSONTyped(json: any, ignoreDiscriminat
         
         'channel': json['channel'] == null ? undefined : MagicLinkChannelFromJSON(json['channel']),
         'email': json['email'] == null ? undefined : json['email'],
-        'language': json['language'] == null ? undefined : json['language'],
+        'language': json['language'] == null ? undefined : MagicLinkLanguageFromJSON(json['language']),
         'magicLinkPath': json['magic_link_path'] == null ? undefined : json['magic_link_path'],
         'phone': json['phone'] == null ? undefined : json['phone'],
         'redirectUrl': json['redirect_url'] == null ? undefined : json['redirect_url'],
@@ -141,7 +148,7 @@ export function CreateMagicLinkRequestToJSONTyped(value?: CreateMagicLinkRequest
         
         'channel': MagicLinkChannelToJSON(value['channel']),
         'email': value['email'],
-        'language': value['language'],
+        'language': MagicLinkLanguageToJSON(value['language']),
         'magic_link_path': value['magicLinkPath'],
         'phone': value['phone'],
         'redirect_url': value['redirectUrl'],
