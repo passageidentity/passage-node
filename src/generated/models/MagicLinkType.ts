@@ -14,7 +14,7 @@
 
 
 /**
- * 
+ * The type of magic link to create: "login" or "verify_identifier". Defaults to "login".
  * @export
  */
 export const MagicLinkType = {

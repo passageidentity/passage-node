@@ -11,6 +11,7 @@ export * from './ListPaginatedUsersItem';
 export * from './ListPaginatedUsersResponse';
 export * from './MagicLink';
 export * from './MagicLinkChannel';
+export * from './MagicLinkLanguage';
 export * from './MagicLinkResponse';
 export * from './MagicLinkType';
 export * from './Model400Error';

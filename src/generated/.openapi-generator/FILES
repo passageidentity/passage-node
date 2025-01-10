@@ -16,6 +16,7 @@ models/ListPaginatedUsersItem.ts
 models/ListPaginatedUsersResponse.ts
 models/MagicLink.ts
 models/MagicLinkChannel.ts
+models/MagicLinkLanguage.ts
 models/MagicLinkResponse.ts
 models/MagicLinkType.ts
 models/Model400Error.ts

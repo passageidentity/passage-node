@@ -14,7 +14,7 @@
 
 
 /**
- * 
+ * The channel for magic link delivery: "email" or "phone". Required if "send" is true.
  * @export
  */
 export const MagicLinkChannel = {
