@@ -4,6 +4,34 @@ This log was last generated on Wed, 30 Oct 2024 17:11:25 GMT and should not be m
 
 <!-- Start content -->
 
+## [3.0.0](https://github.com/passageidentity/passage-node/compare/v2.12.1...v3.0.0) (2025-01-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* change language type to be more strict in magic link options
+* change appID parameter name in Passage constructor to appId ([#220](https://github.com/passageidentity/passage-node/issues/220))
+* removes unused `CreateMagicLinkRequest` and `ResponseError` types
+* remove deprecated AppInfo code from codegen ([#208](https://github.com/passageidentity/passage-node/issues/208))
+* return void instead of boolean for `Passage.user.delete`, `Passage.user.revokeRefreshTokens`, and `Passage.user.revokeDevice`
+* removes deprecated code from Passage class
+* drop support for node v16
+* codegen models now use camelCase props ([#207](https://github.com/passageidentity/passage-node/issues/207))
+
+### Features
+
+* `validate_jwt` only compares the aud claim against the Passage app id ([ba42c26](https://github.com/passageidentity/passage-node/commit/ba42c26314f8dc5eec8b8b735c540ae24ef68262))
+* change appID parameter name in Passage constructor to appId ([#220](https://github.com/passageidentity/passage-node/issues/220)) ([66531af](https://github.com/passageidentity/passage-node/commit/66531af47e893dffdd26aa91ff0cf3cf48f67274))
+* change language type to be more strict in magic link options ([5423a80](https://github.com/passageidentity/passage-node/commit/5423a8012b1841904c71f20ce0cbf99888c084ff))
+* codegen models now use camelCase props ([#207](https://github.com/passageidentity/passage-node/issues/207)) ([fb6c694](https://github.com/passageidentity/passage-node/commit/fb6c6946254d573f6b20281788ef6294b7fa0c01))
+* drop support for node v16 ([7f0dfeb](https://github.com/passageidentity/passage-node/commit/7f0dfeb387a6884a32fd00175d18436875d3b172))
+* export the union types of CreateMagicLinkArgs for convenience ([5423a80](https://github.com/passageidentity/passage-node/commit/5423a8012b1841904c71f20ce0cbf99888c084ff))
+* remove deprecated AppInfo code from codegen ([#208](https://github.com/passageidentity/passage-node/issues/208)) ([1c927d5](https://github.com/passageidentity/passage-node/commit/1c927d54c0419e2ffc3377b1948d898371c2fa08))
+* removes deprecated code from Passage class ([ba42c26](https://github.com/passageidentity/passage-node/commit/ba42c26314f8dc5eec8b8b735c540ae24ef68262))
+* removes redundant error message prefixes ([ba42c26](https://github.com/passageidentity/passage-node/commit/ba42c26314f8dc5eec8b8b735c540ae24ef68262))
+* removes unused `CreateMagicLinkRequest` and `ResponseError` types ([7e8a445](https://github.com/passageidentity/passage-node/commit/7e8a44592dd0f64c3521f5198ab0e830851dd5be))
+* return void instead of boolean for `Passage.user.delete`, `Passage.user.revokeRefreshTokens`, and `Passage.user.revokeDevice` ([ba42c26](https://github.com/passageidentity/passage-node/commit/ba42c26314f8dc5eec8b8b735c540ae24ef68262))
+
 ## [2.12.1](https://github.com/passageidentity/passage-node/compare/v2.12.0...v2.12.1) (2024-12-16)
 
 
