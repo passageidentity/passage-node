@@ -49,12 +49,10 @@ import { Passage } from '@passageidentity/passage-node';
 ### Initialize
 
 ```js
-// Passage requires an App ID and, optionally, an API Key
-const passageConfig = {
-    appID: process.env.PASSAGE_APP_ID,
+const passage = new Passage({
+    appId: process.env.PASSAGE_APP_ID,
     apiKey: process.env.PASSAGE_API_KEY,
-};
-let passage = new Passage(passageConfig);
+});
 ```
 
 ### Go Passwordless
