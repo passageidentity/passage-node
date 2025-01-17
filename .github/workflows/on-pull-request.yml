@@ -39,3 +39,21 @@ jobs:
         run: npm i
       - name: Test
         run: npm run test
+  test-e2e:
+    name: Test E2E
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger E2E Workflow in backend-sdk-tests and Wait
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        with:
+          owner: passageidentity
+          repo: backend-sdk-tests
+          workflow_file_name: integration-tests-complete.yml
+          github_token: ${{ secrets.BE_SDK_PAT }}
+          # github.head_ref is only available on PR events, while github.ref_name provides the branch name on other events
+          client_payload: >-
+            {
+              "target_sdk":"node",
+              "use_test_release":true,
+              "sdk_branch_ref":"${{ github.head_ref || github.ref_name }}"
+            }
