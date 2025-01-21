@@ -43,7 +43,11 @@ jobs:
     name: Test E2E
     runs-on: ubuntu-latest
     steps:
+      - name: Check membership
+        run: |
+          echo "Author Association: ${{ github.event.pull_request.author_association }}"
       - name: Trigger E2E Workflow in backend-sdk-tests and Wait
+        if: ${{ github.event.pull_request.author_association == 'MEMBER' }}
         uses: convictional/trigger-workflow-and-wait@v1.6.5
         with:
           owner: passageidentity
