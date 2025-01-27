@@ -5,12 +5,6 @@ on:
   workflow_dispatch:
   pull_request:
 
-env:
-  API_KEY: ${{ secrets.API_KEY }}
-  APP_ID: ${{ secrets.APP_ID }}
-  APP_TOKEN: ${{ secrets.APP_TOKEN }}
-  EXAMPLE_USER_ID: ${{ secrets.EXAMPLE_USER_ID }}
-
 jobs:
   lint:
     name: Lint
