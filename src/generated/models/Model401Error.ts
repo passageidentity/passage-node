@@ -38,8 +38,8 @@ export interface Model401Error {
  * @export
  */
 export const Model401ErrorCodeEnum = {
-    AccessToken: 'invalid_access_token',
-    Nonce: 'invalid_nonce'
+    InvalidAccessToken: 'invalid_access_token',
+    InvalidNonce: 'invalid_nonce'
 } as const;
 export type Model401ErrorCodeEnum = typeof Model401ErrorCodeEnum[keyof typeof Model401ErrorCodeEnum];
 
