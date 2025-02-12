@@ -50,7 +50,7 @@ export class Passage {
             headers: {
                 ...config?.headers,
                 'Authorization': `Bearer ${config?.accessToken}`,
-                'Passage-Version': `passage-node ${process.env.npm_package_version ?? ''}`,
+                'Passage-Version': `passage-node ${process.env.npm_package_version ?? 'v0.0.0'}`,
             },
             middleware: [],
         });
