@@ -4,6 +4,13 @@ This log was last generated on Wed, 30 Oct 2024 17:11:25 GMT and should not be m
 
 <!-- Start content -->
 
+## [3.0.1](https://github.com/passageidentity/passage-node/compare/v3.0.0...v3.0.1) (2025-02-13)
+
+
+### Bug Fixes
+
+* add "passage-node" prefix to version header ([#226](https://github.com/passageidentity/passage-node/issues/226)) ([bedfb81](https://github.com/passageidentity/passage-node/commit/bedfb811a58df411603cf28281eb14bf59f2abb1))
+
 ## [3.0.0](https://github.com/passageidentity/passage-node/compare/v2.12.1...v3.0.0) (2025-01-14)
 
 
