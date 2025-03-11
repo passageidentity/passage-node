@@ -10,7 +10,7 @@ file="$1"
 
 rm -rf ./src/generated
 
-docker run --rm -v "${PWD}:/local" -u $(id -u) openapitools/openapi-generator-cli:latest generate \
+docker run --rm -v "${PWD}:/local" -u $(id -u) openapitools/openapi-generator-cli:v7.10.0 generate \
   -i "/local/$file" \
   -g typescript-fetch \
   -o /local/src/generated \
