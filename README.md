@@ -3,6 +3,9 @@
 ![NPM Version](https://img.shields.io/npm/v/%40passageidentity%2Fpassage-node?link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40passageidentity%2Fpassage-node) ![NPM Type Definitions](https://img.shields.io/npm/types/%40passageidentity%2Fpassage-node) ![GitHub License](https://img.shields.io/github/license/passageidentity/passage-node)
 ![Static Badge](https://img.shields.io/badge/Built_by_1Password-grey?logo=1password)
 
+# ⚠️ DEPRECATED
+**This repository is deprecated and no longer maintained as of January 16, 2026.**
+
 ## About
 
 [Passage by 1Password](https://1password.com/product/passage) unlocks the passwordless future with a simpler, more secure passkey authentication experience. Passage handles the complexities of the [WebAuthn API](https://blog.1password.com/what-is-webauthn/), and allows you to implement passkeys with ease.
