@@ -4,6 +4,13 @@ This log was last generated on Wed, 30 Oct 2024 17:11:25 GMT and should not be m
 
 <!-- Start content -->
 
+## [3.0.2](https://github.com/passageidentity/passage-node/compare/v3.0.1...v3.0.2) (2026-01-09)
+
+
+### Documentation
+
+* add sunset notice to README ([#232](https://github.com/passageidentity/passage-node/issues/232)) ([c12d502](https://github.com/passageidentity/passage-node/commit/c12d502f3bf270aaf59939ab25d2cf858a98cbaf))
+
 ## [3.0.1](https://github.com/passageidentity/passage-node/compare/v3.0.0...v3.0.1) (2025-02-13)
 
 
